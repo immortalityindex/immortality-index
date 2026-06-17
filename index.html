@@ -264,19 +264,19 @@
     <p class="modal-subtitle">Research Framework Disclaimer</p>
     <div class="modal-section">
       <h3>What This Is</h3>
-      <p>The Immortality Index is a proprietary, speculative theoretical roadmap â not a scientific consensus document. It maps a <em>possible</em> pathway toward indefinite human lifespan by decomposing the challenge into 23 verifiable research milestones across two engineering tracks: Genetics and Nanotech. Progress on each milestone is determined by evidence from peer-reviewed literature, not prediction or personal estimate.</p>
+      <p>The Immortality Index is a proprietary, speculative theoretical roadmap — not a scientific consensus document. It maps a <em>possible</em> pathway toward indefinite human lifespan by decomposing the challenge into 23 verifiable research milestones across two engineering tracks: Genetics and Nanotech. Progress on each milestone is determined by evidence from peer-reviewed literature, not prediction or personal estimate.</p>
     </div>
     <div class="modal-section">
       <h3>Speculative Framework Elements</h3>
-      <p>Several concepts in this index â including <strong>Boss Hurdles</strong>, <strong>P2P Re-Flashing</strong>, <strong>Cryptographic Logic Gate Wiring</strong>, and the <strong>12-hour operational window</strong> â are original theoretical constructs developed for this roadmap. They are not established scientific terminology and do not represent universal scientific consensus. They represent engineering targets derived from extrapolating current biological and nanotechnology research trajectories.</p>
+      <p>Several concepts in this index — including <strong>Boss Hurdles</strong>, <strong>P2P Re-Flashing</strong>, <strong>Cryptographic Logic Gate Wiring</strong>, and the <strong>12-hour operational window</strong> — are original theoretical constructs developed for this roadmap. They are not established scientific terminology and do not represent universal scientific consensus. They represent engineering targets derived from extrapolating current biological and nanotechnology research trajectories.</p>
     </div>
     <div class="modal-section">
       <h3>AI-Assisted Literature Monitoring</h3>
-      <p>Daily automated scans use large language model (LLM) analysis of scientific literature to assess whether individual milestones have been met by peer-reviewed evidence. These assessments are probabilistic and may contain errors. Milestone completion reflects the AI's interpretation of available published research â not a formal peer review or expert panel evaluation. Manual overrides are available through the admin panel.</p>
+      <p>Daily automated scans use large language model (LLM) analysis of scientific literature to assess whether individual milestones have been met by peer-reviewed evidence. These assessments are probabilistic and may contain errors. Milestone completion reflects the AI's interpretation of available published research — not a formal peer review or expert panel evaluation. Manual overrides are available through the admin panel.</p>
     </div>
     <div class="modal-section">
       <h3>Optimistic Stance</h3>
-      <p>This index operates from a transhumanist perspective â treating biological aging as an engineering problem, not an inevitability. We believe the evidence supports long-term feasibility of the roadmap, while acknowledging that timelines are deeply uncertain, many milestones are decades away, and the path will require breakthroughs that have not yet occurred. Scientific surprise â in both directions â is guaranteed.</p>
+      <p>This index operates from a transhumanist perspective — treating biological aging as an engineering problem, not an inevitability. We believe the evidence supports long-term feasibility of the roadmap, while acknowledging that timelines are deeply uncertain, many milestones are decades away, and the path will require breakthroughs that have not yet occurred. Scientific surprise — in both directions — is guaranteed.</p>
     </div>
     <div class="modal-section">
       <h3>Not Medical Advice</h3>
@@ -289,11 +289,11 @@
 <header>
   <div class="header-inner">
     <div class="logo-area">
-      <h1>â¡ Immortality Index</h1>
-      <p>23 Research Obstacles Â· Live Literature Tracking</p>
+      <h1>⚡ Immortality Index</h1>
+      <p>23 Research Obstacles · Live Literature Tracking</p>
     </div>
     <div class="header-actions">
-      <button class="disclaimer-btn" onclick="document.getElementById('disclaimerModal').classList.add('open')">â¹ Disclaimer</button>
+      <button class="disclaimer-btn" onclick="document.getElementById('disclaimerModal').classList.add('open')">ℹ Disclaimer</button>
       <div class="last-scan">
         <div id="lastScanLabel" class="pulse">Loading...</div>
         <div style="margin-top:2px">Last Scan</div>
@@ -307,7 +307,7 @@
     <h2>Track 01</h2>
     <div class="track-name">Genetics</div>
     <div class="track-stat">
-      <span id="genetics-count">â / â milestones complete</span>
+      <span id="genetics-count">— / — milestones complete</span>
       <span id="genetics-pct" style="font-weight:700;color:var(--accent)">0%</span>
     </div>
     <div class="track-progress-bar"><div class="track-progress-fill" id="genetics-bar" style="width:0%"></div></div>
@@ -316,7 +316,7 @@
     <h2>Track 02</h2>
     <div class="track-name">Nanotech</div>
     <div class="track-stat">
-      <span id="nanotech-count">â / â milestones complete</span>
+      <span id="nanotech-count">— / — milestones complete</span>
       <span id="nanotech-pct" style="font-weight:700;color:var(--purple)">0%</span>
     </div>
     <div class="track-progress-bar"><div class="track-progress-fill" id="nanotech-bar" style="width:0%"></div></div>
@@ -325,20 +325,20 @@
 
 <div class="tracks">
   <div class="track-column genetics-col" id="genetics-col">
-    <h3>Track 01 Â· Genetics</h3>
+    <h3>Track 01 · Genetics</h3>
     <div class="loading-state"><div class="spinner"></div><div>Loading obstacles...</div></div>
   </div>
   <div class="track-column nanotech-col" id="nanotech-col">
-    <h3>Track 02 Â· Nanotech</h3>
+    <h3>Track 02 · Nanotech</h3>
     <div class="loading-state"><div class="spinner"></div><div>Loading obstacles...</div></div>
   </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <span>Immortality Index Â· Speculative Research Roadmap</span>
+    <span>Immortality Index · Speculative Research Roadmap</span>
     <a onclick="document.getElementById('disclaimerModal').classList.add('open')">Disclaimer &amp; Methodology</a>
-    <span id="footer-update">Updated: â</span>
+    <span id="footer-update">Updated: —</span>
   </div>
 </footer>
 
@@ -372,7 +372,7 @@
     if (!milestones?.length) return '<div class="no-data">No milestones defined.</div>';
     return milestones.map((m, i) => `
       <div class="milestone-item ${m.completed ? 'done' : ''}">
-        <div class="milestone-check"><span class="milestone-check-inner">â</span></div>
+        <div class="milestone-check"><span class="milestone-check-inner">✓</span></div>
         <div class="milestone-num">${i+1}.</div>
         <div>
           <div class="milestone-name">${escHtml(m.name)}</div>
@@ -395,7 +395,7 @@
       : '<span class="no-data">No anchors listed.</span>';
     const papersHtml = obs.papers?.length
       ? obs.papers.map(p => `<a class="paper-link" href="${p.url}" target="_blank" rel="noopener">${escHtml(p.title||p.url)}</a>`).join('')
-      : '<div class="no-data">No papers linked yet â AI scan populates this.</div>';
+      : '<div class="no-data">No papers linked yet — AI scan populates this.</div>';
 
     return `
       <div class="${cls}" id="${cardId}">
@@ -409,18 +409,18 @@
               ${obs.isBoss ? '<span class="boss-badge">Boss Hurdle</span>' : ''}
             </div>
           </div>
-          <span class="chevron">â¼</span>
+          <span class="chevron">▼</span>
         </div>
         <div class="card-body">
           <div class="theoretical-target">
-            <div class="label">ð¯ Theoretical Target</div>
+            <div class="label">🎯 Theoretical Target</div>
             <p>${escHtml(obs.theoreticalTarget || 'Target not defined.')}</p>
           </div>
-          <div class="section-label">ð Engineering Milestones</div>
+          <div class="section-label">📋 Engineering Milestones</div>
           <div class="milestones-list">${renderMilestones(obs.milestones)}</div>
-          <div class="section-label" style="margin-top:14px">ð¬ Real-World Scientific Anchors</div>
+          <div class="section-label" style="margin-top:14px">🔬 Real-World Scientific Anchors</div>
           <div class="anchors-list">${anchorsHtml}</div>
-          <div class="section-label" style="margin-top:14px">ð Research Papers</div>
+          <div class="section-label" style="margin-top:14px">📄 Research Papers</div>
           <div class="papers-list">${papersHtml}</div>
         </div>
       </div>`;
@@ -469,7 +469,7 @@
 
     function renderCol(obs, colId, colClass) {
       const phases = groupByPhase(obs);
-      let html = `<h3>${colId==='genetics-col'?'Track 01 Â· Genetics':'Track 02 Â· Nanotech'}</h3>`;
+      let html = `<h3>${colId==='genetics-col'?'Track 01 · Genetics':'Track 02 · Nanotech'}</h3>`;
       let first = true;
       phases.forEach((phaseObs, label) => {
         html += `<div class="phase-header" style="${first?'border-top:none;margin-top:0;padding-top:0':''}">

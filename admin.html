@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin â Immortality Index</title>
+  <title>Admin — Immortality Index</title>
   <style>
     :root {
       --bg: #050810; --bg2: #0b0f1e; --bg3: #111827;
@@ -122,7 +122,7 @@
 <header>
   <div class="header-inner">
     <div class="logo">
-      <h1>â¡ Immortality Index â Admin</h1>
+      <h1>⚡ Immortality Index — Admin</h1>
       <p>Milestone Management Panel</p>
     </div>
     <div id="auth-section">
@@ -150,16 +150,16 @@
     <h2>Obstacle Management</h2>
     <div class="admin-actions">
       <span class="scan-status" id="scan-status"></span>
-      <button class="btn btn-sm btn-scan" id="scan-btn" onclick="triggerScan()">â¶ Trigger AI Scan</button>
+      <button class="btn btn-sm btn-scan" id="scan-btn" onclick="triggerScan()">▶ Trigger AI Scan</button>
     </div>
   </div>
   <div class="obstacles-grid">
     <div id="genetics-admin">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">Track 01 Â· Genetics</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">Track 01 · Genetics</div>
       <div class="loading-state"><div class="spinner"></div>Loading...</div>
     </div>
     <div id="nanotech-admin">
-      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">Track 02 Â· Nanotech</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">Track 02 · Nanotech</div>
       <div class="loading-state"><div class="spinner"></div>Loading...</div>
     </div>
   </div>
@@ -181,7 +181,7 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // ââ AUTH âââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── AUTH ─────────────────────────────────────────────────
   window.doLogin = async () => {
     const email = document.getElementById('email-input').value.trim();
     const pass = document.getElementById('pass-input').value;
@@ -212,7 +212,7 @@
     }
   });
 
-  // ââ SCAN âââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── SCAN ─────────────────────────────────────────────────
   window.triggerScan = async () => {
     const btn = document.getElementById('scan-btn');
     const status = document.getElementById('scan-status');
@@ -226,18 +226,18 @@
         method: 'POST',
         headers: { 'Authorization': 'Bearer ' + token }
       });
-      status.textContent = r.ok ? 'â Scan triggered (background â runs ~2 min)' : 'â Scan failed: ' + r.status;
+      status.textContent = r.ok ? '✓ Scan triggered (background — runs ~2 min)' : '✗ Scan failed: ' + r.status;
       status.style.color = r.ok ? 'var(--green)' : 'var(--red)';
     } catch(e) {
-      status.textContent = 'â ' + e.message;
+      status.textContent = '✗ ' + e.message;
       status.style.color = 'var(--red)';
     } finally {
       btn.disabled = false;
-      btn.textContent = 'â¶ Trigger AI Scan';
+      btn.textContent = '▶ Trigger AI Scan';
     }
   };
 
-  // ââ OBSTACLES ââââââââââââââââââââââââââââââââââââââââââââ
+  // ── OBSTACLES ────────────────────────────────────────────
   let allDocs = {};
 
   function loadObstacles() {
@@ -279,7 +279,7 @@
           <div class="obs-id">${idLabel}</div>
           <div class="obs-name ${colClass}">${escHtml(obs.name)}${obs.isBoss ? ' <span class="boss-badge">Boss Hurdle</span>' : ''}</div>
           <div class="obs-pct ${colClass}">${pct}%</div>
-          <span class="chevron">â¼</span>
+          <span class="chevron">▼</span>
         </div>
         <div class="obs-card-body">
           <div class="milestones-admin">${milestoneRows}</div>
@@ -295,7 +295,7 @@
     const nanotech = obs.filter(o => o.track === 'nanotech').sort((a,b) => a.order - b.order);
 
     function renderCol(list, colId, colClass) {
-      const label = colId === 'genetics-admin' ? 'Track 01 Â· Genetics' : 'Track 02 Â· Nanotech';
+      const label = colId === 'genetics-admin' ? 'Track 01 · Genetics' : 'Track 02 · Nanotech';
       let html = `<div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">${label}</div>`;
       let lastPhase = null;
       list.forEach(o => {
@@ -313,7 +313,7 @@
     renderCol(nanotech, 'nanotech-admin', 'nanotech-col');
   }
 
-  // ââ TOGGLE MILESTONE âââââââââââââââââââââââââââââââââââââ
+  // ── TOGGLE MILESTONE ─────────────────────────────────────
   window.toggleMilestone = (obsId, idx) => {
     const obs = allDocs[obsId];
     if (!obs) return;
@@ -332,7 +332,7 @@
     }
   };
 
-  // ââ SAVE OBSTACLE âââââââââââââââââââââââââââââââââââââââââ
+  // ── SAVE OBSTACLE ─────────────────────────────────────────
   window.saveObstacle = async (obsId) => {
     const obs = allDocs[obsId];
     if (!obs) return;
@@ -353,11 +353,11 @@
         milestones: obs.milestones,
         lastUpdated: new Date().toISOString()
       });
-      fb.textContent = 'â Saved';
+      fb.textContent = '✓ Saved';
       fb.style.color = 'var(--green)';
       setTimeout(() => { fb.textContent = ''; }, 3000);
     } catch(e) {
-      fb.textContent = 'â Error: ' + e.message;
+      fb.textContent = '✗ Error: ' + e.message;
       fb.style.color = 'var(--red)';
     } finally {
       btn.disabled = false;
