@@ -121,8 +121,9 @@ Respond ONLY as a JSON array — one object per milestone, in order:
 [{"id": "...", "achieved": true/false, "confidence": "high"/"medium"/"low", "evidence": "One sentence citing specific paper/author/journal/year if achieved, otherwise null"}, ...]`;
 
       // Gemini call with retry on 429 (rate limit) and 503 (transient unavailable)
+      // Note: Gemini uses the same 429 "quota" message for both RPM and RPD limits.
+      // We retry all 429s — after 3×30s the RPM window resets and calls succeed.
       let geminiResp = null;
-      let quotaExhausted = false;
       for (let attempt = 1; attempt <= 3; attempt++) {
         try {
           geminiResp = await fetch(GEMINI_URL, {
@@ -131,19 +132,8 @@ Respond ONLY as a JSON array — one object per milestone, in order:
             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
           });
           if (geminiResp.ok) break;
-          if (geminiResp.status === 429) {
-            const errData = await geminiResp.clone().json().catch(() => ({}));
-            const errMsg = (errData?.error?.message || '').toLowerCase();
-            if (errMsg.includes('quota') || errMsg.includes('billing')) {
-              // Hard daily quota exhaustion — abort immediately
-              quotaExhausted = true;
-              break;
-            }
-            // Transient rate limit — retry
-            if (attempt < 3) { console.log(`429 rate limit on attempt ${attempt}, waiting 30s...`); await delay(30000); continue; }
-          }
-          if (geminiResp.status === 503 && attempt < 3) {
-            console.log(`503 unavailable on attempt ${attempt}, waiting 30s...`);
+          if ((geminiResp.status === 429 || geminiResp.status === 503) && attempt < 3) {
+            console.log(`${geminiResp.status} on attempt ${attempt} for ${obs.id}, waiting 30s...`);
             await delay(30000);
             continue;
           }
@@ -151,11 +141,6 @@ Respond ONLY as a JSON array — one object per milestone, in order:
         } catch (fetchErr) {
           if (attempt < 3) { await delay(5000); continue; }
         }
-      }
-
-      if (quotaExhausted) {
-        await writeStatus({ status: 'error', error: 'Gemini daily quota exhausted. Try again tomorrow.', startedAt: now, milestonesUpdated, obstaclesUpdated, log: log.slice(-50) });
-        return { statusCode: 200, body: JSON.stringify({ error: 'quota_exhausted' }) };
       }
 
       if (!geminiResp || !geminiResp.ok) {
