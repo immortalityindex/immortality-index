@@ -11,6 +11,12 @@ The Immortality Index maps 23 obstacles standing between current science and bio
 
 See [MILESTONES.md](MILESTONES.md) for a static reference of all obstacles and milestones.
 
+## Citing this work
+
+If you reference or build on this framework in a paper, article, or project, please cite:
+
+> Immortality Index. https://github.com/immortalityindex/immortality-index
+
 ## License
 
-Licensed under [CC BY 4.0](LICENSE). You may use, share, or build on this work as long as you credit "Immortality Index" and link back to [immortality-index.netlify.app](https://immortality-index.netlify.app).
+Licensed under [CC BY 4.0](LICENSE). You may use, share, or build on this work as long as you credit "Immortality Index" and link back to https://github.com/immortalityindex/immortality-index.
