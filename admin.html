@@ -3,519 +3,367 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Immortality Index — Admin</title>
+  <title>Admin â Immortality Index</title>
   <style>
     :root {
-      --bg: #080c14;
-      --surface: #0d1424;
-      --surface2: #121b30;
-      --border: #1a2540;
-      --text: #c8d8f0;
-      --muted: #5a7099;
-      --green: #00e5a0;
-      --cyan: #00c8ff;
-      --red: #ff4466;
-      --gold: #f0c040;
-      --boss: #9b59b6;
+      --bg: #050810; --bg2: #0b0f1e; --bg3: #111827;
+      --border: #1e2d45; --border2: #2a3f5f;
+      --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b;
+      --accent: #06b6d4; --purple: #8b5cf6;
+      --green: #10b981; --red: #ef4444; --boss: #f97316;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
-
-    /* ── Login screen ── */
-    #loginScreen {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 24px;
+    header {
+      background: linear-gradient(135deg,#0a0e1f,#0d1629);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
     }
-    .login-box {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; padding: 40px; width: 100%; max-width: 400px;
-    }
-    .login-box h1 { font-size: 22px; margin-bottom: 6px; }
-    .login-box p { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
-    .form-group input {
-      width: 100%; padding: 10px 14px;
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--text); font-size: 14px;
-      outline: none; transition: border-color 0.2s;
-    }
-    .form-group input:focus { border-color: var(--cyan); }
-
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
-      cursor: pointer; border: none; transition: opacity 0.2s, transform 0.1s;
-    }
-    .btn:hover { opacity: 0.85; }
-    .btn:active { transform: scale(0.98); }
-    .btn-primary { background: var(--cyan); color: #080c14; }
-    .btn-success { background: var(--green); color: #080c14; }
+    .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .logo h1 { font-size: 20px; font-weight: 700; background: linear-gradient(90deg,var(--accent),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .logo p { font-size: 11px; color: var(--text3); margin-top: 2px; }
+    #auth-section { display: flex; gap: 8px; align-items: center; }
+    #auth-section input { background: var(--bg2); border: 1px solid var(--border2); color: var(--text); border-radius: 8px; padding: 8px 12px; font-size: 13px; outline: none; }
+    #auth-section input:focus { border-color: var(--accent); }
+    .btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; border: none; transition: all 0.2s; font-weight: 600; }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover { background: #22d3ee; }
     .btn-danger { background: var(--red); color: #fff; }
-    .btn-ghost {
-      background: transparent; color: var(--muted);
-      border: 1px solid var(--border);
+    .btn-danger:hover { background: #dc2626; }
+    .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-sm { padding: 4px 10px; font-size: 11px; font-weight: 600; border-radius: 5px; border: none; cursor: pointer; }
+    .btn-scan { background: rgba(6,182,212,0.15); color: var(--accent); border: 1px solid rgba(6,182,212,0.3); }
+    .btn-scan:hover { background: rgba(6,182,212,0.25); }
+
+    #login-panel {
+      max-width: 400px; margin: 80px auto; padding: 32px;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; text-align: center;
     }
-    .btn-ghost:hover { color: var(--text); border-color: #2a3a60; }
-    .btn-full { width: 100%; }
-    .btn-sm { padding: 6px 12px; font-size: 12px; }
+    #login-panel h2 { margin-bottom: 8px; font-size: 18px; }
+    #login-panel p { color: var(--text3); font-size: 13px; margin-bottom: 24px; }
+    #login-form { display: flex; flex-direction: column; gap: 10px; }
+    #login-form input { background: var(--bg3); border: 1px solid var(--border2); color: var(--text); border-radius: 8px; padding: 10px 14px; font-size: 14px; outline: none; }
+    #login-form input:focus { border-color: var(--accent); }
+    #login-error { color: var(--red); font-size: 12px; margin-top: 8px; min-height: 16px; }
 
-    .error-text { color: var(--red); font-size: 12px; margin-top: 10px; }
-    .toggle-link { color: var(--cyan); font-size: 13px; cursor: pointer; background: none; border: none; padding: 0; text-decoration: underline; }
+    #admin-panel { display: none; max-width: 1200px; margin: 32px auto 60px; padding: 0 24px; }
+    .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .admin-header h2 { font-size: 16px; font-weight: 700; color: var(--text2); }
+    .admin-actions { display: flex; gap: 8px; align-items: center; }
+    .scan-status { font-size: 12px; color: var(--text3); }
 
-    /* ── Admin app ── */
-    #adminApp { display: none; }
+    .obstacles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 900px) { .obstacles-grid { grid-template-columns: 1fr; } }
 
-    .topbar {
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
-      position: sticky; top: 0; z-index: 100;
+    .obs-admin-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
     }
-    .topbar h1 { font-size: 18px; font-weight: 700; }
-    .topbar h1 span { color: var(--cyan); }
-    .topbar-right { display: flex; align-items: center; gap: 12px; }
-    .topbar-user { font-size: 12px; color: var(--muted); }
-
-    .page { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
-
-    /* ── Action bar ── */
-    .action-bar {
-      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: 16px 20px; margin-bottom: 28px;
+    .obs-admin-card.boss-card { border-color: rgba(249,115,22,0.4); }
+    .obs-card-head {
+      padding: 12px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer;
+      border-bottom: 1px solid var(--border);
     }
-    .action-bar-title { font-size: 14px; font-weight: 600; flex: 1; }
-    .scan-status { font-size: 12px; color: var(--muted); }
+    .obs-card-head:hover { background: rgba(255,255,255,0.02); }
+    .obs-id { font-size: 10px; font-weight: 700; color: var(--text3); min-width: 32px; }
+    .obs-name { flex: 1; font-size: 13px; font-weight: 600; }
+    .boss-badge { font-size: 9px; font-weight: 700; color: var(--boss); background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3); border-radius: 4px; padding: 2px 6px; }
+    .obs-pct { font-size: 12px; font-weight: 700; color: var(--accent); }
+    .genetics-col .obs-pct { color: var(--accent); }
+    .nanotech-col .obs-pct { color: var(--purple); }
+    .chevron { font-size: 11px; color: var(--text3); transition: transform 0.2s; flex-shrink: 0; }
+    .obs-admin-card.open .chevron { transform: rotate(180deg); }
 
-    /* ── Filter bar ── */
-    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-    .filter-btn {
-      padding: 5px 14px; border-radius: 99px; font-size: 12px; font-weight: 600;
-      cursor: pointer; border: 1px solid var(--border); background: transparent;
-      color: var(--muted); transition: all 0.2s;
-    }
-    .filter-btn.active, .filter-btn:hover { color: var(--text); border-color: var(--cyan); background: rgba(0,200,255,0.08); }
-    .filter-btn.active { color: var(--cyan); }
+    .obs-card-body { display: none; padding: 14px; }
+    .obs-admin-card.open .obs-card-body { display: block; }
 
-    /* ── Obstacle cards ── */
-    .obs-grid { display: grid; gap: 14px; }
-
-    .obs-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; overflow: hidden;
-    }
-    .obs-card-header {
-      display: flex; align-items: center; gap: 12px;
-      padding: 14px 18px; cursor: pointer;
-      user-select: none; transition: background 0.15s;
-    }
-    .obs-card-header:hover { background: rgba(255,255,255,0.02); }
-
-    .obs-key { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; min-width: 80px; }
-    .obs-name { flex: 1; font-size: 14px; font-weight: 500; }
-    .obs-track-badge {
-      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
-      padding: 2px 8px; border-radius: 99px; font-weight: 700;
-    }
-    .obs-track-badge.genetics { background: rgba(0,229,160,0.12); color: var(--green); border: 1px solid rgba(0,229,160,0.2); }
-    .obs-track-badge.nanotech { background: rgba(0,200,255,0.12); color: var(--cyan); border: 1px solid rgba(0,200,255,0.2); }
-
-    .obs-pct { font-size: 14px; font-weight: 700; min-width: 40px; text-align: right; }
-    .genetics .obs-pct { color: var(--green); }
-    .nanotech .obs-pct { color: var(--cyan); }
-
-    .status-pill {
-      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-      padding: 3px 9px; border-radius: 99px;
-    }
-    .status-pill.completed { background: rgba(0,229,160,0.15); color: var(--green); border: 1px solid rgba(0,229,160,0.25); }
-    .status-pill.active { background: rgba(0,200,255,0.1); color: var(--cyan); border: 1px solid rgba(0,200,255,0.2); }
-    .status-pill.boss-hurdle { background: rgba(155,89,182,0.15); color: var(--boss); border: 1px solid rgba(155,89,182,0.25); }
-
-    .lock-icon { font-size: 14px; opacity: 0.5; }
-    .lock-icon.locked { color: var(--gold); opacity: 1; }
-
-    .chevron { color: var(--muted); transition: transform 0.2s; font-size: 12px; }
-    .obs-card.open .chevron { transform: rotate(180deg); }
-
-    /* ── Expanded edit form ── */
-    .obs-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
-    .obs-card.open .obs-body { display: block; }
-
-    .edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
-    @media (max-width: 600px) { .edit-grid { grid-template-columns: 1fr; } }
-    .edit-grid .full { grid-column: 1 / -1; }
-
-    .field { display: flex; flex-direction: column; gap: 6px; }
-    .field label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-    .field input, .field select {
-      padding: 8px 12px; background: var(--surface2);
-      border: 1px solid var(--border); border-radius: 7px;
-      color: var(--text); font-size: 13px; outline: none;
+    .milestones-admin { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .milestone-admin-row {
+      display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 7px;
       transition: border-color 0.2s;
     }
-    .field input:focus, .field select:focus { border-color: var(--cyan); }
-    .field input[type=range] {
-      padding: 0; background: none; border: none; cursor: pointer; accent-color: var(--green);
+    .milestone-admin-row.done { background: rgba(16,185,129,0.05); border-color: rgba(16,185,129,0.2); }
+    .toggle-wrap { flex-shrink: 0; margin-top: 2px; }
+    .toggle {
+      width: 32px; height: 18px; border-radius: 9px; background: var(--border2);
+      border: none; cursor: pointer; position: relative; transition: background 0.2s;
     }
-    .range-row { display: flex; align-items: center; gap: 10px; }
-    .range-val { font-size: 14px; font-weight: 700; color: var(--green); min-width: 36px; text-align: right; }
-
-    .lock-row {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px; background: var(--surface2);
-      border: 1px solid var(--border); border-radius: 7px;
+    .toggle::after {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 14px; height: 14px; border-radius: 50%; background: white; transition: transform 0.2s;
     }
-    .lock-row label { font-size: 13px; flex: 1; cursor: pointer; }
-    .lock-row input[type=checkbox] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; }
-
-    .reasoning-box {
-      padding: 10px 12px; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 7px; font-size: 12px; color: var(--muted); font-style: italic;
-      line-height: 1.6;
+    .toggle.on { background: var(--green); }
+    .toggle.on::after { transform: translateX(14px); }
+    .ms-num { font-size: 10px; color: var(--text3); min-width: 18px; margin-top: 2px; flex-shrink: 0; }
+    .ms-text { flex: 1; }
+    .ms-name { font-size: 12px; color: var(--text2); line-height: 1.4; }
+    .milestone-admin-row.done .ms-name { color: var(--green); }
+    .ms-evidence-input {
+      width: 100%; margin-top: 4px; background: var(--bg3);
+      border: 1px solid var(--border); border-radius: 5px;
+      color: var(--text2); font-size: 11px; padding: 4px 8px; outline: none;
     }
+    .ms-evidence-input:focus { border-color: var(--accent); }
+    .ms-evidence-input::placeholder { color: var(--text3); font-style: italic; }
 
-    .card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-    .save-msg { font-size: 12px; color: var(--green); animation: fadeOut 3s forwards; }
-    @keyframes fadeOut { 0%,70%{ opacity:1 } 100%{ opacity:0 } }
+    .save-btn { display: block; width: 100%; padding: 8px; background: var(--accent); color: #000; border: none; border-radius: 7px; font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 8px; }
+    .save-btn:hover { background: #22d3ee; }
+    .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .save-feedback { font-size: 11px; color: var(--green); text-align: center; margin-top: 4px; min-height: 14px; }
 
-    /* ── Loading ── */
-    .loading { text-align: center; padding: 60px; color: var(--muted); }
-    .spinner { width: 30px; height: 30px; border: 2px solid var(--border); border-top-color: var(--cyan); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 12px; }
+    .loading-state { text-align: center; padding: 60px; color: var(--text3); }
+    .spinner { width: 28px; height: 28px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-<!-- ══ LOGIN ══════════════════════════════════════════════════════════════════ -->
-<div id="loginScreen">
-  <div class="login-box">
-    <h1>Admin Panel</h1>
-    <p>Immortality Index — restricted access</p>
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" id="email" autocomplete="email" placeholder="admin@example.com" />
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <h1>â¡ Immortality Index â Admin</h1>
+      <p>Milestone Management Panel</p>
     </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" />
+    <div id="auth-section">
+      <span id="user-email" style="font-size:12px;color:var(--text3)"></span>
+      <button class="btn btn-ghost" id="logout-btn" style="display:none" onclick="doLogout()">Log Out</button>
     </div>
-    <button class="btn btn-primary btn-full" id="loginBtn">Sign In</button>
-    <button class="btn btn-ghost btn-full" id="createBtn" style="margin-top:10px">Create Account (First-time setup)</button>
-    <div class="error-text" id="loginError"></div>
   </div>
+</header>
+
+<!-- LOGIN -->
+<div id="login-panel">
+  <h2>Admin Login</h2>
+  <p>Authorised users only</p>
+  <div id="login-form">
+    <input type="email" id="email-input" placeholder="Email" autocomplete="username" />
+    <input type="password" id="pass-input" placeholder="Password" autocomplete="current-password" />
+    <button class="btn btn-primary" onclick="doLogin()">Sign In</button>
+  </div>
+  <div id="login-error"></div>
 </div>
 
-<!-- ══ ADMIN APP ══════════════════════════════════════════════════════════════ -->
-<div id="adminApp">
-  <div class="topbar">
-    <h1>Immortality <span>Index</span> &mdash; Admin</h1>
-    <div class="topbar-right">
-      <span class="topbar-user" id="userEmail"></span>
-      <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-header">
+    <h2>Obstacle Management</h2>
+    <div class="admin-actions">
+      <span class="scan-status" id="scan-status"></span>
+      <button class="btn btn-sm btn-scan" id="scan-btn" onclick="triggerScan()">â¶ Trigger AI Scan</button>
     </div>
   </div>
-
-  <div class="page">
-    <div class="action-bar">
-      <div class="action-bar-title">Research Obstacles</div>
-      <span class="scan-status" id="scanStatus"></span>
-      <button class="btn btn-primary btn-sm" id="scanBtn">⚡ Run AI Scan Now</button>
-      <button class="btn btn-ghost btn-sm" id="seedBtn">🌱 Seed Database</button>
+  <div class="obstacles-grid">
+    <div id="genetics-admin">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">Track 01 Â· Genetics</div>
+      <div class="loading-state"><div class="spinner"></div>Loading...</div>
     </div>
-
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="genetics">Genetics</button>
-      <button class="filter-btn" data-filter="nanotech">Nanotech</button>
-      <button class="filter-btn" data-filter="active">Active</button>
-      <button class="filter-btn" data-filter="completed">Completed</button>
-      <button class="filter-btn" data-filter="boss-hurdle">Boss Hurdles</button>
-    </div>
-
-    <div id="obstacleList">
-      <div class="loading"><div class="spinner"></div>Loading obstacles…</div>
+    <div id="nanotech-admin">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">Track 02 Â· Nanotech</div>
+      <div class="loading-state"><div class="spinner"></div>Loading...</div>
     </div>
   </div>
 </div>
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, collection, onSnapshot, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-<script>
-firebase.initializeApp({
-  apiKey: "AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM",
-  authDomain: "immortality-index.firebaseapp.com",
-  projectId: "immortality-index",
-  storageBucket: "immortality-index.firebasestorage.app",
-  messagingSenderId: "202572480694",
-  appId: "1:202572480694:web:1d0ae36f8bb68106cc6617"
-});
-
-const auth = firebase.auth();
-const db   = firebase.firestore();
-
-// ── Auth state ───────────────────────────────────────────────────────────────
-auth.onAuthStateChanged(user => {
-  if (user) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminApp').style.display = 'block';
-    document.getElementById('userEmail').textContent = user.email;
-    loadObstacles();
-  } else {
-    document.getElementById('loginScreen').style.display = 'flex';
-    document.getElementById('adminApp').style.display = 'none';
-  }
-});
-
-// ── Login / Create ───────────────────────────────────────────────────────────
-document.getElementById('loginBtn').onclick = async () => {
-  const email = document.getElementById('email').value.trim();
-  const pass  = document.getElementById('password').value;
-  document.getElementById('loginError').textContent = '';
-  try {
-    await auth.signInWithEmailAndPassword(email, pass);
-  } catch (e) {
-    document.getElementById('loginError').textContent = e.message;
-  }
-};
-
-document.getElementById('createBtn').onclick = async () => {
-  const email = document.getElementById('email').value.trim();
-  const pass  = document.getElementById('password').value;
-  document.getElementById('loginError').textContent = '';
-  if (pass.length < 8) {
-    document.getElementById('loginError').textContent = 'Password must be at least 8 characters.';
-    return;
-  }
-  try {
-    await auth.createUserWithEmailAndPassword(email, pass);
-  } catch (e) {
-    document.getElementById('loginError').textContent = e.message;
-  }
-};
-
-document.getElementById('logoutBtn').onclick = () => auth.signOut();
-
-// ── Filter state ─────────────────────────────────────────────────────────────
-let currentFilter = 'all';
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    renderList();
-  };
-});
-
-// ── Data store ───────────────────────────────────────────────────────────────
-let allObstacles = [];
-
-function loadObstacles() {
-  db.collection('obstacles').onSnapshot(snap => {
-    allObstacles = [];
-    snap.forEach(doc => allObstacles.push({ _docId: doc.id, ...doc.data() }));
-    allObstacles.sort((a, b) => {
-      if (a.track !== b.track) return a.track < b.track ? -1 : 1;
-      const parse = k => { const m = (k||'').match(/^(\d+)\.(\d+)/); return m ? +m[1]*100 + +m[2] : 999; };
-      return parse(a.key) - parse(b.key);
-    });
-    renderList();
+  const app = initializeApp({
+    apiKey: "AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM",
+    authDomain: "immortality-index.firebaseapp.com",
+    projectId: "immortality-index",
+    storageBucket: "immortality-index.firebasestorage.app",
+    messagingSenderId: "202572480694",
+    appId: "1:202572480694:web:1d0ae36f8bb68106cc6617"
   });
-}
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
-function filtered() {
-  return allObstacles.filter(o => {
-    if (currentFilter === 'all') return true;
-    if (currentFilter === 'genetics') return o.track === 'genetics';
-    if (currentFilter === 'nanotech') return o.track === 'nanotech';
-    if (currentFilter === 'active') return o.status === 'Active';
-    if (currentFilter === 'completed') return o.status === 'Completed';
-    if (currentFilter === 'boss-hurdle') return o.status === 'Boss Hurdle';
-    return true;
-  });
-}
-
-// ── Render ───────────────────────────────────────────────────────────────────
-function renderList() {
-  const list = filtered();
-  if (!list.length) {
-    document.getElementById('obstacleList').innerHTML = '<div class="loading">No obstacles match this filter.</div>';
-    return;
-  }
-  document.getElementById('obstacleList').innerHTML =
-    `<div class="obs-grid">${list.map(renderCard).join('')}</div>`;
-
-  // Wire up events
-  list.forEach(obs => {
-    const id = obs._docId;
-    const card = document.getElementById(`card-${id}`);
-
-    // Toggle expand
-    card.querySelector('.obs-card-header').onclick = () => card.classList.toggle('open');
-
-    // Range input live update
-    const range = card.querySelector('.range-input');
-    const rangeVal = card.querySelector('.range-val');
-    range.oninput = () => { rangeVal.textContent = range.value + '%'; };
-
-    // Save
-    card.querySelector('.save-btn').onclick = () => saveCard(id, card, obs);
-
-    // Revert
-    card.querySelector('.revert-btn').onclick = () => {
-      renderList(); // re-render fresh from data
-    };
-  });
-}
-
-function statusPillClass(status) {
-  if (status === 'Completed') return 'completed';
-  if (status === 'Boss Hurdle') return 'boss-hurdle';
-  return 'active';
-}
-
-function renderCard(obs) {
-  const id = obs._docId;
-  const spc = statusPillClass(obs.status);
-  const reasoning = obs.ai_reasoning || '';
-  const lastScan = obs.last_scanned ? formatDate(obs.last_scanned) : 'Never';
-
-  return `
-  <div class="obs-card ${obs.track}" id="card-${id}">
-    <div class="obs-card-header">
-      <span class="obs-key">${esc(obs.key || '')}</span>
-      <span class="obs-name">${esc(obs.name)}</span>
-      <span class="obs-track-badge ${obs.track}">${obs.track}</span>
-      <span class="obs-pct">${obs.progress || 0}%</span>
-      <span class="status-pill ${spc}">${esc(obs.status)}</span>
-      <span class="lock-icon ${obs.ai_locked ? 'locked' : ''}">${obs.ai_locked ? '🔒' : '🔓'}</span>
-      <span class="chevron">▼</span>
-    </div>
-    <div class="obs-body">
-      <div class="edit-grid">
-        <div class="field full">
-          <label>Progress</label>
-          <div class="range-row">
-            <input type="range" class="range-input" min="0" max="100" value="${obs.progress || 0}" />
-            <span class="range-val">${obs.progress || 0}%</span>
-          </div>
-        </div>
-        <div class="field">
-          <label>Status</label>
-          <select class="status-select">
-            <option value="Active" ${obs.status === 'Active' ? 'selected' : ''}>Active</option>
-            <option value="Completed" ${obs.status === 'Completed' ? 'selected' : ''}>Completed</option>
-            <option value="Boss Hurdle" ${obs.status === 'Boss Hurdle' ? 'selected' : ''}>Boss Hurdle</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Lock AI Updates</label>
-          <div class="lock-row">
-            <input type="checkbox" class="lock-check" id="lock-${id}" ${obs.ai_locked ? 'checked' : ''} />
-            <label for="lock-${id}">Prevent AI from overwriting this obstacle</label>
-          </div>
-        </div>
-        <div class="field full">
-          <label>Evidence Article Title</label>
-          <input type="text" class="article-title" value="${esc(obs.article_title || '')}" placeholder="Paper or article name" />
-        </div>
-        <div class="field full">
-          <label>Evidence URL</label>
-          <input type="url" class="article-url" value="${esc(obs.article_url || '')}" placeholder="https://…" />
-        </div>
-        ${reasoning ? `
-        <div class="field full">
-          <label>Last AI Reasoning</label>
-          <div class="reasoning-box">${esc(reasoning)}</div>
-        </div>` : ''}
-        <div class="field full" style="color:var(--muted);font-size:11px">
-          Last AI scan: ${lastScan}
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="btn btn-success btn-sm save-btn">Save Changes</button>
-        <button class="btn btn-ghost btn-sm revert-btn">Revert</button>
-      </div>
-      <div class="save-msg" id="msg-${id}" style="display:none"></div>
-    </div>
-  </div>`;
-}
-
-async function saveCard(docId, card, obs) {
-  const progress    = parseInt(card.querySelector('.range-input').value, 10);
-  const status      = card.querySelector('.status-select').value;
-  const ai_locked   = card.querySelector('.lock-check').checked;
-  const article_title = card.querySelector('.article-title').value.trim();
-  const article_url   = card.querySelector('.article-url').value.trim();
-
-  try {
-    await db.collection('obstacles').doc(docId).update({
-      progress, status, ai_locked, article_title, article_url,
-      last_updated: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    const msg = document.getElementById(`msg-${docId}`);
-    msg.textContent = '✓ Saved';
-    msg.style.display = 'block';
-    setTimeout(() => { msg.style.display = 'none'; }, 3000);
-  } catch (e) {
-    alert('Error saving: ' + e.message);
-  }
-}
-
-// ── AI Scan ──────────────────────────────────────────────────────────────────
-document.getElementById('scanBtn').onclick = async () => {
-  const secret = prompt('Enter ADMIN_SECRET to trigger scan:');
-  if (!secret) return;
-
-  document.getElementById('scanStatus').textContent = '⏳ Scanning… (may take several minutes)';
-  document.getElementById('scanBtn').disabled = true;
-
-  try {
-    const res = await fetch('/api/scan', {
-      headers: { 'x-admin-secret': secret }
-    });
-    const data = await res.json();
-    if (data.success) {
-      document.getElementById('scanStatus').textContent =
-        `✓ Scan complete: ${data.scanned} processed, ${data.errors} errors`;
-    } else {
-      document.getElementById('scanStatus').textContent = '✗ Scan failed: ' + (data.error || 'unknown error');
+  // ââ AUTH âââââââââââââââââââââââââââââââââââââââââââââââââ
+  window.doLogin = async () => {
+    const email = document.getElementById('email-input').value.trim();
+    const pass = document.getElementById('pass-input').value;
+    document.getElementById('login-error').textContent = '';
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } catch(e) {
+      document.getElementById('login-error').textContent = e.message;
     }
-  } catch (e) {
-    document.getElementById('scanStatus').textContent = '✗ Network error: ' + e.message;
-  } finally {
-    document.getElementById('scanBtn').disabled = false;
+  };
+  window.doLogout = () => signOut(auth);
+
+  document.getElementById('pass-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') window.doLogin();
+  });
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      document.getElementById('login-panel').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+      document.getElementById('user-email').textContent = user.email;
+      document.getElementById('logout-btn').style.display = 'inline-flex';
+      loadObstacles();
+    } else {
+      document.getElementById('login-panel').style.display = 'block';
+      document.getElementById('admin-panel').style.display = 'none';
+      document.getElementById('logout-btn').style.display = 'none';
+    }
+  });
+
+  // ââ SCAN âââââââââââââââââââââââââââââââââââââââââââââââââ
+  window.triggerScan = async () => {
+    const btn = document.getElementById('scan-btn');
+    const status = document.getElementById('scan-status');
+    btn.disabled = true;
+    btn.textContent = 'Triggering...';
+    status.textContent = '';
+    try {
+      const user = auth.currentUser;
+      const token = await user.getIdToken();
+      const r = await fetch('/api/scan', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      status.textContent = r.ok ? 'â Scan triggered (background â runs ~2 min)' : 'â Scan failed: ' + r.status;
+      status.style.color = r.ok ? 'var(--green)' : 'var(--red)';
+    } catch(e) {
+      status.textContent = 'â ' + e.message;
+      status.style.color = 'var(--red)';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'â¶ Trigger AI Scan';
+    }
+  };
+
+  // ââ OBSTACLES ââââââââââââââââââââââââââââââââââââââââââââ
+  let allDocs = {};
+
+  function loadObstacles() {
+    onSnapshot(collection(db, 'obstacles'), snap => {
+      snap.docs.forEach(d => { allDocs[d.id] = { ...d.data(), id: d.id }; });
+      renderAdmin();
+    });
   }
-};
 
-// ── Seed ─────────────────────────────────────────────────────────────────────
-document.getElementById('seedBtn').onclick = async () => {
-  const secret = prompt('Enter SEED_SECRET to seed the database (WARNING: overwrites all data):');
-  if (!secret) return;
-  if (!confirm('This will overwrite ALL obstacle data. Are you sure?')) return;
-
-  try {
-    const res = await fetch(`/api/seed?secret=${encodeURIComponent(secret)}`);
-    const data = await res.json();
-    alert(data.success ? `✓ Seeded ${data.seeded} obstacles.` : '✗ Seed failed: ' + data.error);
-  } catch (e) {
-    alert('Network error: ' + e.message);
+  function escHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-};
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+  function calcPct(milestones) {
+    if (!milestones?.length) return 0;
+    const done = milestones.filter(m => m.completed).length;
+    return Math.round(done / milestones.length * 100);
+  }
 
-function formatDate(ts) {
-  if (!ts) return 'unknown';
-  const d = ts.toDate ? ts.toDate() : new Date(ts);
-  return d.toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
-}
+  function renderObsCard(obs, colClass) {
+    const pct = calcPct(obs.milestones);
+    const cardId = 'adm-' + obs.id;
+    const idLabel = obs.id.replace('g-','G').replace('n-','N').replace('-','.');
+    const milestoneRows = (obs.milestones||[]).map((m, i) => `
+      <div class="milestone-admin-row ${m.completed ? 'done' : ''}" id="ms-row-${obs.id}-${i}">
+        <div class="toggle-wrap">
+          <button class="toggle ${m.completed ? 'on' : ''}" onclick="toggleMilestone('${obs.id}', ${i})" title="${m.completed ? 'Mark incomplete' : 'Mark complete'}"></button>
+        </div>
+        <div class="ms-num">${i+1}.</div>
+        <div class="ms-text">
+          <div class="ms-name">${escHtml(m.name)}</div>
+          <input class="ms-evidence-input" id="ev-${obs.id}-${i}" type="text" placeholder="Evidence / citation (optional)" value="${escHtml(m.evidence||'')}" />
+        </div>
+      </div>`).join('');
+
+    return `
+      <div class="obs-admin-card ${obs.isBoss ? 'boss-card' : ''}" id="${cardId}">
+        <div class="obs-card-head" onclick="document.getElementById('${cardId}').classList.toggle('open')">
+          <div class="obs-id">${idLabel}</div>
+          <div class="obs-name ${colClass}">${escHtml(obs.name)}${obs.isBoss ? ' <span class="boss-badge">Boss Hurdle</span>' : ''}</div>
+          <div class="obs-pct ${colClass}">${pct}%</div>
+          <span class="chevron">â¼</span>
+        </div>
+        <div class="obs-card-body">
+          <div class="milestones-admin">${milestoneRows}</div>
+          <button class="save-btn" onclick="saveObstacle('${obs.id}')">Save Changes</button>
+          <div class="save-feedback" id="save-fb-${obs.id}"></div>
+        </div>
+      </div>`;
+  }
+
+  function renderAdmin() {
+    const obs = Object.values(allDocs);
+    const genetics = obs.filter(o => o.track === 'genetics').sort((a,b) => a.order - b.order);
+    const nanotech = obs.filter(o => o.track === 'nanotech').sort((a,b) => a.order - b.order);
+
+    function renderCol(list, colId, colClass) {
+      const label = colId === 'genetics-admin' ? 'Track 01 Â· Genetics' : 'Track 02 Â· Nanotech';
+      let html = `<div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">${label}</div>`;
+      let lastPhase = null;
+      list.forEach(o => {
+        const ph = o.phaseLabel || ('Phase ' + o.phase);
+        if (ph !== lastPhase) {
+          html += `<div style="font-size:10px;font-weight:600;letter-spacing:0.8px;color:var(--text3);text-transform:uppercase;padding:10px 2px 4px;border-top:1px solid var(--border);margin-top:6px">${escHtml(ph)}</div>`;
+          lastPhase = ph;
+        }
+        html += renderObsCard(o, colClass);
+      });
+      document.getElementById(colId).innerHTML = html;
+    }
+
+    renderCol(genetics, 'genetics-admin', 'genetics-col');
+    renderCol(nanotech, 'nanotech-admin', 'nanotech-col');
+  }
+
+  // ââ TOGGLE MILESTONE âââââââââââââââââââââââââââââââââââââ
+  window.toggleMilestone = (obsId, idx) => {
+    const obs = allDocs[obsId];
+    if (!obs) return;
+    obs.milestones[idx].completed = !obs.milestones[idx].completed;
+    // Update button and row UI immediately
+    const row = document.getElementById(`ms-row-${obsId}-${idx}`);
+    const btn = row?.querySelector('.toggle');
+    const done = obs.milestones[idx].completed;
+    btn?.classList.toggle('on', done);
+    row?.classList.toggle('done', done);
+    // Update the obs-admin-card pct
+    const card = document.getElementById('adm-' + obsId);
+    if (card) {
+      const pctEl = card.querySelector('.obs-pct');
+      if (pctEl) pctEl.textContent = calcPct(obs.milestones) + '%';
+    }
+  };
+
+  // ââ SAVE OBSTACLE âââââââââââââââââââââââââââââââââââââââââ
+  window.saveObstacle = async (obsId) => {
+    const obs = allDocs[obsId];
+    if (!obs) return;
+    const fb = document.getElementById('save-fb-' + obsId);
+    const btn = document.querySelector(`#adm-${obsId} .save-btn`);
+    btn.disabled = true;
+    btn.textContent = 'Saving...';
+    fb.textContent = '';
+
+    // Collect evidence values from inputs
+    obs.milestones.forEach((m, i) => {
+      const inp = document.getElementById(`ev-${obsId}-${i}`);
+      if (inp) m.evidence = inp.value.trim();
+    });
+
+    try {
+      await updateDoc(doc(db, 'obstacles', obsId), {
+        milestones: obs.milestones,
+        lastUpdated: new Date().toISOString()
+      });
+      fb.textContent = 'â Saved';
+      fb.style.color = 'var(--green)';
+      setTimeout(() => { fb.textContent = ''; }, 3000);
+    } catch(e) {
+      fb.textContent = 'â Error: ' + e.message;
+      fb.style.color = 'var(--red)';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Save Changes';
+    }
+  };
 </script>
 </body>
 </html>
