@@ -100,7 +100,6 @@ Respond ONLY in this exact JSON format:
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Referer': 'https://immortality-index.netlify.app'
             },
             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
           });
