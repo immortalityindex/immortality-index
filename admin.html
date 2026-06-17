@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Immortality Index — Admin</title>
+  <style>
+    :root {
+      --bg: #080c14;
+      --surface: #0d1424;
+      --surface2: #121b30;
+      --border: #1a2540;
+      --text: #c8d8f0;
+      --muted: #5a7099;
+      --green: #00e5a0;
+      --cyan: #00c8ff;
+      --red: #ff4466;
+      --gold: #f0c040;
+      --boss: #9b59b6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+
+    /* ── Login screen ── */
+    #loginScreen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+    }
+    .login-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 40px; width: 100%; max-width: 400px;
+    }
+    .login-box h1 { font-size: 22px; margin-bottom: 6px; }
+    .login-box p { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+    .form-group input {
+      width: 100%; padding: 10px 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-size: 14px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus { border-color: var(--cyan); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: none; transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--cyan); color: #080c14; }
+    .btn-success { background: var(--green); color: #080c14; }
+    .btn-danger { background: var(--red); color: #fff; }
+    .btn-ghost {
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: #2a3a60; }
+    .btn-full { width: 100%; }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+    .error-text { color: var(--red); font-size: 12px; margin-top: 10px; }
+    .toggle-link { color: var(--cyan); font-size: 13px; cursor: pointer; background: none; border: none; padding: 0; text-decoration: underline; }
+
+    /* ── Admin app ── */
+    #adminApp { display: none; }
+
+    .topbar {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .topbar h1 { font-size: 18px; font-weight: 700; }
+    .topbar h1 span { color: var(--cyan); }
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar-user { font-size: 12px; color: var(--muted); }
+
+    .page { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ── Action bar ── */
+    .action-bar {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px 20px; margin-bottom: 28px;
+    }
+    .action-bar-title { font-size: 14px; font-weight: 600; flex: 1; }
+    .scan-status { font-size: 12px; color: var(--muted); }
+
+    /* ── Filter bar ── */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .filter-btn {
+      padding: 5px 14px; border-radius: 99px; font-size: 12px; font-weight: 600;
+      cursor: pointer; border: 1px solid var(--border); background: transparent;
+      color: var(--muted); transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover { color: var(--text); border-color: var(--cyan); background: rgba(0,200,255,0.08); }
+    .filter-btn.active { color: var(--cyan); }
+
+    /* ── Obstacle cards ── */
+    .obs-grid { display: grid; gap: 14px; }
+
+    .obs-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .obs-card-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px; cursor: pointer;
+      user-select: none; transition: background 0.15s;
+    }
+    .obs-card-header:hover { background: rgba(255,255,255,0.02); }
+
+    .obs-key { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; min-width: 80px; }
+    .obs-name { flex: 1; font-size: 14px; font-weight: 500; }
+    .obs-track-badge {
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 99px; font-weight: 700;
+    }
+    .obs-track-badge.genetics { background: rgba(0,229,160,0.12); color: var(--green); border: 1px solid rgba(0,229,160,0.2); }
+    .obs-track-badge.nanotech { background: rgba(0,200,255,0.12); color: var(--cyan); border: 1px solid rgba(0,200,255,0.2); }
+
+    .obs-pct { font-size: 14px; font-weight: 700; min-width: 40px; text-align: right; }
+    .genetics .obs-pct { color: var(--green); }
+    .nanotech .obs-pct { color: var(--cyan); }
+
+    .status-pill {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 99px;
+    }
+    .status-pill.completed { background: rgba(0,229,160,0.15); color: var(--green); border: 1px solid rgba(0,229,160,0.25); }
+    .status-pill.active { background: rgba(0,200,255,0.1); color: var(--cyan); border: 1px solid rgba(0,200,255,0.2); }
+    .status-pill.boss-hurdle { background: rgba(155,89,182,0.15); color: var(--boss); border: 1px solid rgba(155,89,182,0.25); }
+
+    .lock-icon { font-size: 14px; opacity: 0.5; }
+    .lock-icon.locked { color: var(--gold); opacity: 1; }
+
+    .chevron { color: var(--muted); transition: transform 0.2s; font-size: 12px; }
+    .obs-card.open .chevron { transform: rotate(180deg); }
+
+    /* ── Expanded edit form ── */
+    .obs-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
+    .obs-card.open .obs-body { display: block; }
+
+    .edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+    @media (max-width: 600px) { .edit-grid { grid-template-columns: 1fr; } }
+    .edit-grid .full { grid-column: 1 / -1; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .field input, .field select {
+      padding: 8px 12px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 7px;
+      color: var(--text); font-size: 13px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color: var(--cyan); }
+    .field input[type=range] {
+      padding: 0; background: none; border: none; cursor: pointer; accent-color: var(--green);
+    }
+    .range-row { display: flex; align-items: center; gap: 10px; }
+    .range-val { font-size: 14px; font-weight: 700; color: var(--green); min-width: 36px; text-align: right; }
+
+    .lock-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 7px;
+    }
+    .lock-row label { font-size: 13px; flex: 1; cursor: pointer; }
+    .lock-row input[type=checkbox] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; }
+
+    .reasoning-box {
+      padding: 10px 12px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 7px; font-size: 12px; color: var(--muted); font-style: italic;
+      line-height: 1.6;
+    }
+
+    .card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .save-msg { font-size: 12px; color: var(--green); animation: fadeOut 3s forwards; }
+    @keyframes fadeOut { 0%,70%{ opacity:1 } 100%{ opacity:0 } }
+
+    /* ── Loading ── */
+    .loading { text-align: center; padding: 60px; color: var(--muted); }
+    .spinner { width: 30px; height: 30px; border: 2px solid var(--border); border-top-color: var(--cyan); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══════════════════════════════════════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>Admin Panel</h1>
+    <p>Immortality Index — restricted access</p>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" autocomplete="email" placeholder="admin@example.com" />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" />
+    </div>
+    <button class="btn btn-primary btn-full" id="loginBtn">Sign In</button>
+    <button class="btn btn-ghost btn-full" id="createBtn" style="margin-top:10px">Create Account (First-time setup)</button>
+    <div class="error-text" id="loginError"></div>
+  </div>
+</div>
+
+<!-- ══ ADMIN APP ══════════════════════════════════════════════════════════════ -->
+<div id="adminApp">
+  <div class="topbar">
+    <h1>Immortality <span>Index</span> &mdash; Admin</h1>
+    <div class="topbar-right">
+      <span class="topbar-user" id="userEmail"></span>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="action-bar">
+      <div class="action-bar-title">Research Obstacles</div>
+      <span class="scan-status" id="scanStatus"></span>
+      <button class="btn btn-primary btn-sm" id="scanBtn">⚡ Run AI Scan Now</button>
+      <button class="btn btn-ghost btn-sm" id="seedBtn">🌱 Seed Database</button>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="genetics">Genetics</button>
+      <button class="filter-btn" data-filter="nanotech">Nanotech</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+      <button class="filter-btn" data-filter="boss-hurdle">Boss Hurdles</button>
+    </div>
+
+    <div id="obstacleList">
+      <div class="loading"><div class="spinner"></div>Loading obstacles…</div>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+<script>
+firebase.initializeApp({
+  apiKey: "AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM",
+  authDomain: "immortality-index.firebaseapp.com",
+  projectId: "immortality-index",
+  storageBucket: "immortality-index.firebasestorage.app",
+  messagingSenderId: "202572480694",
+  appId: "1:202572480694:web:1d0ae36f8bb68106cc6617"
+});
+
+const auth = firebase.auth();
+const db   = firebase.firestore();
+
+// ── Auth state ───────────────────────────────────────────────────────────────
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'block';
+    document.getElementById('userEmail').textContent = user.email;
+    loadObstacles();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminApp').style.display = 'none';
+  }
+});
+
+// ── Login / Create ───────────────────────────────────────────────────────────
+document.getElementById('loginBtn').onclick = async () => {
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('password').value;
+  document.getElementById('loginError').textContent = '';
+  try {
+    await auth.signInWithEmailAndPassword(email, pass);
+  } catch (e) {
+    document.getElementById('loginError').textContent = e.message;
+  }
+};
+
+document.getElementById('createBtn').onclick = async () => {
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('password').value;
+  document.getElementById('loginError').textContent = '';
+  if (pass.length < 8) {
+    document.getElementById('loginError').textContent = 'Password must be at least 8 characters.';
+    return;
+  }
+  try {
+    await auth.createUserWithEmailAndPassword(email, pass);
+  } catch (e) {
+    document.getElementById('loginError').textContent = e.message;
+  }
+};
+
+document.getElementById('logoutBtn').onclick = () => auth.signOut();
+
+// ── Filter state ─────────────────────────────────────────────────────────────
+let currentFilter = 'all';
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderList();
+  };
+});
+
+// ── Data store ───────────────────────────────────────────────────────────────
+let allObstacles = [];
+
+function loadObstacles() {
+  db.collection('obstacles').onSnapshot(snap => {
+    allObstacles = [];
+    snap.forEach(doc => allObstacles.push({ _docId: doc.id, ...doc.data() }));
+    allObstacles.sort((a, b) => {
+      if (a.track !== b.track) return a.track < b.track ? -1 : 1;
+      const parse = k => { const m = (k||'').match(/^(\d+)\.(\d+)/); return m ? +m[1]*100 + +m[2] : 999; };
+      return parse(a.key) - parse(b.key);
+    });
+    renderList();
+  });
+}
+
+function filtered() {
+  return allObstacles.filter(o => {
+    if (currentFilter === 'all') return true;
+    if (currentFilter === 'genetics') return o.track === 'genetics';
+    if (currentFilter === 'nanotech') return o.track === 'nanotech';
+    if (currentFilter === 'active') return o.status === 'Active';
+    if (currentFilter === 'completed') return o.status === 'Completed';
+    if (currentFilter === 'boss-hurdle') return o.status === 'Boss Hurdle';
+    return true;
+  });
+}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+function renderList() {
+  const list = filtered();
+  if (!list.length) {
+    document.getElementById('obstacleList').innerHTML = '<div class="loading">No obstacles match this filter.</div>';
+    return;
+  }
+  document.getElementById('obstacleList').innerHTML =
+    `<div class="obs-grid">${list.map(renderCard).join('')}</div>`;
+
+  // Wire up events
+  list.forEach(obs => {
+    const id = obs._docId;
+    const card = document.getElementById(`card-${id}`);
+
+    // Toggle expand
+    card.querySelector('.obs-card-header').onclick = () => card.classList.toggle('open');
+
+    // Range input live update
+    const range = card.querySelector('.range-input');
+    const rangeVal = card.querySelector('.range-val');
+    range.oninput = () => { rangeVal.textContent = range.value + '%'; };
+
+    // Save
+    card.querySelector('.save-btn').onclick = () => saveCard(id, card, obs);
+
+    // Revert
+    card.querySelector('.revert-btn').onclick = () => {
+      renderList(); // re-render fresh from data
+    };
+  });
+}
+
+function statusPillClass(status) {
+  if (status === 'Completed') return 'completed';
+  if (status === 'Boss Hurdle') return 'boss-hurdle';
+  return 'active';
+}
+
+function renderCard(obs) {
+  const id = obs._docId;
+  const spc = statusPillClass(obs.status);
+  const reasoning = obs.ai_reasoning || '';
+  const lastScan = obs.last_scanned ? formatDate(obs.last_scanned) : 'Never';
+
+  return `
+  <div class="obs-card ${obs.track}" id="card-${id}">
+    <div class="obs-card-header">
+      <span class="obs-key">${esc(obs.key || '')}</span>
+      <span class="obs-name">${esc(obs.name)}</span>
+      <span class="obs-track-badge ${obs.track}">${obs.track}</span>
+      <span class="obs-pct">${obs.progress || 0}%</span>
+      <span class="status-pill ${spc}">${esc(obs.status)}</span>
+      <span class="lock-icon ${obs.ai_locked ? 'locked' : ''}">${obs.ai_locked ? '🔒' : '🔓'}</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="obs-body">
+      <div class="edit-grid">
+        <div class="field full">
+          <label>Progress</label>
+          <div class="range-row">
+            <input type="range" class="range-input" min="0" max="100" value="${obs.progress || 0}" />
+            <span class="range-val">${obs.progress || 0}%</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Status</label>
+          <select class="status-select">
+            <option value="Active" ${obs.status === 'Active' ? 'selected' : ''}>Active</option>
+            <option value="Completed" ${obs.status === 'Completed' ? 'selected' : ''}>Completed</option>
+            <option value="Boss Hurdle" ${obs.status === 'Boss Hurdle' ? 'selected' : ''}>Boss Hurdle</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Lock AI Updates</label>
+          <div class="lock-row">
+            <input type="checkbox" class="lock-check" id="lock-${id}" ${obs.ai_locked ? 'checked' : ''} />
+            <label for="lock-${id}">Prevent AI from overwriting this obstacle</label>
+          </div>
+        </div>
+        <div class="field full">
+          <label>Evidence Article Title</label>
+          <input type="text" class="article-title" value="${esc(obs.article_title || '')}" placeholder="Paper or article name" />
+        </div>
+        <div class="field full">
+          <label>Evidence URL</label>
+          <input type="url" class="article-url" value="${esc(obs.article_url || '')}" placeholder="https://…" />
+        </div>
+        ${reasoning ? `
+        <div class="field full">
+          <label>Last AI Reasoning</label>
+          <div class="reasoning-box">${esc(reasoning)}</div>
+        </div>` : ''}
+        <div class="field full" style="color:var(--muted);font-size:11px">
+          Last AI scan: ${lastScan}
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-success btn-sm save-btn">Save Changes</button>
+        <button class="btn btn-ghost btn-sm revert-btn">Revert</button>
+      </div>
+      <div class="save-msg" id="msg-${id}" style="display:none"></div>
+    </div>
+  </div>`;
+}
+
+async function saveCard(docId, card, obs) {
+  const progress    = parseInt(card.querySelector('.range-input').value, 10);
+  const status      = card.querySelector('.status-select').value;
+  const ai_locked   = card.querySelector('.lock-check').checked;
+  const article_title = card.querySelector('.article-title').value.trim();
+  const article_url   = card.querySelector('.article-url').value.trim();
+
+  try {
+    await db.collection('obstacles').doc(docId).update({
+      progress, status, ai_locked, article_title, article_url,
+      last_updated: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    const msg = document.getElementById(`msg-${docId}`);
+    msg.textContent = '✓ Saved';
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 3000);
+  } catch (e) {
+    alert('Error saving: ' + e.message);
+  }
+}
+
+// ── AI Scan ──────────────────────────────────────────────────────────────────
+document.getElementById('scanBtn').onclick = async () => {
+  const secret = prompt('Enter ADMIN_SECRET to trigger scan:');
+  if (!secret) return;
+
+  document.getElementById('scanStatus').textContent = '⏳ Scanning… (may take several minutes)';
+  document.getElementById('scanBtn').disabled = true;
+
+  try {
+    const res = await fetch('/api/scan', {
+      headers: { 'x-admin-secret': secret }
+    });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('scanStatus').textContent =
+        `✓ Scan complete: ${data.scanned} processed, ${data.errors} errors`;
+    } else {
+      document.getElementById('scanStatus').textContent = '✗ Scan failed: ' + (data.error || 'unknown error');
+    }
+  } catch (e) {
+    document.getElementById('scanStatus').textContent = '✗ Network error: ' + e.message;
+  } finally {
+    document.getElementById('scanBtn').disabled = false;
+  }
+};
+
+// ── Seed ─────────────────────────────────────────────────────────────────────
+document.getElementById('seedBtn').onclick = async () => {
+  const secret = prompt('Enter SEED_SECRET to seed the database (WARNING: overwrites all data):');
+  if (!secret) return;
+  if (!confirm('This will overwrite ALL obstacle data. Are you sure?')) return;
+
+  try {
+    const res = await fetch(`/api/seed?secret=${encodeURIComponent(secret)}`);
+    const data = await res.json();
+    alert(data.success ? `✓ Seeded ${data.seeded} obstacles.` : '✗ Seed failed: ' + data.error);
+  } catch (e) {
+    alert('Network error: ' + e.message);
+  }
+};
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatDate(ts) {
+  if (!ts) return 'unknown';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+}
+</script>
+</body>
+</html>

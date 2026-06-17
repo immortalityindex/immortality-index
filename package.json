@@ -1,0 +1,12 @@
+{
+  "name": "immortality-index",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0",
+    "@google/generative-ai": "^0.21.0"
+  }
+}

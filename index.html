@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Immortality Index</title>
+  <style>
+    :root {
+      --bg: #080c14;
+      --surface: #0d1424;
+      --border: #1a2540;
+      --text: #c8d8f0;
+      --muted: #5a7099;
+      --green: #00e5a0;
+      --green-dim: #00e5a022;
+      --cyan: #00c8ff;
+      --cyan-dim: #00c8ff18;
+      --gold: #f0c040;
+      --gold-dim: #f0c04020;
+      --red: #ff4466;
+      --boss: #9b59b6;
+      --boss-dim: #9b59b620;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background grid ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ── Header ── */
+    header { text-align: center; margin-bottom: 60px; }
+    header .eyebrow {
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 12px; opacity: 0.8;
+    }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 60%, var(--green) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    header p {
+      color: var(--muted); font-size: 15px; max-width: 560px; margin: 0 auto 20px;
+    }
+    .last-updated { font-size: 12px; color: var(--muted); opacity: 0.6; }
+
+    /* ── Track summary cards ── */
+    .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 60px; }
+    @media (max-width: 640px) { .tracks { grid-template-columns: 1fr; } }
+
+    .track-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .track-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+    }
+    .track-card.genetics::before { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    .track-card.nanotech::before { background: linear-gradient(90deg, var(--cyan), var(--boss)); }
+
+    .track-card .track-label {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .track-card .track-name { font-size: 22px; font-weight: 600; margin-bottom: 20px; }
+    .track-card.genetics .track-name { color: var(--green); }
+    .track-card.nanotech .track-name { color: var(--cyan); }
+
+    .big-progress {
+      display: flex; align-items: baseline; gap: 6px; margin-bottom: 14px;
+    }
+    .big-progress .pct { font-size: 48px; font-weight: 700; line-height: 1; }
+    .track-card.genetics .pct { color: var(--green); }
+    .track-card.nanotech .pct { color: var(--cyan); }
+    .big-progress .label { font-size: 14px; color: var(--muted); }
+
+    .track-bar-wrap { background: rgba(255,255,255,0.06); border-radius: 99px; height: 8px; overflow: hidden; }
+    .track-bar-fill {
+      height: 100%; border-radius: 99px;
+      transition: width 1s cubic-bezier(.4,0,.2,1);
+    }
+    .track-card.genetics .track-bar-fill { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    .track-card.nanotech .track-bar-fill { background: linear-gradient(90deg, var(--cyan), var(--boss)); }
+
+    .track-meta { margin-top: 12px; font-size: 12px; color: var(--muted); }
+
+    /* ── Section headings ── */
+    .section { margin-bottom: 48px; }
+    .section-header {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .section-header h2 { font-size: 20px; font-weight: 600; }
+    .section-header .section-badge {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 99px; font-weight: 600;
+    }
+    .section-header.genetics h2 { color: var(--green); }
+    .section-header.genetics .section-badge { background: var(--green-dim); color: var(--green); border: 1px solid var(--green)44; }
+    .section-header.nanotech h2 { color: var(--cyan); }
+    .section-header.nanotech .section-badge { background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--cyan)44; }
+
+    /* ── Obstacle grid ── */
+    .obstacle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .obstacle-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .obstacle-card:hover { border-color: #2a3a60; transform: translateY(-2px); }
+
+    .obstacle-card.completed { border-color: #00e5a030; background: linear-gradient(135deg, #0d1424, #0d1c14); }
+    .obstacle-card.boss-hurdle { border-color: #9b59b630; background: linear-gradient(135deg, #0d1424, #130d1c); }
+
+    .obstacle-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px; }
+
+    .obstacle-key {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      color: var(--muted); text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .status-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 99px; white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-badge.completed { background: var(--green-dim); color: var(--green); border: 1px solid var(--green)33; }
+    .status-badge.active { background: rgba(0,200,255,0.1); color: var(--cyan); border: 1px solid var(--cyan)33; }
+    .status-badge.boss-hurdle { background: var(--boss-dim); color: var(--boss); border: 1px solid var(--boss)44; }
+
+    .obstacle-name {
+      font-size: 14px; font-weight: 500; line-height: 1.5;
+      color: #ddeeff; margin-bottom: 16px;
+    }
+
+    .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .progress-bar-wrap {
+      flex: 1; height: 6px; background: rgba(255,255,255,0.06);
+      border-radius: 99px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 99px;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    .genetics .progress-bar-fill { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    .nanotech .progress-bar-fill { background: linear-gradient(90deg, var(--cyan), #7b6ef0); }
+    .obstacle-card.boss-hurdle .progress-bar-fill { background: linear-gradient(90deg, var(--boss), #e040fb); }
+
+    .progress-pct { font-size: 13px; font-weight: 700; min-width: 36px; text-align: right; }
+    .genetics .progress-pct { color: var(--green); }
+    .nanotech .progress-pct { color: var(--cyan); }
+
+    .evidence-link {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; color: var(--muted); text-decoration: none;
+      padding: 7px 10px; border-radius: 7px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      overflow: hidden;
+    }
+    .evidence-link:hover { background: rgba(255,255,255,0.05); color: var(--text); border-color: #2a3a60; }
+    .evidence-link .link-icon { flex-shrink: 0; opacity: 0.6; }
+    .evidence-link .link-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .no-evidence { font-size: 12px; color: var(--muted); opacity: 0.4; font-style: italic; }
+
+    /* ── Loading state ── */
+    .loading {
+      text-align: center; padding: 80px 20px; color: var(--muted);
+    }
+    .spinner {
+      width: 36px; height: 36px; border: 3px solid var(--border);
+      border-top-color: var(--cyan);
+      border-radius: 50%; animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-msg { text-align: center; padding: 40px; color: var(--red); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; margin-top: 60px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--muted); opacity: 0.5;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="eyebrow">Research Progress Tracker</div>
+    <h1>Immortality Index</h1>
+    <p>Tracking the scientific obstacles that stand between humanity and indefinite lifespan — updated daily via AI literature scan.</p>
+    <div class="last-updated" id="lastUpdated">Loading…</div>
+  </header>
+
+  <div class="tracks" id="trackSummary">
+    <div class="track-card genetics">
+      <div class="track-label">Track 01</div>
+      <div class="track-name">Genetics</div>
+      <div class="big-progress">
+        <span class="pct" id="geneticsPct">—</span>
+        <span class="label">% addressed</span>
+      </div>
+      <div class="track-bar-wrap">
+        <div class="track-bar-fill" id="geneticsBar" style="width:0%"></div>
+      </div>
+      <div class="track-meta" id="geneticsMeta"></div>
+    </div>
+    <div class="track-card nanotech">
+      <div class="track-label">Track 02</div>
+      <div class="track-name">Nanotech</div>
+      <div class="big-progress">
+        <span class="pct" id="nanotechPct">—</span>
+        <span class="label">% addressed</span>
+      </div>
+      <div class="track-bar-wrap">
+        <div class="track-bar-fill" id="nanotechBar" style="width:0%"></div>
+      </div>
+      <div class="track-meta" id="nanotechMeta"></div>
+    </div>
+  </div>
+
+  <div id="content">
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>Loading latest research data…</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Data auto-updated daily · <a href="/admin.html">Admin</a></p>
+  </footer>
+</div>
+
+<!-- Firebase Web SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM",
+  authDomain: "immortality-index.firebaseapp.com",
+  projectId: "immortality-index",
+  storageBucket: "immortality-index.firebasestorage.app",
+  messagingSenderId: "202572480694",
+  appId: "1:202572480694:web:1d0ae36f8bb68106cc6617",
+  measurementId: "G-SHG59GLCHK"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function statusClass(status) {
+  if (status === 'Completed') return 'completed';
+  if (status === 'Boss Hurdle') return 'boss-hurdle';
+  return 'active';
+}
+
+function statusLabel(status) {
+  return status === 'Boss Hurdle' ? '⚔ Boss Hurdle' : status === 'Completed' ? '✓ Completed' : 'Active';
+}
+
+function formatDate(ts) {
+  if (!ts) return 'unknown';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function renderCard(obs, track) {
+  const sc = statusClass(obs.status);
+  const hasLink = obs.article_url && obs.article_url.trim() !== '';
+  const hasTitle = obs.article_title && obs.article_title.trim() !== '' && obs.article_title !== 'None';
+
+  return `
+    <div class="obstacle-card ${track} ${sc}">
+      <div class="obstacle-top">
+        <span class="obstacle-key">${escHtml(obs.key || '')}</span>
+        <span class="status-badge ${sc}">${statusLabel(obs.status)}</span>
+      </div>
+      <div class="obstacle-name">${escHtml(obs.name)}</div>
+      <div class="progress-row">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" style="width:${obs.progress || 0}%"></div>
+        </div>
+        <span class="progress-pct">${obs.progress || 0}%</span>
+      </div>
+      ${hasTitle
+        ? hasLink
+          ? `<a class="evidence-link" href="${escHtml(obs.article_url)}" target="_blank" rel="noopener">
+               <svg class="link-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+               <span class="link-text">${escHtml(obs.article_title)}</span>
+             </a>`
+          : `<div class="evidence-link" style="cursor:default">
+               <svg class="link-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+               <span class="link-text">${escHtml(obs.article_title)}</span>
+             </div>`
+        : `<span class="no-evidence">No evidence on file</span>`
+      }
+    </div>`;
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function calcTrackProgress(obstacles) {
+  if (!obstacles.length) return 0;
+  const sum = obstacles.reduce((a, o) => a + (o.progress || 0), 0);
+  return Math.round(sum / obstacles.length);
+}
+
+function renderSection(title, cssClass, obstacles) {
+  const completed = obstacles.filter(o => o.status === 'Completed').length;
+  const cards = obstacles.map(o => renderCard(o, cssClass)).join('');
+  return `
+    <div class="section">
+      <div class="section-header ${cssClass}">
+        <h2>${title} Track</h2>
+        <span class="section-badge">${completed}/${obstacles.length} Completed</span>
+      </div>
+      <div class="obstacle-grid">${cards}</div>
+    </div>`;
+}
+
+// Key sort: "1.1 Foo" → sort by numeric prefix
+function sortByKey(a, b) {
+  const parse = k => {
+    const m = (k || '').match(/^(\d+)\.(\d+)/);
+    return m ? parseInt(m[1]) * 100 + parseInt(m[2]) : 999;
+  };
+  return parse(a.key) - parse(b.key);
+}
+
+// ── Real-time listener ───────────────────────────────────────────────────────
+db.collection('obstacles').onSnapshot(snapshot => {
+  const genetics = [], nanotech = [];
+  let latestTs = null;
+
+  snapshot.forEach(doc => {
+    const d = doc.data();
+    if (d.track === 'genetics') genetics.push(d);
+    else if (d.track === 'nanotech') nanotech.push(d);
+    if (d.last_updated && (!latestTs || d.last_updated.toMillis() > latestTs.toMillis())) {
+      latestTs = d.last_updated;
+    }
+  });
+
+  genetics.sort(sortByKey);
+  nanotech.sort(sortByKey);
+
+  // Track summary
+  const gPct = calcTrackProgress(genetics);
+  const nPct = calcTrackProgress(nanotech);
+  const gComp = genetics.filter(o => o.status === 'Completed').length;
+  const nComp = nanotech.filter(o => o.status === 'Completed').length;
+
+  document.getElementById('geneticsPct').textContent = gPct + '%';
+  document.getElementById('geneticsBar').style.width = gPct + '%';
+  document.getElementById('geneticsMeta').textContent = `${gComp} of ${genetics.length} obstacles addressed`;
+
+  document.getElementById('nanotechPct').textContent = nPct + '%';
+  document.getElementById('nanotechBar').style.width = nPct + '%';
+  document.getElementById('nanotechMeta').textContent = `${nComp} of ${nanotech.length} obstacles addressed`;
+
+  document.getElementById('lastUpdated').textContent =
+    latestTs ? `Last updated: ${formatDate(latestTs)}` : 'No data yet';
+
+  document.getElementById('content').innerHTML =
+    renderSection('Genetics', 'genetics', genetics) +
+    renderSection('Nanotech', 'nanotech', nanotech);
+
+}, err => {
+  document.getElementById('content').innerHTML =
+    `<div class="error-msg">Failed to load data: ${err.message}</div>`;
+});
+</script>
+</body>
+</html>
