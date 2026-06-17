@@ -52,6 +52,21 @@
     .admin-header h2 { font-size: 16px; font-weight: 700; color: var(--text2); }
     .admin-actions { display: flex; gap: 8px; align-items: center; }
     .scan-status { font-size: 12px; color: var(--text3); }
+    /* Scan progress panel */
+    #scan-progress { display:none; margin:0 0 24px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px 24px; }
+    .scan-prog-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+    .scan-prog-title { font-size:13px; font-weight:700; color:var(--accent); }
+    .scan-prog-status { font-size:11px; color:var(--text3); }
+    .scan-prog-bar-wrap { background:var(--bg3); border-radius:99px; height:6px; margin-bottom:14px; overflow:hidden; }
+    .scan-prog-bar { height:6px; border-radius:99px; background:linear-gradient(90deg,var(--accent),var(--purple)); transition:width 0.5s ease; width:0%; }
+    .scan-prog-current { font-size:12px; color:var(--text2); margin-bottom:12px; }
+    .scan-prog-stats { display:flex; gap:20px; font-size:11px; color:var(--text3); margin-bottom:14px; }
+    .scan-prog-stats span b { color:var(--text); }
+    .scan-log { max-height:140px; overflow-y:auto; font-size:11px; font-family:monospace; background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:8px 10px; display:flex; flex-direction:column; gap:2px; }
+    .log-achieved { color:var(--green); }
+    .log-not { color:var(--text3); }
+    .log-error { color:var(--red); }
+
 
     .obstacles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
     @media (max-width: 900px) { .obstacles-grid { grid-template-columns: 1fr; } }
@@ -153,6 +168,22 @@
       <button class="btn btn-sm btn-scan" id="scan-btn" onclick="triggerScan()">▶ Trigger AI Scan</button>
     </div>
   </div>
+
+  <!-- Scan progress panel -->
+  <div id="scan-progress">
+    <div class="scan-prog-header">
+      <span class="scan-prog-title">🔬 AI Scan in Progress</span>
+      <span class="scan-prog-status" id="prog-status-text"></span>
+    </div>
+    <div class="scan-prog-bar-wrap"><div class="scan-prog-bar" id="prog-bar"></div></div>
+    <div class="scan-prog-current" id="prog-current">Initialising...</div>
+    <div class="scan-prog-stats">
+      <span>Obstacles: <b><span id="prog-obs">0</span> / <span id="prog-obs-total">0</span></b></span>
+      <span>Milestones scanned: <b><span id="prog-ms">0</span> / <span id="prog-ms-total">0</span></b></span>
+      <span>Updated: <b><span id="prog-updated">0</span></b></span>
+    </div>
+    <div class="scan-log" id="scan-log"></div>
+  </div>
   <div class="obstacles-grid">
     <div id="genetics-admin">
       <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:12px">Track 01 · Genetics</div>
@@ -213,25 +244,102 @@
   });
 
   // ── SCAN ─────────────────────────────────────────────────
+  let scanUnsub = null;
+
+  function startScanProgressListener() {
+    if (scanUnsub) scanUnsub();
+    const progPanel = document.getElementById('scan-progress');
+    const progBar   = document.getElementById('prog-bar');
+    const progCur   = document.getElementById('prog-current');
+    const progObs   = document.getElementById('prog-obs');
+    const progObsT  = document.getElementById('prog-obs-total');
+    const progMs    = document.getElementById('prog-ms');
+    const progMsT   = document.getElementById('prog-ms-total');
+    const progUpd   = document.getElementById('prog-updated');
+    const progStat  = document.getElementById('prog-status-text');
+    const logEl     = document.getElementById('scan-log');
+
+    progPanel.style.display = 'block';
+    logEl.innerHTML = '';
+
+    scanUnsub = onSnapshot(doc(db, '_meta', 'scanStatus'), snap => {
+      if (!snap.exists()) return;
+      const d = snap.data();
+
+      progObsT.textContent = d.totalObstacles || 0;
+      progMsT.textContent  = d.totalMilestones || 0;
+      progObs.textContent  = d.obstacleIndex || 0;
+      progMs.textContent   = d.milestonesScanned || 0;
+      progUpd.textContent  = d.milestonesUpdated || 0;
+
+      const pct = d.totalMilestones ? Math.round((d.milestonesScanned / d.totalMilestones) * 100) : 0;
+      progBar.style.width = pct + '%';
+
+      if (d.status === 'running') {
+        progCur.textContent = d.currentObstacle ? `Scanning: ${d.currentObstacle}` : 'Initialising...';
+        progStat.textContent = `${pct}%`;
+      } else if (d.status === 'complete') {
+        progCur.textContent = `✓ Complete — ${d.milestonesUpdated || 0} milestone(s) newly confirmed`;
+        progStat.textContent = d.completedAt ? new Date(d.completedAt).toLocaleTimeString() : '';
+        progBar.style.width = '100%';
+        document.getElementById('scan-btn').disabled = false;
+        document.getElementById('scan-btn').textContent = '▶ Trigger AI Scan';
+        document.getElementById('scan-status').textContent = `Last scan: ${d.milestonesUpdated || 0} updated`;
+        document.getElementById('scan-status').style.color = 'var(--green)';
+        if (scanUnsub) { scanUnsub(); scanUnsub = null; }
+      } else if (d.status === 'error') {
+        progCur.textContent = '✗ Error: ' + (d.error || 'unknown');
+        progCur.style.color = 'var(--red)';
+        document.getElementById('scan-btn').disabled = false;
+        document.getElementById('scan-btn').textContent = '▶ Trigger AI Scan';
+        if (scanUnsub) { scanUnsub(); scanUnsub = null; }
+      }
+
+      // Render log entries
+      if (d.log?.length) {
+        logEl.innerHTML = '';
+        d.log.forEach(entry => {
+          const el = document.createElement('div');
+          if (entry.error) {
+            el.className = 'log-error';
+            el.textContent = `[${entry.t}] ${entry.obs} · ${entry.ms} — ERROR: ${entry.error}`;
+          } else if (entry.achieved) {
+            el.className = 'log-achieved';
+            el.textContent = `[${entry.t}] ✓ ${entry.obs} · ${entry.ms} — ${entry.confidence} confidence`;
+          } else {
+            el.className = 'log-not';
+            el.textContent = `[${entry.t}] · ${entry.obs} · ${entry.ms} — not yet achieved`;
+          }
+          logEl.appendChild(el);
+        });
+        logEl.scrollTop = logEl.scrollHeight;
+      }
+    });
+  }
+
   window.triggerScan = async () => {
     const btn = document.getElementById('scan-btn');
     const status = document.getElementById('scan-status');
     btn.disabled = true;
-    btn.textContent = 'Triggering...';
+    btn.textContent = 'Starting scan...';
     status.textContent = '';
     try {
       const user = auth.currentUser;
       const token = await user.getIdToken();
+      startScanProgressListener();
       const r = await fetch('/api/scan', {
         method: 'POST',
         headers: { 'Authorization': 'Bearer ' + token }
       });
-      status.textContent = r.ok ? '✓ Scan triggered (background — runs ~2 min)' : '✗ Scan failed: ' + r.status;
-      status.style.color = r.ok ? 'var(--green)' : 'var(--red)';
+      if (!r.ok) {
+        status.textContent = '✗ Scan failed to start: ' + r.status;
+        status.style.color = 'var(--red)';
+        btn.disabled = false;
+        btn.textContent = '▶ Trigger AI Scan';
+      }
     } catch(e) {
       status.textContent = '✗ ' + e.message;
       status.style.color = 'var(--red)';
-    } finally {
       btn.disabled = false;
       btn.textContent = '▶ Trigger AI Scan';
     }

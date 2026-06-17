@@ -2,90 +2,115 @@ const admin = require('firebase-admin');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 exports.handler = async (event, context) => {
-  // Auth: admin secret (manual trigger) OR Firebase ID token (from admin panel)
   const manualSecret = event.headers['x-admin-secret'];
   const authHeader = event.headers['authorization'];
-
   const validManual = process.env.ADMIN_SECRET && manualSecret === process.env.ADMIN_SECRET;
   const validCron = process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`;
 
-  // Also accept Firebase ID tokens from admin panel
   let validToken = false;
   if (!validManual && !validCron && authHeader?.startsWith('Bearer ')) {
     try {
       if (!admin.apps.length) {
-        const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-        admin.initializeApp({ credential: admin.credential.cert(sa) });
+        admin.initializeApp({ credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)) });
       }
-      const token = authHeader.replace('Bearer ', '');
-      await admin.auth().verifyIdToken(token);
+      await admin.auth().verifyIdToken(authHeader.replace('Bearer ', ''));
       validToken = true;
-    } catch (_) { /* invalid token */ }
+    } catch (_) {}
   }
 
   if (!validManual && !validCron && !validToken) {
     return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 
+  if (!admin.apps.length) {
+    admin.initializeApp({ credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)) });
+  }
+  const db = admin.firestore();
+  const statusRef = db.collection('_meta').doc('scanStatus');
+  const now = new Date().toISOString();
+
+  const writeStatus = (data) => statusRef.set({ ...data, updatedAt: new Date().toISOString() });
+
   try {
-    if (!admin.apps.length) {
-      const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-      admin.initializeApp({ credential: admin.credential.cert(sa) });
-    }
-    const db = admin.firestore();
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-    // Fetch all obstacles
     const snap = await db.collection('obstacles').get();
     const obstacles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const totalMilestones = obstacles.reduce((s, o) => s + (o.milestones?.length || 0), 0);
+
+    await writeStatus({
+      status: 'running',
+      startedAt: now,
+      currentObstacle: '',
+      obstacleIndex: 0,
+      totalObstacles: obstacles.length,
+      milestonesScanned: 0,
+      totalMilestones,
+      milestonesUpdated: 0,
+      obstaclesUpdated: 0,
+      log: []
+    });
 
     const delay = ms => new Promise(r => setTimeout(r, ms));
-    const now = new Date().toISOString();
-    let updatedCount = 0;
+    let milestonesScanned = 0;
+    let milestonesUpdated = 0;
+    let obstaclesUpdated = 0;
+    const log = [];
 
-    for (const obs of obstacles) {
+    for (let oi = 0; oi < obstacles.length; oi++) {
+      const obs = obstacles[oi];
       const milestones = obs.milestones || [];
       let obsChanged = false;
       const updatedMilestones = [...milestones];
 
+      await writeStatus({
+        status: 'running',
+        startedAt: now,
+        currentObstacle: obs.shortName || obs.name,
+        obstacleIndex: oi + 1,
+        totalObstacles: obstacles.length,
+        milestonesScanned,
+        totalMilestones,
+        milestonesUpdated,
+        obstaclesUpdated,
+        log: log.slice(-20)
+      });
+
       for (let i = 0; i < milestones.length; i++) {
         const ms = milestones[i];
-
-        // Skip already-completed milestones (don't regress them)
-        if (ms.completed) continue;
+        if (ms.completed) { milestonesScanned++; continue; }
 
         const prompt = `You are a scientific literature analyst specialising in longevity, genetics, and nanotechnology research.
 
 Obstacle: "${obs.name}"
-Milestone ${i + 1}: "${ms.name}"
+Milestone: "${ms.name}"
 
-Your task: Determine whether this specific milestone has been ACHIEVED in peer-reviewed scientific literature as of your knowledge cutoff.
+Has this specific milestone been ACHIEVED in peer-reviewed scientific literature as of your knowledge cutoff?
 
-A milestone is ACHIEVED if:
-- There is direct peer-reviewed experimental evidence (published in a reputable journal)
-- The evidence demonstrates the specific quantitative threshold described
-- The result has been independently replicated OR is from a major research institution
+ACHIEVED means: direct experimental peer-reviewed evidence meeting the specific quantitative threshold described, published in a reputable journal.
+NOT YET ACHIEVED means: theoretical goal, only partial evidence, only preprints, or clinical trials not yet completed.
 
-A milestone is NOT YET ACHIEVED if:
-- It remains a theoretical goal
-- Only partial/preliminary evidence exists below the described threshold
-- Evidence exists only in preprints or conference abstracts
-- The milestone requires future clinical trials not yet completed
-
-Respond in this exact JSON format (no other text):
+Respond ONLY in this exact JSON format:
 {"achieved": true/false, "confidence": "high"/"medium"/"low", "evidence": "One sentence citing specific paper, author, journal, year if achieved; otherwise null"}`;
 
         try {
-          await delay(4000); // ~15 req/min rate limit compliance
+          await delay(4000);
           const result = await model.generateContent(prompt);
           const raw = result.response.text().trim();
-
-          // Extract JSON from response
           const jsonMatch = raw.match(/\{[\s\S]*\}/);
-          if (!jsonMatch) continue;
+          if (!jsonMatch) { milestonesScanned++; continue; }
 
           const parsed = JSON.parse(jsonMatch[0]);
+          const entry = {
+            t: new Date().toISOString().slice(11,19),
+            obs: obs.shortName || obs.id,
+            ms: ms.id,
+            achieved: parsed.achieved,
+            confidence: parsed.confidence,
+            evidence: parsed.evidence
+          };
+          log.push(entry);
 
           if (parsed.achieved && parsed.confidence !== 'low') {
             updatedMilestones[i] = {
@@ -96,11 +121,12 @@ Respond in this exact JSON format (no other text):
               confidence: parsed.confidence
             };
             obsChanged = true;
+            milestonesUpdated++;
           }
         } catch (err) {
-          console.error(`Scan error for ${obs.id} ms${i}:`, err.message);
-          // Continue with next milestone
+          log.push({ t: new Date().toISOString().slice(11,19), obs: obs.id, ms: ms.id, error: err.message });
         }
+        milestonesScanned++;
       }
 
       if (obsChanged) {
@@ -108,27 +134,30 @@ Respond in this exact JSON format (no other text):
           milestones: updatedMilestones,
           lastUpdated: now
         });
-        updatedCount++;
+        obstaclesUpdated++;
       }
 
-      // Brief pause between obstacles
-      await delay(1000);
+      await delay(500);
     }
+
+    await writeStatus({
+      status: 'complete',
+      startedAt: now,
+      completedAt: new Date().toISOString(),
+      totalObstacles: obstacles.length,
+      milestonesScanned,
+      totalMilestones,
+      milestonesUpdated,
+      obstaclesUpdated,
+      log: log.slice(-50)
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        success: true,
-        scanned: obstacles.length,
-        updated: updatedCount,
-        timestamp: now
-      })
+      body: JSON.stringify({ success: true, scanned: obstacles.length, milestonesUpdated, obstaclesUpdated })
     };
   } catch (error) {
-    console.error('Scan failed:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message })
-    };
+    await writeStatus({ status: 'error', error: error.message, startedAt: now });
+    return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
   }
 };
