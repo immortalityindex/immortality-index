@@ -29,7 +29,17 @@ exports.handler = async (event, context) => {
   const statusRef = db.collection('_meta').doc('scanStatus');
   const now = new Date().toISOString();
 
+  const scanId = now; // unique ID for this scan run
   const writeStatus = (data) => statusRef.set({ ...data, updatedAt: new Date().toISOString() });
+
+  // Cancel check: returns true if this scan should stop
+  const isCancelled = async () => {
+    const snap = await statusRef.get();
+    if (!snap.exists) return false;
+    const d = snap.data();
+    // If a newer scan started (different scanId), stop this one
+    return d.scanId && d.scanId !== scanId;
+  };
 
   try {
     const GEMINI_KEY = process.env.GEMINI_API_KEY;
@@ -41,6 +51,7 @@ exports.handler = async (event, context) => {
 
     await writeStatus({
       status: 'running',
+      scanId,
       startedAt: now,
       currentObstacle: '',
       obstacleIndex: 0,
@@ -66,6 +77,7 @@ exports.handler = async (event, context) => {
 
       await writeStatus({
         status: 'running',
+        scanId,
         startedAt: now,
         currentObstacle: obs.shortName || obs.name,
         obstacleIndex: oi + 1,
@@ -95,6 +107,7 @@ Respond ONLY in this exact JSON format:
 {"achieved": true/false, "confidence": "high"/"medium"/"low", "evidence": "One sentence citing specific paper, author, journal, year if achieved; otherwise null"}`;
 
         try {
+          if (await isCancelled()) { console.log('Scan cancelled, newer scan started'); return; }
           await delay(4000);
           const geminiResp = await fetch(GEMINI_URL, {
             method: 'POST',
