@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "vercel dev"
+    "dev": "netlify dev"
   },
   "dependencies": {
     "firebase-admin": "^12.0.0",
-    "@google/generative-ai": "^0.21.0"
+    "@google/generative-ai": "^0.21.0",
+    "@netlify/functions": "^2.0.0"
   }
 }

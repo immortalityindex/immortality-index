@@ -1,0 +1,19 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+# Map /api/* to Netlify function paths
+[[redirects]]
+  from = "/api/scan"
+  to = "/.netlify/functions/scan-background"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/seed"
+  to = "/.netlify/functions/seed"
+  status = 200
+  force = true
+
+[functions]
+  node_bundler = "esbuild"
