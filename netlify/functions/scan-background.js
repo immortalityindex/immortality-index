@@ -27,18 +27,19 @@ exports.handler = async (event, context) => {
   }
   const db = admin.firestore();
   const statusRef = db.collection('_meta').doc('scanStatus');
+  // Separate doc for scan identity — ONLY written once at init, NEVER in the loop.
+  // This prevents concurrent old scans from overwriting the new scan's ID.
+  const activeScanRef = db.collection('_meta').doc('activeScan');
   const now = new Date().toISOString();
+  const scanId = now;
 
-  const scanId = now; // unique ID for this scan run
   const writeStatus = (data) => statusRef.set({ ...data, updatedAt: new Date().toISOString() });
 
-  // Cancel check: returns true if this scan should stop
+  // Cancel check: reads activeScanRef (written ONCE at init, not touched in loop)
   const isCancelled = async () => {
-    const snap = await statusRef.get();
+    const snap = await activeScanRef.get();
     if (!snap.exists) return false;
-    const d = snap.data();
-    // If a newer scan started (different scanId), stop this one
-    return d.scanId && d.scanId !== scanId;
+    return snap.data().scanId !== scanId;
   };
 
   try {
@@ -49,9 +50,11 @@ exports.handler = async (event, context) => {
     const obstacles = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     const totalMilestones = obstacles.reduce((s, o) => s + (o.milestones?.length || 0), 0);
 
+    // Write scanId to activeScanRef ONCE — this cancels any previously running scans
+    await activeScanRef.set({ scanId });
+
     await writeStatus({
       status: 'running',
-      scanId,
       startedAt: now,
       currentObstacle: '',
       obstacleIndex: 0,
@@ -77,7 +80,6 @@ exports.handler = async (event, context) => {
 
       await writeStatus({
         status: 'running',
-        scanId,
         startedAt: now,
         currentObstacle: obs.shortName || obs.name,
         obstacleIndex: oi + 1,
@@ -106,20 +108,45 @@ NOT YET ACHIEVED means: theoretical goal, only partial evidence, only preprints,
 Respond ONLY in this exact JSON format:
 {"achieved": true/false, "confidence": "high"/"medium"/"low", "evidence": "One sentence citing specific paper, author, journal, year if achieved; otherwise null"}`;
 
-        try {
-          if (await isCancelled()) { console.log('Scan cancelled, newer scan started'); return; }
-          await delay(5000);
-          const geminiResp = await fetch(GEMINI_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-          });
-          if (!geminiResp.ok) {
-            const errText = await geminiResp.text();
-            throw new Error(`Gemini ${geminiResp.status}: ${errText.slice(0,200)}`);
+        // Check cancellation before delay (avoids wasted wait if already cancelled)
+        if (await isCancelled()) { console.log('Scan cancelled — newer scan detected'); return; }
+        await delay(5000);
+
+        // Gemini call with retry on 429 rate-limit errors
+        let geminiResp;
+        let attempt = 0;
+        const maxAttempts = 3;
+        while (attempt < maxAttempts) {
+          attempt++;
+          try {
+            geminiResp = await fetch(GEMINI_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            });
+            if (geminiResp.ok) break;
+            if (geminiResp.status === 429 && attempt < maxAttempts) {
+              console.log(`429 rate limit on attempt ${attempt}, waiting 30s before retry...`);
+              await delay(30000); // wait 30 seconds then retry
+              continue;
+            }
+            break; // non-429 error or out of retries
+          } catch (fetchErr) {
+            if (attempt < maxAttempts) { await delay(5000); continue; }
+            geminiResp = null;
+            log.push({ t: new Date().toISOString().slice(11,19), obs: obs.id, ms: ms.id, error: `fetch failed: ${fetchErr.message}` });
+            break;
           }
+        }
+
+        if (!geminiResp || !geminiResp.ok) {
+          const errText = geminiResp ? (await geminiResp.text()).slice(0, 200) : 'no response';
+          log.push({ t: new Date().toISOString().slice(11,19), obs: obs.id, ms: ms.id, error: `Gemini ${geminiResp?.status}: ${errText}` });
+          milestonesScanned++;
+          continue;
+        }
+
+        try {
           const geminiData = await geminiResp.json();
           const raw = geminiData.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
           const jsonMatch = raw.match(/\{[\s\S]*\}/);
@@ -147,8 +174,8 @@ Respond ONLY in this exact JSON format:
             obsChanged = true;
             milestonesUpdated++;
           }
-        } catch (err) {
-          log.push({ t: new Date().toISOString().slice(11,19), obs: obs.id, ms: ms.id, error: err.message });
+        } catch (parseErr) {
+          log.push({ t: new Date().toISOString().slice(11,19), obs: obs.id, ms: ms.id, error: `parse error: ${parseErr.message}` });
         }
         milestonesScanned++;
       }
