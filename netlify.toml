@@ -23,3 +23,6 @@
   to = "/.netlify/functions/scan-status"
   status = 200
   force = true
+
+[functions."scan-background"]
+  schedule = "5 8 * * *"
