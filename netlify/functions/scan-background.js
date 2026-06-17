@@ -7,8 +7,12 @@ exports.handler = async (event, context) => {
   const validManual = process.env.ADMIN_SECRET && manualSecret === process.env.ADMIN_SECRET;
   const validCron = process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`;
 
+  // Netlify scheduled invocations pass a body with next_run — allow these automatically
+  let isScheduled = false;
+  try { isScheduled = !!JSON.parse(event.body || '{}').next_run; } catch (_) {}
+
   let validToken = false;
-  if (!validManual && !validCron && authHeader?.startsWith('Bearer ')) {
+  if (!validManual && !validCron && !isScheduled && authHeader?.startsWith('Bearer ')) {
     try {
       if (!admin.apps.length) {
         admin.initializeApp({ credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)) });
@@ -18,7 +22,7 @@ exports.handler = async (event, context) => {
     } catch (_) {}
   }
 
-  if (!validManual && !validCron && !validToken) {
+  if (!validManual && !validCron && !isScheduled && !validToken) {
     return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 
