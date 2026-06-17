@@ -108,7 +108,7 @@ Respond ONLY in this exact JSON format:
 
         try {
           if (await isCancelled()) { console.log('Scan cancelled, newer scan started'); return; }
-          await delay(4000);
+          await delay(5000);
           const geminiResp = await fetch(GEMINI_URL, {
             method: 'POST',
             headers: {
