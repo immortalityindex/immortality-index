@@ -306,13 +306,16 @@
           const el = document.createElement('div');
           if (entry.error) {
             el.className = 'log-error';
-            el.textContent = `[${entry.t}] ${entry.obs} · ${entry.ms} — ERROR: ${entry.error}`;
-          } else if (entry.achieved) {
-            el.className = 'log-achieved';
-            el.textContent = `[${entry.t}] ✓ ${entry.obs} · ${entry.ms} — ${entry.confidence} confidence`;
+            el.textContent = `[${entry.t}] ${entry.obs} — ERROR: ${entry.error}`;
           } else {
-            el.className = 'log-not';
-            el.textContent = `[${entry.t}] · ${entry.obs} · ${entry.ms} — not yet achieved`;
+            const confirmed = entry.confirmed || 0;
+            if (confirmed > 0) {
+              el.className = 'log-achieved';
+              el.textContent = `[${entry.t}] ✓ ${entry.obs} — ${confirmed}/${entry.scanned} confirmed`;
+            } else {
+              el.className = 'log-not';
+              el.textContent = `[${entry.t}] · ${entry.obs} — ${entry.scanned} scanned, none confirmed`;
+            }
           }
           logEl.appendChild(el);
         });
