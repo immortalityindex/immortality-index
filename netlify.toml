@@ -17,3 +17,9 @@
 
 [functions]
   node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/scan-status"
+  to = "/.netlify/functions/scan-status"
+  status = 200
+  force = true

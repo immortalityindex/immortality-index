@@ -459,13 +459,24 @@
     document.getElementById('nanotech-bar').style.width = ns.pct + '%';
     document.getElementById('nanotech-count').textContent = `${ns.done} / ${ns.total} milestones complete`;
 
-    const latest = all.reduce((l,o) => (!l||o.lastUpdated>l)?o.lastUpdated:l, null);
-    if (latest) {
-      const label = new Date(latest).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-      document.getElementById('lastScanLabel').textContent = label;
+    // Last scan date from scan-status endpoint
+    fetch('/api/scan-status').then(r => r.json()).then(d => {
+      const ts = d.completedAt || d.startedAt;
+      if (ts) {
+        const dt = new Date(ts);
+        const label = dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+          + ' ' + dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+        document.getElementById('lastScanLabel').textContent = 'Last scan: ' + label;
+        document.getElementById('lastScanLabel').classList.remove('pulse');
+        document.getElementById('footer-update').textContent = 'Last scan: ' + label;
+      } else {
+        document.getElementById('lastScanLabel').textContent = 'No scan yet';
+        document.getElementById('lastScanLabel').classList.remove('pulse');
+      }
+    }).catch(() => {
+      document.getElementById('lastScanLabel').textContent = 'Last scan: unknown';
       document.getElementById('lastScanLabel').classList.remove('pulse');
-      document.getElementById('footer-update').textContent = 'Updated: ' + label;
-    }
+    });
 
     function renderCol(obs, colId, colClass) {
       const phases = groupByPhase(obs);

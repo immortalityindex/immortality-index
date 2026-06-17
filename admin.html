@@ -244,10 +244,10 @@
   });
 
   // ── SCAN ─────────────────────────────────────────────────
-  let scanUnsub = null;
+  let scanPollInterval = null;
 
   function startScanProgressListener() {
-    if (scanUnsub) scanUnsub();
+    if (scanPollInterval) clearInterval(scanPollInterval);
     const progPanel = document.getElementById('scan-progress');
     const progBar   = document.getElementById('prog-bar');
     const progCur   = document.getElementById('prog-current');
@@ -262,9 +262,13 @@
     progPanel.style.display = 'block';
     logEl.innerHTML = '';
 
-    scanUnsub = onSnapshot(doc(db, '_meta', 'scanStatus'), snap => {
-      if (!snap.exists()) return;
-      const d = snap.data();
+    const updateProgress = async () => {
+      let d;
+      try {
+        const r = await fetch('/api/scan-status');
+        d = await r.json();
+      } catch(e) { return; }
+      if (!d || d.status === 'never') return;
 
       progObsT.textContent = d.totalObstacles || 0;
       progMsT.textContent  = d.totalMilestones || 0;
@@ -286,13 +290,13 @@
         document.getElementById('scan-btn').textContent = '▶ Trigger AI Scan';
         document.getElementById('scan-status').textContent = `Last scan: ${d.milestonesUpdated || 0} updated`;
         document.getElementById('scan-status').style.color = 'var(--green)';
-        if (scanUnsub) { scanUnsub(); scanUnsub = null; }
+        if (scanPollInterval) { clearInterval(scanPollInterval); scanPollInterval = null; }
       } else if (d.status === 'error') {
         progCur.textContent = '✗ Error: ' + (d.error || 'unknown');
         progCur.style.color = 'var(--red)';
         document.getElementById('scan-btn').disabled = false;
         document.getElementById('scan-btn').textContent = '▶ Trigger AI Scan';
-        if (scanUnsub) { scanUnsub(); scanUnsub = null; }
+        if (scanPollInterval) { clearInterval(scanPollInterval); scanPollInterval = null; }
       }
 
       // Render log entries
@@ -314,7 +318,9 @@
         });
         logEl.scrollTop = logEl.scrollHeight;
       }
-    });
+    };
+    updateProgress();
+    scanPollInterval = setInterval(updateProgress, 3000);
   }
 
   window.triggerScan = async () => {
