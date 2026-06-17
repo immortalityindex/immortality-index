@@ -6,415 +6,489 @@
   <title>Immortality Index</title>
   <style>
     :root {
-      --bg: #080c14;
-      --surface: #0d1424;
-      --border: #1a2540;
-      --text: #c8d8f0;
-      --muted: #5a7099;
-      --green: #00e5a0;
-      --green-dim: #00e5a022;
-      --cyan: #00c8ff;
-      --cyan-dim: #00c8ff18;
-      --gold: #f0c040;
-      --gold-dim: #f0c04020;
-      --red: #ff4466;
-      --boss: #9b59b6;
-      --boss-dim: #9b59b620;
+      --bg: #050810;
+      --bg2: #0b0f1e;
+      --bg3: #111827;
+      --border: #1e2d45;
+      --border2: #2a3f5f;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --accent: #06b6d4;
+      --accent2: #0891b2;
+      --purple: #8b5cf6;
+      --purple2: #7c3aed;
+      --green: #10b981;
+      --green2: #059669;
+      --orange: #f59e0b;
+      --red: #ef4444;
+      --boss: #f97316;
+      --boss2: #ea580c;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
+      line-height: 1.6;
     }
-
-    /* ── Background grid ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
+    header {
+      background: linear-gradient(135deg, #0a0e1f 0%, #0d1629 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
     }
-
-    .page { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
-
-    /* ── Header ── */
-    header { text-align: center; margin-bottom: 60px; }
-    header .eyebrow {
-      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 12px; opacity: 0.8;
-    }
-    header h1 {
-      font-size: clamp(2rem, 5vw, 3.6rem);
-      font-weight: 700; letter-spacing: -1px;
-      background: linear-gradient(135deg, #fff 0%, var(--cyan) 60%, var(--green) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 16px;
-    }
-    header p {
-      color: var(--muted); font-size: 15px; max-width: 560px; margin: 0 auto 20px;
-    }
-    .last-updated { font-size: 12px; color: var(--muted); opacity: 0.6; }
-
-    /* ── Track summary cards ── */
-    .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 60px; }
-    @media (max-width: 640px) { .tracks { grid-template-columns: 1fr; } }
-
-    .track-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    .track-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-    }
-    .track-card.genetics::before { background: linear-gradient(90deg, var(--green), var(--cyan)); }
-    .track-card.nanotech::before { background: linear-gradient(90deg, var(--cyan), var(--boss)); }
-
-    .track-card .track-label {
-      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 8px;
-    }
-    .track-card .track-name { font-size: 22px; font-weight: 600; margin-bottom: 20px; }
-    .track-card.genetics .track-name { color: var(--green); }
-    .track-card.nanotech .track-name { color: var(--cyan); }
-
-    .big-progress {
-      display: flex; align-items: baseline; gap: 6px; margin-bottom: 14px;
-    }
-    .big-progress .pct { font-size: 48px; font-weight: 700; line-height: 1; }
-    .track-card.genetics .pct { color: var(--green); }
-    .track-card.nanotech .pct { color: var(--cyan); }
-    .big-progress .label { font-size: 14px; color: var(--muted); }
-
-    .track-bar-wrap { background: rgba(255,255,255,0.06); border-radius: 99px; height: 8px; overflow: hidden; }
-    .track-bar-fill {
-      height: 100%; border-radius: 99px;
-      transition: width 1s cubic-bezier(.4,0,.2,1);
-    }
-    .track-card.genetics .track-bar-fill { background: linear-gradient(90deg, var(--green), var(--cyan)); }
-    .track-card.nanotech .track-bar-fill { background: linear-gradient(90deg, var(--cyan), var(--boss)); }
-
-    .track-meta { margin-top: 12px; font-size: 12px; color: var(--muted); }
-
-    /* ── Section headings ── */
-    .section { margin-bottom: 48px; }
-    .section-header {
-      display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
-      padding-bottom: 16px; border-bottom: 1px solid var(--border);
-    }
-    .section-header h2 { font-size: 20px; font-weight: 600; }
-    .section-header .section-badge {
-      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 99px; font-weight: 600;
-    }
-    .section-header.genetics h2 { color: var(--green); }
-    .section-header.genetics .section-badge { background: var(--green-dim); color: var(--green); border: 1px solid var(--green)44; }
-    .section-header.nanotech h2 { color: var(--cyan); }
-    .section-header.nanotech .section-badge { background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--cyan)44; }
-
-    /* ── Obstacle grid ── */
-    .obstacle-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
+      flex-wrap: wrap;
+    }
+    .logo-area h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo-area p {
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 2px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .disclaimer-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--text2);
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .disclaimer-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(6,182,212,0.05); }
+    .last-scan { font-size: 11px; color: var(--text3); text-align: right; }
+
+    .summary {
+      max-width: 1400px;
+      margin: 32px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .track-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .track-card h2 { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
+    .track-card .track-name { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+    .track-card.genetics .track-name { color: var(--accent); }
+    .track-card.nanotech .track-name { color: var(--purple); }
+    .track-stat { display: flex; justify-content: space-between; font-size: 13px; color: var(--text2); margin-bottom: 8px; }
+    .track-progress-bar { height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .track-progress-fill { height: 100%; border-radius: 999px; transition: width 0.8s ease; }
+    .genetics .track-progress-fill { background: linear-gradient(90deg, var(--accent2), var(--accent)); }
+    .nanotech .track-progress-fill { background: linear-gradient(90deg, var(--purple2), var(--purple)); }
+
+    .tracks {
+      max-width: 1400px;
+      margin: 32px auto 60px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .track-column h3 { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); padding: 0 4px; margin-bottom: 12px; }
+
+    .phase-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--text3); padding: 14px 4px 6px;
+      border-top: 1px solid var(--border); margin-top: 8px;
     }
 
     .obstacle-card {
-      background: var(--surface);
+      background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 20px 22px;
-      transition: border-color 0.2s, transform 0.2s;
-      position: relative;
+      margin-bottom: 8px;
       overflow: hidden;
+      transition: border-color 0.2s;
     }
-    .obstacle-card:hover { border-color: #2a3a60; transform: translateY(-2px); }
-
-    .obstacle-card.completed { border-color: #00e5a030; background: linear-gradient(135deg, #0d1424, #0d1c14); }
-    .obstacle-card.boss-hurdle { border-color: #9b59b630; background: linear-gradient(135deg, #0d1424, #130d1c); }
-
-    .obstacle-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 12px; }
-
-    .obstacle-key {
-      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-      color: var(--muted); text-transform: uppercase;
-      flex-shrink: 0;
+    .obstacle-card:hover { border-color: var(--border2); }
+    .obstacle-card.boss {
+      border-color: rgba(249,115,22,0.35);
+      background: linear-gradient(135deg, var(--bg2) 0%, rgba(249,115,22,0.04) 100%);
     }
+    .obstacle-card.boss:hover { border-color: rgba(249,115,22,0.6); }
+    .obstacle-card.completed-card { border-color: rgba(16,185,129,0.3); }
 
-    .status-badge {
-      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-      padding: 3px 8px; border-radius: 99px; white-space: nowrap;
-      flex-shrink: 0;
+    .card-header {
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
     }
-    .status-badge.completed { background: var(--green-dim); color: var(--green); border: 1px solid var(--green)33; }
-    .status-badge.active { background: rgba(0,200,255,0.1); color: var(--cyan); border: 1px solid var(--cyan)33; }
-    .status-badge.boss-hurdle { background: var(--boss-dim); color: var(--boss); border: 1px solid var(--boss)44; }
+    .card-header:hover { background: rgba(255,255,255,0.015); }
+    .obstacle-id { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--text3); min-width: 36px; text-transform: uppercase; }
+    .card-main { flex: 1; min-width: 0; }
+    .card-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .boss .card-name { color: var(--boss); }
+    .card-meta { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .mini-progress { flex: 1; height: 4px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .mini-fill { height: 100%; border-radius: 999px; transition: width 0.6s ease; }
+    .genetics-col .mini-fill { background: var(--accent); }
+    .nanotech-col .mini-fill { background: var(--purple); }
+    .boss .mini-fill { background: var(--boss); }
+    .milestone-count { font-size: 10px; color: var(--text3); white-space: nowrap; }
+    .boss-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+      color: var(--boss); background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.3); border-radius: 4px; padding: 2px 6px;
+    }
+    .chevron { color: var(--text3); font-size: 12px; transition: transform 0.25s; flex-shrink: 0; }
+    .obstacle-card.open .chevron { transform: rotate(180deg); }
 
-    .obstacle-name {
-      font-size: 14px; font-weight: 500; line-height: 1.5;
-      color: #ddeeff; margin-bottom: 16px;
-    }
+    .card-body { display: none; border-top: 1px solid var(--border); padding: 16px; }
+    .obstacle-card.open .card-body { display: block; }
 
-    .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .progress-bar-wrap {
-      flex: 1; height: 6px; background: rgba(255,255,255,0.06);
-      border-radius: 99px; overflow: hidden;
+    .theoretical-target {
+      background: linear-gradient(135deg, rgba(139,92,246,0.07), rgba(6,182,212,0.05));
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
     }
-    .progress-bar-fill {
-      height: 100%; border-radius: 99px;
-      transition: width 1.2s cubic-bezier(.4,0,.2,1);
-    }
-    .genetics .progress-bar-fill { background: linear-gradient(90deg, var(--green), var(--cyan)); }
-    .nanotech .progress-bar-fill { background: linear-gradient(90deg, var(--cyan), #7b6ef0); }
-    .obstacle-card.boss-hurdle .progress-bar-fill { background: linear-gradient(90deg, var(--boss), #e040fb); }
+    .theoretical-target .label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
+    .theoretical-target p { font-size: 13px; color: var(--text2); line-height: 1.55; }
 
-    .progress-pct { font-size: 13px; font-weight: 700; min-width: 36px; text-align: right; }
-    .genetics .progress-pct { color: var(--green); }
-    .nanotech .progress-pct { color: var(--cyan); }
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; margin-top: 14px; }
 
-    .evidence-link {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 12px; color: var(--muted); text-decoration: none;
-      padding: 7px 10px; border-radius: 7px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-      overflow: hidden;
+    .milestones-list { display: flex; flex-direction: column; gap: 6px; }
+    .milestone-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 10px; border-radius: 7px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
     }
-    .evidence-link:hover { background: rgba(255,255,255,0.05); color: var(--text); border-color: #2a3a60; }
-    .evidence-link .link-icon { flex-shrink: 0; opacity: 0.6; }
-    .evidence-link .link-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .milestone-item.done { background: rgba(16,185,129,0.05); border-color: rgba(16,185,129,0.2); }
+    .milestone-check {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid var(--border2); flex-shrink: 0; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .milestone-item.done .milestone-check { background: var(--green); border-color: var(--green); }
+    .milestone-check-inner { color: white; font-size: 9px; font-weight: 700; display: none; }
+    .milestone-item.done .milestone-check-inner { display: block; }
+    .milestone-num { font-size: 9px; font-weight: 700; color: var(--text3); min-width: 16px; margin-top: 2px; flex-shrink: 0; }
+    .milestone-name { font-size: 12px; color: var(--text2); line-height: 1.45; }
+    .milestone-item.done .milestone-name { color: var(--green2); }
+    .milestone-evidence { font-size: 11px; color: var(--text3); margin-top: 3px; font-style: italic; }
 
-    .no-evidence { font-size: 12px; color: var(--muted); opacity: 0.4; font-style: italic; }
+    .anchors-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .anchor-chip {
+      font-size: 11px; color: var(--text3);
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 5px; padding: 3px 8px;
+    }
+    .papers-list { display: flex; flex-direction: column; gap: 4px; }
+    .paper-link { font-size: 12px; color: var(--accent); text-decoration: none; }
+    .paper-link:hover { text-decoration: underline; }
+    .no-data { font-size: 12px; color: var(--text3); font-style: italic; }
 
-    /* ── Loading state ── */
-    .loading {
-      text-align: center; padding: 80px 20px; color: var(--muted);
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+      z-index: 1000; align-items: center; justify-content: center; padding: 24px;
     }
-    .spinner {
-      width: 36px; height: 36px; border: 3px solid var(--border);
-      border-top-color: var(--cyan);
-      border-radius: 50%; animation: spin 0.8s linear infinite;
-      margin: 0 auto 16px;
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--bg2); border: 1px solid var(--border2); border-radius: 16px;
+      max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 32px;
     }
+    .modal-box h2 {
+      font-size: 20px; font-weight: 700; margin-bottom: 6px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .modal-subtitle { font-size: 12px; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 24px; }
+    .modal-section { margin-bottom: 20px; }
+    .modal-section h3 { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .modal-section p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+    .modal-close {
+      display: block; width: 100%; margin-top: 24px; padding: 11px;
+      background: var(--border); border: none; border-radius: 8px;
+      color: var(--text2); font-size: 14px; cursor: pointer; transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--border2); }
+
+    footer { border-top: 1px solid var(--border); padding: 20px 24px; }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; font-size: 12px; color: var(--text3); flex-wrap: wrap;
+    }
+    .footer-inner a { color: var(--text3); text-decoration: none; cursor: pointer; }
+    .footer-inner a:hover { color: var(--accent); }
+    .loading-state { text-align: center; padding: 60px 24px; color: var(--text3); }
+    .spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    .error-msg { text-align: center; padding: 40px; color: var(--red); }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center; margin-top: 60px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-      font-size: 12px; color: var(--muted); opacity: 0.5;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--cyan); }
+    .pulse { animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    @media (max-width: 900px) { .summary,.tracks { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-<div class="page">
-  <header>
-    <div class="eyebrow">Research Progress Tracker</div>
-    <h1>Immortality Index</h1>
-    <p>Tracking the scientific obstacles that stand between humanity and indefinite lifespan — updated daily via AI literature scan.</p>
-    <div class="last-updated" id="lastUpdated">Loading…</div>
-  </header>
 
-  <div class="tracks" id="trackSummary">
-    <div class="track-card genetics">
-      <div class="track-label">Track 01</div>
-      <div class="track-name">Genetics</div>
-      <div class="big-progress">
-        <span class="pct" id="geneticsPct">—</span>
-        <span class="label">% addressed</span>
-      </div>
-      <div class="track-bar-wrap">
-        <div class="track-bar-fill" id="geneticsBar" style="width:0%"></div>
-      </div>
-      <div class="track-meta" id="geneticsMeta"></div>
+<div class="modal-overlay" id="disclaimerModal">
+  <div class="modal-box">
+    <h2>Immortality Index</h2>
+    <p class="modal-subtitle">Research Framework Disclaimer</p>
+    <div class="modal-section">
+      <h3>What This Is</h3>
+      <p>The Immortality Index is a proprietary, speculative theoretical roadmap â not a scientific consensus document. It maps a <em>possible</em> pathway toward indefinite human lifespan by decomposing the challenge into 23 verifiable research milestones across two engineering tracks: Genetics and Nanotech. Progress on each milestone is determined by evidence from peer-reviewed literature, not prediction or personal estimate.</p>
     </div>
-    <div class="track-card nanotech">
-      <div class="track-label">Track 02</div>
-      <div class="track-name">Nanotech</div>
-      <div class="big-progress">
-        <span class="pct" id="nanotechPct">—</span>
-        <span class="label">% addressed</span>
-      </div>
-      <div class="track-bar-wrap">
-        <div class="track-bar-fill" id="nanotechBar" style="width:0%"></div>
-      </div>
-      <div class="track-meta" id="nanotechMeta"></div>
+    <div class="modal-section">
+      <h3>Speculative Framework Elements</h3>
+      <p>Several concepts in this index â including <strong>Boss Hurdles</strong>, <strong>P2P Re-Flashing</strong>, <strong>Cryptographic Logic Gate Wiring</strong>, and the <strong>12-hour operational window</strong> â are original theoretical constructs developed for this roadmap. They are not established scientific terminology and do not represent universal scientific consensus. They represent engineering targets derived from extrapolating current biological and nanotechnology research trajectories.</p>
     </div>
+    <div class="modal-section">
+      <h3>AI-Assisted Literature Monitoring</h3>
+      <p>Daily automated scans use large language model (LLM) analysis of scientific literature to assess whether individual milestones have been met by peer-reviewed evidence. These assessments are probabilistic and may contain errors. Milestone completion reflects the AI's interpretation of available published research â not a formal peer review or expert panel evaluation. Manual overrides are available through the admin panel.</p>
+    </div>
+    <div class="modal-section">
+      <h3>Optimistic Stance</h3>
+      <p>This index operates from a transhumanist perspective â treating biological aging as an engineering problem, not an inevitability. We believe the evidence supports long-term feasibility of the roadmap, while acknowledging that timelines are deeply uncertain, many milestones are decades away, and the path will require breakthroughs that have not yet occurred. Scientific surprise â in both directions â is guaranteed.</p>
+    </div>
+    <div class="modal-section">
+      <h3>Not Medical Advice</h3>
+      <p>Nothing on this site constitutes medical advice, investment advice, or a recommendation to pursue any specific intervention. All described technologies are research-stage unless otherwise noted.</p>
+    </div>
+    <button class="modal-close" onclick="document.getElementById('disclaimerModal').classList.remove('open')">Close</button>
   </div>
-
-  <div id="content">
-    <div class="loading">
-      <div class="spinner"></div>
-      <div>Loading latest research data…</div>
-    </div>
-  </div>
-
-  <footer>
-    <p>Data auto-updated daily · <a href="/admin.html">Admin</a></p>
-  </footer>
 </div>
 
-<!-- Firebase Web SDK (compat) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM",
-  authDomain: "immortality-index.firebaseapp.com",
-  projectId: "immortality-index",
-  storageBucket: "immortality-index.firebasestorage.app",
-  messagingSenderId: "202572480694",
-  appId: "1:202572480694:web:1d0ae36f8bb68106cc6617",
-  measurementId: "G-SHG59GLCHK"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-function statusClass(status) {
-  if (status === 'Completed') return 'completed';
-  if (status === 'Boss Hurdle') return 'boss-hurdle';
-  return 'active';
-}
-
-function statusLabel(status) {
-  return status === 'Boss Hurdle' ? '⚔ Boss Hurdle' : status === 'Completed' ? '✓ Completed' : 'Active';
-}
-
-function formatDate(ts) {
-  if (!ts) return 'unknown';
-  const d = ts.toDate ? ts.toDate() : new Date(ts);
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-}
-
-function renderCard(obs, track) {
-  const sc = statusClass(obs.status);
-  const hasLink = obs.article_url && obs.article_url.trim() !== '';
-  const hasTitle = obs.article_title && obs.article_title.trim() !== '' && obs.article_title !== 'None';
-
-  return `
-    <div class="obstacle-card ${track} ${sc}">
-      <div class="obstacle-top">
-        <span class="obstacle-key">${escHtml(obs.key || '')}</span>
-        <span class="status-badge ${sc}">${statusLabel(obs.status)}</span>
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <h1>â¡ Immortality Index</h1>
+      <p>23 Research Obstacles Â· Live Literature Tracking</p>
+    </div>
+    <div class="header-actions">
+      <button class="disclaimer-btn" onclick="document.getElementById('disclaimerModal').classList.add('open')">â¹ Disclaimer</button>
+      <div class="last-scan">
+        <div id="lastScanLabel" class="pulse">Loading...</div>
+        <div style="margin-top:2px">Last Scan</div>
       </div>
-      <div class="obstacle-name">${escHtml(obs.name)}</div>
-      <div class="progress-row">
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-fill" style="width:${obs.progress || 0}%"></div>
-        </div>
-        <span class="progress-pct">${obs.progress || 0}%</span>
-      </div>
-      ${hasTitle
-        ? hasLink
-          ? `<a class="evidence-link" href="${escHtml(obs.article_url)}" target="_blank" rel="noopener">
-               <svg class="link-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-               <span class="link-text">${escHtml(obs.article_title)}</span>
-             </a>`
-          : `<div class="evidence-link" style="cursor:default">
-               <svg class="link-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-               <span class="link-text">${escHtml(obs.article_title)}</span>
-             </div>`
-        : `<span class="no-evidence">No evidence on file</span>`
-      }
-    </div>`;
-}
+    </div>
+  </div>
+</header>
 
-function escHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+<div class="summary">
+  <div class="track-card genetics">
+    <h2>Track 01</h2>
+    <div class="track-name">Genetics</div>
+    <div class="track-stat">
+      <span id="genetics-count">â / â milestones complete</span>
+      <span id="genetics-pct" style="font-weight:700;color:var(--accent)">0%</span>
+    </div>
+    <div class="track-progress-bar"><div class="track-progress-fill" id="genetics-bar" style="width:0%"></div></div>
+  </div>
+  <div class="track-card nanotech">
+    <h2>Track 02</h2>
+    <div class="track-name">Nanotech</div>
+    <div class="track-stat">
+      <span id="nanotech-count">â / â milestones complete</span>
+      <span id="nanotech-pct" style="font-weight:700;color:var(--purple)">0%</span>
+    </div>
+    <div class="track-progress-bar"><div class="track-progress-fill" id="nanotech-bar" style="width:0%"></div></div>
+  </div>
+</div>
 
-function calcTrackProgress(obstacles) {
-  if (!obstacles.length) return 0;
-  const sum = obstacles.reduce((a, o) => a + (o.progress || 0), 0);
-  return Math.round(sum / obstacles.length);
-}
+<div class="tracks">
+  <div class="track-column genetics-col" id="genetics-col">
+    <h3>Track 01 Â· Genetics</h3>
+    <div class="loading-state"><div class="spinner"></div><div>Loading obstacles...</div></div>
+  </div>
+  <div class="track-column nanotech-col" id="nanotech-col">
+    <h3>Track 02 Â· Nanotech</h3>
+    <div class="loading-state"><div class="spinner"></div><div>Loading obstacles...</div></div>
+  </div>
+</div>
 
-function renderSection(title, cssClass, obstacles) {
-  const completed = obstacles.filter(o => o.status === 'Completed').length;
-  const cards = obstacles.map(o => renderCard(o, cssClass)).join('');
-  return `
-    <div class="section">
-      <div class="section-header ${cssClass}">
-        <h2>${title} Track</h2>
-        <span class="section-badge">${completed}/${obstacles.length} Completed</span>
-      </div>
-      <div class="obstacle-grid">${cards}</div>
-    </div>`;
-}
+<footer>
+  <div class="footer-inner">
+    <span>Immortality Index Â· Speculative Research Roadmap</span>
+    <a onclick="document.getElementById('disclaimerModal').classList.add('open')">Disclaimer &amp; Methodology</a>
+    <span id="footer-update">Updated: â</span>
+  </div>
+</footer>
 
-// Key sort: "1.1 Foo" → sort by numeric prefix
-function sortByKey(a, b) {
-  const parse = k => {
-    const m = (k || '').match(/^(\d+)\.(\d+)/);
-    return m ? parseInt(m[1]) * 100 + parseInt(m[2]) : 999;
-  };
-  return parse(a.key) - parse(b.key);
-}
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-// ── Real-time listener ───────────────────────────────────────────────────────
-db.collection('obstacles').onSnapshot(snapshot => {
-  const genetics = [], nanotech = [];
-  let latestTs = null;
+  const app = initializeApp({
+    apiKey: "AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM",
+    authDomain: "immortality-index.firebaseapp.com",
+    projectId: "immortality-index",
+    storageBucket: "immortality-index.firebasestorage.app",
+    messagingSenderId: "202572480694",
+    appId: "1:202572480694:web:1d0ae36f8bb68106cc6617"
+  });
+  const db = getFirestore(app);
 
-  snapshot.forEach(doc => {
-    const d = doc.data();
-    if (d.track === 'genetics') genetics.push(d);
-    else if (d.track === 'nanotech') nanotech.push(d);
-    if (d.last_updated && (!latestTs || d.last_updated.toMillis() > latestTs.toMillis())) {
-      latestTs = d.last_updated;
-    }
+  window.toggleCard = id => document.getElementById(id)?.classList.toggle('open');
+
+  document.getElementById('disclaimerModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
   });
 
-  genetics.sort(sortByKey);
-  nanotech.sort(sortByKey);
+  function calcProgress(milestones) {
+    if (!milestones?.length) return { done: 0, total: 0, pct: 0 };
+    const done = milestones.filter(m => m.completed).length;
+    return { done, total: milestones.length, pct: Math.round(done / milestones.length * 100) };
+  }
 
-  // Track summary
-  const gPct = calcTrackProgress(genetics);
-  const nPct = calcTrackProgress(nanotech);
-  const gComp = genetics.filter(o => o.status === 'Completed').length;
-  const nComp = nanotech.filter(o => o.status === 'Completed').length;
+  function renderMilestones(milestones) {
+    if (!milestones?.length) return '<div class="no-data">No milestones defined.</div>';
+    return milestones.map((m, i) => `
+      <div class="milestone-item ${m.completed ? 'done' : ''}">
+        <div class="milestone-check"><span class="milestone-check-inner">â</span></div>
+        <div class="milestone-num">${i+1}.</div>
+        <div>
+          <div class="milestone-name">${escHtml(m.name)}</div>
+          ${m.evidence ? `<div class="milestone-evidence">${escHtml(m.evidence)}</div>` : ''}
+        </div>
+      </div>`).join('');
+  }
 
-  document.getElementById('geneticsPct').textContent = gPct + '%';
-  document.getElementById('geneticsBar').style.width = gPct + '%';
-  document.getElementById('geneticsMeta').textContent = `${gComp} of ${genetics.length} obstacles addressed`;
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
 
-  document.getElementById('nanotechPct').textContent = nPct + '%';
-  document.getElementById('nanotechBar').style.width = nPct + '%';
-  document.getElementById('nanotechMeta').textContent = `${nComp} of ${nanotech.length} obstacles addressed`;
+  function renderCard(obs, colClass) {
+    const { done, total, pct } = calcProgress(obs.milestones);
+    const cardId = 'card-' + obs.id;
+    const idLabel = obs.id.replace('g-','G').replace('n-','N').replace('-','.');
+    const cls = ['obstacle-card', obs.isBoss ? 'boss' : '', pct === 100 ? 'completed-card' : ''].filter(Boolean).join(' ');
+    const anchorsHtml = obs.anchors?.length
+      ? obs.anchors.map(a => `<span class="anchor-chip">${escHtml(a)}</span>`).join('')
+      : '<span class="no-data">No anchors listed.</span>';
+    const papersHtml = obs.papers?.length
+      ? obs.papers.map(p => `<a class="paper-link" href="${p.url}" target="_blank" rel="noopener">${escHtml(p.title||p.url)}</a>`).join('')
+      : '<div class="no-data">No papers linked yet â AI scan populates this.</div>';
 
-  document.getElementById('lastUpdated').textContent =
-    latestTs ? `Last updated: ${formatDate(latestTs)}` : 'No data yet';
+    return `
+      <div class="${cls}" id="${cardId}">
+        <div class="card-header" onclick="toggleCard('${cardId}')">
+          <div class="obstacle-id">${idLabel}</div>
+          <div class="card-main">
+            <div class="card-name">${escHtml(obs.name)}</div>
+            <div class="card-meta">
+              <div class="mini-progress"><div class="mini-fill" style="width:${pct}%"></div></div>
+              <span class="milestone-count">${done}/${total}</span>
+              ${obs.isBoss ? '<span class="boss-badge">Boss Hurdle</span>' : ''}
+            </div>
+          </div>
+          <span class="chevron">â¼</span>
+        </div>
+        <div class="card-body">
+          <div class="theoretical-target">
+            <div class="label">ð¯ Theoretical Target</div>
+            <p>${escHtml(obs.theoreticalTarget || 'Target not defined.')}</p>
+          </div>
+          <div class="section-label">ð Engineering Milestones</div>
+          <div class="milestones-list">${renderMilestones(obs.milestones)}</div>
+          <div class="section-label" style="margin-top:14px">ð¬ Real-World Scientific Anchors</div>
+          <div class="anchors-list">${anchorsHtml}</div>
+          <div class="section-label" style="margin-top:14px">ð Research Papers</div>
+          <div class="papers-list">${papersHtml}</div>
+        </div>
+      </div>`;
+  }
 
-  document.getElementById('content').innerHTML =
-    renderSection('Genetics', 'genetics', genetics) +
-    renderSection('Nanotech', 'nanotech', nanotech);
+  function groupByPhase(obs) {
+    const map = new Map();
+    for (const o of obs) {
+      const key = o.phaseLabel || ('Phase ' + o.phase);
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(o);
+    }
+    return map;
+  }
 
-}, err => {
-  document.getElementById('content').innerHTML =
-    `<div class="error-msg">Failed to load data: ${err.message}</div>`;
-});
+  onSnapshot(collection(db, 'obstacles'), snap => {
+    const all = snap.docs.map(d => ({ ...d.data(), id: d.id }));
+
+    const genetics = all.filter(o => o.track === 'genetics').sort((a,b) => a.order - b.order);
+    const nanotech = all.filter(o => o.track === 'nanotech').sort((a,b) => a.order - b.order);
+
+    function trackTotals(obs) {
+      let done = 0, total = 0;
+      obs.forEach(o => (o.milestones||[]).forEach(m => { total++; if(m.completed) done++; }));
+      return { done, total, pct: total ? Math.round(done/total*100) : 0 };
+    }
+
+    const gs = trackTotals(genetics);
+    const ns = trackTotals(nanotech);
+
+    document.getElementById('genetics-pct').textContent = gs.pct + '%';
+    document.getElementById('genetics-bar').style.width = gs.pct + '%';
+    document.getElementById('genetics-count').textContent = `${gs.done} / ${gs.total} milestones complete`;
+
+    document.getElementById('nanotech-pct').textContent = ns.pct + '%';
+    document.getElementById('nanotech-bar').style.width = ns.pct + '%';
+    document.getElementById('nanotech-count').textContent = `${ns.done} / ${ns.total} milestones complete`;
+
+    const latest = all.reduce((l,o) => (!l||o.lastUpdated>l)?o.lastUpdated:l, null);
+    if (latest) {
+      const label = new Date(latest).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+      document.getElementById('lastScanLabel').textContent = label;
+      document.getElementById('lastScanLabel').classList.remove('pulse');
+      document.getElementById('footer-update').textContent = 'Updated: ' + label;
+    }
+
+    function renderCol(obs, colId, colClass) {
+      const phases = groupByPhase(obs);
+      let html = `<h3>${colId==='genetics-col'?'Track 01 Â· Genetics':'Track 02 Â· Nanotech'}</h3>`;
+      let first = true;
+      phases.forEach((phaseObs, label) => {
+        html += `<div class="phase-header" style="${first?'border-top:none;margin-top:0;padding-top:0':''}">
+          ${escHtml(label)}
+        </div>`;
+        first = false;
+        phaseObs.forEach(o => { html += renderCard(o, colClass); });
+      });
+      document.getElementById(colId).innerHTML = html;
+    }
+
+    renderCol(genetics, 'genetics-col', 'genetics-col');
+    renderCol(nanotech, 'nanotech-col', 'nanotech-col');
+  }, err => {
+    console.error(err);
+    ['genetics-col','nanotech-col'].forEach(id => {
+      document.getElementById(id).innerHTML = `<div class="loading-state" style="color:var(--red)">Failed to load: ${err.message}</div>`;
+    });
+  });
 </script>
 </body>
 </html>
