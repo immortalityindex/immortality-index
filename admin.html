@@ -265,7 +265,7 @@
     const updateProgress = async () => {
       let d;
       try {
-        const r = await fetch('/api/scan-status');
+        const r = await fetch('https://immortality-index-scanner.immortalityindex.workers.dev/status');
         d = await r.json();
       } catch(e) { return; }
       if (!d || d.status === 'never') return;
@@ -336,7 +336,7 @@
       const user = auth.currentUser;
       const token = await user.getIdToken();
       startScanProgressListener();
-      const r = await fetch('/.netlify/functions/scan-background', {
+      const r = await fetch('https://immortality-index-scanner.immortalityindex.workers.dev/scan', {
         method: 'POST',
         headers: { 'Authorization': 'Bearer ' + token }
       });
