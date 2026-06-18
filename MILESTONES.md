@@ -186,7 +186,7 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 
 #### G-5.2 · ⚠️ SLIB: Full Chromosomal Integration and Identity Verification
 
-**Theoretical Target:** Demonstrate simultaneous, coordinated operation of all Track 01 subsystems within a single mammalian organism, with confirmed systemic somatic identity integrity across ≥10^12 cells.
+**Theoretical Target:** Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-5.1) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.
 
 **Milestones:**
 1. All Track 01 subsystems co-delivered and co-expressed in a single aged murine model without mutual interference confirmed by multi-omics profiling

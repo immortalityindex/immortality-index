@@ -96,7 +96,7 @@ Track 02 converges into a Phase 4 System-Level Integration Bottleneck (SLIB) con
 
 Each track terminates in its own System-Level Integration Bottleneck (SLIB) — a final integration phase that can only be satisfied once all upstream obstacles in that track are simultaneously validated in a single organism.
 
-**Track 01 SLIB (Phase 5)** contains two obstacles. G-5.1 closes the feedback loop between Track 01 identity detection and Track 02 nanorobotic retrieval — described in detail below. G-5.2 validates full Track 01 integration: all genetic fidelity subsystems co-operating in a single organism with confirmed systemic somatic identity integrity across ≥10¹² cells.
+**Track 01 SLIB (Phase 5)** contains two obstacles in sequential dependency. G-5.1 (Somatic Identity Triage) must be proven first — it is the prerequisite fault-containment gate: without a working triage circuit, corrupted cells during full-system integration have no containment pathway. G-5.2 (Full Chromosomal Integration and Identity Verification) is the culminating validation: all thirteen Track 01 obstacles simultaneously co-expressed in a single aged organism, with confirmed systemic somatic identity integrity, ≥20% biological age reduction by two independent epigenetic clocks, and 12-month safety with zero oncogenic events.
 
 **Track 02 SLIB (Phase 4)** contains one obstacle. N-4.1 validates full Track 02 integration: all nanorobotic subsystems deployed as a coordinated swarm in a living organism, with confirmed task completion and bio-clearance.
 
