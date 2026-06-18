@@ -22,7 +22,7 @@ repository: "https://github.com/immortalityindex/immortality-index"
 
 ## Abstract
 
-We present the Immortality Index, a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure — specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The Immortality Index provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce obstacle G-5.2 — Somatic Identity Triage and External Intervention Loop — as a novel architectural construct operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localized fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
+We present the Immortality Index, a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure — specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The Immortality Index provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce G-5.2 — Somatic Identity Triage and External Intervention Loop — as the cross-track integration node in the SLIB, operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localized fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
 
 ---
 
@@ -61,7 +61,7 @@ The critical observation is that natural multicellular organisms lack a distribu
 
 ### 2.1 Track 01 · Somatic Genetic Fidelity
 
-Track 01 addresses the upstream layer of somatic identity restoration: the molecular and genomic tools required to detect identity deviation, correct it, and maintain fidelity over organismal lifespan. It is organised into four phases plus a System-Level Integration Bottleneck (SLIB).
+Track 01 addresses the upstream layer of somatic identity restoration: the molecular and genomic tools required to detect identity deviation, correct it, and maintain fidelity over organismal lifespan. It is organised into four phases.
 
 **Phase 1 — Reprogramming Layer**
 The fundamental demonstration that partial epigenetic reprogramming can be achieved safely in post-mitotic mammalian cells in vivo, without triggering oncogenic dedifferentiation. Obstacles G-1.1 through G-1.4 cover in vivo epigenetic reprogramming proof-of-concept, systemic senescent cell clearance, full-body vascular gene delivery, and stem cell telomere maintenance.
@@ -75,8 +75,7 @@ Obstacles G-3.1 through G-3.3 address the active maintenance infrastructure: eng
 **Phase 4 — Intercellular Communication Layer**
 Obstacles G-4.1 through G-4.3 address the network layer: tunneling nanotube synthesis for directed molecular cargo transfer, the Decentralized Intercellular Transcriptomic Error-Correction Network (paracrine-mediated correction signalling between cells), and homing matrix stem cell routing.
 
-**Phase 5 — System-Level Integration Bottleneck (SLIB)**
-Obstacles G-5.1 and G-5.2 represent the integration gate. G-5.1 requires simultaneous, coordinated operation of all Track 01 subsystems within a single mammalian organism. G-5.2 — described in detail in §2.3 — operationalises the triage protocol for cells whose identity deviation has passed the point of correction.
+Track 01 converges into the shared System-Level Integration Bottleneck (SLIB) described in §2.3.
 
 ### 2.2 Track 02 · Nanoscale Biomedical Systems
 
@@ -91,10 +90,19 @@ Obstacles N-2.1 through N-2.3 address fabrication: DNA origami scaffolding for n
 **Phase 3 — Tissue Interface Layer**
 Obstacles N-3.1 through N-3.3 address the interface between nanorobotic systems and host tissue: selective fibrotic matrix degradation, molecular ECM deposition, and near-field code-flashing for mid-deployment nanounit reprogramming.
 
-**Phase 4 — System-Level Integration Bottleneck (SLIB)**
-Obstacle N-4.1 requires full coordinated swarm operation across all Track 02 subsystems within a living mammalian organism, with confirmed bio-clearance within 72 hours.
+Track 02 converges into the shared System-Level Integration Bottleneck (SLIB) described in §2.3.
 
-### 2.3 G-5.2 · Somatic Identity Triage and External Intervention Loop
+### 2.3 System-Level Integration Bottleneck (SLIB)
+
+Both tracks converge into a single shared integration gate — the SLIB — rather than each having a separate integration phase. This is a deliberate architectural choice: a track-internal "integration phase" is not a true integration test, because it validates only one subsystem stack in isolation. The SLIB is only satisfiable when both tracks are simultaneously operational in the same organism.
+
+The SLIB contains three obstacles:
+
+- **G-5.1** validates full Track 01 integration: all genetic fidelity subsystems co-operating in a single organism with confirmed systemic somatic identity integrity across ≥10¹² cells.
+- **N-4.1** validates full Track 02 integration: all nanorobotic subsystems deployed as a coordinated swarm in a living organism with confirmed bio-clearance.
+- **G-5.2** closes the feedback loop between the two tracks — described in detail in §2.4.
+
+### 2.4 G-5.2 · Somatic Identity Triage and External Intervention Loop
 
 G-5.2 is the architectural node that closes the feedback loop between Track 01 (identity detection) and Track 02 (physical retrieval). It operationalises what we term the **Byzantine somatic fault hypothesis**: in a distributed network of ≈10¹² somatic cells, corruption of individual nodes is inevitable. The systemic risk is not individual node corruption but **propagation** — a corrupted cell that continues to signal as functional can recruit neighbouring cells into its deviant transcriptomic state via paracrine signalling, exosome exchange, or gap junctions. This is the somatic equivalent of a Byzantine fault in distributed computing.
 

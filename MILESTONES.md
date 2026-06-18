@@ -7,12 +7,13 @@
 
 ## Overview
 
-The Immortality Index tracks **24 research obstacles** across two engineering tracks. Each obstacle has **4 binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
+The Immortality Index tracks **24 research obstacles** across two engineering tracks plus a shared integration gate. Each obstacle has **4 binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
 
-- **Track 01 · Somatic Genetic Fidelity** — 14 obstacles, 56 milestones
-- **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones
+- **Track 01 · Somatic Genetic Fidelity** — 12 obstacles, 48 milestones
+- **Track 02 · Nanoscale Biomedical Systems** — 9 obstacles, 36 milestones
+- **System-Level Integration Bottleneck (SLIB)** — 3 obstacles, 12 milestones
 
-**System-Level Integration Bottlenecks (SLIB):** Denoted with ⚠️. Phase 5 obstacles in each track representing cross-system integration requirements that cannot be validated until upstream milestones in both tracks are simultaneously satisfied.
+**SLIB:** Denoted with ⚠️. A single convergence gate — separate from both tracks — that can only be satisfied once all upstream milestones in both tracks are simultaneously met. G-5.1 validates full Track 01 integration; N-4.1 validates full Track 02 integration; G-5.2 closes the feedback loop between the two.
 
 ---
 
@@ -172,7 +173,15 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 
 ---
 
-### Phase 5 — System-Level Integration Bottleneck (SLIB)
+---
+
+*Track 01 ends here. G-5.1 and G-5.2 appear in the SLIB section below.*
+
+---
+
+## System-Level Integration Bottleneck (SLIB)
+
+> These three obstacles sit outside either track. They represent the final convergence gate — cross-system integration that cannot be validated until all upstream milestones in both Track 01 and Track 02 are simultaneously satisfied.
 
 #### G-5.1 · ⚠️ SLIB: Full Chromosomal Integration and Identity Verification
 
@@ -300,7 +309,11 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 
 ---
 
-### Phase 4 — System-Level Integration Bottleneck (SLIB)
+---
+
+*Track 02 ends here. N-4.1 appears in the SLIB section below.*
+
+---
 
 #### N-4.1 · ⚠️ SLIB: Mass Swarm Cohesion and Systemic Integration
 

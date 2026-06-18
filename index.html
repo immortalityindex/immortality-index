@@ -248,6 +248,37 @@
     }
     .footer-inner a { color: var(--text3); text-decoration: none; cursor: pointer; }
     .footer-inner a:hover { color: var(--accent); }
+    .slib-section {
+      max-width: 1400px;
+      margin: 32px auto 0;
+      padding: 0 24px;
+    }
+    .slib-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 16px 0 12px;
+      border-top: 2px solid var(--boss);
+      flex-wrap: wrap;
+    }
+    .slib-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--boss);
+      letter-spacing: 0.3px;
+    }
+    .slib-sub {
+      font-size: 12px;
+      color: var(--text3);
+    }
+    .slib-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+    @media (max-width: 1100px) { .slib-cards { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 700px) { .slib-cards { grid-template-columns: 1fr; } }
     .loading-state { text-align: center; padding: 60px 24px; color: var(--text3); }
     .spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -264,7 +295,7 @@
     <p class="modal-subtitle">System Architecture, Methodology, and Academic Accountability Statement</p>
     <div class="modal-section">
       <h3>What This Is</h3>
-      <p>The Immortality Index is an open-source, version-controlled binary milestone registry that decomposes the biological aging problem into 24 falsifiable research obstacles across two primary engineering tracks. Progress on each obstacle is determined solely by evidence from peer-reviewed literature — not prediction, personal estimate, or institutional position. The framework is designed for formal academic citation.</p>
+      <p>The Immortality Index is an open-source, version-controlled binary milestone registry that decomposes the biological aging problem into 24 falsifiable research obstacles across two engineering tracks plus a shared System-Level Integration Bottleneck (SLIB) — the final convergence gate requiring both tracks to be simultaneously operational. Progress on each obstacle is determined solely by evidence from peer-reviewed literature — not prediction, personal estimate, or institutional position. The framework is designed for formal academic citation.</p>
     </div>
     <div class="modal-section">
       <h3>AI Authorship Disclosure</h3>
@@ -299,7 +330,7 @@
   <div class="header-inner">
     <div class="logo-area">
       <h1>⚡ Immortality Index</h1>
-      <p>24 Research Obstacles · Live Literature Tracking</p>
+      <p>24 Obstacles · 2 Tracks + SLIB · Live Literature Tracking</p>
     </div>
     <div class="header-actions">
       <button class="disclaimer-btn" onclick="document.getElementById('disclaimerModal').classList.add('open')">ℹ Methodology &amp; Citation</button>
@@ -340,6 +371,16 @@
   <div class="track-column nanotech-col" id="nanotech-col">
     <h3>Track 02 · Nanotech</h3>
     <div class="loading-state"><div class="spinner"></div><div>Loading obstacles...</div></div>
+  </div>
+</div>
+
+<div class="slib-section" id="slib-section" style="display:none">
+  <div class="slib-header">
+    <span class="slib-label">⚠ System-Level Integration Bottleneck (SLIB)</span>
+    <span class="slib-sub">Cross-track convergence gate — requires both Track 01 and Track 02 fully operational</span>
+  </div>
+  <div class="slib-cards" id="slib-col">
+    <div class="loading-state"><div class="spinner"></div><div>Loading...</div></div>
   </div>
 </div>
 
@@ -415,7 +456,7 @@
             <div class="card-meta">
               <div class="mini-progress"><div class="mini-fill" style="width:${pct}%"></div></div>
               <span class="milestone-count">${done}/${total}</span>
-              ${obs.isBoss ? '<span class="boss-badge">Boss Hurdle</span>' : ''}
+              ${obs.isBoss ? '<span class="boss-badge">⚠ SLIB</span>' : ''}
             </div>
           </div>
           <span class="chevron">▼</span>
@@ -448,8 +489,9 @@
   onSnapshot(collection(db, 'obstacles'), snap => {
     const all = snap.docs.map(d => ({ ...d.data(), id: d.id }));
 
-    const genetics = all.filter(o => o.track === 'genetics').sort((a,b) => a.order - b.order);
-    const nanotech = all.filter(o => o.track === 'nanotech').sort((a,b) => a.order - b.order);
+    const genetics = all.filter(o => o.track === 'genetics' && !o.isBoss).sort((a,b) => a.order - b.order);
+    const nanotech = all.filter(o => o.track === 'nanotech' && !o.isBoss).sort((a,b) => a.order - b.order);
+    const slib = all.filter(o => o.isBoss).sort((a,b) => a.order - b.order);
 
     function trackTotals(obs) {
       let done = 0, total = 0;
@@ -492,6 +534,12 @@
 
     renderCol(genetics, 'genetics-col', 'genetics-col');
     renderCol(nanotech, 'nanotech-col', 'nanotech-col');
+
+    // Render SLIB section
+    if (slib.length > 0) {
+      document.getElementById('slib-section').style.display = '';
+      document.getElementById('slib-col').innerHTML = slib.map(o => renderCard(o, 'slib-col')).join('');
+    }
   }, err => {
     console.error(err);
     ['genetics-col','nanotech-col'].forEach(id => {
