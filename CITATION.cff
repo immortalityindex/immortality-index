@@ -1,33 +1,29 @@
 cff-version: 1.2.0
-message: "If you use, build upon, or reference this framework in academic literature, please cite it as follows."
+message: "If you use the Immortality Index in your research, please cite it using this metadata."
+type: software
+title: "Immortality Index: A Binary Milestone Registry for Longevity Research"
 authors:
   - name: "Immortality Index"
-    website: "https://immortality-index.pages.dev"
-title: "Immortality Index: A Binary Milestone Registry for Longevity Research"
-version: "1.0.0"
-doi: "10.5281/zenodo.PLACEHOLDER"
-date-released: 2026-06-18
-url: "https://github.com/immortalityindex/immortality-index"
+version: 1.0.0
+date-released: "2026-06-18"
 license: CC-BY-4.0
-abstract: >
-  The Immortality Index is an open, version-controlled, binary milestone
-  registry that operationalises the engineering prerequisites for negligible somatic senescence.
-  It decomposes the biological aging problem into 24 falsifiable research obstacles across two
-  primary engineering tracks — somatic genetic fidelity (Track 01) and nanoscale biomedical
-  systems (Track 02) — each governed by four binary milestone gates. Milestone status is
-  updated autonomously via large-language-model literature scanning against peer-reviewed
-  sources. The framework is designed for formal citation, collaborative extension, and
-  integration into academic longevity research programmes. This project was conceived by a
-  human and developed through AI-assisted collaboration (Google Gemini, then Claude by
-  Anthropic), and lightly reviewed by a human.
+repository-code: "https://github.com/immortalityindex/immortality-index"
+doi: "10.5281/zenodo.PLACEHOLDER"
 keywords:
   - longevity
   - biogerontology
-  - negligible senescence
-  - epigenetic reprogramming
+  - engineered negligible senescence
+  - milestone tracking
+  - dependency graph
   - somatic identity
-  - nanotechnology
-  - systems biology
-  - falsifiable benchmarking
+  - epigenetic drift
+  - nanorobotics
   - open science
-repository-code: "https://github.com/immortalityindex/immortality-index"
+abstract: >
+  The Immortality Index is an open-science binary milestone registry that tracks
+  progress toward engineered negligible senescence across two parallel research tracks:
+  Track 01 (Somatic Genetic Maintenance) and Track 02 (Autonomous Nanorobotic Intervention).
+  Each of the 25 research obstacles is defined by a precise theoretical target and four
+  validation-tier milestones. Milestone state is updated nightly by an automated AI
+  literature scanner enforcing strict inclusion criteria. The framework provides a
+  falsifiable, publicly auditable dependency graph for the global longevity research community.
