@@ -13,16 +13,16 @@ repository: "https://github.com/immortalityindex/immortality-index"
 
 **Immortality Index**  
 *Correspondence: [immortality-index.pages.dev](https://immortality-index.pages.dev)*  
-*Version 1.0.0 · 18 June 2026 · CC BY 4.0*  
+*Version 1.0.0 Â· 18 June 2026 Â· CC BY 4.0*  
 *DOI: 10.5281/zenodo.PLACEHOLDER*
 
-> **AI Authorship Disclosure:** This whitepaper and the Immortality Index framework were conceived by a human and developed through AI-assisted collaboration — initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and the content of this document were generated through this human–AI process and lightly reviewed by a human. This disclosure is made in the interest of full transparency.
+> **AI Authorship Disclosure:** This whitepaper and the Immortality Index framework were conceived by a human and developed through AI-assisted collaboration â initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and the content of this document were generated through this humanâAI process and lightly reviewed by a human. This disclosure is made in the interest of full transparency.
 
 ---
 
 ## Abstract
 
-We present the Immortality Index, a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure — specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The Immortality Index provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce G-4.4 — Somatic Identity Triage and External Intervention Loop — as the fault-containment gate that closes the loop between Track 01 identity detection and Track 02 nanorobotic retrieval, operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localised fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
+We present the Immortality Index, a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure â specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The Immortality Index provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce G-4.4 â Somatic Identity Triage and External Intervention Loop â as the fault-containment gate that closes the loop between Track 01 identity detection and Track 02 nanorobotic retrieval, operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localised fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
 
 ---
 
@@ -30,14 +30,14 @@ We present the Immortality Index, a formal, open-source binary milestone registr
 
 ### 1.1 The Benchmarking Problem in Longevity Research
 
-The biological aging research landscape suffers from a structural epistemic problem: the absence of a universally agreed, threshold-anchored, falsifiable benchmarking instrument. Existing tracking mechanisms — citation counts, funding allocations, company valuations, and narrative progress reports — are systematically susceptible to optimism bias, institutional pressure, and the absence of explicit failure criteria. A research programme can attract sustained funding while producing results that, measured against objective engineering thresholds, represent negligible progress toward the stated goal of extended healthy lifespan.
+The biological aging research landscape suffers from a structural epistemic problem: the absence of a universally agreed, threshold-anchored, falsifiable benchmarking instrument. Existing tracking mechanisms â citation counts, funding allocations, company valuations, and narrative progress reports â are systematically susceptible to optimism bias, institutional pressure, and the absence of explicit failure criteria. A research programme can attract sustained funding while producing results that, measured against objective engineering thresholds, represent negligible progress toward the stated goal of extended healthy lifespan.
 
 This is not a criticism of individual researchers. It is a structural property of any domain in which success criteria are defined post-hoc, thresholds are adjusted retroactively in response to experimental outcomes, and the benchmark instrument is maintained by parties with reputational or financial stakes in its outputs.
 
 The Immortality Index addresses this gap by constructing a benchmark with the following properties:
 
 1. **Binary gates:** Each milestone is either achieved or not. There is no partial credit and no continuous score. This eliminates the ambiguity that allows threshold-shifting.
-2. **Pre-registered thresholds:** All quantitative thresholds — efficiency percentages, sample sizes, p-value requirements, follow-up durations — are specified in advance and cannot be altered except via documented, publicly visible pull requests with peer-reviewed justification.
+2. **Pre-registered thresholds:** All quantitative thresholds â efficiency percentages, sample sizes, p-value requirements, follow-up durations â are specified in advance and cannot be altered except via documented, publicly visible pull requests with peer-reviewed justification.
 3. **Autonomous evaluation:** Milestone status is determined by LLM literature scanning against peer-reviewed sources, not by human curators. Human curation introduces reputational incentive; LLM scanning does not.
 4. **Open version control:** All changes to the framework are tracked in a public Git repository. The history of every threshold change, milestone addition, and status update is permanently auditable.
 5. **Formal citability:** The framework is structured for formal academic citation with a `CITATION.cff` file, DOI registration via Zenodo, and a standardised BibTeX entry. Researchers who build upon or critique the Immortality Index can formally attribute it.
@@ -46,7 +46,7 @@ The Immortality Index addresses this gap by constructing a benchmark with the fo
 
 The central theoretical framing of the Immortality Index departs from conventional biogerontological models that describe aging as an evolved trait, a stochastic accumulation of damage, or an entropy-driven inevitability. While these models are descriptively accurate at the phenomenological level, they are less useful as engineering targets because they do not naturally decompose into discrete, achievable, falsifiable intermediate milestones.
 
-We instead adopt a **somatic identity fidelity** framing. Every cell in a multicellular organism can be understood as carrying an identity specification — a configuration of epigenetic marks, expressed transcriptomic profile, and genomic sequence — that determines its tissue-specific function. Aging, under this framing, is the progressive divergence of actual somatic identity from the original specification. This divergence is driven by:
+We instead adopt a **somatic identity fidelity** framing. Every cell in a multicellular organism can be understood as carrying an identity specification â a configuration of epigenetic marks, expressed transcriptomic profile, and genomic sequence â that determines its tissue-specific function. Aging, under this framing, is the progressive divergence of actual somatic identity from the original specification. This divergence is driven by:
 
 - **Epigenetic drift:** stochastic changes to methylation and histone modification patterns that alter gene expression without altering the underlying sequence
 - **Transcriptomic noise:** accumulation of stochastic gene expression fluctuations that compound over cell divisions
@@ -59,68 +59,68 @@ The critical observation is that natural multicellular organisms lack a distribu
 
 ## 2. System Architecture
 
-### 2.1 Track 01 · Somatic Genetic Fidelity
+### 2.1 Track 01 Â· Somatic Genetic Fidelity
 
 Track 01 addresses the upstream layer of somatic identity restoration: the molecular and genomic tools required to detect identity deviation, correct it, and maintain fidelity over organismal lifespan. It is organised into four phases.
 
-**Phase 1 — Reprogramming Layer**
+**Phase 1 â Reprogramming Layer**
 The fundamental demonstration that partial epigenetic reprogramming can be achieved safely in post-mitotic mammalian cells in vivo, without triggering oncogenic dedifferentiation. Obstacles G-1.1 through G-1.4 cover in vivo epigenetic reprogramming proof-of-concept, systemic senescent cell clearance, full-body vascular gene delivery, and stem cell telomere maintenance.
 
-**Phase 2 — Genomic Fidelity Layer**
-Obstacles G-2.1 and G-2.2 address the precision editing layer: targeted reactivation of silenced longevity-associated loci without heterochromatin destabilisation, and single-nucleotide precision editing in post-mitotic somatic cells with off-target rates ≤1 event per 10⁹ base pairs.
+**Phase 2 â Genomic Fidelity Layer**
+Obstacles G-2.1 and G-2.2 address the precision editing layer: targeted reactivation of silenced longevity-associated loci without heterochromatin destabilisation, and single-nucleotide precision editing in post-mitotic somatic cells with off-target rates â¤1 event per 10â¹ base pairs.
 
-**Phase 3 — Synthetic Biology Layer**
+**Phase 3 â Synthetic Biology Layer**
 Obstacles G-3.1 through G-3.3 address the active maintenance infrastructure: engineered condensate compartments for DNA repair factor concentration, cryptographic 12-hour logic gate wiring for programmable epigenetic modification cycles, and the synthetic somatic identity tag that constitutes the ground-truth specification against which cell identity can be verified.
 
-**Phase 4 — Intercellular Communication Layer**
-Obstacles G-4.1 through G-4.4 address the network layer: tunneling nanotube synthesis for directed molecular cargo transfer, the Decentralized Intercellular Transcriptomic Error-Correction Network (paracrine-mediated correction signalling between cells), homing matrix stem cell routing, and G-4.4 — Somatic Identity Triage and External Intervention Loop — the cell-autonomous fault-containment circuit that converts irreparably corrupted cells into inert, self-labelled units and emits a vascular peptide beacon for Track 02 nanorobotic retrieval.
+**Phase 4 â Intercellular Communication Layer**
+Obstacles G-4.1 through G-4.4 address the network layer: tunneling nanotube synthesis for directed molecular cargo transfer, the Decentralized Intercellular Transcriptomic Error-Correction Network (paracrine-mediated correction signalling between cells), homing matrix stem cell routing, and G-4.4 â Somatic Identity Triage and External Intervention Loop â the cell-autonomous fault-containment circuit that converts irreparably corrupted cells into inert, self-labelled units and emits a vascular peptide beacon for Track 02 nanorobotic retrieval.
 
 Track 01 converges into a Phase 5 System-Level Integration Bottleneck (SLIB) containing a single obstacle: G-5.1 (Perpetual Human Somatic Rejuvenation). G-4.5 (Full Chromosomal Integration and Identity Verification) is now a Phase 4 prerequisite.
 
-### 2.2 Track 02 · Nanoscale Biomedical Systems
+### 2.2 Track 02 Â· Nanoscale Biomedical Systems
 
 Track 02 addresses the downstream retrieval and physical intervention layer: the nanorobotic systems required to receive the Track 01 somatic identity vascular peptide signal, navigate to triage sites, and execute targeted physical interventions that the molecular biology layer cannot achieve autonomously.
 
-**Phase 1 — Propulsion & Processing Layer**
+**Phase 1 â Propulsion & Processing Layer**
 Obstacles N-1.1 through N-1.3 address mobility and onboard computation: sub-10-attojoule reversible neuromorphic processing elements, remote mechanical micro-propulsion in physiological media, and low-frequency acoustic mesh networks for swarm coordination.
 
-**Phase 2 — Assembly Layer**
+**Phase 2 â Assembly Layer**
 Obstacles N-2.1 through N-2.3 address fabrication: DNA origami scaffolding for nanoscale precision positioning, digital-to-physical molecular assembly from sequence specification, and radiation-hardened structural hulls for operational durability.
 
-**Phase 3 — Tissue Interface Layer**
+**Phase 3 â Tissue Interface Layer**
 Obstacles N-3.1 through N-3.3 address the interface between nanorobotic systems and host tissue: selective fibrotic matrix degradation, molecular ECM deposition, and near-field code-flashing for mid-deployment nanounit reprogramming.
 
 Track 02 converges into a Phase 4 System-Level Integration Bottleneck (SLIB) containing obstacle N-4.1 (Mass Swarm Cohesion and Systemic Integration).
 
 ### 2.3 System-Level Integration Bottleneck (SLIB)
 
-Each track terminates in its own System-Level Integration Bottleneck (SLIB) — a final integration phase that can only be satisfied once all upstream obstacles in that track are simultaneously validated in a single organism.
+Each track terminates in its own System-Level Integration Bottleneck (SLIB) â a final integration phase that can only be satisfied once all upstream obstacles in that track are simultaneously validated in a single organism.
 
-**Track 01 SLIB (Phase 5)** contains a single obstacle: G-5.1 (Perpetual Human Somatic Rejuvenation) — the culminating validation that all fourteen Track 01 obstacles operate simultaneously in a single aged organism, with confirmed systemic somatic identity integrity, ≥20% biological age reduction by two independent epigenetic clocks, and 12-month safety with zero oncogenic events.
+**Track 01 SLIB (Phase 5)** contains a single obstacle: G-5.1 (Perpetual Human Somatic Rejuvenation) â the culminating validation that all fourteen Track 01 obstacles operate simultaneously in a single aged organism, with confirmed systemic somatic identity integrity, â¥20% biological age reduction by two independent epigenetic clocks, and 12-month safety with zero oncogenic events.
 
-**Track 02 SLIB (Phase 4)** contains a single obstacle: N-4.1 (Mass Swarm Cohesion and Systemic Integration) — full nanorobotic swarm deployment with confirmed task completion and bio-clearance.
+**Track 02 SLIB (Phase 4)** contains a single obstacle: N-4.1 (Mass Swarm Cohesion and Systemic Integration) â full nanorobotic swarm deployment with confirmed task completion and bio-clearance.
 
 The cross-track dependency runs through G-4.4, not through the SLIBs directly. G-4.4 (Somatic Identity Triage, Phase 4 Track 01) generates the vascular peptide beacon that Track 02 nanorobotic systems are built to receive. G-4.4 is therefore the architectural handoff point between the two tracks.
 
-### 2.3.1 G-4.4 · Somatic Identity Triage and External Intervention Loop
+### 2.3.1 G-4.4 Â· Somatic Identity Triage and External Intervention Loop
 
-G-4.4 is the architectural node that closes the feedback loop between Track 01 (identity detection) and Track 02 (physical retrieval). It operationalises what we term the **Byzantine somatic fault hypothesis**: in a distributed network of ≈10¹² somatic cells, corruption of individual nodes is inevitable. The systemic risk is not individual node corruption but **propagation** — a corrupted cell that continues to signal as functional can recruit neighbouring cells into its deviant transcriptomic state via paracrine signalling, exosome exchange, or gap junctions. This is the somatic equivalent of a Byzantine fault in distributed computing.
+G-4.4 is the architectural node that closes the feedback loop between Track 01 (identity detection) and Track 02 (physical retrieval). It operationalises what we term the **Byzantine somatic fault hypothesis**: in a distributed network of â10Â¹Â² somatic cells, corruption of individual nodes is inevitable. The systemic risk is not individual node corruption but **propagation** â a corrupted cell that continues to signal as functional can recruit neighbouring cells into its deviant transcriptomic state via paracrine signalling, exosome exchange, or gap junctions. This is the somatic equivalent of a Byzantine fault in distributed computing.
 
 The G-4.4 triage circuit implements a **2-of-3 spatial quorum logic gate**. A permanent somatic cell enters triage mode only when:
 
-1. Its synthetic identity string (G-3.3) carries detectable corruption in ≥2 of 3 independently checksummed domains (the dual-corruption criterion), AND
+1. Its synthetic identity string (G-3.3) carries detectable corruption in â¥2 of 3 independently checksummed domains (the dual-corruption criterion), AND
 2. The cryptographic checksum of its current transcriptomic state diverges from the stored identity specification beyond the error-correction threshold
 
 When both conditions are simultaneously satisfied, the cell must execute three coordinated outputs in parallel:
 
-**Output A — Metabolic Shutdown**
+**Output A â Metabolic Shutdown**
 The cell downregulates ATP-producing metabolic pathways to below 20% of baseline, confirmed by luminescence assay. This prevents the cell from performing any functional somatic activity while maintaining enough metabolic activity for the subsequent outputs.
 
-**Output B — Somatic Identity Triage and Localized Fibrotic Encapsulation**
+**Output B â Somatic Identity Triage and Localized Fibrotic Encapsulation**
 The cell induces a micro-scale fibrotic capsule around itself, sequestering it from neighbours and preventing physical exchange of molecular cargo via tunneling nanotubes or gap junctions. Encapsulation is confirmed by Sirius Red collagen deposition staining. This prevents lineage-infidelity propagation.
 
-**Output C — Vascular Peptide Secretion**
-The cell continuously secretes a bio-orthogonal tracking peptide at ≥10 fmol/mL into the local vasculature. This peptide is detectable by systemic LC-MS/MS assay or, in the full integrated system, by Track 02 nanorobotic units equipped with the corresponding receptor. The peptide functions as a persistent distress beacon enabling targeted physical retrieval of the triage site.
+**Output C â Vascular Peptide Secretion**
+The cell continuously secretes a bio-orthogonal tracking peptide at â¥10 fmol/mL into the local vasculature. This peptide is detectable by systemic LC-MS/MS assay or, in the full integrated system, by Track 02 nanorobotic units equipped with the corresponding receptor. The peptide functions as a persistent distress beacon enabling targeted physical retrieval of the triage site.
 
 The mathematical model governing the quorum gate can be expressed as:
 
@@ -130,7 +130,7 @@ where $C_i \in \{0,1\}$ represents corruption detection in checksum domain $i$, 
 
 The quorum requirement prevents false-positive triage events. A single checksum domain corruption could result from a transient read error or a benign epigenetic fluctuation. Requiring dual corruption with concurrent transcriptomic divergence reduces the false-positive rate to a target of <2% in uncorrupted neighbour cells (confirmed by Milestone G-4.4-1 in vitro validation).
 
-The four milestones of G-4.4 follow the standard RLI validation ladder: in vitro human 3D organoid, murine in vivo, large animal/NHP, and human Phase I safety trial — each adding a layer of translational confidence before the architecture can be considered clinically validated.
+The four milestones of G-4.4 follow the standard RLI validation ladder: in vitro human 3D organoid, murine in vivo, large animal/NHP, and human Phase I safety trial â each adding a layer of translational confidence before the architecture can be considered clinically validated.
 
 ---
 
@@ -140,7 +140,7 @@ The four milestones of G-4.4 follow the standard RLI validation ladder: in vitro
 
 The RLI milestone scanning system is implemented as a Cloudflare Edge Worker (`workers/scanner.js`) that executes the following pipeline every six hours via cron trigger (`0 */6 * * *`):
 
-1. For each of the 24 obstacles, retrieve the current milestone completion status from the Firestore database
+1. For each of the 25 obstacles, retrieve the current milestone completion status from the Firestore database
 2. For each incomplete milestone, construct a structured LLM query to Google Gemini 2.5 Flash
 3. Submit the query to the Gemini API and parse the structured response
 4. If the LLM returns a `confirmed: true` response with a cited source, update the milestone status in Firestore and record the confirming citation
@@ -182,7 +182,7 @@ Respond in JSON format:
 A milestone confirmation is accepted by the scanning system only when all of the following are satisfied:
 
 - The LLM returns `confirmed: true` with `confidence: "high"`
-- A specific citation (author, journal, year) is provided — `null` citations are rejected
+- A specific citation (author, journal, year) is provided â `null` citations are rejected
 - The cited study is a peer-reviewed journal article, a preprint with independent verification, or a registered clinical trial with public results
 - The quantitative thresholds stated in the milestone are explicitly addressed in the LLM's reasoning field
 
@@ -195,24 +195,24 @@ Milestones are NOT confirmed when:
 - Sample size is below the milestone's specified minimum
 - Evidence is from preprints without any form of peer review
 - The LLM returns `confidence: "low"` or `confidence: "medium"` even with a citation
-- P-value is ≥ 0.05 for the primary outcome measure
+- P-value is â¥ 0.05 for the primary outcome measure
 - The citing study has a directly relevant conflict of interest and no independent replication exists
 
 ### 3.5 False-Positive Elimination
 
 The scanning system implements a two-stage false-positive filter:
 
-**Stage 1 — Threshold matching:** The LLM's reasoning field is parsed for explicit acknowledgement of the milestone's quantitative threshold. If the reasoning does not address the specific numeric requirement (e.g., "≥90% on-target correction"), the confirmation is rejected regardless of the `confirmed` field value.
+**Stage 1 â Threshold matching:** The LLM's reasoning field is parsed for explicit acknowledgement of the milestone's quantitative threshold. If the reasoning does not address the specific numeric requirement (e.g., "â¥90% on-target correction"), the confirmation is rejected regardless of the `confirmed` field value.
 
-**Stage 2 — Citation validation:** The system flags any confirmation where the citation field contains only a generic journal name without author, year, or DOI-like identifier. These are queued for human review via GitHub Issue rather than automatically confirmed.
+**Stage 2 â Citation validation:** The system flags any confirmation where the citation field contains only a generic journal name without author, year, or DOI-like identifier. These are queued for human review via GitHub Issue rather than automatically confirmed.
 
 ---
 
 ## 4. Authorship, Anonymity, and Institutional Independence
 
-The Immortality Index was conceived by a human and developed through AI-assisted collaboration — initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and this whitepaper were generated through this human–AI process and lightly reviewed by a human. The project is maintained anonymously. This is a deliberate structural choice, not an evasion. The benchmarking mechanism's integrity depends on its assessments being free from institutional affiliation, funding relationships, and individual reputational incentive. A named author at an institution with longevity research funding has an inherent conflict of interest in assessing whether that institution's research area has met a milestone threshold. Anonymous, AI-assisted authorship does not carry that incentive.
+The Immortality Index was conceived by a human and developed through AI-assisted collaboration â initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and this whitepaper were generated through this humanâAI process and lightly reviewed by a human. The project is maintained anonymously. This is a deliberate structural choice, not an evasion. The benchmarking mechanism's integrity depends on its assessments being free from institutional affiliation, funding relationships, and individual reputational incentive. A named author at an institution with longevity research funding has an inherent conflict of interest in assessing whether that institution's research area has met a milestone threshold. Anonymous, AI-assisted authorship does not carry that incentive.
 
-All contributors are anonymous by default. Named attribution is available on request via a documented pull request. The framework's version history, however, is fully public — every threshold change, milestone addition, and status modification is permanently recorded in the Git repository and attributable to a GitHub account, providing accountability without requiring named authorship on the academic record.
+All contributors are anonymous by default. Named attribution is available on request via a documented pull request. The framework's version history, however, is fully public â every threshold change, milestone addition, and status modification is permanently recorded in the Git repository and attributable to a GitHub account, providing accountability without requiring named authorship on the academic record.
 
 ---
 
