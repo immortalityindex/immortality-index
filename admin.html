@@ -243,11 +243,17 @@
     }
   });
 
-  // ── SCAN ─────────────────────────────────────────────────
-  let scanPollInterval = null;
 
-  function startScanProgressListener() {
-    if (scanPollInterval) clearInterval(scanPollInterval);
+  // ── SCAN ─────────────────────────────────────────────────
+  const WORKER = 'https://immortality-index-scanner.immortalityindex.workers.dev';
+
+  window.triggerScan = async () => {
+    const btn = document.getElementById('scan-btn');
+    const statusEl = document.getElementById('scan-status');
+    btn.disabled = true;
+    btn.textContent = '⏳ Starting...';
+    statusEl.textContent = '';
+
     const progPanel = document.getElementById('scan-progress');
     const progBar   = document.getElementById('prog-bar');
     const progCur   = document.getElementById('prog-current');
@@ -259,96 +265,100 @@
     const progStat  = document.getElementById('prog-status-text');
     const logEl     = document.getElementById('scan-log');
 
-    progPanel.style.display = 'block';
-    logEl.innerHTML = '';
-
-    const updateProgress = async () => {
-      let d;
-      try {
-        const r = await fetch('https://immortality-index-scanner.immortalityindex.workers.dev/status');
-        d = await r.json();
-      } catch(e) { return; }
-      if (!d || d.status === 'never') return;
-
-      progObsT.textContent = d.totalObstacles || 0;
-      progMsT.textContent  = d.totalMilestones || 0;
-      progObs.textContent  = d.obstacleIndex || 0;
-      progMs.textContent   = d.milestonesScanned || 0;
-      progUpd.textContent  = d.milestonesUpdated || 0;
-
-      const pct = d.totalMilestones ? Math.round((d.milestonesScanned / d.totalMilestones) * 100) : 0;
-      progBar.style.width = pct + '%';
-
-      if (d.status === 'running') {
-        progCur.textContent = d.currentObstacle ? `Scanning: ${d.currentObstacle}` : 'Initialising...';
-        progStat.textContent = `${pct}%`;
-      } else if (d.status === 'complete') {
-        progCur.textContent = `✓ Complete — ${d.milestonesUpdated || 0} milestone(s) newly confirmed`;
-        progStat.textContent = d.completedAt ? new Date(d.completedAt).toLocaleTimeString() : '';
-        progBar.style.width = '100%';
-        document.getElementById('scan-btn').disabled = false;
-        document.getElementById('scan-btn').textContent = '▶ Trigger AI Scan';
-        document.getElementById('scan-status').textContent = `Last scan: ${d.milestonesUpdated || 0} updated`;
-        document.getElementById('scan-status').style.color = 'var(--green)';
-        if (scanPollInterval) { clearInterval(scanPollInterval); scanPollInterval = null; }
-      } else if (d.status === 'error') {
-        progCur.textContent = '✗ Error: ' + (d.error || 'unknown');
-        progCur.style.color = 'var(--red)';
-        document.getElementById('scan-btn').disabled = false;
-        document.getElementById('scan-btn').textContent = '▶ Trigger AI Scan';
-        if (scanPollInterval) { clearInterval(scanPollInterval); scanPollInterval = null; }
-      }
-
-      // Render log entries
-      if (d.log?.length) {
-        logEl.innerHTML = '';
-        d.log.forEach(entry => {
-          const el = document.createElement('div');
-          if (entry.error) {
-            el.className = 'log-error';
-            el.textContent = `[${entry.t}] ${entry.obs} — ERROR: ${entry.error}`;
-          } else {
-            const confirmed = entry.confirmed || 0;
-            if (confirmed > 0) {
-              el.className = 'log-achieved';
-              el.textContent = `[${entry.t}] ✓ ${entry.obs} — ${confirmed}/${entry.scanned} confirmed`;
-            } else {
-              el.className = 'log-not';
-              el.textContent = `[${entry.t}] · ${entry.obs} — ${entry.scanned} scanned, none confirmed`;
-            }
-          }
-          logEl.appendChild(el);
-        });
-        logEl.scrollTop = logEl.scrollHeight;
-      }
-    };
-    updateProgress();
-    scanPollInterval = setInterval(updateProgress, 3000);
-  }
-
-  window.triggerScan = async () => {
-    const btn = document.getElementById('scan-btn');
-    const status = document.getElementById('scan-status');
-    btn.disabled = true;
-    btn.textContent = 'Starting scan...';
-    status.textContent = '';
     try {
       const user = auth.currentUser;
-      const token = await user.getIdToken();
-      startScanProgressListener();
-      const r = await fetch('https://immortality-index-scanner.immortalityindex.workers.dev/scan', {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      if (!r.ok) {
-        status.textContent = '✗ Scan failed to start: ' + r.status;
-        status.style.color = 'var(--red)';
-        btn.disabled = false;
-        btn.textContent = '▶ Trigger AI Scan';
+      let token = await user.getIdToken(true);
+      const authHeaders = () => ({ 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' });
+
+      // Fetch obstacle list from Worker
+      const listR = await fetch(WORKER + '/obstacles', { headers: authHeaders() });
+      if (!listR.ok) {
+        statusEl.textContent = '✗ Scan failed to start: ' + listR.status;
+        statusEl.style.color = 'var(--red)';
+        btn.disabled = false; btn.textContent = '▶ Trigger AI Scan';
+        return;
       }
-    } catch(e) {
-      status.textContent = '✗ ' + e.message;
-      status.style.color = 'var(--red)';
+      const { obstacles } = await listR.json();
+      const totalMilestones = obstacles.reduce((s, o) => s + o.total, 0);
+
+      progPanel.style.display = 'block';
+      logEl.innerHTML = '';
+      progObsT.textContent = obstacles.length;
+      progMsT.textContent  = totalMilestones;
+      btn.textContent = '⏳ Scanning...';
+      progCur.textContent = 'Initialising...';
+
+      let milestonesScanned = 0, milestonesUpdated = 0;
+
+      for (let i = 0; i < obstacles.length; i++) {
+        const obs = obstacles[i];
+        progObs.textContent = i + 1;
+        progCur.textContent = 'Scanning: ' + obs.name;
+        const pct = totalMilestones ? Math.round(milestonesScanned / totalMilestones * 100) : 0;
+        progBar.style.width = pct + '%';
+        progStat.textContent = pct + '%';
+
+        if (i > 0) await new Promise(r => setTimeout(r, 7000));
+
+        // Refresh token for long-running scans
+        token = await user.getIdToken();
+
+        try {
+          const r = await fetch(WORKER + '/scan', {
+            method: 'POST',
+            headers: authHeaders(),
+            body: JSON.stringify({ obstacleId: obs.id })
+          });
+          const result = await r.json();
+
+          if (!r.ok) throw new Error(result.error || ('HTTP ' + r.status));
+
+          milestonesScanned += result.scanned || 0;
+          milestonesUpdated += result.confirmed || 0;
+          progMs.textContent  = milestonesScanned;
+          progUpd.textContent = milestonesUpdated;
+
+          const t = new Date().toISOString().slice(11, 19);
+          const entry = document.createElement('div');
+          if (result.error) {
+            entry.className = 'log-error';
+            entry.textContent = '[' + t + '] ' + obs.name + ' — ERROR: ' + result.error;
+          } else if (result.skipped) {
+            entry.className = 'log-not';
+            entry.textContent = '[' + t + '] · ' + obs.name + ' — all done, skipped';
+          } else if ((result.confirmed || 0) > 0) {
+            entry.className = 'log-achieved';
+            entry.textContent = '[' + t + '] ✓ ' + obs.name + ' — ' + result.confirmed + '/' + result.scanned + ' confirmed';
+          } else {
+            entry.className = 'log-not';
+            entry.textContent = '[' + t + '] · ' + obs.name + ' — ' + (result.scanned || 0) + ' scanned, none confirmed';
+          }
+          logEl.appendChild(entry);
+          logEl.scrollTop = logEl.scrollHeight;
+        } catch (e) {
+          const t = new Date().toISOString().slice(11, 19);
+          const entry = document.createElement('div');
+          entry.className = 'log-error';
+          entry.textContent = '[' + t + '] ' + obs.name + ' — ERROR: ' + e.message;
+          logEl.appendChild(entry);
+          logEl.scrollTop = logEl.scrollHeight;
+        }
+      }
+
+      // Done
+      progBar.style.width = '100%';
+      progObs.textContent = obstacles.length;
+      progMs.textContent  = milestonesScanned;
+      progCur.textContent = '✓ Complete — ' + milestonesUpdated + ' milestone(s) newly confirmed';
+      progStat.textContent = new Date().toLocaleTimeString();
+      statusEl.textContent = 'Last scan: ' + milestonesUpdated + ' updated';
+      statusEl.style.color = 'var(--green)';
+      btn.disabled = false;
+      btn.textContent = '▶ Trigger AI Scan';
+
+    } catch (e) {
+      statusEl.textContent = '✗ ' + e.message;
+      statusEl.style.color = 'var(--red)';
       btn.disabled = false;
       btn.textContent = '▶ Trigger AI Scan';
     }
