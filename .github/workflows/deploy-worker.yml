@@ -16,3 +16,13 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ceb25d5b7590978c73da5a81f083508a
           workingDirectory: workers
+          secrets: |
+            FIREBASE_SERVICE_ACCOUNT
+            GEMINI_API_KEY
+            ADMIN_SECRET
+            CRON_SECRET
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ADMIN_SECRET: ${{ secrets.ADMIN_SECRET }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
