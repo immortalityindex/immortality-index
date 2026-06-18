@@ -1,5 +1,5 @@
-# The Radical Longevity Index (RLI)
-### A Framework for Engineered Negligible Senescence
+# Immortality Index
+### A Binary Milestone Registry for Longevity Research
 
 A structured, open-source, binary milestone registry tracking humanity's quantitative progress toward defeating biological aging. Designed for formal academic citation and collaborative scientific contribution.
 
@@ -9,9 +9,15 @@ A structured, open-source, binary milestone registry tracking humanity's quantit
 
 ---
 
+## AI Authorship Disclosure
+
+This project was conceived by a human and developed through AI-assisted collaboration — initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and the academic whitepaper were generated through this human–AI process and lightly reviewed by a human. We make this disclosure in the interest of full transparency about the origins of this work.
+
+---
+
 ## About
 
-The Radical Longevity Index operationalises the engineering prerequisites for negligible somatic senescence. Rather than tracking qualitative "progress," the RLI uses a formal dependency graph of **23 research obstacles** across two primary engineering tracks, each governed by **four binary milestone gates** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not.
+The Immortality Index operationalises the engineering prerequisites for negligible somatic senescence. Rather than tracking qualitative "progress," it uses a formal dependency graph of **24 research obstacles** across two primary engineering tracks, each governed by **four binary milestone gates** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not.
 
 Milestone status is updated autonomously every six hours via large-language-model (LLM) edge-worker literature scanning against peer-reviewed sources. No human curator adjusts thresholds after the fact. This design ensures the framework functions as a **neutral, falsifiable benchmarking mechanism** rather than an advocacy tool.
 
@@ -27,13 +33,13 @@ Milestone status is updated autonomously every six hours via large-language-mode
 
 ## Citing This Work
 
-This framework is designed for formal academic citation. If you reference, build upon, or integrate the RLI into your research, please cite using the bibliographic metadata in [`CITATION.cff`](./CITATION.cff).
+This framework is designed for formal academic citation. If you reference, build upon, or integrate the Immortality Index into your research, please cite using the bibliographic metadata in [`CITATION.cff`](./CITATION.cff).
 
 **BibTeX:**
 ```bibtex
-@misc{rli2026,
-  author       = {{The Immortality Index Consortium}},
-  title        = {The Radical Longevity Index: A Quantitative Dependency Graph and Milestone Framework for Somatic Identity Verification and Radical Longevity Engineering},
+@misc{immortalityindex2026,
+  author       = {{Immortality Index}},
+  title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},
   year         = {2026},
   publisher    = {GitHub},
   doi          = {10.5281/zenodo.PLACEHOLDER},
@@ -43,7 +49,7 @@ This framework is designed for formal academic citation. If you reference, build
 ```
 
 **APA:**
-> The Immortality Index Consortium. (2026). *The Radical Longevity Index: A Quantitative Dependency Graph and Milestone Framework for Somatic Identity Verification and Radical Longevity Engineering* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER
+> Immortality Index. (2026). *Immortality Index: A Binary Milestone Registry for Longevity Research* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER
 
 ---
 
@@ -80,18 +86,18 @@ Contributions must satisfy the following criteria to maintain scientific integri
 1. **Falsifiability:** Every proposed milestone must be binary (achieved / not achieved) and evaluable from peer-reviewed primary literature alone.
 2. **Independence:** No milestone may depend on proprietary data, paywalled datasets, or unpublished results.
 3. **No threshold manipulation:** Milestone thresholds may only be adjusted via public, peer-reviewed consensus with documented justification in the pull request.
-4. **Attribution:** All contributions are attributed to The Immortality Index Consortium unless a contributor explicitly opts into named attribution.
+4. **Attribution:** All contributions are attributed to the Immortality Index project unless a contributor explicitly opts into named attribution.
 
 Open an Issue using the provided templates to propose new milestones, dispute assessments, or report incorrect AI-assigned completions.
 
 ---
 
-## Authorship and Anonymity
+## Anonymity
 
-This project is maintained under the collective pseudonym **The Immortality Index Consortium** to ensure the framework's scientific assessments remain free from institutional bias, funding pressure, or individual reputational incentive. All contributors are anonymous by default. This is a deliberate structural choice to preserve the integrity of the benchmarking mechanism.
+This project is maintained anonymously to ensure the framework's scientific assessments remain free from institutional bias, funding pressure, or individual reputational incentive. All contributors are anonymous by default. This is a deliberate structural choice to preserve the integrity of the benchmarking mechanism.
 
 ---
 
 ## License
 
-[CC BY 4.0](./LICENSE) — You are free to share, adapt, and build upon this work for any purpose, including commercial and academic, provided you give appropriate attribution to The Immortality Index Consortium and link to the original repository.
+[CC BY 4.0](./LICENSE) — You are free to share, adapt, and build upon this work for any purpose, including commercial and academic, provided you give appropriate attribution to the Immortality Index and link to the original repository.

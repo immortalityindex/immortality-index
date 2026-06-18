@@ -260,11 +260,15 @@
 
 <div class="modal-overlay" id="disclaimerModal">
   <div class="modal-box">
-    <h2>The Radical Longevity Index</h2>
+    <h2>Immortality Index</h2>
     <p class="modal-subtitle">System Architecture, Methodology, and Academic Accountability Statement</p>
     <div class="modal-section">
       <h3>What This Is</h3>
-      <p>The Radical Longevity Index (RLI) is an open-source, version-controlled binary milestone registry that decomposes the biological aging problem into 24 falsifiable research obstacles across two primary engineering tracks. Progress on each obstacle is determined solely by evidence from peer-reviewed literature — not prediction, personal estimate, or institutional position. The framework is designed for formal academic citation.</p>
+      <p>The Immortality Index is an open-source, version-controlled binary milestone registry that decomposes the biological aging problem into 24 falsifiable research obstacles across two primary engineering tracks. Progress on each obstacle is determined solely by evidence from peer-reviewed literature — not prediction, personal estimate, or institutional position. The framework is designed for formal academic citation.</p>
+    </div>
+    <div class="modal-section">
+      <h3>AI Authorship Disclosure</h3>
+      <p>This project was conceived by a human and developed through AI-assisted collaboration — initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and the academic whitepaper were generated through this human–AI process and lightly reviewed by a human. We make this disclosure in the interest of full transparency about the origins of this work.</p>
     </div>
     <div class="modal-section">
       <h3>Theoretical Constructs</h3>
@@ -276,12 +280,12 @@
     </div>
     <div class="modal-section">
       <h3>Benchmark Integrity</h3>
-      <p>All milestone thresholds are pre-registered and immutable except via publicly visible pull requests with documented peer-reviewed justification. No threshold may be adjusted retroactively to accommodate an experimental result. The full change history of every threshold and milestone is permanently auditable in the public GitHub repository. This framework is maintained under the collective pseudonym The Immortality Index Consortium to ensure assessments remain free from institutional affiliation, funding relationships, and individual reputational incentive.</p>
+      <p>All milestone thresholds are pre-registered and immutable except via publicly visible pull requests with documented peer-reviewed justification. No threshold may be adjusted retroactively to accommodate an experimental result. The full change history of every threshold and milestone is permanently auditable in the public GitHub repository. The project is maintained anonymously to ensure assessments remain free from institutional affiliation, funding relationships, and individual reputational incentive.</p>
     </div>
     <div class="modal-section">
       <h3>Cite This Work</h3>
-      <p style="font-size:0.78rem;font-family:monospace;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:6px;line-height:1.6;margin-bottom:8px">@misc{rli2026,<br>&nbsp;&nbsp;author = {{The Immortality Index Consortium}},<br>&nbsp;&nbsp;title = {The Radical Longevity Index},<br>&nbsp;&nbsp;year = {2026},<br>&nbsp;&nbsp;doi = {10.5281/zenodo.PLACEHOLDER},<br>&nbsp;&nbsp;url = {https://github.com/immortalityindex/immortality-index}<br>}</p>
-      <p style="font-size:0.82rem;color:#94a3b8">APA: The Immortality Index Consortium. (2026). <em>The Radical Longevity Index</em> (v1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER</p>
+      <p style="font-size:0.78rem;font-family:monospace;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:6px;line-height:1.6;margin-bottom:8px">@misc{immortalityindex2026,<br>&nbsp;&nbsp;author = {{Immortality Index}},<br>&nbsp;&nbsp;title = {Immortality Index: A Binary Milestone Registry for Longevity Research},<br>&nbsp;&nbsp;year = {2026},<br>&nbsp;&nbsp;doi = {10.5281/zenodo.PLACEHOLDER},<br>&nbsp;&nbsp;url = {https://github.com/immortalityindex/immortality-index}<br>}</p>
+      <p style="font-size:0.82rem;color:#94a3b8">APA: Immortality Index. (2026). <em>Immortality Index: A Binary Milestone Registry for Longevity Research</em> (v1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER</p>
     </div>
     <div class="modal-section">
       <h3>Not Medical Advice</h3>
@@ -294,7 +298,7 @@
 <header>
   <div class="header-inner">
     <div class="logo-area">
-      <h1>⚡ Radical Longevity Index</h1>
+      <h1>⚡ Immortality Index</h1>
       <p>24 Research Obstacles · Live Literature Tracking</p>
     </div>
     <div class="header-actions">
@@ -341,7 +345,7 @@
 
 <footer>
   <div class="footer-inner">
-    <span>Radical Longevity Index · The Immortality Index Consortium · CC BY 4.0</span>
+    <span>Immortality Index · CC BY 4.0</span>
     <a onclick="document.getElementById('disclaimerModal').classList.add('open')">Methodology &amp; Citation</a>
     <span id="footer-update">Updated: —</span>
   </div>
@@ -462,4 +466,38 @@
 
     document.getElementById('nanotech-pct').textContent = ns.pct + '%';
     document.getElementById('nanotech-bar').style.width = ns.pct + '%';
-    document.getElementById('nanotech-count').textContent = `${ns.done} / ${ns.total} milestones 
+    document.getElementById('nanotech-count').textContent = `${ns.done} / ${ns.total} milestones complete`;
+
+    const latest = all.reduce((l,o) => (!l||o.lastUpdated>l)?o.lastUpdated:l, null);
+    if (latest) {
+      const label = new Date(latest).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+      document.getElementById('lastScanLabel').textContent = label;
+      document.getElementById('lastScanLabel').classList.remove('pulse');
+      document.getElementById('footer-update').textContent = 'Updated: ' + label;
+    }
+
+    function renderCol(obs, colId, colClass) {
+      const phases = groupByPhase(obs);
+      let html = `<h3>${colId==='genetics-col'?'Track 01 · Genetics':'Track 02 · Nanotech'}</h3>`;
+      let first = true;
+      phases.forEach((phaseObs, label) => {
+        html += `<div class="phase-header" style="${first?'border-top:none;margin-top:0;padding-top:0':''}">
+          ${escHtml(label)}
+        </div>`;
+        first = false;
+        phaseObs.forEach(o => { html += renderCard(o, colClass); });
+      });
+      document.getElementById(colId).innerHTML = html;
+    }
+
+    renderCol(genetics, 'genetics-col', 'genetics-col');
+    renderCol(nanotech, 'nanotech-col', 'nanotech-col');
+  }, err => {
+    console.error(err);
+    ['genetics-col','nanotech-col'].forEach(id => {
+      document.getElementById(id).innerHTML = `<div class="loading-state" style="color:var(--red)">Failed to load: ${err.message}</div>`;
+    });
+  });
+</script>
+</body>
+</html>

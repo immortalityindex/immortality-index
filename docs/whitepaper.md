@@ -1,7 +1,7 @@
 ---
 title: "A Decentralized Peer-to-Peer Error-Correction Architecture for the Mitigation of Somatic Identity Loss and Epigenetic Drift"
-subtitle: "The Radical Longevity Index: System Architecture, Methodology, and Academic Accountability Statement"
-author: "The Immortality Index Consortium"
+subtitle: "Immortality Index: System Architecture, Methodology, and Academic Accountability Statement"
+author: "Immortality Index"
 date: 2026-06-18
 version: "1.0.0"
 doi: "10.5281/zenodo.PLACEHOLDER"
@@ -11,16 +11,18 @@ repository: "https://github.com/immortalityindex/immortality-index"
 
 # A Decentralized Peer-to-Peer Error-Correction Architecture for the Mitigation of Somatic Identity Loss and Epigenetic Drift
 
-**The Immortality Index Consortium**  
+**Immortality Index**  
 *Correspondence: [immortality-index.pages.dev](https://immortality-index.pages.dev)*  
 *Version 1.0.0 · 18 June 2026 · CC BY 4.0*  
 *DOI: 10.5281/zenodo.PLACEHOLDER*
+
+> **AI Authorship Disclosure:** This whitepaper and the Immortality Index framework were conceived by a human and developed through AI-assisted collaboration — initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and the content of this document were generated through this human–AI process and lightly reviewed by a human. This disclosure is made in the interest of full transparency.
 
 ---
 
 ## Abstract
 
-We present the Radical Longevity Index (RLI), a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure — specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The RLI provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce obstacle G-5.2 — Somatic Identity Triage and External Intervention Loop — as a novel architectural construct operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localized fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
+We present the Immortality Index, a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure — specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The Immortality Index provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce obstacle G-5.2 — Somatic Identity Triage and External Intervention Loop — as a novel architectural construct operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localized fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
 
 ---
 
@@ -32,17 +34,17 @@ The biological aging research landscape suffers from a structural epistemic prob
 
 This is not a criticism of individual researchers. It is a structural property of any domain in which success criteria are defined post-hoc, thresholds are adjusted retroactively in response to experimental outcomes, and the benchmark instrument is maintained by parties with reputational or financial stakes in its outputs.
 
-The Radical Longevity Index addresses this gap by constructing a benchmark with the following properties:
+The Immortality Index addresses this gap by constructing a benchmark with the following properties:
 
 1. **Binary gates:** Each milestone is either achieved or not. There is no partial credit and no continuous score. This eliminates the ambiguity that allows threshold-shifting.
 2. **Pre-registered thresholds:** All quantitative thresholds — efficiency percentages, sample sizes, p-value requirements, follow-up durations — are specified in advance and cannot be altered except via documented, publicly visible pull requests with peer-reviewed justification.
 3. **Autonomous evaluation:** Milestone status is determined by LLM literature scanning against peer-reviewed sources, not by human curators. Human curation introduces reputational incentive; LLM scanning does not.
 4. **Open version control:** All changes to the framework are tracked in a public Git repository. The history of every threshold change, milestone addition, and status update is permanently auditable.
-5. **Formal citability:** The framework is structured for formal academic citation with a `CITATION.cff` file, DOI registration via Zenodo, and a standardised BibTeX entry. Researchers who build upon or critique the RLI can formally attribute it.
+5. **Formal citability:** The framework is structured for formal academic citation with a `CITATION.cff` file, DOI registration via Zenodo, and a standardised BibTeX entry. Researchers who build upon or critique the Immortality Index can formally attribute it.
 
 ### 1.2 Framing Aging as a Systems-Engineering Failure
 
-The central theoretical framing of the RLI departs from conventional biogerontological models that describe aging as an evolved trait, a stochastic accumulation of damage, or an entropy-driven inevitability. While these models are descriptively accurate at the phenomenological level, they are less useful as engineering targets because they do not naturally decompose into discrete, achievable, falsifiable intermediate milestones.
+The central theoretical framing of the Immortality Index departs from conventional biogerontological models that describe aging as an evolved trait, a stochastic accumulation of damage, or an entropy-driven inevitability. While these models are descriptively accurate at the phenomenological level, they are less useful as engineering targets because they do not naturally decompose into discrete, achievable, falsifiable intermediate milestones.
 
 We instead adopt a **somatic identity fidelity** framing. Every cell in a multicellular organism can be understood as carrying an identity specification — a configuration of epigenetic marks, expressed transcriptomic profile, and genomic sequence — that determines its tissue-specific function. Aging, under this framing, is the progressive divergence of actual somatic identity from the original specification. This divergence is driven by:
 
@@ -51,7 +53,7 @@ We instead adopt a **somatic identity fidelity** framing. Every cell in a multic
 - **Genomic mutation:** point mutations, indels, and structural variants introduced by replication errors, oxidative damage, and transposable element mobilisation
 - **Senescent cell accumulation:** cells that have exited the cell cycle but remain metabolically active and secrete pro-inflammatory signals (the senescence-associated secretory phenotype, SASP), corrupting the local tissue environment
 
-The critical observation is that natural multicellular organisms lack a distributed error-correction mechanism capable of detecting and triaging individual cells whose somatic identity has diverged beyond a specified threshold. This is the engineering gap the RLI is designed to close.
+The critical observation is that natural multicellular organisms lack a distributed error-correction mechanism capable of detecting and triaging individual cells whose somatic identity has diverged beyond a specified threshold. This is the engineering gap the Immortality Index is designed to close.
 
 ---
 
@@ -74,7 +76,7 @@ Obstacles G-3.1 through G-3.3 address the active maintenance infrastructure: eng
 Obstacles G-4.1 through G-4.3 address the network layer: tunneling nanotube synthesis for directed molecular cargo transfer, the Decentralized Intercellular Transcriptomic Error-Correction Network (paracrine-mediated correction signalling between cells), and homing matrix stem cell routing.
 
 **Phase 5 — System-Level Integration Bottleneck (SLIB)**
-Obstacles G-5.1 and G-5.2 represent the integration gate. G-5.1 requires simultaneous, coordinated operation of all Track 01 subsystems within a single mammalian organism. G-5.2 — described in detail in §2.3 —"operationalises the triage protocol for cells whose identity deviation has passed the point of correction.
+Obstacles G-5.1 and G-5.2 represent the integration gate. G-5.1 requires simultaneous, coordinated operation of all Track 01 subsystems within a single mammalian organism. G-5.2 — described in detail in §2.3 — operationalises the triage protocol for cells whose identity deviation has passed the point of correction.
 
 ### 2.2 Track 02 · Nanoscale Biomedical Systems
 
@@ -200,7 +202,7 @@ The scanning system implements a two-stage false-positive filter:
 
 ## 4. Authorship, Anonymity, and Institutional Independence
 
-The Radical Longevity Index is maintained under the collective pseudonym **The Immortality Index Consortium**. This is a deliberate structural choice, not an evasion. The benchmarking mechanism's integrity depends on its assessments being free from institutional affiliation, funding relationships, and individual reputational incentive. A named author at an institution with longevity research funding has an inherent conflict of interest in assessing whether that institution's research area has met a milestone threshold. An anonymous collective does not.
+The Immortality Index was conceived by a human and developed through AI-assisted collaboration — initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and this whitepaper were generated through this human–AI process and lightly reviewed by a human. The project is maintained anonymously. This is a deliberate structural choice, not an evasion. The benchmarking mechanism's integrity depends on its assessments being free from institutional affiliation, funding relationships, and individual reputational incentive. A named author at an institution with longevity research funding has an inherent conflict of interest in assessing whether that institution's research area has met a milestone threshold. Anonymous, AI-assisted authorship does not carry that incentive.
 
 All contributors are anonymous by default. Named attribution is available on request via a documented pull request. The framework's version history, however, is fully public — every threshold change, milestone addition, and status modification is permanently recorded in the Git repository and attributable to a GitHub account, providing accountability without requiring named authorship on the academic record.
 
@@ -210,9 +212,9 @@ All contributors are anonymous by default. Named attribution is available on req
 
 **BibTeX:**
 ```bibtex
-@misc{rli2026,
-  author       = {{The Immortality Index Consortium}},
-  title        = {The Radical Longevity Index: A Quantitative Dependency Graph and Milestone Framework for Somatic Identity Verification and Radical Longevity Engineering},
+@misc{immortalityindex2026,
+  author       = {{Immortality Index}},
+  title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},
   year         = {2026},
   publisher    = {GitHub},
   doi          = {10.5281/zenodo.PLACEHOLDER},
@@ -222,7 +224,7 @@ All contributors are anonymous by default. Named attribution is available on req
 ```
 
 **APA:**
-> The Immortality Index Consortium. (2026). *The Radical Longevity Index: A Quantitative Dependency Graph and Milestone Framework for Somatic Identity Verification and Radical Longevity Engineering* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER
+> Immortality Index. (2026). *Immortality Index: A Binary Milestone Registry for Longevity Research* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER
 
 ---
 
@@ -240,8 +242,4 @@ The Firestore database underlying the live platform is read-public. Writes requi
 
 ## 7. License
 
-This work is published under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to share, adapt, and build upon this work for any purpose, including commercial and academic use, provided you give appropriate attribution to The Immortality Index Consortium and include a link to the original repository and this DOI.
-
----
-
-*The Immortality Index Consortium · [immortality-index.pages.dev](https://immortality-index.pages.dev) · CC BY 4.0*
+This work i
