@@ -34,8 +34,8 @@ function verifyFirebaseJwt(auth) {
     const payload = JSON.parse(atob(pad(parts[1].replace(/-/g,'+').replace(/_/g,'/'))));
     const now = Math.floor(Date.now() / 1000);
     return payload.iss === 'https://securetoken.google.com/' + PROJECT_ID
-        && payload.aud === PROJECT_ID
-        && payload.exp > now;
+      && payload.aud === PROJECT_ID
+      && payload.exp > now;
   } catch { return false; }
 }
 
@@ -100,23 +100,45 @@ function isAuthorized(request, env) {
 // Scan a single obstacle synchronously
 async function scanObstacle(obs, env, token) {
   const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${env.GEMINI_API_KEY}`;
-  const milestones = obs.milestones || [];
+
+  // ── Stale-completion guard ───────────────────────────────────────────────
+  // If the obstacle's milestone definitions were updated after a milestone was
+  // confirmed, that confirmation is stale and must be reset before re-scanning.
+  // Patch scripts set `milestonesUpdatedAt` whenever definitions change.
+  // The scanner stores `confirmedAt` on each confirmed milestone.
+  // Rule: if confirmedAt < milestonesUpdatedAt → reset to completed: false.
+  let milestones = obs.milestones || [];
+  const defUpdatedAt = obs.milestonesUpdatedAt || null;
+
+  if (defUpdatedAt) {
+    let staleFound = false;
+    milestones = milestones.map(ms => {
+      if (ms.completed && ms.confirmedAt && ms.confirmedAt < defUpdatedAt) {
+        staleFound = true;
+        return { id: ms.id, name: ms.name, completed: false, evidence: '' };
+      }
+      return ms;
+    });
+    if (staleFound) {
+      await fsSet(`obstacles/${obs.id}`, {
+        milestones,
+        lastUpdated: new Date().toISOString()
+      }, token);
+    }
+  }
+  // ── End stale-completion guard ───────────────────────────────────────────
+
   const toScan = milestones.filter(ms => !ms.completed);
   if (!toScan.length) return { scanned: 0, confirmed: 0, skipped: true };
 
   const milestoneList = toScan.map((ms, i) => `${i+1}. [${ms.id}] "${ms.name}"`).join('\n');
   const prompt = `You are a scientific literature analyst specialising in longevity, genetics, and nanotechnology research.
-
 Obstacle: "${obs.name}"
-
 For EACH milestone below, assess whether it has been ACHIEVED in peer-reviewed scientific literature as of your knowledge cutoff.
-
 ACHIEVED means: direct experimental evidence meeting the specific quantitative threshold described, published in a reputable journal.
 NOT YET ACHIEVED means: theoretical goal, only partial evidence, preprints only, or incomplete clinical trials.
-
 Milestones:
 ${milestoneList}
-
 Respond ONLY as a JSON array — one object per milestone, in order:
 [{"id": "...", "achieved": true/false, "confidence": "high"/"medium"/"low", "evidence": "One sentence citing specific paper/author/journal/year if achieved, otherwise null"}, ...]`;
 
@@ -206,7 +228,6 @@ export default {
     const url = new URL(request.url);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
 
-    // GET /status — public
     if (request.method === 'GET' && url.pathname === '/status') {
       try {
         const token = await getToken(env);
@@ -218,7 +239,6 @@ export default {
       }
     }
 
-    // GET /obstacles — returns list of obstacle IDs and milestone counts
     if (request.method === 'GET' && url.pathname === '/obstacles') {
       if (!isAuthorized(request, env))
         return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: CORS });
@@ -237,8 +257,6 @@ export default {
       }
     }
 
-    // POST /scan — scan ONE obstacle by id, returns result synchronously
-    // Body: { obstacleId: string } OR { all: true } for full scan (background)
     if (request.method === 'POST' && url.pathname === '/scan') {
       if (!isAuthorized(request, env))
         return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: CORS });
@@ -247,12 +265,10 @@ export default {
         const token = await getToken(env);
 
         if (body.obstacleId) {
-          // Single-obstacle scan — synchronous, fits in 30s
           const obs = await fsGet(`obstacles/${body.obstacleId}`, token);
           if (!obs) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404, headers: CORS });
           obs.id = body.obstacleId;
           const result = await scanObstacle(obs, env, token);
-          // Update scan status
           const status = await fsGet('_meta/scanStatus', token);
           if (status) {
             await fsSet('_meta/scanStatus', {
@@ -267,7 +283,6 @@ export default {
             { headers: { 'Content-Type': 'application/json', ...CORS } });
         }
 
-        // Legacy: full scan in background (only works if Worker lifetime allows)
         ctx.waitUntil(runFullScan(env));
         return new Response(JSON.stringify({ started: true }),
           { headers: { 'Content-Type': 'application/json', ...CORS } });
