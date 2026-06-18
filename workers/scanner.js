@@ -292,34 +292,6 @@ export default {
     }
 
 
-    // ONE-TIME PATCH — delete after use
-    if (request.method === 'POST' && url.pathname === '/patch-genetics') {
-      const b = await request.json().catch(() => ({}));
-      if (b.token !== 'pg2026') return new Response('no', { status: 401 });
-      try {
-        const tkn = await getToken(env);
-        const now = new Date().toISOString();
-        const pd = await fetch('https://raw.githubusercontent.com/immortalityindex/immortality-index/main/workers/patch-data.json').then(r => r.json());
-        const upsert = async (id, doc) => {
-          const fields = Object.fromEntries(Object.entries({...doc, lastUpdated:now, milestonesUpdatedAt:now}).map(([k,v]) => [k, toV(v)]));
-          const res = await fetch(`${FS_BASE}/obstacles/${id}`, { method:'PATCH', headers:{ Authorization:`Bearer ${tkn}`, 'Content-Type':'application/json' }, body:JSON.stringify({fields}) });
-          if (!res.ok) throw new Error(`${id}: ${res.status}`);
-        };
-        await upsert('g-4.4', pd['g-4.4']);
-        await upsert('g-4.5', pd['g-4.5']);
-        await upsert('g-4.6', pd['g-4.6']);
-        const p51 = pd['g-5.1-patch'];
-        const f51 = Object.fromEntries(Object.entries({...p51, milestonesUpdatedAt:now, lastUpdated:now}).map(([k,v]) => [k, toV(v)]));
-        const m51 = Object.keys(f51).map(k => `updateMask.fieldPaths=${encodeURIComponent(k)}`).join('&');
-        const r51 = await fetch(`${FS_BASE}/obstacles/g-5.1?${m51}`, { method:'PATCH', headers:{ Authorization:`Bearer ${tkn}`, 'Content-Type':'application/json' }, body:JSON.stringify({fields:f51}) });
-        if (!r51.ok) throw new Error(`g-5.1: ${r51.status}`);
-        return new Response(JSON.stringify({success:true, at:now}), { headers:{'Content-Type':'application/json',...CORS} });
-      } catch(e) {
-        return new Response(JSON.stringify({error:e.message}), { status:500, headers:{'Content-Type':'application/json',...CORS} });
-      }
-    }
-    // END ONE-TIME PATCH
-
     return new Response('Not found', { status: 404 });
   }
 };
