@@ -620,39 +620,38 @@ exports.handler = async (event, context) => {
         lastUpdated: now
       },
 
-      // PHASE 5 — SYSTEM-LEVEL INTEGRATION BOTTLENECK (SLIB)
       {
-        id: 'g-5.1',
+        id: 'g-4.4',
         track: 'genetics',
-        phase: 5,
-        phaseLabel: 'Phase 5 — System-Level Integration Bottleneck (SLIB)',
+        phase: 4,
+        phaseLabel: 'Phase 4 — Intercellular Communication Layer',
         order: 13,
         name: 'Somatic Identity Triage and External Intervention Loop',
-        shortName: 'SLIB: Somatic Identity Triage',
-        isBoss: true,
+        shortName: 'Somatic Identity Triage',
+        isBoss: false,
         theoreticalTarget:
           'Engineer a cell-autonomous fault-containment circuit in permanent somatic cells that activates upon simultaneous detection of: (1) corruption in ≥2 of 3 independently checksummed domains of the synthetic identity tag (G-3.3), and (2) transcriptomic state divergence exceeding the pre-specified correction threshold. Upon activation, the circuit executes three coordinated outputs in parallel: metabolic shutdown to <20% of baseline ATP production, localised fibrotic self-encapsulation to prevent molecular exchange with neighbouring cells, and continuous secretion of a bio-orthogonal vascular tracking peptide at ≥10 fmol/mL. This converts irreparably corrupted cells into inert, self-labelled units that halt somatic identity contamination and emit a persistent retrieval beacon for Track 02 nanorobotic systems — closing the Byzantine fault isolation loop before cascade propagation can occur.',
         milestones: [
           {
-            id: 'g-5.1.1',
+            id: 'g-4.4.1',
             name: 'In vitro human 3D organoid validation: dual-corruption trigger activates metabolic shutdown (<20% baseline ATP by luminescence assay), fibrotic encapsulation (Sirius Red staining), and bio-orthogonal peptide secretion (≥10 fmol/mL by LC-MS/MS) in ≥90% of triggered cells with <2% false-positive rate in uncorrupted neighbours',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.1.2',
+            id: 'g-4.4.2',
             name: 'Murine in vivo model: engineered cells with dual-corruption trigger confirm triage activation within 24h, fibrotic capsule at ≥85% of sites, vascular peptide ≥10 fmol/mL by systemic assay; host biological age unchanged at 90-day follow-up (no SASP-mediated bystander aging)',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.1.3',
+            id: 'g-4.4.3',
             name: 'Large animal / NHP validation across ≥3 tissue compartments: independent triage activation in each, no cross-compartment corruption propagation, vascular peptide ≥10 fmol/mL by clinical-grade ELISA, host biological age within ±5% of baseline at 180-day follow-up',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.1.4',
+            id: 'g-4.4.4',
             name: 'Human Phase I safety and biomarker detection trial (n ≥ 12): vascular peptide ≥10 fmol/mL in serum by LC-MS/MS within 72h; no grade ≥2 adverse events (CTCAE v5.0); CRP ≤1.5× ULN at 30 days; no fibrotic lesion expansion beyond 5mm by MRI',
             completed: false,
             evidence: ''
@@ -670,38 +669,40 @@ exports.handler = async (event, context) => {
         papers: [],
         lastUpdated: now
       },
+
+      // PHASE 5 — SYSTEM-LEVEL INTEGRATION BOTTLENECK (SLIB)
       {
-        id: 'g-5.2',
+        id: 'g-5.1',
         track: 'genetics',
         phase: 5,
         phaseLabel: 'Phase 5 — System-Level Integration Bottleneck (SLIB)',
         order: 14,
         name: 'Full Chromosomal Integration and Identity Verification',
-        shortName: 'SLIB: Chromosomal Integration',
+        shortName: 'SLIB: Full Track 01 Integration',
         isBoss: true,
         theoreticalTarget:
-          'Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-5.1) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.',
+          'Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-4.4) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.',
         milestones: [
           {
-            id: 'g-5.2.1',
+            id: 'g-5.1.1',
             name: 'All Track 01 subsystems co-delivered and co-expressed in a single aged murine model without mutual interference confirmed by multi-omics profiling',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.2.2',
+            id: 'g-5.1.2',
             name: 'Systemic somatic identity verification: identity tag readable in ≥85% of sampled cells across ≥5 tissue types at 6-month timepoint',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.2.3',
+            id: 'g-5.1.3',
             name: 'Measurable multi-system functional rejuvenation — biological age reduction ≥20% by two independent epigenetic clocks in same organism',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.2.4',
+            id: 'g-5.1.4',
             name: 'Safety at 12-month follow-up: zero oncogenic events, ANA panel negative, karyotype stable by whole-genome sequencing',
             completed: false,
             evidence: ''
@@ -709,7 +710,7 @@ exports.handler = async (event, context) => {
         ],
         anchors: [
           'Horvath epigenetic clock — whole-organism aging biomarker',
-          'Multi-omics integration — Synder Lab Stanford / TOF-SIMS proteomics',
+          'Multi-omics integration — Snyder Lab Stanford / TOF-SIMS proteomics',
           'ANA (anti-nuclear antibody) panel — standard autoimmunity safety screen',
           'Whole-genome sequencing for karyotype stability — Illumina / PacBio long-read',
           'Biological age reduction in vivo — David Sinclair Lab OSK eye rejuvenation (Nature 2020)',

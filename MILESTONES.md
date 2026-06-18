@@ -12,7 +12,7 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 - **Track 01 · Somatic Genetic Fidelity** — 14 obstacles, 56 milestones (Phases 1–4 + SLIB)
 - **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones (Phases 1–3 + SLIB)
 
-**System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track. Track 01's SLIB contains G-5.1 (Somatic Identity Triage — the cross-track bridge that requires Track 02 nanorobots to retrieve flagged cells) and G-5.2 (Full Track 01 Integration — all genetic fidelity subsystems confirmed operating together). Track 02's SLIB contains N-4.1 (full nanorobotic swarm integration). G-5.1 is the dependency node that makes both tracks interdependent.
+**System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track — one obstacle each. Track 01's SLIB is G-5.1 (Full Chromosomal Integration and Identity Verification): all 13 Track 01 subsystems confirmed operating together in a single organism. Track 02's SLIB is N-4.1 (Mass Swarm Cohesion and Systemic Integration). The cross-track dependency runs through G-4.4: the Somatic Identity Triage circuit (Phase 4, Track 01) generates the vascular peptide beacon that Track 02 nanorobots are built to receive.
 
 ---
 
@@ -170,9 +170,7 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 3. Fibrosis markers (collagen-I, α-SMA, TGF-β) remain ≤1.5× baseline at recruitment sites at 14-day post-homing timepoint
 4. In vivo murine tissue damage model demonstrates ≥4× functional stem cell enrichment with improved healing metrics vs. controls (p < 0.05)
 
-### Phase 5 — System-Level Integration Bottleneck (SLIB)
-
-#### G-5.1 · ⚠️ SLIB: Somatic Identity Triage and External Intervention Loop
+#### G-4.4 · Somatic Identity Triage and External Intervention Loop
 
 **Theoretical Target:** Engineer a cell-autonomous fault-containment circuit in permanent somatic cells that activates upon simultaneous detection of: (1) corruption in ≥2 of 3 independently checksummed domains of the synthetic identity tag (G-3.3), and (2) transcriptomic state divergence exceeding the pre-specified correction threshold. Upon activation, the circuit executes three coordinated outputs in parallel: metabolic shutdown to <20% of baseline ATP production, localised fibrotic self-encapsulation to prevent molecular exchange with neighbouring cells, and continuous secretion of a bio-orthogonal vascular tracking peptide at ≥10 fmol/mL. This converts irreparably corrupted cells into inert, self-labelled units that halt somatic identity contamination and emit a persistent retrieval beacon for Track 02 nanorobotic systems — closing the Byzantine fault isolation loop before cascade propagation can occur.
 
@@ -182,11 +180,11 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 3. Large animal / NHP validation across ≥3 tissue compartments: independent triage activation in each, no cross-compartment corruption propagation, vascular peptide ≥10 fmol/mL by clinical-grade ELISA, host biological age within ±5% of baseline at 180-day follow-up
 4. Human Phase I safety and biomarker detection trial (n ≥ 12): vascular peptide ≥10 fmol/mL in serum by LC-MS/MS within 72h; no grade ≥2 adverse events (CTCAE v5.0); CRP ≤1.5× ULN at 30 days; no fibrotic lesion expansion beyond 5mm by MRI
 
----
+### Phase 5 — System-Level Integration Bottleneck (SLIB)
 
-#### G-5.2 · ⚠️ SLIB: Full Chromosomal Integration and Identity Verification
+#### G-5.1 · ⚠️ SLIB: Full Chromosomal Integration and Identity Verification
 
-**Theoretical Target:** Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-5.1) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.
+**Theoretical Target:** Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-4.4) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.
 
 **Milestones:**
 1. All Track 01 subsystems co-delivered and co-expressed in a single aged murine model without mutual interference confirmed by multi-omics profiling
