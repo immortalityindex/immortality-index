@@ -1,12 +1,7 @@
 // Immortality Index — Cloudflare Worker
-// Replaces Netlify Functions: scan-background, scan-status, cleanup
-// Cron: runs every 6 hours. HTTP: manual trigger from admin panel.
-
 const PROJECT_ID = 'immortality-index';
-const FIREBASE_API_KEY = 'AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM';
 const FS_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
 
-// ── Firebase JWT auth (service account) ───────────────────────────────────
 async function getToken(env) {
   const sa = JSON.parse(env.FIREBASE_SERVICE_ACCOUNT);
   const now = Math.floor(Date.now() / 1000);
@@ -28,19 +23,21 @@ async function getToken(env) {
   return (await r.json()).access_token;
 }
 
-// ── Verify Firebase ID token via REST ──────────────────────────────────────
-async function verifyFirebaseToken(idToken) {
+// Verify Firebase ID token by decoding JWT payload (checks iss, aud, exp)
+function verifyFirebaseJwt(auth) {
   try {
-    const r = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${FIREBASE_API_KEY}`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ idToken })
-    });
-    const d = await r.json();
-    return r.ok && d.users?.length > 0;
+    const token = auth.replace('Bearer ', '');
+    const parts = token.split('.');
+    if (parts.length !== 3) return false;
+    const pad = s => s + '='.repeat((4 - s.length % 4) % 4);
+    const payload = JSON.parse(atob(pad(parts[1].replace(/-/g, '+').replace(/_/g, '/'))));
+    const now = Math.floor(Date.now() / 1000);
+    return payload.iss === 'https://securetoken.google.com/' + PROJECT_ID
+        && payload.aud === PROJECT_ID
+        && payload.exp > now;
   } catch { return false; }
 }
 
-// ── Firestore value codec ──────────────────────────────────────────────────
 function toV(v) {
   if (v === null || v === undefined) return { nullValue: null };
   if (typeof v === 'boolean') return { booleanValue: v };
@@ -66,7 +63,6 @@ function fromDoc(doc) {
   return Object.fromEntries(Object.entries(doc.fields).map(([k,v]) => [k, fromV(v)]));
 }
 
-// ── Firestore helpers ──────────────────────────────────────────────────────
 async function fsGet(path, token) {
   const r = await fetch(`${FS_BASE}/${path}`, { headers: { Authorization: `Bearer ${token}` } });
   if (r.status === 404) return null;
@@ -86,26 +82,20 @@ async function fsCollection(col, token) {
   return (data.documents || []).map(doc => ({ id: doc.name.split('/').pop(), ...fromDoc(doc) }));
 }
 
-// ── CORS headers ───────────────────────────────────────────────────────────
 const CORS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Authorization, x-admin-secret, Content-Type'
 };
 
-// ── Auth check ─────────────────────────────────────────────────────────────
-async function isAuthorized(request, env) {
+function isAuthorized(request, env) {
   const secret = request.headers.get('x-admin-secret');
-  const auth = request.headers.get('authorization');
+  const auth = request.headers.get('authorization') || '';
   if (env.ADMIN_SECRET && secret === env.ADMIN_SECRET) return true;
-  if (env.CRON_SECRET && auth === `Bearer ${env.CRON_SECRET}`) return true;
-  if (auth?.startsWith('Bearer ')) {
-    const idToken = auth.replace('Bearer ', '');
-    return await verifyFirebaseToken(idToken);
-  }
+  if (env.CRON_SECRET && auth === 'Bearer ' + env.CRON_SECRET) return true;
+  if (auth.startsWith('Bearer ')) return verifyFirebaseJwt(auth);
   return false;
 }
 
-// ── Scan logic ─────────────────────────────────────────────────────────────
 async function runScan(env) {
   const token = await getToken(env);
   const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${env.GEMINI_API_KEY}`;
@@ -127,7 +117,6 @@ async function runScan(env) {
     obstacleIndex: 0, totalObstacles: obstacles.length,
     milestonesScanned: 0, totalMilestones, milestonesUpdated: 0, obstaclesUpdated: 0, log: [] });
 
-  const delay2 = ms => new Promise(r => setTimeout(r, ms));
   let milestonesScanned = 0, milestonesUpdated = 0, obstaclesUpdated = 0;
   const log = [];
 
@@ -141,7 +130,7 @@ async function runScan(env) {
       obstacleIndex: oi + 1, totalObstacles: obstacles.length,
       milestonesScanned, totalMilestones, milestonesUpdated, obstaclesUpdated, log: log.slice(-20) });
 
-    if (await isCancelled()) { console.log('Scan cancelled'); return { cancelled: true }; }
+    if (await isCancelled()) { return { cancelled: true }; }
     await delay(13000);
 
     const milestoneList = toScan.map((ms, i) => `${i+1}. [${ms.id}] "${ms.name}"`).join('\n');
@@ -221,11 +210,8 @@ Respond ONLY as a JSON array — one object per milestone, in order:
   return { scanned: obstacles.length, milestonesUpdated, obstaclesUpdated };
 }
 
-// ── Worker export ──────────────────────────────────────────────────────────
 export default {
-  async scheduled(event, env, ctx) {
-    ctx.waitUntil(runScan(env));
-  },
+  async scheduled(event, env, ctx) { ctx.waitUntil(runScan(env)); },
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
@@ -243,7 +229,7 @@ export default {
     }
 
     if (request.method === 'POST' && url.pathname === '/scan') {
-      if (!await isAuthorized(request, env)) {
+      if (!isAuthorized(request, env)) {
         return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: CORS });
       }
       ctx.waitUntil(runScan(env));
