@@ -461,7 +461,7 @@
     document.getElementById('nanotech-count').textContent = `${ns.done} / ${ns.total} milestones complete`;
 
     // Last scan date from scan-status endpoint
-    fetch('/api/scan-status').then(r => r.json()).then(d => {
+    fetch('https://immortality-index-scanner.immortalityindex.workers.dev/status').then(r => r.json()).then(d => {
       const ts = d.completedAt || d.startedAt;
       if (ts) {
         const dt = new Date(ts);
