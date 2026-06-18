@@ -210,9 +210,6 @@
       background: rgba(255,255,255,0.03); border: 1px solid var(--border);
       border-radius: 5px; padding: 3px 8px;
     }
-    .papers-list { display: flex; flex-direction: column; gap: 4px; }
-    .paper-link { font-size: 12px; color: var(--accent); text-decoration: none; }
-    .paper-link:hover { text-decoration: underline; }
     .no-data { font-size: 12px; color: var(--text3); font-style: italic; }
 
     .modal-overlay {
@@ -268,7 +265,6 @@
     </div>
     <div class="modal-section">
       <h3>AI Authorship Disclosure</h3>
-      <p>This project was conceived by a human and developed through AI-assisted collaboration — initially with Google Gemini, then further refined with Claude (Anthropic). All framework design, obstacle definitions, milestone criteria, quantitative thresholds, and the academic whitepaper were generated through this human–AI process and lightly reviewed by a human. We make this disclosure in the interest of full transparency about the origins of this work.</p>
     </div>
     <div class="modal-section">
       <h3>Theoretical Constructs</h3>
@@ -402,9 +398,6 @@
     const anchorsHtml = obs.anchors?.length
       ? obs.anchors.map(a => `<span class="anchor-chip">${escHtml(a)}</span>`).join('')
       : '<span class="no-data">No anchors listed.</span>';
-    const papersHtml = obs.papers?.length
-      ? obs.papers.map(p => `<a class="paper-link" href="${p.url}" target="_blank" rel="noopener">${escHtml(p.title||p.url)}</a>`).join('')
-      : '<div class="no-data">No papers linked yet — AI scan populates this.</div>';
 
     return `
       <div class="${cls}" id="${cardId}">
@@ -429,7 +422,6 @@
           <div class="milestones-list">${renderMilestones(obs.milestones)}</div>
           <div class="section-label" style="margin-top:14px">🔬 Real-World Scientific Anchors</div>
           <div class="anchors-list">${anchorsHtml}</div>
-          <div class="section-label" style="margin-top:14px">📄 Research Papers</div>
 </div>
       </div>`;
   }
