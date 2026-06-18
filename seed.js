@@ -68,7 +68,6 @@ exports.handler = async (event, context) => {
           'AgeX Therapeutics — iTR induced tissue regeneration'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -118,7 +117,6 @@ exports.handler = async (event, context) => {
           'Cleara Biotech — p21-targeting senolytic approach'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -168,7 +166,6 @@ exports.handler = async (event, context) => {
           'Prevail Therapeutics — AAV9 CNS gene therapy'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -217,7 +214,6 @@ exports.handler = async (event, context) => {
           'Roger Reddel Lab — ALT pathway biology (Cancer Research Institute)'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -268,7 +264,6 @@ exports.handler = async (event, context) => {
           'Aurora Biosciences — chromatin-targeted therapeutics'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -318,7 +313,6 @@ exports.handler = async (event, context) => {
           'Sherlock Biosciences — CRISPR diagnostics precision'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -369,7 +363,6 @@ exports.handler = async (event, context) => {
           'Sabari et al. Science 2018 — coactivator condensates at super-enhancers'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -418,7 +411,6 @@ exports.handler = async (event, context) => {
           'GenoFAB — synthetic biology circuit design software platform'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -467,7 +459,6 @@ exports.handler = async (event, context) => {
           'EpiBeat — epigenetic engineering tools'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -518,7 +509,6 @@ exports.handler = async (event, context) => {
           'Connelly Lab — F-actin nanotube formation in immune synapses'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -567,7 +557,6 @@ exports.handler = async (event, context) => {
           'Biological near-field communication theory (Nakano & Eckford)'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -616,7 +605,6 @@ exports.handler = async (event, context) => {
           'Mandal et al. — CXCR4 overexpression in HSC transplantation'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -666,7 +654,6 @@ exports.handler = async (event, context) => {
           'CTCAE v5.0 — Common Terminology Criteria for Adverse Events (FDA/NCI)'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -717,7 +704,6 @@ exports.handler = async (event, context) => {
           'AAVS1 safe harbour locus — Porteus Lab Stanford'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -768,7 +754,6 @@ exports.handler = async (event, context) => {
           'David Sinclair Lab — multi-target anti-aging convergence'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: new Date().toISOString()
       },
 
@@ -822,7 +807,6 @@ exports.handler = async (event, context) => {
           'Feringa Group — light-driven molecular motors (Nobel 2016)'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -871,7 +855,6 @@ exports.handler = async (event, context) => {
           'Sandia National Laboratories — ultra-low power CMOS design'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -920,7 +903,6 @@ exports.handler = async (event, context) => {
           'IntraSense — implantable acoustic body sensor platform'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -971,7 +953,6 @@ exports.handler = async (event, context) => {
           'Nanotemper Technologies — MST and DLS characterisation of DNA nanostructures'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -1020,7 +1001,6 @@ exports.handler = async (event, context) => {
           'NIST Center for Nanoscale Science and Technology — atomic fabrication'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -1069,7 +1049,6 @@ exports.handler = async (event, context) => {
           'Lawrence Berkeley National Lab — radiation effects on nanostructured materials'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -1120,7 +1099,6 @@ exports.handler = async (event, context) => {
           'Michael Bhattacharya Lab — nanofiber ECM drug delivery'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -1169,7 +1147,6 @@ exports.handler = async (event, context) => {
           'MatTek Corporation — EpiDerm 3D human tissue models'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
       {
@@ -1218,7 +1195,6 @@ exports.handler = async (event, context) => {
           'NTT Research — molecular communication theory and experiment'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       },
 
@@ -1269,7 +1245,6 @@ exports.handler = async (event, context) => {
           'Hod Lipson Lab Columbia — self-replicating and self-healing robot swarms'
         ],
         status: 'active',
-        papers: [],
         lastUpdated: now
       }
     ];
