@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seed Firestore â Immortality Index</title>
+  <title>Seed Firestore Ã¢ÂÂ Immortality Index</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0;
@@ -37,14 +37,14 @@
 </head>
 <body>
 <div class="card">
-  <h1>ð¥ Firestore Seeder</h1>
-  <p class="sub">immortality-index Â· 25 obstacles Â· Cloudflare Pages</p>
+  <h1>Ã°ÂÂÂ¥ Firestore Seeder</h1>
+  <p class="sub">immortality-index ÃÂ· 25 obstacles ÃÂ· Cloudflare Pages</p>
 
   <div id="auth-section">
     <label>Firebase Email</label>
     <input type="email" id="email" placeholder="your@email.com" />
     <label>Password</label>
-    <input type="password" id="password" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" />
+    <input type="password" id="password" placeholder="Ã¢ÂÂ¢Ã¢ÂÂ¢Ã¢ÂÂ¢Ã¢ÂÂ¢Ã¢ÂÂ¢Ã¢ÂÂ¢Ã¢ÂÂ¢Ã¢ÂÂ¢" />
     <button class="btn" onclick="doSignIn()">Sign In</button>
     <div id="status"></div>
   </div>
@@ -52,8 +52,7 @@
   <div id="seed-section">
     <div class="user-badge" id="user-badge"></div>
     <p style="font-size:0.82rem;color:#aaa;margin-bottom:8px;">
-      Overwrites all 25 obstacles with the updated schema:<br>
-      G-4.5 â Phase 4 Â· G-5.1 Perpetual Human Somatic Rejuvenation (SLIB) Â· N-4.1 SLIB
+      Writes all 25 obstacles to Firestore. Existing milestone progress is preserved.
     </p>
     <button class="btn btn-seed" id="seed-btn" onclick="seedFirestore()">Seed Firestore (25 obstacles)</button>
     <button class="btn" style="background:#333;margin-top:8px;" onclick="doSignOut()">Sign Out</button>
@@ -83,38 +82,38 @@ const auth = firebase.auth();
 const db   = firebase.firestore();
 
 const OBSTACLES = [
-      // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-      // TRACK 01 Â· GENETICS
-      // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+      // Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+      // TRACK 01 ÃÂ· GENETICS
+      // Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 
-      // PHASE 1 â REPROGRAMMING LAYER
+      // PHASE 1 Ã¢ÂÂ REPROGRAMMING LAYER
       {
         id: 'g-1.1',
         track: 'genetics',
         phase: 1,
-        phaseLabel: 'Phase 1 â Reprogramming Layer',
+        phaseLabel: 'Phase 1 Ã¢ÂÂ Reprogramming Layer',
         order: 1,
         name: 'In Vivo Epigenetic Reprogramming Proof-of-Concept',
         shortName: 'Reprogramming PoC',
         isBoss: false,
         theoreticalTarget:
-          'Demonstrate safe, reversible, partial epigenetic reprogramming in a living human subject that measurably reverses cellular age markers (Horvath DNA methylation clock) by â¥20 years without inducing pluripotency-associated oncogenesis or teratoma formation.',
+          'Demonstrate safe, reversible, partial epigenetic reprogramming in a living human subject that measurably reverses cellular age markers (Horvath DNA methylation clock) by Ã¢ÂÂ¥20 years without inducing pluripotency-associated oncogenesis or teratoma formation.',
         milestones: [
           {
             id: 'g-1.1.1',
-            name: 'Non-oncogenic partial reprogramming protocol (OSK without c-Myc) validated in human organoids â independent lab replication confirmed',
+            name: 'Non-oncogenic partial reprogramming protocol (OSK without c-Myc) validated in human organoids Ã¢ÂÂ independent lab replication confirmed',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-1.1.2',
-            name: 'In vivo murine model shows â¥20% reversal on Horvath DNA methylation clock with zero tumor incidence over 12-month follow-up',
+            name: 'In vivo murine model shows Ã¢ÂÂ¥20% reversal on Horvath DNA methylation clock with zero tumor incidence over 12-month follow-up',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-1.1.3',
-            name: 'Phase I human safety IND filing accepted â cyclic OSKM/OSK expression trialled in an isolated somatic tissue type (e.g., retinal ganglion cells)',
+            name: 'Phase I human safety IND filing accepted Ã¢ÂÂ cyclic OSKM/OSK expression trialled in an isolated somatic tissue type (e.g., retinal ganglion cells)',
             completed: false,
             evidence: ''
           },
@@ -126,13 +125,13 @@ const OBSTACLES = [
           }
         ],
         anchors: [
-          'Life Biosciences â ER-100 partial reprogramming platform',
-          'Altos Labs â OSKM/OSK cyclic expression programme',
-          'Turn Bio â mRNA-based transient reprogramming',
+          'Life Biosciences Ã¢ÂÂ ER-100 partial reprogramming platform',
+          'Altos Labs Ã¢ÂÂ OSKM/OSK cyclic expression programme',
+          'Turn Bio Ã¢ÂÂ mRNA-based transient reprogramming',
           'Yamanaka factors (Oct4, Sox2, Klf4, c-Myc)',
           'Horvath epigenetic clock / DNA methylation biomarkers',
-          'David Sinclair Lab â OSK in vivo eye rejuvenation (Nature 2020)',
-          'AgeX Therapeutics â iTR induced tissue regeneration'
+          'David Sinclair Lab Ã¢ÂÂ OSK in vivo eye rejuvenation (Nature 2020)',
+          'AgeX Therapeutics Ã¢ÂÂ iTR induced tissue regeneration'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -141,7 +140,7 @@ const OBSTACLES = [
         id: 'g-1.2',
         track: 'genetics',
         phase: 1,
-        phaseLabel: 'Phase 1 â Reprogramming Layer',
+        phaseLabel: 'Phase 1 Ã¢ÂÂ Reprogramming Layer',
         order: 2,
         name: 'Systemic Senescent Cell Clearance Engine',
         shortName: 'Senescent Clearance',
@@ -157,7 +156,7 @@ const OBSTACLES = [
           },
           {
             id: 'g-1.2.2',
-            name: 'Combination senolytic protocol (Dasatinib + Quercetin + navitoclax) achieves systemic clearance in NHP model â biomarkers (p16, SA-Î²-gal, IL-6) reduced >60%',
+            name: 'Combination senolytic protocol (Dasatinib + Quercetin + navitoclax) achieves systemic clearance in NHP model Ã¢ÂÂ biomarkers (p16, SA-ÃÂ²-gal, IL-6) reduced >60%',
             completed: false,
             evidence: ''
           },
@@ -169,19 +168,19 @@ const OBSTACLES = [
           },
           {
             id: 'g-1.2.4',
-            name: 'Safe repeatable clearance protocol established â tissue regenerative recovery confirmed post-clearance with no long-term immune deficiency or wound-healing impairment',
+            name: 'Safe repeatable clearance protocol established Ã¢ÂÂ tissue regenerative recovery confirmed post-clearance with no long-term immune deficiency or wound-healing impairment',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Unity Biotechnology â UBX0101, UBX1967 senolytic trials',
+          'Unity Biotechnology Ã¢ÂÂ UBX0101, UBX1967 senolytic trials',
           'CAR-T targeting uPAR (Amor et al. Nature 2020)',
-          'Dasatinib + Quercetin â Mayo Clinic Phase I/II trials',
-          'Navitoclax (ABT-263) â BCL-2 family senolytic',
-          'UNITY/Oisin Biotechnologies â lipid nanoparticle senolytic delivery',
-          'James Kirkland Lab Mayo Clinic â senolytic clinical research',
-          'Cleara Biotech â p21-targeting senolytic approach'
+          'Dasatinib + Quercetin Ã¢ÂÂ Mayo Clinic Phase I/II trials',
+          'Navitoclax (ABT-263) Ã¢ÂÂ BCL-2 family senolytic',
+          'UNITY/Oisin Biotechnologies Ã¢ÂÂ lipid nanoparticle senolytic delivery',
+          'James Kirkland Lab Mayo Clinic Ã¢ÂÂ senolytic clinical research',
+          'Cleara Biotech Ã¢ÂÂ p21-targeting senolytic approach'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -190,13 +189,13 @@ const OBSTACLES = [
         id: 'g-1.3',
         track: 'genetics',
         phase: 1,
-        phaseLabel: 'Phase 1 â Reprogramming Layer',
+        phaseLabel: 'Phase 1 Ã¢ÂÂ Reprogramming Layer',
         order: 3,
         name: 'Full-Body Vascular Gene Delivery Network',
         shortName: 'Vascular Delivery Network',
         isBoss: false,
         theoreticalTarget:
-          'Establish a gene delivery infrastructure capable of transfecting >90% of all cell types across all organ systems â including CNS beyond the blood-brain barrier â with a single systemic administration, achieving <0.01% off-target genomic integration events.',
+          'Establish a gene delivery infrastructure capable of transfecting >90% of all cell types across all organ systems Ã¢ÂÂ including CNS beyond the blood-brain barrier Ã¢ÂÂ with a single systemic administration, achieving <0.01% off-target genomic integration events.',
         milestones: [
           {
             id: 'g-1.3.1',
@@ -206,7 +205,7 @@ const OBSTACLES = [
           },
           {
             id: 'g-1.3.2',
-            name: 'Ionizable LNP formulation achieves >70% CNS transfection efficiency post-IV administration in primate model without hepatotoxicity (LFT within 2Ã ULN)',
+            name: 'Ionizable LNP formulation achieves >70% CNS transfection efficiency post-IV administration in primate model without hepatotoxicity (LFT within 2ÃÂ ULN)',
             completed: false,
             evidence: ''
           },
@@ -218,19 +217,19 @@ const OBSTACLES = [
           },
           {
             id: 'g-1.3.4',
-            name: 'Phase I/II human trial demonstrates systemic biodistribution with therapeutic expression levels in target tissues â off-target integration <0.01% confirmed by whole-genome sequencing',
+            name: 'Phase I/II human trial demonstrates systemic biodistribution with therapeutic expression levels in target tissues Ã¢ÂÂ off-target integration <0.01% confirmed by whole-genome sequencing',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Dyno Therapeutics â AI-evolved AAV capsid library',
-          '4D Molecular Therapeutics â engineered capsids',
-          'Precision BioSciences â ARCUS nuclease + AAV',
-          'Moderna â CNS-targeting LNP platform',
-          'Beam Therapeutics â base editing + AAV delivery',
-          'BRAIN Initiative â BBB-crossing vector research',
-          'Prevail Therapeutics â AAV9 CNS gene therapy'
+          'Dyno Therapeutics Ã¢ÂÂ AI-evolved AAV capsid library',
+          '4D Molecular Therapeutics Ã¢ÂÂ engineered capsids',
+          'Precision BioSciences Ã¢ÂÂ ARCUS nuclease + AAV',
+          'Moderna Ã¢ÂÂ CNS-targeting LNP platform',
+          'Beam Therapeutics Ã¢ÂÂ base editing + AAV delivery',
+          'BRAIN Initiative Ã¢ÂÂ BBB-crossing vector research',
+          'Prevail Therapeutics Ã¢ÂÂ AAV9 CNS gene therapy'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -239,67 +238,67 @@ const OBSTACLES = [
         id: 'g-1.4',
         track: 'genetics',
         phase: 1,
-        phaseLabel: 'Phase 1 â Reprogramming Layer',
+        phaseLabel: 'Phase 1 Ã¢ÂÂ Reprogramming Layer',
         order: 4,
         name: 'Stem Cell Telomere Maintenance Switch',
         shortName: 'Telomere Maintenance',
         isBoss: false,
         theoreticalTarget:
-          'Engineer a controllable, tissue-specific telomerase activation switch that maintains stem cell telomere length in the 8â12 kb range across all tissue compartments indefinitely, while remaining transcriptionally silent in non-stem somatic cells to prevent oncogenesis.',
+          'Engineer a controllable, tissue-specific telomerase activation switch that maintains stem cell telomere length in the 8Ã¢ÂÂ12 kb range across all tissue compartments indefinitely, while remaining transcriptionally silent in non-stem somatic cells to prevent oncogenesis.',
         milestones: [
           {
             id: 'g-1.4.1',
-            name: 'Tissue-specific TERT promoter construct validated for stem-cell-only expression in organoid systems â zero detectable TERT expression in differentiated progeny cells',
+            name: 'Tissue-specific TERT promoter construct validated for stem-cell-only expression in organoid systems Ã¢ÂÂ zero detectable TERT expression in differentiated progeny cells',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-1.4.2',
-            name: 'ALT (Alternative Lengthening of Telomeres) pathway upregulation demonstrated as backup elongation mechanism in TERT-negative cells â no associated genome instability',
+            name: 'ALT (Alternative Lengthening of Telomeres) pathway upregulation demonstrated as backup elongation mechanism in TERT-negative cells Ã¢ÂÂ no associated genome instability',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-1.4.3',
-            name: '24-month telomere maintenance confirmed in NHP HSC and tissue stem cell populations â qPCR and FISH confirm 8â12 kb range maintenance without malignant transformation',
+            name: '24-month telomere maintenance confirmed in NHP HSC and tissue stem cell populations Ã¢ÂÂ qPCR and FISH confirm 8Ã¢ÂÂ12 kb range maintenance without malignant transformation',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-1.4.4',
-            name: 'Clinical-grade TERT gene therapy vector demonstrates safe telomere maintenance in human HSC transplantation model â 12-month follow-up with no oncogenic signal',
+            name: 'Clinical-grade TERT gene therapy vector demonstrates safe telomere maintenance in human HSC transplantation model Ã¢ÂÂ 12-month follow-up with no oncogenic signal',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Sierra Sciences â Bill Andrews TERT activation research',
-          'BioViva â TERT gene therapy (Liz Parrish self-experiment, n=1)',
-          'Telomere-to-Telomere (T2T) Consortium â complete human telomere sequencing',
-          'Geron Corporation â hTERT immortalisation studies',
-          'TA Sciences â TA-65 telomerase activator (cycloastragenol)',
-          'Roger Reddel Lab â ALT pathway biology (Cancer Research Institute)'
+          'Sierra Sciences Ã¢ÂÂ Bill Andrews TERT activation research',
+          'BioViva Ã¢ÂÂ TERT gene therapy (Liz Parrish self-experiment, n=1)',
+          'Telomere-to-Telomere (T2T) Consortium Ã¢ÂÂ complete human telomere sequencing',
+          'Geron Corporation Ã¢ÂÂ hTERT immortalisation studies',
+          'TA Sciences Ã¢ÂÂ TA-65 telomerase activator (cycloastragenol)',
+          'Roger Reddel Lab Ã¢ÂÂ ALT pathway biology (Cancer Research Institute)'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // PHASE 2 â GENOME FIDELITY LAYER
+      // PHASE 2 Ã¢ÂÂ GENOME FIDELITY LAYER
       {
         id: 'g-2.1',
         track: 'genetics',
         phase: 2,
-        phaseLabel: 'Phase 2 â Genome Fidelity Layer',
+        phaseLabel: 'Phase 2 Ã¢ÂÂ Genome Fidelity Layer',
         order: 5,
         name: 'Heterochromatin Pioneer Decoupling',
         shortName: 'Heterochromatin Decoupling',
         isBoss: false,
         theoreticalTarget:
-          'Develop precision molecular tools to selectively open age-collapsed heterochromatin domains at designated genomic loci without triggering global chromatin instability, transposon activation, or senescence response â enabling downstream repair machinery to access previously inaccessible DNA damage sites.',
+          'Develop precision molecular tools to selectively open age-collapsed heterochromatin domains at designated genomic loci without triggering global chromatin instability, transposon activation, or senescence response Ã¢ÂÂ enabling downstream repair machinery to access previously inaccessible DNA damage sites.',
         milestones: [
           {
             id: 'g-2.1.1',
-            name: 'Pioneer transcription factor cocktail (e.g., FOXA1, GATA3, TP53) opens targeted heterochromatin in aged human fibroblasts with <5% off-target loci disruption â ATAC-seq confirmed',
+            name: 'Pioneer transcription factor cocktail (e.g., FOXA1, GATA3, TP53) opens targeted heterochromatin in aged human fibroblasts with <5% off-target loci disruption Ã¢ÂÂ ATAC-seq confirmed',
             completed: false,
             evidence: ''
           },
@@ -317,18 +316,18 @@ const OBSTACLES = [
           },
           {
             id: 'g-2.1.4',
-            name: 'Coupled Prime Editor accesses and corrects target mutation within newly opened heterochromatin domain in NHP â editing efficiency >10Ã improvement vs. baseline closed chromatin',
+            name: 'Coupled Prime Editor accesses and corrects target mutation within newly opened heterochromatin domain in NHP Ã¢ÂÂ editing efficiency >10ÃÂ improvement vs. baseline closed chromatin',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'ENCODE Project â heterochromatin accessibility maps across tissue types',
-          'Pioneer factor biology â FOXA1/GATA3 breast tissue reprogramming studies',
-          'CUT&RUN / CUT&TAG â locus-specific H3K9me3 profiling',
-          '10x Genomics â single-cell ATAC-seq chromatin accessibility',
-          'Bhanu Lab â pioneer factor structural biology',
-          'Aurora Biosciences â chromatin-targeted therapeutics'
+          'ENCODE Project Ã¢ÂÂ heterochromatin accessibility maps across tissue types',
+          'Pioneer factor biology Ã¢ÂÂ FOXA1/GATA3 breast tissue reprogramming studies',
+          'CUT&RUN / CUT&TAG Ã¢ÂÂ locus-specific H3K9me3 profiling',
+          '10x Genomics Ã¢ÂÂ single-cell ATAC-seq chromatin accessibility',
+          'Bhanu Lab Ã¢ÂÂ pioneer factor structural biology',
+          'Aurora Biosciences Ã¢ÂÂ chromatin-targeted therapeutics'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -337,23 +336,23 @@ const OBSTACLES = [
         id: 'g-2.2',
         track: 'genetics',
         phase: 2,
-        phaseLabel: 'Phase 2 â Genome Fidelity Layer',
+        phaseLabel: 'Phase 2 Ã¢ÂÂ Genome Fidelity Layer',
         order: 6,
         name: 'Sub-Letter Nucleotide Absolute Precision Editing',
         shortName: 'Absolute Precision Editing',
         isBoss: false,
         theoreticalTarget:
-          'Achieve a genome-wide editing fidelity of â¤1 unintended nucleotide change per 10Â¹Â² base pairs edited in a single therapeutic intervention across all cell types â enabling safe simultaneous correction of thousands of age-associated somatic mutations.',
+          'Achieve a genome-wide editing fidelity of Ã¢ÂÂ¤1 unintended nucleotide change per 10ÃÂ¹ÃÂ² base pairs edited in a single therapeutic intervention across all cell types Ã¢ÂÂ enabling safe simultaneous correction of thousands of age-associated somatic mutations.',
         milestones: [
           {
             id: 'g-2.2.1',
-            name: 'Prime Editing v4+ demonstrates <1 unintended edit per 10â¹ bp in human iPSC lines â independently replicated in â¥3 labs with CIRCLE-seq or DISCOVER-seq off-target validation',
+            name: 'Prime Editing v4+ demonstrates <1 unintended edit per 10Ã¢ÂÂ¹ bp in human iPSC lines Ã¢ÂÂ independently replicated in Ã¢ÂÂ¥3 labs with CIRCLE-seq or DISCOVER-seq off-target validation',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-2.2.2',
-            name: 'High-fidelity evolved Cas12 variant (PAM-flexible) achieves <1 off-target per 10Â¹â° bp in therapeutic in vivo murine model â whole-genome sequencing confirmed in 100+ animals',
+            name: 'High-fidelity evolved Cas12 variant (PAM-flexible) achieves <1 off-target per 10ÃÂ¹Ã¢ÂÂ° bp in therapeutic in vivo murine model Ã¢ÂÂ whole-genome sequencing confirmed in 100+ animals',
             completed: false,
             evidence: ''
           },
@@ -365,69 +364,69 @@ const OBSTACLES = [
           },
           {
             id: 'g-2.2.4',
-            name: 'Simultaneous multi-locus editing (â¥50 sites) at clinical scale with aggregate fidelity maintained at â¤1 error per 10Â¹Â² bp â validated in NHP therapeutic model',
+            name: 'Simultaneous multi-locus editing (Ã¢ÂÂ¥50 sites) at clinical scale with aggregate fidelity maintained at Ã¢ÂÂ¤1 error per 10ÃÂ¹ÃÂ² bp Ã¢ÂÂ validated in NHP therapeutic model',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'David Liu Lab / Beam Therapeutics â Prime Editing v3/v4',
-          'Editas Medicine â high-fidelity Cas9 eSpCas9, HiFi Cas9',
-          'Inscripta â CRISPR-Cas14 small nuclease platform',
-          'DISCOVER-Seq â unbiased off-target detection (Concordet/Haeussler)',
-          'CIRCLE-seq â in vitro off-target profiling',
-          'Andrew Anzalone â PE3/PE3b prime editing optimisation',
-          'Sherlock Biosciences â CRISPR diagnostics precision'
+          'David Liu Lab / Beam Therapeutics Ã¢ÂÂ Prime Editing v3/v4',
+          'Editas Medicine Ã¢ÂÂ high-fidelity Cas9 eSpCas9, HiFi Cas9',
+          'Inscripta Ã¢ÂÂ CRISPR-Cas14 small nuclease platform',
+          'DISCOVER-Seq Ã¢ÂÂ unbiased off-target detection (Concordet/Haeussler)',
+          'CIRCLE-seq Ã¢ÂÂ in vitro off-target profiling',
+          'Andrew Anzalone Ã¢ÂÂ PE3/PE3b prime editing optimisation',
+          'Sherlock Biosciences Ã¢ÂÂ CRISPR diagnostics precision'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // PHASE 3 â SYNTHETIC BIOLOGY LAYER
+      // PHASE 3 Ã¢ÂÂ SYNTHETIC BIOLOGY LAYER
       {
         id: 'g-3.1',
         track: 'genetics',
         phase: 3,
-        phaseLabel: 'Phase 3 â Synthetic Biology Layer',
+        phaseLabel: 'Phase 3 Ã¢ÂÂ Synthetic Biology Layer',
         order: 7,
         name: 'Synthetic Membraneless Nuclear Enclave Formation',
         shortName: 'Nuclear Enclave Formation',
         isBoss: false,
         theoreticalTarget:
-          'Engineer stable, synthetic biomolecular condensates within the nucleus that serve as isolated, high-fidelity processing zones for reprogramming factor delivery and genomic repair operations â achieving 3â5Ã enhanced editing efficiency while remaining completely traceless post-operation.',
+          'Engineer stable, synthetic biomolecular condensates within the nucleus that serve as isolated, high-fidelity processing zones for reprogramming factor delivery and genomic repair operations Ã¢ÂÂ achieving 3Ã¢ÂÂ5ÃÂ enhanced editing efficiency while remaining completely traceless post-operation.',
         milestones: [
           {
             id: 'g-3.1.1',
-            name: 'Synthetic IDR (intrinsically disordered region) protein constructs nucleate stable condensates within human cell nuclei with >6-hour persistence â FRAP and live-cell imaging confirmed',
+            name: 'Synthetic IDR (intrinsically disordered region) protein constructs nucleate stable condensates within human cell nuclei with >6-hour persistence Ã¢ÂÂ FRAP and live-cell imaging confirmed',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.1.2',
-            name: 'Condensate-enclosed CRISPR/repair machinery demonstrates 3â5Ã enhanced editing efficiency vs. dispersed delivery in human primary cell lines â replicated in â¥2 independent labs',
+            name: 'Condensate-enclosed CRISPR/repair machinery demonstrates 3Ã¢ÂÂ5ÃÂ enhanced editing efficiency vs. dispersed delivery in human primary cell lines Ã¢ÂÂ replicated in Ã¢ÂÂ¥2 independent labs',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.1.3',
-            name: 'Dissolution trigger (small molecule or optogenetic light signal) achieves complete, traceless condensate clearance from nucleus â no residual IDR protein detectable at 48h by super-resolution imaging',
+            name: 'Dissolution trigger (small molecule or optogenetic light signal) achieves complete, traceless condensate clearance from nucleus Ã¢ÂÂ no residual IDR protein detectable at 48h by super-resolution imaging',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.1.4',
-            name: 'In vivo delivery of condensate-forming synthetic proteins via ionizable LNP demonstrates functional nuclear enclave formation in hepatocytes in murine model â histology and proteomics confirmed',
+            name: 'In vivo delivery of condensate-forming synthetic proteins via ionizable LNP demonstrates functional nuclear enclave formation in hepatocytes in murine model Ã¢ÂÂ histology and proteomics confirmed',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Mittag Lab â liquid-liquid phase separation (LLPS) biology',
-          'Richard Young Lab / Whitehead Institute â transcriptional condensates',
-          'Dewpoint Therapeutics â condensate-targeted drug discovery',
-          'Phase Genomics â condensate genomic organisation',
-          'Boija et al. Cell 2018 â condensates in transcription activation',
-          'Sabari et al. Science 2018 â coactivator condensates at super-enhancers'
+          'Mittag Lab Ã¢ÂÂ liquid-liquid phase separation (LLPS) biology',
+          'Richard Young Lab / Whitehead Institute Ã¢ÂÂ transcriptional condensates',
+          'Dewpoint Therapeutics Ã¢ÂÂ condensate-targeted drug discovery',
+          'Phase Genomics Ã¢ÂÂ condensate genomic organisation',
+          'Boija et al. Cell 2018 Ã¢ÂÂ condensates in transcription activation',
+          'Sabari et al. Science 2018 Ã¢ÂÂ coactivator condensates at super-enhancers'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -436,13 +435,13 @@ const OBSTACLES = [
         id: 'g-3.2',
         track: 'genetics',
         phase: 3,
-        phaseLabel: 'Phase 3 â Synthetic Biology Layer',
+        phaseLabel: 'Phase 3 Ã¢ÂÂ Synthetic Biology Layer',
         order: 8,
         name: '12-Hour Cryptographic Logic Gate Wiring',
         shortName: 'Cryptographic Logic Gates',
         isBoss: false,
         theoreticalTarget:
-          'Construct a synthetic genetic circuit that verifies cellular identity against an internal cryptographic checksum, executes a precisely timed (12-hour window) reprogramming/repair cascade, and autonomously terminates all activity with complete circuit self-degradation â leaving zero residual synthetic components in the cell.',
+          'Construct a synthetic genetic circuit that verifies cellular identity against an internal cryptographic checksum, executes a precisely timed (12-hour window) reprogramming/repair cascade, and autonomously terminates all activity with complete circuit self-degradation Ã¢ÂÂ leaving zero residual synthetic components in the cell.',
         milestones: [
           {
             id: 'g-3.2.1',
@@ -452,30 +451,30 @@ const OBSTACLES = [
           },
           {
             id: 'g-3.2.2',
-            name: 'Ribocomputing circuit (RNA-based logic gates) achieves 12-hour autonomous operational window with built-in degradation timer governed by RNA decay rates â validated in HEK293T and primary cells',
+            name: 'Ribocomputing circuit (RNA-based logic gates) achieves 12-hour autonomous operational window with built-in degradation timer governed by RNA decay rates Ã¢ÂÂ validated in HEK293T and primary cells',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.2.3',
-            name: 'Cryptographic identity verification layer (cell-type-specific promoter + epigenetic signature reader dCas9 construct) integrated â circuit activation blocked in >99% of off-target cell types',
+            name: 'Cryptographic identity verification layer (cell-type-specific promoter + epigenetic signature reader dCas9 construct) integrated Ã¢ÂÂ circuit activation blocked in >99% of off-target cell types',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.2.4',
-            name: 'Full circuit (verify â execute â self-degrade) demonstrated in ex vivo human primary cells â zero residual circuit component detectable by mass spectrometry and RNA-seq at 36 hours post-initiation',
+            name: 'Full circuit (verify Ã¢ÂÂ execute Ã¢ÂÂ self-degrade) demonstrated in ex vivo human primary cells Ã¢ÂÂ zero residual circuit component detectable by mass spectrometry and RNA-seq at 36 hours post-initiation',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Collins Lab MIT â genetic toggle switch and logic circuit design',
-          'Wyss Institute for Biologically Inspired Engineering â synthetic biology',
-          'Ribocomputing (Green et al. Nature 2017) â RNA-based logic gates',
-          'Synlogic Therapeutics â engineered living medicines with circuit control',
-          'Gardner, Cantor, Collins (Nature 2000) â bistable genetic toggle switch',
-          'GenoFAB â synthetic biology circuit design software platform'
+          'Collins Lab MIT Ã¢ÂÂ genetic toggle switch and logic circuit design',
+          'Wyss Institute for Biologically Inspired Engineering Ã¢ÂÂ synthetic biology',
+          'Ribocomputing (Green et al. Nature 2017) Ã¢ÂÂ RNA-based logic gates',
+          'Synlogic Therapeutics Ã¢ÂÂ engineered living medicines with circuit control',
+          'Gardner, Cantor, Collins (Nature 2000) Ã¢ÂÂ bistable genetic toggle switch',
+          'GenoFAB Ã¢ÂÂ synthetic biology circuit design software platform'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -484,7 +483,7 @@ const OBSTACLES = [
         id: 'g-3.3',
         track: 'genetics',
         phase: 3,
-        phaseLabel: 'Phase 3 â Synthetic Biology Layer',
+        phaseLabel: 'Phase 3 Ã¢ÂÂ Synthetic Biology Layer',
         order: 9,
         name: 'Protected Corruptible Identity Tag Binding',
         shortName: 'Identity Tag Binding',
@@ -494,47 +493,47 @@ const OBSTACLES = [
         milestones: [
           {
             id: 'g-3.3.1',
-            name: 'Synthetic CpG methylation pattern (designer methylome at non-coding locus) stably inherited through â¥20 cell divisions in human iPSC-derived cells without drift â bisulfite sequencing confirmed',
+            name: 'Synthetic CpG methylation pattern (designer methylome at non-coding locus) stably inherited through Ã¢ÂÂ¥20 cell divisions in human iPSC-derived cells without drift Ã¢ÂÂ bisulfite sequencing confirmed',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.3.2',
-            name: 'dCas9-based identity reader protein distinguishes authentic identity methylation signature from corrupted/erased pattern with >99% specificity â validated against 50+ perturbation conditions',
+            name: 'dCas9-based identity reader protein distinguishes authentic identity methylation signature from corrupted/erased pattern with >99% specificity Ã¢ÂÂ validated against 50+ perturbation conditions',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.3.3',
-            name: 'Identity tag demonstrated to survive partial OSK reprogramming event without erasure â methylation pattern maintained at >90% fidelity in daughter cells post-reprogramming',
+            name: 'Identity tag demonstrated to survive partial OSK reprogramming event without erasure Ã¢ÂÂ methylation pattern maintained at >90% fidelity in daughter cells post-reprogramming',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-3.3.4',
-            name: 'Autonomous error-correction loop (methylation writer + reader feedback) restores tag integrity after deliberate 30% partial corruption â recovery confirmed within 6 hours in cell culture',
+            name: 'Autonomous error-correction loop (methylation writer + reader feedback) restores tag integrity after deliberate 30% partial corruption Ã¢ÂÂ recovery confirmed within 6 hours in cell culture',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Ryan Lister Lab â whole-genome bisulfite sequencing, methylome mapping',
-          'Albert Keung Lab â synthetic epigenetic memory circuits',
-          'dCas9-DNMT3A â targeted CpG methylation writing (Vojta et al. 2016)',
-          'dCas9-TET1 â targeted demethylation (Liu et al. 2016)',
-          'IHEC Roadmap Epigenomics â reference methylome datasets',
-          'EpiBeat â epigenetic engineering tools'
+          'Ryan Lister Lab Ã¢ÂÂ whole-genome bisulfite sequencing, methylome mapping',
+          'Albert Keung Lab Ã¢ÂÂ synthetic epigenetic memory circuits',
+          'dCas9-DNMT3A Ã¢ÂÂ targeted CpG methylation writing (Vojta et al. 2016)',
+          'dCas9-TET1 Ã¢ÂÂ targeted demethylation (Liu et al. 2016)',
+          'IHEC Roadmap Epigenomics Ã¢ÂÂ reference methylome datasets',
+          'EpiBeat Ã¢ÂÂ epigenetic engineering tools'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // PHASE 4 â INTERCELLULAR COMMUNICATION LAYER
+      // PHASE 4 Ã¢ÂÂ INTERCELLULAR COMMUNICATION LAYER
       {
         id: 'g-4.1',
         track: 'genetics',
         phase: 4,
-        phaseLabel: 'Phase 4 â Intercellular Communication Layer',
+        phaseLabel: 'Phase 4 Ã¢ÂÂ Intercellular Communication Layer',
         order: 10,
         name: 'Intercellular Tunneling Nanotube Synthesis',
         shortName: 'Tunneling Nanotube Synthesis',
@@ -544,13 +543,13 @@ const OBSTACLES = [
         milestones: [
           {
             id: 'g-4.1.1',
-            name: 'Chemically-induced TNT formation between designated cell pairs in 2D culture achieved with >60% efficiency â M-Sec/RalA pathway stimulation or synthetic linker protein approach validated',
+            name: 'Chemically-induced TNT formation between designated cell pairs in 2D culture achieved with >60% efficiency Ã¢ÂÂ M-Sec/RalA pathway stimulation or synthetic linker protein approach validated',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.1.2',
-            name: 'Directed mitochondrial transfer through synthetic TNTs confirmed in aged/damaged cells â recipient cell shows metabolic recovery: â¥30% increase in ATP output and restored mitochondrial membrane potential',
+            name: 'Directed mitochondrial transfer through synthetic TNTs confirmed in aged/damaged cells Ã¢ÂÂ recipient cell shows metabolic recovery: Ã¢ÂÂ¥30% increase in ATP output and restored mitochondrial membrane potential',
             completed: false,
             evidence: ''
           },
@@ -562,18 +561,18 @@ const OBSTACLES = [
           },
           {
             id: 'g-4.1.4',
-            name: 'In vivo proof of synthetic TNT formation between injected donor cells and cardiac or neural target tissue in murine model â cargo delivery confirmed by live fluorescence imaging',
+            name: 'In vivo proof of synthetic TNT formation between injected donor cells and cardiac or neural target tissue in murine model Ã¢ÂÂ cargo delivery confirmed by live fluorescence imaging',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Islam et al. Nature 2012 â mitochondrial transfer restores aerobic respiration',
-          'M-Sec (TNFAIP2) â TNT inducer protein (Hase et al. J Cell Biol 2009)',
-          'Frankel Lab UCLA â TNT biogenesis mechanisms',
-          'MitoCeption â mitochondria transfer protocol (Caicedo et al. 2015)',
-          'Creative Medical Technology â clinical mitochondria transfer research',
-          'Connelly Lab â F-actin nanotube formation in immune synapses'
+          'Islam et al. Nature 2012 Ã¢ÂÂ mitochondrial transfer restores aerobic respiration',
+          'M-Sec (TNFAIP2) Ã¢ÂÂ TNT inducer protein (Hase et al. J Cell Biol 2009)',
+          'Frankel Lab UCLA Ã¢ÂÂ TNT biogenesis mechanisms',
+          'MitoCeption Ã¢ÂÂ mitochondria transfer protocol (Caicedo et al. 2015)',
+          'Creative Medical Technology Ã¢ÂÂ clinical mitochondria transfer research',
+          'Connelly Lab Ã¢ÂÂ F-actin nanotube formation in immune synapses'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -582,7 +581,7 @@ const OBSTACLES = [
         id: 'g-4.2',
         track: 'genetics',
         phase: 4,
-        phaseLabel: 'Phase 4 â Intercellular Communication Layer',
+        phaseLabel: 'Phase 4 Ã¢ÂÂ Intercellular Communication Layer',
         order: 11,
         name: 'Kinship Authentication & Direct P2P Re-Flashing',
         shortName: 'P2P Re-Flashing',
@@ -592,7 +591,7 @@ const OBSTACLES = [
         milestones: [
           {
             id: 'g-4.2.1',
-            name: 'Shielded heterochromatin-encoded master checksum locus established â demonstrably resistant to Tet1/DNMT perturbation and survives through â¥50 cell generations without drift >2%',
+            name: 'Shielded heterochromatin-encoded master checksum locus established Ã¢ÂÂ demonstrably resistant to Tet1/DNMT perturbation and survives through Ã¢ÂÂ¥50 cell generations without drift >2%',
             completed: false,
             evidence: ''
           },
@@ -604,20 +603,20 @@ const OBSTACLES = [
           },
           {
             id: 'g-4.2.3',
-            name: 'Near-field molecular communication channel (TNT + gap junction hybrid) transfers corrected epigenetic/mRNA payload from verified neighbour to corrupted receiver â functional restoration confirmed within 2-hour window',
+            name: 'Near-field molecular communication channel (TNT + gap junction hybrid) transfers corrected epigenetic/mRNA payload from verified neighbour to corrupted receiver Ã¢ÂÂ functional restoration confirmed within 2-hour window',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.2.4',
-            name: 'Identity leeway algorithm (tolerates Â±3% natural epigenetic drift before triggering repair) validated in 100-cell culture network â no false-positive repair cascades over 30-day experiment',
+            name: 'Identity leeway algorithm (tolerates ÃÂ±3% natural epigenetic drift before triggering repair) validated in 100-cell culture network Ã¢ÂÂ no false-positive repair cascades over 30-day experiment',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Gap junction connexin channels â endogenous near-field cell-cell communication',
-          'ADAR A-to-I editing sensors â RNA-based deviation detection',
+          'Gap junction connexin channels Ã¢ÂÂ endogenous near-field cell-cell communication',
+          'ADAR A-to-I editing sensors Ã¢ÂÂ RNA-based deviation detection',
           'ncRNA-based cellular state monitoring (Rinn Lab)',
           'Exosome-mediated mRNA transfer between cells (Valadi et al. Nature 2007)',
           'Synthetic lateral inhibition circuits (Elowitz Lab Caltech)',
@@ -630,7 +629,7 @@ const OBSTACLES = [
         id: 'g-4.3',
         track: 'genetics',
         phase: 4,
-        phaseLabel: 'Phase 4 â Intercellular Communication Layer',
+        phaseLabel: 'Phase 4 Ã¢ÂÂ Intercellular Communication Layer',
         order: 12,
         name: 'Homing Matrix Stem Cell Routing',
         shortName: 'Stem Cell Routing',
@@ -640,36 +639,36 @@ const OBSTACLES = [
         milestones: [
           {
             id: 'g-4.3.1',
-            name: 'CXCR4-overexpressing engineered MSCs demonstrate >70% homing efficiency to SDF-1-rich bone marrow niches in murine model vs. <30% for unmodified cells â bioluminescence imaging confirmed',
+            name: 'CXCR4-overexpressing engineered MSCs demonstrate >70% homing efficiency to SDF-1-rich bone marrow niches in murine model vs. <30% for unmodified cells Ã¢ÂÂ bioluminescence imaging confirmed',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.3.2',
-            name: 'Orthogonal chemokine receptor pair (non-native ligand/receptor not found in host) engineered into stem cells â achieves tissue-specific routing independent of endogenous SDF-1 gradients',
+            name: 'Orthogonal chemokine receptor pair (non-native ligand/receptor not found in host) engineered into stem cells Ã¢ÂÂ achieves tissue-specific routing independent of endogenous SDF-1 gradients',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.3.3',
-            name: 'Multiplexed routing system (2â3 receptor/ligand pairs) delivers distinct stem cell populations to different target niches simultaneously in single administration â zero cross-contamination between targets',
+            name: 'Multiplexed routing system (2Ã¢ÂÂ3 receptor/ligand pairs) delivers distinct stem cell populations to different target niches simultaneously in single administration Ã¢ÂÂ zero cross-contamination between targets',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.3.4',
-            name: 'Engineered stem cell engraftment confirmed at target sites by single-cell sequencing at 6-month follow-up â stable integration with <5% ectopic engraftment systemwide',
+            name: 'Engineered stem cell engraftment confirmed at target sites by single-cell sequencing at 6-month follow-up Ã¢ÂÂ stable integration with <5% ectopic engraftment systemwide',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'CXCR4/SDF-1 (CXCL12) axis â Lapidot Lab Weizmann Institute',
+          'CXCR4/SDF-1 (CXCL12) axis Ã¢ÂÂ Lapidot Lab Weizmann Institute',
           'AMD3100 (plerixafor) stem cell mobilisation research',
-          'Mesoblast â MSC homing therapy clinical programmes',
-          'ExCellThera â HSC expansion and homing enhancement',
-          'BioCardia â cardiac stem cell targeted delivery',
-          'Mandal et al. â CXCR4 overexpression in HSC transplantation'
+          'Mesoblast Ã¢ÂÂ MSC homing therapy clinical programmes',
+          'ExCellThera Ã¢ÂÂ HSC expansion and homing enhancement',
+          'BioCardia Ã¢ÂÂ cardiac stem cell targeted delivery',
+          'Mandal et al. Ã¢ÂÂ CXCR4 overexpression in HSC transplantation'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -679,63 +678,63 @@ const OBSTACLES = [
         id: 'g-4.4',
         track: 'genetics',
         phase: 4,
-        phaseLabel: 'Phase 4 â Intercellular Communication Layer',
+        phaseLabel: 'Phase 4 Ã¢ÂÂ Intercellular Communication Layer',
         order: 13,
         name: 'Somatic Identity Triage and External Intervention Loop',
         shortName: 'Somatic Identity Triage',
         isBoss: false,
         theoreticalTarget:
-          'Engineer a cell-autonomous fault-containment circuit in permanent somatic cells that activates upon simultaneous detection of: (1) corruption in â¥2 of 3 independently checksummed domains of the synthetic identity tag (G-3.3), and (2) transcriptomic state divergence exceeding the pre-specified correction threshold. Upon activation, the circuit executes three coordinated outputs in parallel: metabolic shutdown to <20% of baseline ATP production, localised fibrotic self-encapsulation to prevent molecular exchange with neighbouring cells, and continuous secretion of a bio-orthogonal vascular tracking peptide at â¥10 fmol/mL. This converts irreparably corrupted cells into inert, self-labelled units that halt somatic identity contamination and emit a persistent retrieval beacon for Track 02 nanorobotic systems â closing the Byzantine fault isolation loop before cascade propagation can occur.',
+          'Engineer a cell-autonomous fault-containment circuit in permanent somatic cells that activates upon simultaneous detection of: (1) corruption in Ã¢ÂÂ¥2 of 3 independently checksummed domains of the synthetic identity tag (G-3.3), and (2) transcriptomic state divergence exceeding the pre-specified correction threshold. Upon activation, the circuit executes three coordinated outputs in parallel: metabolic shutdown to <20% of baseline ATP production, localised fibrotic self-encapsulation to prevent molecular exchange with neighbouring cells, and continuous secretion of a bio-orthogonal vascular tracking peptide at Ã¢ÂÂ¥10 fmol/mL. This converts irreparably corrupted cells into inert, self-labelled units that halt somatic identity contamination and emit a persistent retrieval beacon for Track 02 nanorobotic systems Ã¢ÂÂ closing the Byzantine fault isolation loop before cascade propagation can occur.',
         milestones: [
           {
             id: 'g-4.4.1',
-            name: 'In vitro human 3D organoid validation: dual-corruption trigger activates metabolic shutdown (<20% baseline ATP by luminescence assay), fibrotic encapsulation (Sirius Red staining), and bio-orthogonal peptide secretion (â¥10 fmol/mL by LC-MS/MS) in â¥90% of triggered cells with <2% false-positive rate in uncorrupted neighbours',
+            name: 'In vitro human 3D organoid validation: dual-corruption trigger activates metabolic shutdown (<20% baseline ATP by luminescence assay), fibrotic encapsulation (Sirius Red staining), and bio-orthogonal peptide secretion (Ã¢ÂÂ¥10 fmol/mL by LC-MS/MS) in Ã¢ÂÂ¥90% of triggered cells with <2% false-positive rate in uncorrupted neighbours',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.4.2',
-            name: 'Murine in vivo model: engineered cells with dual-corruption trigger confirm triage activation within 24h, fibrotic capsule at â¥85% of sites, vascular peptide â¥10 fmol/mL by systemic assay; host biological age unchanged at 90-day follow-up (no SASP-mediated bystander aging)',
+            name: 'Murine in vivo model: engineered cells with dual-corruption trigger confirm triage activation within 24h, fibrotic capsule at Ã¢ÂÂ¥85% of sites, vascular peptide Ã¢ÂÂ¥10 fmol/mL by systemic assay; host biological age unchanged at 90-day follow-up (no SASP-mediated bystander aging)',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.4.3',
-            name: 'Large animal / NHP validation across â¥3 tissue compartments: independent triage activation in each, no cross-compartment corruption propagation, vascular peptide â¥10 fmol/mL by clinical-grade ELISA, host biological age within Â±5% of baseline at 180-day follow-up',
+            name: 'Large animal / NHP validation across Ã¢ÂÂ¥3 tissue compartments: independent triage activation in each, no cross-compartment corruption propagation, vascular peptide Ã¢ÂÂ¥10 fmol/mL by clinical-grade ELISA, host biological age within ÃÂ±5% of baseline at 180-day follow-up',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.4.4',
-            name: 'Human Phase I safety and biomarker detection trial (n â¥ 12): vascular peptide â¥10 fmol/mL in serum by LC-MS/MS within 72h; no grade â¥2 adverse events (CTCAE v5.0); CRP â¤1.5Ã ULN at 30 days; no fibrotic lesion expansion beyond 5mm by MRI',
+            name: 'Human Phase I safety and biomarker detection trial (n Ã¢ÂÂ¥ 12): vascular peptide Ã¢ÂÂ¥10 fmol/mL in serum by LC-MS/MS within 72h; no grade Ã¢ÂÂ¥2 adverse events (CTCAE v5.0); CRP Ã¢ÂÂ¤1.5ÃÂ ULN at 30 days; no fibrotic lesion expansion beyond 5mm by MRI',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Byzantine fault tolerance â Lamport, Shostak, Pease (1982)',
-          'Synthetic gene circuit design â Collins Lab MIT / iGEM',
-          'Sirius Red collagen staining â standard fibrosis quantification assay',
-          'Bio-orthogonal chemistry â Bertozzi Lab Stanford (bioorthogonal peptide labelling)',
-          'LC-MS/MS peptide quantification â clinical proteomics gold standard',
-          'CTCAE v5.0 â Common Terminology Criteria for Adverse Events (FDA/NCI)'
+          'Byzantine fault tolerance Ã¢ÂÂ Lamport, Shostak, Pease (1982)',
+          'Synthetic gene circuit design Ã¢ÂÂ Collins Lab MIT / iGEM',
+          'Sirius Red collagen staining Ã¢ÂÂ standard fibrosis quantification assay',
+          'Bio-orthogonal chemistry Ã¢ÂÂ Bertozzi Lab Stanford (bioorthogonal peptide labelling)',
+          'LC-MS/MS peptide quantification Ã¢ÂÂ clinical proteomics gold standard',
+          'CTCAE v5.0 Ã¢ÂÂ Common Terminology Criteria for Adverse Events (FDA/NCI)'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // PHASE 5 â SYSTEM-LEVEL INTEGRATION BOTTLENECK (SLIB)
+      // PHASE 5 Ã¢ÂÂ SYSTEM-LEVEL INTEGRATION BOTTLENECK (SLIB)
       {
         id: 'g-4.5',
         track: 'genetics',
         phase: 4,
-        phaseLabel: 'Phase 4 â Intercellular Communication Layer',
+        phaseLabel: 'Phase 4 Ã¢ÂÂ Intercellular Communication Layer',
         order: 14,
         name: 'Full Chromosomal Integration and Identity Verification',
         shortName: 'Full Chromosomal Integration',
         isBoss: false,
         theoreticalTarget:
-          'Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems â epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-4.4) â within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in â¥85% of sampled cells across â¥5 tissue types), measurable biological age reduction of â¥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.',
+          'Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems Ã¢ÂÂ epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-4.4) Ã¢ÂÂ within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in Ã¢ÂÂ¥85% of sampled cells across Ã¢ÂÂ¥5 tissue types), measurable biological age reduction of Ã¢ÂÂ¥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.',
         milestones: [
           {
             id: 'g-4.5.1',
@@ -745,13 +744,13 @@ const OBSTACLES = [
           },
           {
             id: 'g-4.5.2',
-            name: 'Systemic somatic identity verification: identity tag readable in â¥85% of sampled cells across â¥5 tissue types at 6-month timepoint',
+            name: 'Systemic somatic identity verification: identity tag readable in Ã¢ÂÂ¥85% of sampled cells across Ã¢ÂÂ¥5 tissue types at 6-month timepoint',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-4.5.3',
-            name: 'Measurable multi-system functional rejuvenation â biological age reduction â¥20% by two independent epigenetic clocks in same organism',
+            name: 'Measurable multi-system functional rejuvenation Ã¢ÂÂ biological age reduction Ã¢ÂÂ¥20% by two independent epigenetic clocks in same organism',
             completed: false,
             evidence: ''
           },
@@ -763,12 +762,12 @@ const OBSTACLES = [
           }
         ],
         anchors: [
-          'Horvath epigenetic clock â whole-organism aging biomarker',
-          'Multi-omics integration â Snyder Lab Stanford / TOF-SIMS proteomics',
-          'ANA (anti-nuclear antibody) panel â standard autoimmunity safety screen',
-          'Whole-genome sequencing for karyotype stability â Illumina / PacBio long-read',
-          'Biological age reduction in vivo â David Sinclair Lab OSK eye rejuvenation (Nature 2020)',
-          'AAVS1 safe harbour locus â Porteus Lab Stanford'
+          'Horvath epigenetic clock Ã¢ÂÂ whole-organism aging biomarker',
+          'Multi-omics integration Ã¢ÂÂ Snyder Lab Stanford / TOF-SIMS proteomics',
+          'ANA (anti-nuclear antibody) panel Ã¢ÂÂ standard autoimmunity safety screen',
+          'Whole-genome sequencing for karyotype stability Ã¢ÂÂ Illumina / PacBio long-read',
+          'Biological age reduction in vivo Ã¢ÂÂ David Sinclair Lab OSK eye rejuvenation (Nature 2020)',
+          'AAVS1 safe harbour locus Ã¢ÂÂ Porteus Lab Stanford'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -778,77 +777,77 @@ const OBSTACLES = [
         id: 'g-5.1',
         track: 'genetics',
         phase: 5,
-        phaseLabel: 'Phase 5 â System-Level Integration Bottleneck (SLIB)',
+        phaseLabel: 'Phase 5 Ã¢ÂÂ System-Level Integration Bottleneck (SLIB)',
         order: 15,
         name: 'Perpetual Human Somatic Rejuvenation',
         shortName: 'SLIB: Perpetual Rejuvenation',
         isBoss: true,
         theoreticalTarget:
-          'Demonstrate indefinite maintenance of biological age homeostasis (Horvath clock equivalent â¤30 years) in a living human subject running the full integrated Track 01 protocol â all 13 genetic subsystems active simultaneously â over a minimum 5-year observation period. Annual safety panels (full oncology screen, karyotype by whole-genome sequencing, ANA panel) must remain clear throughout. Peer-reviewed publication confirms sustained multi-organ biological age maintenance with zero cumulative oncogenic events and no immune dysregulation.',
+          'Demonstrate indefinite maintenance of biological age homeostasis (Horvath clock equivalent Ã¢ÂÂ¤30 years) in a living human subject running the full integrated Track 01 protocol Ã¢ÂÂ all 13 genetic subsystems active simultaneously Ã¢ÂÂ over a minimum 5-year observation period. Annual safety panels (full oncology screen, karyotype by whole-genome sequencing, ANA panel) must remain clear throughout. Peer-reviewed publication confirms sustained multi-organ biological age maintenance with zero cumulative oncogenic events and no immune dysregulation.',
         milestones: [
           {
             id: 'g-5.1.1',
-            name: 'Phase I/II human trial IND accepted for integrated Track 01 multi-subsystem protocol â all 13 genetic subsystems included in a single patient protocol',
+            name: 'Phase I/II human trial IND accepted for integrated Track 01 multi-subsystem protocol Ã¢ÂÂ all 13 genetic subsystems included in a single patient protocol',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-5.1.2',
-            name: '12-month human data: biological age reduction â¥15% confirmed by two independent epigenetic clocks (Horvath + GrimAge/DunedinPACE) in subject receiving integrated protocol â no oncogenic events, ANA negative',
+            name: '12-month human data: biological age reduction Ã¢ÂÂ¥15% confirmed by two independent epigenetic clocks (Horvath + GrimAge/DunedinPACE) in subject receiving integrated protocol Ã¢ÂÂ no oncogenic events, ANA negative',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-5.1.3',
-            name: '3-year follow-up: sustained biological age maintenance confirmed â identity tag readable in â¥85% sampled cells across â¥5 tissue types, karyotype stable by WGS, no oncogenic events across all annual safety panels',
+            name: '3-year follow-up: sustained biological age maintenance confirmed Ã¢ÂÂ identity tag readable in Ã¢ÂÂ¥85% sampled cells across Ã¢ÂÂ¥5 tissue types, karyotype stable by WGS, no oncogenic events across all annual safety panels',
             completed: false,
             evidence: ''
           },
           {
             id: 'g-5.1.4',
-            name: '5-year peer-reviewed publication confirms indefinite biological age maintenance in human subject â Horvath clock â¤30-year equivalent sustained throughout full observation period',
+            name: '5-year peer-reviewed publication confirms indefinite biological age maintenance in human subject Ã¢ÂÂ Horvath clock Ã¢ÂÂ¤30-year equivalent sustained throughout full observation period',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Altos Labs â systemic rejuvenation in humans',
-          'Calico Life Sciences â indefinite lifespan research',
-          'GrimAge / DunedinPACE clocks â sensitive longitudinal epigenetic aging biomarkers',
-          'Juvenescence / Human Longevity Inc. â clinical translation of longevity protocols',
+          'Altos Labs Ã¢ÂÂ systemic rejuvenation in humans',
+          'Calico Life Sciences Ã¢ÂÂ indefinite lifespan research',
+          'GrimAge / DunedinPACE clocks Ã¢ÂÂ sensitive longitudinal epigenetic aging biomarkers',
+          'Juvenescence / Human Longevity Inc. Ã¢ÂÂ clinical translation of longevity protocols',
           'FDA IND framework for complex combination biologics',
-          'David Sinclair Lab â multi-target anti-aging convergence'
+          'David Sinclair Lab Ã¢ÂÂ multi-target anti-aging convergence'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-      // TRACK 02 Â· NANOTECH
-      // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+      // Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+      // TRACK 02 ÃÂ· NANOTECH
+      // Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 
-      // PHASE 1 â PROPULSION & PROCESSING LAYER
+      // PHASE 1 Ã¢ÂÂ PROPULSION & PROCESSING LAYER
       {
         id: 'n-1.1',
         track: 'nanotech',
         phase: 1,
-        phaseLabel: 'Phase 1 â Propulsion & Processing Layer',
+        phaseLabel: 'Phase 1 Ã¢ÂÂ Propulsion & Processing Layer',
         order: 1,
         name: 'Remote Mechanical Micro-Propulsion',
         shortName: 'Micro-Propulsion',
         isBoss: false,
         theoreticalTarget:
-          'Demonstrate a sub-5-micron autonomous propulsion unit capable of navigating against physiological blood flow under remote guidance, achieving positional accuracy within 50 microns of a target site â powered entirely by external field energy harvesting with no onboard chemical fuel.',
+          'Demonstrate a sub-5-micron autonomous propulsion unit capable of navigating against physiological blood flow under remote guidance, achieving positional accuracy within 50 microns of a target site Ã¢ÂÂ powered entirely by external field energy harvesting with no onboard chemical fuel.',
         milestones: [
           {
             id: 'n-1.1.1',
-            name: 'Helical magneto-acoustic micro-swimmer (â¤3 Âµm) navigates in microfluidic channels simulating capillary flow at â¥0.5 cm/s against-flow velocity â independently replicated in â¥2 labs',
+            name: 'Helical magneto-acoustic micro-swimmer (Ã¢ÂÂ¤3 ÃÂµm) navigates in microfluidic channels simulating capillary flow at Ã¢ÂÂ¥0.5 cm/s against-flow velocity Ã¢ÂÂ independently replicated in Ã¢ÂÂ¥2 labs',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-1.1.2',
-            name: '3D in vitro vascular phantom navigation: unit reaches designated target site within Â±50 Âµm accuracy under rotating magnetic field guidance from 10 cm external source with real-time imaging feedback',
+            name: '3D in vitro vascular phantom navigation: unit reaches designated target site within ÃÂ±50 ÃÂµm accuracy under rotating magnetic field guidance from 10 cm external source with real-time imaging feedback',
             completed: false,
             evidence: ''
           },
@@ -860,18 +859,18 @@ const OBSTACLES = [
           },
           {
             id: 'n-1.1.4',
-            name: 'Acoustic + magnetic hybrid steering demonstrated for CNS penetration â units cross validated in vitro blood-brain barrier model (TEER >200 Î©Â·cmÂ²) without compromising barrier integrity',
+            name: 'Acoustic + magnetic hybrid steering demonstrated for CNS penetration Ã¢ÂÂ units cross validated in vitro blood-brain barrier model (TEER >200 ÃÂ©ÃÂ·cmÃÂ²) without compromising barrier integrity',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'ETH Zurich â Bradley Nelson group magnetically guided micro-robots',
-          'Max Planck Institute for Intelligent Systems â Metin Sitti group bio-inspired micro-robots',
-          'Martel Lab Polytechnique Montreal â magnetotactic bacteria-propelled nanorobots',
-          'Joseph Wang Lab UCSD â catalytic/acoustic nano-motors',
-          'Cardiobots â endovascular navigation research',
-          'Feringa Group â light-driven molecular motors (Nobel 2016)'
+          'ETH Zurich Ã¢ÂÂ Bradley Nelson group magnetically guided micro-robots',
+          'Max Planck Institute for Intelligent Systems Ã¢ÂÂ Metin Sitti group bio-inspired micro-robots',
+          'Martel Lab Polytechnique Montreal Ã¢ÂÂ magnetotactic bacteria-propelled nanorobots',
+          'Joseph Wang Lab UCSD Ã¢ÂÂ catalytic/acoustic nano-motors',
+          'Cardiobots Ã¢ÂÂ endovascular navigation research',
+          'Feringa Group Ã¢ÂÂ light-driven molecular motors (Nobel 2016)'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -880,46 +879,46 @@ const OBSTACLES = [
         id: 'n-1.2',
         track: 'nanotech',
         phase: 1,
-        phaseLabel: 'Phase 1 â Propulsion & Processing Layer',
+        phaseLabel: 'Phase 1 Ã¢ÂÂ Propulsion & Processing Layer',
         order: 2,
         name: 'Sub-10 Attojoule Reversible Neuromorphic Processing',
         shortName: 'Attojoule Neuromorphic Processing',
         isBoss: false,
         theoreticalTarget:
-          'Develop a molecular-scale computing unit performing onboard pattern recognition at â¤10 attojoules per logic operation using reversible computation principles â enabling operation on ambient thermal/biochemical energy without significant heat dissipation in surrounding tissue.',
+          'Develop a molecular-scale computing unit performing onboard pattern recognition at Ã¢ÂÂ¤10 attojoules per logic operation using reversible computation principles Ã¢ÂÂ enabling operation on ambient thermal/biochemical energy without significant heat dissipation in surrounding tissue.',
         milestones: [
           {
             id: 'n-1.2.1',
-            name: 'Adiabatic CMOS logic circuit (sub-100 nm) demonstrates â¤50 aJ per operation at physiological temperature with reversible gate architecture â thermodynamic efficiency >80% of Landauer limit',
+            name: 'Adiabatic CMOS logic circuit (sub-100 nm) demonstrates Ã¢ÂÂ¤50 aJ per operation at physiological temperature with reversible gate architecture Ã¢ÂÂ thermodynamic efficiency >80% of Landauer limit',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-1.2.2',
-            name: 'Molecular memristor array (MoSâ or organic polymer-based) achieves â¤10 aJ per state transition with >10â¶ switching endurance cycles â retention >10 years at 37Â°C projected',
+            name: 'Molecular memristor array (MoSÃ¢ÂÂ or organic polymer-based) achieves Ã¢ÂÂ¤10 aJ per state transition with >10Ã¢ÂÂ¶ switching endurance cycles Ã¢ÂÂ retention >10 years at 37ÃÂ°C projected',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-1.2.3',
-            name: 'Neuromorphic spike-based processing unit at â¤10 aJ/spike performs binary biomarker classification (target vs. non-target cell surface receptor pattern) with >95% accuracy in bench test',
+            name: 'Neuromorphic spike-based processing unit at Ã¢ÂÂ¤10 aJ/spike performs binary biomarker classification (target vs. non-target cell surface receptor pattern) with >95% accuracy in bench test',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-1.2.4',
-            name: 'Integrated nano-computing module (10 aJ processing + local molecular memory) validated in full biological simulation pipeline: detect â decide â signal â execute therapeutic action',
+            name: 'Integrated nano-computing module (10 aJ processing + local molecular memory) validated in full biological simulation pipeline: detect Ã¢ÂÂ decide Ã¢ÂÂ signal Ã¢ÂÂ execute therapeutic action',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'IBM Research â NorthPole neuromorphic chip (0.4 ÂµJ/inference)',
-          'Intel Loihi 2 â spike-based neural processing (1000Ã energy efficiency gain)',
-          'Landauer principle â kT ln 2 = 2.9 zJ minimum energy per irreversible bit operation at 37Â°C',
-          'HP Labs / UCSB â memristor crossbar array research',
-          'Tour Lab Rice University â molecular electronics single-molecule switches',
-          'Sandia National Laboratories â ultra-low power CMOS design'
+          'IBM Research Ã¢ÂÂ NorthPole neuromorphic chip (0.4 ÃÂµJ/inference)',
+          'Intel Loihi 2 Ã¢ÂÂ spike-based neural processing (1000ÃÂ energy efficiency gain)',
+          'Landauer principle Ã¢ÂÂ kT ln 2 = 2.9 zJ minimum energy per irreversible bit operation at 37ÃÂ°C',
+          'HP Labs / UCSB Ã¢ÂÂ memristor crossbar array research',
+          'Tour Lab Rice University Ã¢ÂÂ molecular electronics single-molecule switches',
+          'Sandia National Laboratories Ã¢ÂÂ ultra-low power CMOS design'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -928,96 +927,96 @@ const OBSTACLES = [
         id: 'n-1.3',
         track: 'nanotech',
         phase: 1,
-        phaseLabel: 'Phase 1 â Propulsion & Processing Layer',
+        phaseLabel: 'Phase 1 Ã¢ÂÂ Propulsion & Processing Layer',
         order: 3,
         name: 'Low-Frequency Acoustic Wave-Guiding Mesh',
         shortName: 'Acoustic Mesh Network',
         isBoss: false,
         theoreticalTarget:
-          'Establish an intra-body communication network using low-frequency acoustic waves (20â200 kHz) enabling bidirectional data transmission between distributed nanorobotic units at â¥1 kbps bandwidth through soft tissue, with â¤0.5Â°C tissue temperature rise and no cavitation effects.',
+          'Establish an intra-body communication network using low-frequency acoustic waves (20Ã¢ÂÂ200 kHz) enabling bidirectional data transmission between distributed nanorobotic units at Ã¢ÂÂ¥1 kbps bandwidth through soft tissue, with Ã¢ÂÂ¤0.5ÃÂ°C tissue temperature rise and no cavitation effects.',
         milestones: [
           {
             id: 'n-1.3.1',
-            name: 'In vitro tissue phantom (gelatin/agar) demonstrates acoustic signal propagation at 100 kHz with <3 dB loss per cm â no detectable cavitation (hydrophone + passive cavitation detector validated)',
+            name: 'In vitro tissue phantom (gelatin/agar) demonstrates acoustic signal propagation at 100 kHz with <3 dB loss per cm Ã¢ÂÂ no detectable cavitation (hydrophone + passive cavitation detector validated)',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-1.3.2',
-            name: 'Miniaturised piezoelectric transducer (â¤50 Âµm) transmits and receives 1 kbps data through 10 cm of simulated soft tissue with <1% bit error rate',
+            name: 'Miniaturised piezoelectric transducer (Ã¢ÂÂ¤50 ÃÂµm) transmits and receives 1 kbps data through 10 cm of simulated soft tissue with <1% bit error rate',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-1.3.3',
-            name: 'Mesh network of 100+ acoustic nodes self-organises and maintains synchronised communication â temperature elevation <0.2Â°C confirmed by MR thermometry in ex vivo tissue',
+            name: 'Mesh network of 100+ acoustic nodes self-organises and maintains synchronised communication Ã¢ÂÂ temperature elevation <0.2ÃÂ°C confirmed by MR thermometry in ex vivo tissue',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-1.3.4',
-            name: 'In vivo demonstration in small animal: external interrogator receives telemetry from internal acoustic nodes through skin/tissue barrier â signal integrity maintained through 48-hour implant period',
+            name: 'In vivo demonstration in small animal: external interrogator receives telemetry from internal acoustic nodes through skin/tissue barrier Ã¢ÂÂ signal integrity maintained through 48-hour implant period',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'DARPA N-Zero programme â near-zero power acoustic wake-up receivers',
-          'Bhave Lab Cornell â resonant micro-acoustic transducers (FBAR)',
-          'Ghovanloo Lab Georgia Tech â ultrasonic body area network',
-          'IEEE EMBC â acoustic intrabody communication research track',
-          'Verasonics â programmable ultrasound research systems',
-          'IntraSense â implantable acoustic body sensor platform'
+          'DARPA N-Zero programme Ã¢ÂÂ near-zero power acoustic wake-up receivers',
+          'Bhave Lab Cornell Ã¢ÂÂ resonant micro-acoustic transducers (FBAR)',
+          'Ghovanloo Lab Georgia Tech Ã¢ÂÂ ultrasonic body area network',
+          'IEEE EMBC Ã¢ÂÂ acoustic intrabody communication research track',
+          'Verasonics Ã¢ÂÂ programmable ultrasound research systems',
+          'IntraSense Ã¢ÂÂ implantable acoustic body sensor platform'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // PHASE 2 â ASSEMBLY LAYER
+      // PHASE 2 Ã¢ÂÂ ASSEMBLY LAYER
       {
         id: 'n-2.1',
         track: 'nanotech',
         phase: 2,
-        phaseLabel: 'Phase 2 â Assembly Layer',
+        phaseLabel: 'Phase 2 Ã¢ÂÂ Assembly Layer',
         order: 4,
         name: 'Scaffolded DNA Origami Assembly Molds',
         shortName: 'DNA Origami Molds',
         isBoss: false,
         theoreticalTarget:
-          'Fabricate a library of â¥50 distinct, dimensionally stable DNA origami scaffolds (2â100 nm scale) serving as precision positioning molds for assembling functional nanoelectronic, nanomechanical, and nanophotonic components â with structural fidelity maintained in physiological ionic conditions (150 mM NaCl, 37Â°C) for â¥72 hours.',
+          'Fabricate a library of Ã¢ÂÂ¥50 distinct, dimensionally stable DNA origami scaffolds (2Ã¢ÂÂ100 nm scale) serving as precision positioning molds for assembling functional nanoelectronic, nanomechanical, and nanophotonic components Ã¢ÂÂ with structural fidelity maintained in physiological ionic conditions (150 mM NaCl, 37ÃÂ°C) for Ã¢ÂÂ¥72 hours.',
         milestones: [
           {
             id: 'n-2.1.1',
-            name: '3D DNA origami cages (20â50 nm) achieve >90% correct folding yield in physiological buffer conditions â <5% structural collapse over 72 hours confirmed by cryo-EM at molecular resolution',
+            name: '3D DNA origami cages (20Ã¢ÂÂ50 nm) achieve >90% correct folding yield in physiological buffer conditions Ã¢ÂÂ <5% structural collapse over 72 hours confirmed by cryo-EM at molecular resolution',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.1.2',
-            name: 'DNA origami mold positions â¥2 distinct nanocomponents (gold nanoparticle + quantum dot) with <2 nm positional accuracy â STORM/PAINT super-resolution microscopy validated',
+            name: 'DNA origami mold positions Ã¢ÂÂ¥2 distinct nanocomponents (gold nanoparticle + quantum dot) with <2 nm positional accuracy Ã¢ÂÂ STORM/PAINT super-resolution microscopy validated',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.1.3',
-            name: 'Enzymatic ligation enables stable covalent bonding of DNA-nanocomponent assembly â assembled structure survives 1000Ã dilution and physiological shear forces (microfluidic stress test)',
+            name: 'Enzymatic ligation enables stable covalent bonding of DNA-nanocomponent assembly Ã¢ÂÂ assembled structure survives 1000ÃÂ dilution and physiological shear forces (microfluidic stress test)',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.1.4',
-            name: 'Automated DNA origami design pipeline (caDNAno / DAEDALUS / MagicDNA) produces functional mold designs in <48 hours from specification â validated library of 50 distinct molds completed',
+            name: 'Automated DNA origami design pipeline (caDNAno / DAEDALUS / MagicDNA) produces functional mold designs in <48 hours from specification Ã¢ÂÂ validated library of 50 distinct molds completed',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Paul Rothemund â scaffolded DNA origami (Nature 2006)',
-          'William Shih Lab Harvard â 3D wireframe and box origami',
-          'Hendrik Dietz Lab TU Munich â rigid multi-layer 3D origami',
-          'Wyss Institute â DNA nanotechnology programme',
-          'Shawn Douglas â caDNAno design software',
-          'Nanotemper Technologies â MST and DLS characterisation of DNA nanostructures'
+          'Paul Rothemund Ã¢ÂÂ scaffolded DNA origami (Nature 2006)',
+          'William Shih Lab Harvard Ã¢ÂÂ 3D wireframe and box origami',
+          'Hendrik Dietz Lab TU Munich Ã¢ÂÂ rigid multi-layer 3D origami',
+          'Wyss Institute Ã¢ÂÂ DNA nanotechnology programme',
+          'Shawn Douglas Ã¢ÂÂ caDNAno design software',
+          'Nanotemper Technologies Ã¢ÂÂ MST and DLS characterisation of DNA nanostructures'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -1026,46 +1025,46 @@ const OBSTACLES = [
         id: 'n-2.2',
         track: 'nanotech',
         phase: 2,
-        phaseLabel: 'Phase 2 â Assembly Layer',
+        phaseLabel: 'Phase 2 Ã¢ÂÂ Assembly Layer',
         order: 5,
         name: 'True Digital-to-Physical Molecular Assembly',
         shortName: 'Digital-to-Physical Assembly',
         isBoss: false,
         theoreticalTarget:
-          'Demonstrate digital-to-physical molecular assembly where a computational blueprint is translated into a functional molecular structure (â¥50 precisely positioned atoms) through controlled mechanosynthesis or programmable matter â without requiring manual SPM operation per bond.',
+          'Demonstrate digital-to-physical molecular assembly where a computational blueprint is translated into a functional molecular structure (Ã¢ÂÂ¥50 precisely positioned atoms) through controlled mechanosynthesis or programmable matter Ã¢ÂÂ without requiring manual SPM operation per bond.',
         milestones: [
           {
             id: 'n-2.2.1',
-            name: 'STM automation achieves â¥10 atomic placements per minute with <0.1 Ã positioning error under closed-loop control â demonstrated for â¥3 distinct atomic species on a clean surface',
+            name: 'STM automation achieves Ã¢ÂÂ¥10 atomic placements per minute with <0.1 ÃÂ positioning error under closed-loop control Ã¢ÂÂ demonstrated for Ã¢ÂÂ¥3 distinct atomic species on a clean surface',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.2.2',
-            name: 'ML-guided AFM-based mechanosynthesis places â¥5 distinct atom types in pre-specified 2D pattern (20+ atoms total) using machine-learning tip control â no manual intervention per bond',
+            name: 'ML-guided AFM-based mechanosynthesis places Ã¢ÂÂ¥5 distinct atom types in pre-specified 2D pattern (20+ atoms total) using machine-learning tip control Ã¢ÂÂ no manual intervention per bond',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.2.3',
-            name: 'Molecular assembler prototype (DNA-enzyme hybrid ribozyme) catalyses sequential covalent bond formation according to digital sequence input in aqueous environment â 10+ bond cascade demonstrated',
+            name: 'Molecular assembler prototype (DNA-enzyme hybrid ribozyme) catalyses sequential covalent bond formation according to digital sequence input in aqueous environment Ã¢ÂÂ 10+ bond cascade demonstrated',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.2.4',
-            name: 'End-to-end pipeline: computational design â automated synthesis â functional validation completed for a simple molecular machine (rotary motor or molecular switch) with <24h cycle time',
+            name: 'End-to-end pipeline: computational design Ã¢ÂÂ automated synthesis Ã¢ÂÂ functional validation completed for a simple molecular machine (rotary motor or molecular switch) with <24h cycle time',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Don Eigler IBM Almaden â first atomic manipulation (Fe on Cu, 1990)',
-          'K. Eric Drexler â Nanosystems mechanosynthesis theory (1992)',
-          'Zyvex Technologies â molecular assembly platform commercialisation',
-          'Philip Moriarty Lab Nottingham â STM/AFM automation and ML control',
-          'Robert Freitas â Nanomedicine Vol. I & II (mechanosynthesis design)',
-          'NIST Center for Nanoscale Science and Technology â atomic fabrication'
+          'Don Eigler IBM Almaden Ã¢ÂÂ first atomic manipulation (Fe on Cu, 1990)',
+          'K. Eric Drexler Ã¢ÂÂ Nanosystems mechanosynthesis theory (1992)',
+          'Zyvex Technologies Ã¢ÂÂ molecular assembly platform commercialisation',
+          'Philip Moriarty Lab Nottingham Ã¢ÂÂ STM/AFM automation and ML control',
+          'Robert Freitas Ã¢ÂÂ Nanomedicine Vol. I & II (mechanosynthesis design)',
+          'NIST Center for Nanoscale Science and Technology Ã¢ÂÂ atomic fabrication'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -1074,63 +1073,63 @@ const OBSTACLES = [
         id: 'n-2.3',
         track: 'nanotech',
         phase: 2,
-        phaseLabel: 'Phase 2 â Assembly Layer',
+        phaseLabel: 'Phase 2 Ã¢ÂÂ Assembly Layer',
         order: 6,
         name: 'Microscopic Radiation-Hardened Vault Hulls',
         shortName: 'Radiation-Hardened Hulls',
         isBoss: false,
         theoreticalTarget:
-          'Engineer sub-10-micron structural enclosures for nanoelectronic components that maintain functional integrity after: (a) 10 Gy ionising radiation, (b) 1,000+ thermal cycles between 20â42Â°C, and (c) 10,000 hours of continuous operation in physiological fluid â using diamondoid, CNT, or fullerene-based composite architectures.',
+          'Engineer sub-10-micron structural enclosures for nanoelectronic components that maintain functional integrity after: (a) 10 Gy ionising radiation, (b) 1,000+ thermal cycles between 20Ã¢ÂÂ42ÃÂ°C, and (c) 10,000 hours of continuous operation in physiological fluid Ã¢ÂÂ using diamondoid, CNT, or fullerene-based composite architectures.',
         milestones: [
           {
             id: 'n-2.3.1',
-            name: 'Carbon nanotube composite hull (â¤5 Âµm diameter) withstands 10 Gy gamma irradiation with <5% structural degradation â enclosed component function maintained (AFM quantified pre/post irradiation)',
+            name: 'Carbon nanotube composite hull (Ã¢ÂÂ¤5 ÃÂµm diameter) withstands 10 Gy gamma irradiation with <5% structural degradation Ã¢ÂÂ enclosed component function maintained (AFM quantified pre/post irradiation)',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.3.2',
-            name: 'CVD-deposited diamondoid coating on sub-10-Âµm substrate demonstrates hardness â¥50 GPa and <1 nm water/ion penetration over 30-day physiological fluid immersion (SIMS depth profiling)',
+            name: 'CVD-deposited diamondoid coating on sub-10-ÃÂµm substrate demonstrates hardness Ã¢ÂÂ¥50 GPa and <1 nm water/ion penetration over 30-day physiological fluid immersion (SIMS depth profiling)',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.3.3',
-            name: 'Fullerene (C60/C70) reinforced polymer composite hull survives 1,000 thermal cycles (20â42Â°C) without delamination â enclosed nanoelectronics remain functional by I-V characterisation',
+            name: 'Fullerene (C60/C70) reinforced polymer composite hull survives 1,000 thermal cycles (20Ã¢ÂÂ42ÃÂ°C) without delamination Ã¢ÂÂ enclosed nanoelectronics remain functional by I-V characterisation',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-2.3.4',
-            name: 'Complete vault (â¤8 Âµm OD) protects functional molecular computing element through simulated 10-year operational lifetime under accelerated aging protocol (Arrhenius model, 85Â°C/85% RH)',
+            name: 'Complete vault (Ã¢ÂÂ¤8 ÃÂµm OD) protects functional molecular computing element through simulated 10-year operational lifetime under accelerated aging protocol (Arrhenius model, 85ÃÂ°C/85% RH)',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Adamant Namiki â CVD diamondoid deposition on micro-substrates',
-          'Robert Freitas â diamondoid mechanosynthesis hull designs (Nanomedicine)',
-          'Nanocomp Technologies â CNT structural composite sheets',
-          'NASA JPL â C60 fullerene radiation hardness characterisation',
-          'Graphene Flagship (EU) â graphene radiation shielding for space and medical',
-          'Lawrence Berkeley National Lab â radiation effects on nanostructured materials'
+          'Adamant Namiki Ã¢ÂÂ CVD diamondoid deposition on micro-substrates',
+          'Robert Freitas Ã¢ÂÂ diamondoid mechanosynthesis hull designs (Nanomedicine)',
+          'Nanocomp Technologies Ã¢ÂÂ CNT structural composite sheets',
+          'NASA JPL Ã¢ÂÂ C60 fullerene radiation hardness characterisation',
+          'Graphene Flagship (EU) Ã¢ÂÂ graphene radiation shielding for space and medical',
+          'Lawrence Berkeley National Lab Ã¢ÂÂ radiation effects on nanostructured materials'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // PHASE 3 â TISSUE INTERFACE LAYER
+      // PHASE 3 Ã¢ÂÂ TISSUE INTERFACE LAYER
       {
         id: 'n-3.1',
         track: 'nanotech',
         phase: 3,
-        phaseLabel: 'Phase 3 â Tissue Interface Layer',
+        phaseLabel: 'Phase 3 Ã¢ÂÂ Tissue Interface Layer',
         order: 7,
         name: 'Selective Enzyme Scar-Tissue Debridement',
         shortName: 'Scar Tissue Debridement',
         isBoss: false,
         theoreticalTarget:
-          'Deploy targeted enzymatic nanocarriers that selectively degrade pathological fibrotic ECM (excess collagen I/III, fibronectin, TGF-Î²-driven crosslinks) with â¥80% specificity for fibrotic vs. healthy ECM, without disrupting structural collagen in load-bearing tissues or triggering uncontrolled MMP cascades.',
+          'Deploy targeted enzymatic nanocarriers that selectively degrade pathological fibrotic ECM (excess collagen I/III, fibronectin, TGF-ÃÂ²-driven crosslinks) with Ã¢ÂÂ¥80% specificity for fibrotic vs. healthy ECM, without disrupting structural collagen in load-bearing tissues or triggering uncontrolled MMP cascades.',
         milestones: [
           {
             id: 'n-3.1.1',
@@ -1140,30 +1139,30 @@ const OBSTACLES = [
           },
           {
             id: 'n-3.1.2',
-            name: 'Injectable collagenase nanoparticle reduces hepatic fibrosis score by â¥50% in CCl4-induced mouse fibrosis model â no elevation of systemic MMP activity markers in serum',
+            name: 'Injectable collagenase nanoparticle reduces hepatic fibrosis score by Ã¢ÂÂ¥50% in CCl4-induced mouse fibrosis model Ã¢ÂÂ no elevation of systemic MMP activity markers in serum',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-3.1.3',
-            name: 'Ultrasound-triggered MMP release system achieves spatially-confined debridement (Â±500 Âµm target radius) in ex vivo porcine cardiac scar tissue model â confirmed by histology',
+            name: 'Ultrasound-triggered MMP release system achieves spatially-confined debridement (ÃÂ±500 ÃÂµm target radius) in ex vivo porcine cardiac scar tissue model Ã¢ÂÂ confirmed by histology',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-3.1.4',
-            name: 'Safety confirmed: proteomics panel (>200 ECM proteins) shows no degradation of basement membrane or healthy parenchymal ECM at 2Ã therapeutic dose in NHP model',
+            name: 'Safety confirmed: proteomics panel (>200 ECM proteins) shows no degradation of basement membrane or healthy parenchymal ECM at 2ÃÂ therapeutic dose in NHP model',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Christopher Overall Lab UBC â MMP biology and substrate specificity',
-          'Fibrocor Therapeutics â targeted anti-fibrotic drug development',
-          'Galecto Biotech â galectin-3 inhibitors for fibrosis',
-          'Fibrogen â FG-3019 anti-fibrotic antibody (CTGF inhibitor)',
-          'NanoMedics â MMP-responsive nanoparticle platforms',
-          'Michael Bhattacharya Lab â nanofiber ECM drug delivery'
+          'Christopher Overall Lab UBC Ã¢ÂÂ MMP biology and substrate specificity',
+          'Fibrocor Therapeutics Ã¢ÂÂ targeted anti-fibrotic drug development',
+          'Galecto Biotech Ã¢ÂÂ galectin-3 inhibitors for fibrosis',
+          'Fibrogen Ã¢ÂÂ FG-3019 anti-fibrotic antibody (CTGF inhibitor)',
+          'NanoMedics Ã¢ÂÂ MMP-responsive nanoparticle platforms',
+          'Michael Bhattacharya Lab Ã¢ÂÂ nanofiber ECM drug delivery'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -1172,17 +1171,17 @@ const OBSTACLES = [
         id: 'n-3.2',
         track: 'nanotech',
         phase: 3,
-        phaseLabel: 'Phase 3 â Tissue Interface Layer',
+        phaseLabel: 'Phase 3 Ã¢ÂÂ Tissue Interface Layer',
         order: 8,
         name: 'Molecular Extracellular Floor Laying',
         shortName: 'ECM Floor Laying',
         isBoss: false,
         theoreticalTarget:
-          'Execute programmable de novo synthesis and spatial deposition of a complete, biomimetic ECM scaffold in a defined tissue volume (â¥1 cmÂ³) using nanorobotic units â replicating native tissue collagen fibre orientation, proteoglycan distribution, and integrin-binding motif density to within 15% of native composition.',
+          'Execute programmable de novo synthesis and spatial deposition of a complete, biomimetic ECM scaffold in a defined tissue volume (Ã¢ÂÂ¥1 cmÃÂ³) using nanorobotic units Ã¢ÂÂ replicating native tissue collagen fibre orientation, proteoglycan distribution, and integrin-binding motif density to within 15% of native composition.',
         milestones: [
           {
             id: 'n-3.2.1',
-            name: 'Nanorobot-dispensed recombinant collagen + fibronectin mixture self-assembles into aligned fibrils matching native tissue orientation (Â±20Â°) in defined 3D volume under magneto-acoustic guidance',
+            name: 'Nanorobot-dispensed recombinant collagen + fibronectin mixture self-assembles into aligned fibrils matching native tissue orientation (ÃÂ±20ÃÂ°) in defined 3D volume under magneto-acoustic guidance',
             completed: false,
             evidence: ''
           },
@@ -1194,24 +1193,24 @@ const OBSTACLES = [
           },
           {
             id: 'n-3.2.3',
-            name: 'Proteoglycan (heparan sulphate, hyaluronic acid) layer deposited in correct zonal gradients â growth factor sequestration capacity matches native tissue within 20% (ELISA quantified)',
+            name: 'Proteoglycan (heparan sulphate, hyaluronic acid) layer deposited in correct zonal gradients Ã¢ÂÂ growth factor sequestration capacity matches native tissue within 20% (ELISA quantified)',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-3.2.4',
-            name: 'Full synthetic ECM construct in 1 cmÂ³ volume supports viable, organised tissue formation (H&E histology confirmed) after 4-week cell culture â recapitulates native tissue architecture',
+            name: 'Full synthetic ECM construct in 1 cmÃÂ³ volume supports viable, organised tissue formation (H&E histology confirmed) after 4-week cell culture Ã¢ÂÂ recapitulates native tissue architecture',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Organovo â bioprinted liver tissue for drug testing (first commercial bioprinted tissue)',
-          'Aspect Biosystems â microfluidic bioprinting for complex tissue',
-          'Wake Forest Institute for Regenerative Medicine â Anthony Atala bioprinting',
-          'Integra LifeSciences â clinical ECM scaffolds (wound healing)',
-          'Spiber Inc â recombinant spider silk structural proteins for scaffolding',
-          'MatTek Corporation â EpiDerm 3D human tissue models'
+          'Organovo Ã¢ÂÂ bioprinted liver tissue for drug testing (first commercial bioprinted tissue)',
+          'Aspect Biosystems Ã¢ÂÂ microfluidic bioprinting for complex tissue',
+          'Wake Forest Institute for Regenerative Medicine Ã¢ÂÂ Anthony Atala bioprinting',
+          'Integra LifeSciences Ã¢ÂÂ clinical ECM scaffolds (wound healing)',
+          'Spiber Inc Ã¢ÂÂ recombinant spider silk structural proteins for scaffolding',
+          'MatTek Corporation Ã¢ÂÂ EpiDerm 3D human tissue models'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -1220,96 +1219,96 @@ const OBSTACLES = [
         id: 'n-3.3',
         track: 'nanotech',
         phase: 3,
-        phaseLabel: 'Phase 3 â Tissue Interface Layer',
+        phaseLabel: 'Phase 3 Ã¢ÂÂ Tissue Interface Layer',
         order: 9,
         name: 'Near-Field Direct Code Flashing',
         shortName: 'Nano P2P Code Flashing',
         isBoss: false,
         theoreticalTarget:
-          'Implement a nanorobotic peer-to-peer data recovery network where corrupted units receive a complete overwrite of their operational molecular logic stack from a cryptographically verified neighbouring unit â with identity authentication preventing injection of malicious code from compromised peers.',
+          'Implement a nanorobotic peer-to-peer data recovery network where corrupted units receive a complete overwrite of their operational molecular logic stack from a cryptographically verified neighbouring unit Ã¢ÂÂ with identity authentication preventing injection of malicious code from compromised peers.',
         milestones: [
           {
             id: 'n-3.3.1',
-            name: 'Near-field molecular communication channel (synthetic gap junction + DNA strand displacement relay) transfers â¥1 kilobit of molecular information between adjacent unit pair in <5 minutes with <0.1% error rate',
+            name: 'Near-field molecular communication channel (synthetic gap junction + DNA strand displacement relay) transfers Ã¢ÂÂ¥1 kilobit of molecular information between adjacent unit pair in <5 minutes with <0.1% error rate',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-3.3.2',
-            name: 'Cryptographic verification protocol (molecular hash based on unique unit identity tag â DNA barcode + toehold switch) prevents code acceptance from units with mismatched identity â 3 verification rounds demonstrated',
+            name: 'Cryptographic verification protocol (molecular hash based on unique unit identity tag Ã¢ÂÂ DNA barcode + toehold switch) prevents code acceptance from units with mismatched identity Ã¢ÂÂ 3 verification rounds demonstrated',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-3.3.3',
-            name: 'Corrupted unit successfully receives and overwrites damaged operational RNA program from verified neighbour â restored unit passes functional validation test within 30 minutes of re-flashing',
+            name: 'Corrupted unit successfully receives and overwrites damaged operational RNA program from verified neighbour Ã¢ÂÂ restored unit passes functional validation test within 30 minutes of re-flashing',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-3.3.4',
-            name: 'Network-level resilience: 20% of units deliberately corrupted in simulated 100-unit swarm â self-healing protocol restores full swarm function within 2 hours without external intervention',
+            name: 'Network-level resilience: 20% of units deliberately corrupted in simulated 100-unit swarm Ã¢ÂÂ self-healing protocol restores full swarm function within 2 hours without external intervention',
             completed: false,
             evidence: ''
                  }
         ],
         anchors: [
-          'Winfree Lab Caltech â DNA strand displacement cascades for molecular computation',
-          'Lucks Lab Northwestern â RNA-based toehold switches and logic (Pardee et al. Cell 2016)',
-          'Molecular beacons â Tyagi & Kramer (Nature Biotechnology 1996)',
-          'Qian Lab Caltech â DNA computing with error correction',
-          'Molecular Communication textbook â Nakano, Eckford, Haraguchi',
-          'NTT Research â molecular communication theory and experiment'
+          'Winfree Lab Caltech Ã¢ÂÂ DNA strand displacement cascades for molecular computation',
+          'Lucks Lab Northwestern Ã¢ÂÂ RNA-based toehold switches and logic (Pardee et al. Cell 2016)',
+          'Molecular beacons Ã¢ÂÂ Tyagi & Kramer (Nature Biotechnology 1996)',
+          'Qian Lab Caltech Ã¢ÂÂ DNA computing with error correction',
+          'Molecular Communication textbook Ã¢ÂÂ Nakano, Eckford, Haraguchi',
+          'NTT Research Ã¢ÂÂ molecular communication theory and experiment'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
       },
 
-      // PHASE 4 â SYSTEM-LEVEL INTEGRATION BOTTLENECK (SLIB)
+      // PHASE 4 Ã¢ÂÂ SYSTEM-LEVEL INTEGRATION BOTTLENECK (SLIB)
       {
         id: 'n-4.1',
         track: 'nanotech',
         phase: 4,
-        phaseLabel: 'Phase 4 â System-Level Integration Bottleneck (SLIB)',
+        phaseLabel: 'Phase 4 Ã¢ÂÂ System-Level Integration Bottleneck (SLIB)',
         order: 10,
         name: 'Mass Swarm Cohesion and Systemic Integration',
         shortName: 'SLIB: Swarm Integration',
         isBoss: true,
         theoreticalTarget:
-          'Coordinate â¥10â¹ independent nanorobotic units simultaneously within a single living subject â maintaining therapeutic task execution while preventing: (a) vascular occlusion (<5% hematocrit displacement in any capillary bed simultaneously), (b) immune hyper-response (no cytokine storm or complement cascade), (c) localised thermal toxicity (<0.5Â°C elevation per mmÂ³), and (d) unit collision cascades.',
+          'Coordinate Ã¢ÂÂ¥10Ã¢ÂÂ¹ independent nanorobotic units simultaneously within a single living subject Ã¢ÂÂ maintaining therapeutic task execution while preventing: (a) vascular occlusion (<5% hematocrit displacement in any capillary bed simultaneously), (b) immune hyper-response (no cytokine storm or complement cascade), (c) localised thermal toxicity (<0.5ÃÂ°C elevation per mmÃÂ³), and (d) unit collision cascades.',
         milestones: [
           {
             id: 'n-4.1.1',
-            name: 'Distributed consensus algorithm (decentralised, no coordinator) demonstrated for 1,000+ simulated unit swarm â collective therapeutic goal achieved with <1% unit collision rate and <5% hematocrit displacement modelled',
+            name: 'Distributed consensus algorithm (decentralised, no coordinator) demonstrated for 1,000+ simulated unit swarm Ã¢ÂÂ collective therapeutic goal achieved with <1% unit collision rate and <5% hematocrit displacement modelled',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-4.1.2',
-            name: 'Biocompatibility: 10â¸ units/kg dose in NHP demonstrates no systemic immune activation (IL-6, TNF-Î±, complement C3a within 2Ã baseline at 24h and 72h) â no vascular occlusion by Doppler ultrasound',
+            name: 'Biocompatibility: 10Ã¢ÂÂ¸ units/kg dose in NHP demonstrates no systemic immune activation (IL-6, TNF-ÃÂ±, complement C3a within 2ÃÂ baseline at 24h and 72h) Ã¢ÂÂ no vascular occlusion by Doppler ultrasound',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-4.1.3',
-            name: 'Thermal mapping during simulated therapeutic operation: FEM modelling + ex vivo validation confirms no hotspot exceeds +0.5Â°C in any 1 mmÂ³ tissue volume at full swarm operational density',
+            name: 'Thermal mapping during simulated therapeutic operation: FEM modelling + ex vivo validation confirms no hotspot exceeds +0.5ÃÂ°C in any 1 mmÃÂ³ tissue volume at full swarm operational density',
             completed: false,
             evidence: ''
           },
           {
             id: 'n-4.1.4',
-            name: 'Full deployment + coordinated therapeutic task + safe retrieval/biodegradation cycle completed in NHP â all units accounted for by acoustic tracking; zero long-term retention at 90-day necropsy',
+            name: 'Full deployment + coordinated therapeutic task + safe retrieval/biodegradation cycle completed in NHP Ã¢ÂÂ all units accounted for by acoustic tracking; zero long-term retention at 90-day necropsy',
             completed: false,
             evidence: ''
           }
         ],
         anchors: [
-          'Kevin O\'Keeffe MIT â swarmalator collective motion model',
-          'DARPA OFFSET â Offensive Swarm-Enabled Tactics programme',
-          'Wyss Institute for Biologically Inspired Engineering â microrobotics swarm research',
-          'Kilobot â Nagpal Lab Harvard (1000-robot swarm coordination)',
-          'Michael Rubenstein â self-organising swarm robotics',
-          'Hod Lipson Lab Columbia â self-replicating and self-healing robot swarms'
+          'Kevin O\'Keeffe MIT Ã¢ÂÂ swarmalator collective motion model',
+          'DARPA OFFSET Ã¢ÂÂ Offensive Swarm-Enabled Tactics programme',
+          'Wyss Institute for Biologically Inspired Engineering Ã¢ÂÂ microrobotics swarm research',
+          'Kilobot Ã¢ÂÂ Nagpal Lab Harvard (1000-robot swarm coordination)',
+          'Michael Rubenstein Ã¢ÂÂ self-organising swarm robotics',
+          'Hod Lipson Lab Columbia Ã¢ÂÂ self-replicating and self-healing robot swarms'
         ],
         status: 'active',
         lastUpdated: new Date().toISOString()
@@ -1320,7 +1319,7 @@ auth.onAuthStateChanged(function(user) {
   if (user) {
     document.getElementById('auth-section').style.display = 'none';
     document.getElementById('seed-section').style.display = 'block';
-    document.getElementById('user-badge').textContent = 'â Signed in as ' + user.email;
+    document.getElementById('user-badge').textContent = 'Ã¢ÂÂ Signed in as ' + user.email;
   } else {
     document.getElementById('auth-section').style.display = 'block';
     document.getElementById('seed-section').style.display = 'none';
@@ -1331,7 +1330,7 @@ function doSignIn() {
   var email = document.getElementById('email').value.trim();
   var pass  = document.getElementById('password').value;
   var statusEl = document.getElementById('status');
-  statusEl.innerHTML = '<span class="info">Signing inâ¦</span>';
+  statusEl.innerHTML = '<span class="info">Signing inÃ¢ÂÂ¦</span>';
   auth.signInWithEmailAndPassword(email, pass)
     .then(function() { statusEl.innerHTML = ''; })
     .catch(function(e) { statusEl.innerHTML = '<span class="err">Error: ' + e.message + '</span>'; });
@@ -1348,7 +1347,7 @@ async function seedFirestore() {
   const progFill = document.getElementById('prog-fill');
   btn.disabled = true;
   progBar.style.display = 'block';
-  statusEl.innerHTML = '<span class=\'info\'>Reading existing dataâ¦</span>';
+  statusEl.innerHTML = '<span class=\'info\'>Reading existing dataÃ¢ÂÂ¦</span>';
 
   try {
     // Read all existing docs first so we can preserve progress
@@ -1375,12 +1374,12 @@ async function seedFirestore() {
       progFill.style.width = Math.round((i + 1) / OBSTACLES.length * 100) + '%';
     });
 
-    statusEl.innerHTML = '<span class=\'info\'>Writingâ¦</span>';
+    statusEl.innerHTML = '<span class=\'info\'>WritingÃ¢ÂÂ¦</span>';
     await batch.commit();
     progFill.style.width = '100%';
     statusEl.innerHTML =
       '<span class=\'ok\'>&#10003; ' + OBSTACLES.length +
-      ' obstacles written â progress preserved!</span>';
+      ' obstacles written Ã¢ÂÂ progress preserved!</span>';
   } catch (e) {
     statusEl.innerHTML = '<span class=\'err\'>&#10007; ' + e.message + '</span>';
   } finally {
