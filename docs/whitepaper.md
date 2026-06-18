@@ -22,7 +22,7 @@ repository: "https://github.com/immortalityindex/immortality-index"
 
 ## Abstract
 
-We present the Immortality Index, a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure — specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The Immortality Index provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce G-5.2 — Somatic Identity Triage and External Intervention Loop — as the cross-track integration node in the SLIB, operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localized fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
+We present the Immortality Index, a formal, open-source binary milestone registry that decomposes the biological aging problem into a structured dependency graph of 24 falsifiable research obstacles across two primary engineering tracks. We argue that aging is most usefully modeled not as a continuous biological deterioration but as an accumulated systems-engineering failure — specifically, a progressive loss of somatic identity fidelity caused by epigenetic drift, genomic error accumulation, and the absence of a decentralized error-correction mechanism capable of detecting and triaging corrupt somatic cells before Byzantine fault propagation cascades across the organism. The Immortality Index provides a quantitative, threshold-anchored benchmarking framework in which milestone completion is determined autonomously by large-language-model (LLM) literature scanning against peer-reviewed primary sources, updated every six hours. No human curator adjusts thresholds post-hoc. The framework is designed to serve as a neutral, falsifiable instrument for academic citation, collaborative extension, and integration into longevity research programmes. We describe the system architecture, the AI scanning methodology, the inclusion and exclusion criteria for milestone confirmation, and the rationale for each engineering track. We introduce G-5.1 — Somatic Identity Triage and External Intervention Loop — as the fault-containment gate that closes the loop between Track 01 identity detection and Track 02 nanorobotic retrieval, operationalising a 2-of-3 spatial quorum logic gate that triggers metabolic shutdown, localised fibrotic encapsulation, and vascular peptide secretion upon dual corruption detection, enabling external nanorobotic or clinical retrieval before lineage-infidelity propagation can occur.
 
 ---
 
@@ -75,7 +75,7 @@ Obstacles G-3.1 through G-3.3 address the active maintenance infrastructure: eng
 **Phase 4 — Intercellular Communication Layer**
 Obstacles G-4.1 through G-4.3 address the network layer: tunneling nanotube synthesis for directed molecular cargo transfer, the Decentralized Intercellular Transcriptomic Error-Correction Network (paracrine-mediated correction signalling between cells), and homing matrix stem cell routing.
 
-Track 01 converges into the shared System-Level Integration Bottleneck (SLIB) described in §2.3.
+Track 01 converges into a Phase 5 System-Level Integration Bottleneck (SLIB) containing two obstacles: G-5.1 (Somatic Identity Triage and External Intervention Loop) and G-5.2 (Full Chromosomal Integration and Identity Verification).
 
 ### 2.2 Track 02 · Nanoscale Biomedical Systems
 
@@ -90,23 +90,23 @@ Obstacles N-2.1 through N-2.3 address fabrication: DNA origami scaffolding for n
 **Phase 3 — Tissue Interface Layer**
 Obstacles N-3.1 through N-3.3 address the interface between nanorobotic systems and host tissue: selective fibrotic matrix degradation, molecular ECM deposition, and near-field code-flashing for mid-deployment nanounit reprogramming.
 
-Track 02 converges into the shared System-Level Integration Bottleneck (SLIB) described in §2.3.
+Track 02 converges into a Phase 4 System-Level Integration Bottleneck (SLIB) containing obstacle N-4.1 (Mass Swarm Cohesion and Systemic Integration).
 
 ### 2.3 System-Level Integration Bottleneck (SLIB)
 
-Both tracks converge into a single shared integration gate — the SLIB — rather than each having a separate integration phase. This is a deliberate architectural choice: a track-internal "integration phase" is not a true integration test, because it validates only one subsystem stack in isolation. The SLIB is only satisfiable when both tracks are simultaneously operational in the same organism.
+Each track terminates in its own System-Level Integration Bottleneck (SLIB) — a final integration phase that can only be satisfied once all upstream obstacles in that track are simultaneously validated in a single organism.
 
-The SLIB contains three obstacles:
+**Track 01 SLIB (Phase 5)** contains two obstacles. G-5.1 closes the feedback loop between Track 01 identity detection and Track 02 nanorobotic retrieval — described in detail below. G-5.2 validates full Track 01 integration: all genetic fidelity subsystems co-operating in a single organism with confirmed systemic somatic identity integrity across ≥10¹² cells.
 
-- **G-5.1** validates full Track 01 integration: all genetic fidelity subsystems co-operating in a single organism with confirmed systemic somatic identity integrity across ≥10¹² cells.
-- **N-4.1** validates full Track 02 integration: all nanorobotic subsystems deployed as a coordinated swarm in a living organism with confirmed bio-clearance.
-- **G-5.2** closes the feedback loop between the two tracks — described in detail in §2.4.
+**Track 02 SLIB (Phase 4)** contains one obstacle. N-4.1 validates full Track 02 integration: all nanorobotic subsystems deployed as a coordinated swarm in a living organism, with confirmed task completion and bio-clearance.
 
-### 2.4 G-5.2 · Somatic Identity Triage and External Intervention Loop
+The cross-track dependency runs in one direction: Track 02 nanorobotic systems (N-4.1) must be capable of receiving the G-5.1 vascular peptide beacon and executing targeted retrieval at triage sites. G-5.1 therefore functions as the integration handoff point between the two tracks.
 
-G-5.2 is the architectural node that closes the feedback loop between Track 01 (identity detection) and Track 02 (physical retrieval). It operationalises what we term the **Byzantine somatic fault hypothesis**: in a distributed network of ≈10¹² somatic cells, corruption of individual nodes is inevitable. The systemic risk is not individual node corruption but **propagation** — a corrupted cell that continues to signal as functional can recruit neighbouring cells into its deviant transcriptomic state via paracrine signalling, exosome exchange, or gap junctions. This is the somatic equivalent of a Byzantine fault in distributed computing.
+### 2.3.1 G-5.1 · Somatic Identity Triage and External Intervention Loop
 
-The G-5.2 triage circuit implements a **2-of-3 spatial quorum logic gate**. A permanent somatic cell enters triage mode only when:
+G-5.1 is the architectural node that closes the feedback loop between Track 01 (identity detection) and Track 02 (physical retrieval). It operationalises what we term the **Byzantine somatic fault hypothesis**: in a distributed network of ≈10¹² somatic cells, corruption of individual nodes is inevitable. The systemic risk is not individual node corruption but **propagation** — a corrupted cell that continues to signal as functional can recruit neighbouring cells into its deviant transcriptomic state via paracrine signalling, exosome exchange, or gap junctions. This is the somatic equivalent of a Byzantine fault in distributed computing.
+
+The G-5.1 triage circuit implements a **2-of-3 spatial quorum logic gate**. A permanent somatic cell enters triage mode only when:
 
 1. Its synthetic identity string (G-3.3) carries detectable corruption in ≥2 of 3 independently checksummed domains (the dual-corruption criterion), AND
 2. The cryptographic checksum of its current transcriptomic state diverges from the stored identity specification beyond the error-correction threshold
@@ -128,9 +128,9 @@ $$\text{Triage} = \mathbb{1}\left[\sum_{i=1}^{3} C_i \geq 2\right] \cdot \mathbb
 
 where $C_i \in \{0,1\}$ represents corruption detection in checksum domain $i$, $d(\cdot)$ is a transcriptomic distance metric, $\mathbf{T}$ is the transcriptomic state vector, and $\theta$ is the pre-specified divergence threshold.
 
-The quorum requirement prevents false-positive triage events. A single checksum domain corruption could result from a transient read error or a benign epigenetic fluctuation. Requiring dual corruption with concurrent transcriptomic divergence reduces the false-positive rate to a target of <2% in uncorrupted neighbour cells (confirmed by Milestone G-5.2-1 in vitro validation).
+The quorum requirement prevents false-positive triage events. A single checksum domain corruption could result from a transient read error or a benign epigenetic fluctuation. Requiring dual corruption with concurrent transcriptomic divergence reduces the false-positive rate to a target of <2% in uncorrupted neighbour cells (confirmed by Milestone G-5.1-1 in vitro validation).
 
-The four milestones of G-5.2 follow the standard RLI validation ladder: in vitro human 3D organoid, murine in vivo, large animal/NHP, and human Phase I safety trial — each adding a layer of translational confidence before the architecture can be considered clinically validated.
+The four milestones of G-5.1 follow the standard RLI validation ladder: in vitro human 3D organoid, murine in vivo, large animal/NHP, and human Phase I safety trial — each adding a layer of translational confidence before the architecture can be considered clinically validated.
 
 ---
 

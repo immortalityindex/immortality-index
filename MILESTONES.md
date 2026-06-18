@@ -7,13 +7,12 @@
 
 ## Overview
 
-The Immortality Index tracks **24 research obstacles** across two engineering tracks plus a shared integration gate. Each obstacle has **4 binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
+The Immortality Index tracks **24 research obstacles** across two engineering tracks. Each obstacle has **4 binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
 
-- **Track 01 · Somatic Genetic Fidelity** — 12 obstacles, 48 milestones
-- **Track 02 · Nanoscale Biomedical Systems** — 9 obstacles, 36 milestones
-- **System-Level Integration Bottleneck (SLIB)** — 3 obstacles, 12 milestones
+- **Track 01 · Somatic Genetic Fidelity** — 14 obstacles, 56 milestones (Phases 1–4 + SLIB)
+- **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones (Phases 1–3 + SLIB)
 
-**SLIB:** Denoted with ⚠️. A single convergence gate — separate from both tracks — that can only be satisfied once all upstream milestones in both tracks are simultaneously met. G-5.1 validates full Track 01 integration; N-4.1 validates full Track 02 integration; G-5.2 closes the feedback loop between the two.
+**System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track. Track 01's SLIB contains G-5.1 (Somatic Identity Triage — the cross-track bridge that requires Track 02 nanorobots to retrieve flagged cells) and G-5.2 (Full Track 01 Integration — all genetic fidelity subsystems confirmed operating together). Track 02's SLIB contains N-4.1 (full nanorobotic swarm integration). G-5.1 is the dependency node that makes both tracks interdependent.
 
 ---
 
@@ -171,19 +170,21 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 3. Fibrosis markers (collagen-I, α-SMA, TGF-β) remain ≤1.5× baseline at recruitment sites at 14-day post-homing timepoint
 4. In vivo murine tissue damage model demonstrates ≥4× functional stem cell enrichment with improved healing metrics vs. controls (p < 0.05)
 
----
+### Phase 5 — System-Level Integration Bottleneck (SLIB)
+
+#### G-5.1 · ⚠️ SLIB: Somatic Identity Triage and External Intervention Loop
+
+**Theoretical Target:** Engineer a cell-autonomous fault-containment circuit in permanent somatic cells that activates upon simultaneous detection of: (1) corruption in ≥2 of 3 independently checksummed domains of the synthetic identity tag (G-3.3), and (2) transcriptomic state divergence exceeding the pre-specified correction threshold. Upon activation, the circuit executes three coordinated outputs in parallel: metabolic shutdown to <20% of baseline ATP production, localised fibrotic self-encapsulation to prevent molecular exchange with neighbouring cells, and continuous secretion of a bio-orthogonal vascular tracking peptide at ≥10 fmol/mL. This converts irreparably corrupted cells into inert, self-labelled units that halt somatic identity contamination and emit a persistent retrieval beacon for Track 02 nanorobotic systems — closing the Byzantine fault isolation loop before cascade propagation can occur.
+
+**Milestones:**
+1. In vitro human 3D organoid validation: dual-corruption trigger activates metabolic shutdown (<20% baseline ATP by luminescence assay), fibrotic encapsulation (Sirius Red staining), and bio-orthogonal peptide secretion (≥10 fmol/mL by LC-MS/MS) in ≥90% of triggered cells with <2% false-positive rate in uncorrupted neighbours
+2. Murine in vivo model: engineered cells with dual-corruption trigger confirm triage activation within 24h, fibrotic capsule at ≥85% of sites, vascular peptide ≥10 fmol/mL by systemic assay; host biological age unchanged at 90-day follow-up (no SASP-mediated bystander aging)
+3. Large animal / NHP validation across ≥3 tissue compartments: independent triage activation in each, no cross-compartment corruption propagation, vascular peptide ≥10 fmol/mL by clinical-grade ELISA, host biological age within ±5% of baseline at 180-day follow-up
+4. Human Phase I safety and biomarker detection trial (n ≥ 12): vascular peptide ≥10 fmol/mL in serum by LC-MS/MS within 72h; no grade ≥2 adverse events (CTCAE v5.0); CRP ≤1.5× ULN at 30 days; no fibrotic lesion expansion beyond 5mm by MRI
 
 ---
 
-*Track 01 ends here. G-5.1 and G-5.2 appear in the SLIB section below.*
-
----
-
-## System-Level Integration Bottleneck (SLIB)
-
-> These three obstacles sit outside either track. They represent the final convergence gate — cross-system integration that cannot be validated until all upstream milestones in both Track 01 and Track 02 are simultaneously satisfied.
-
-#### G-5.1 · ⚠️ SLIB: Full Chromosomal Integration and Identity Verification
+#### G-5.2 · ⚠️ SLIB: Full Chromosomal Integration and Identity Verification
 
 **Theoretical Target:** Demonstrate simultaneous, coordinated operation of all Track 01 subsystems within a single mammalian organism, with confirmed systemic somatic identity integrity across ≥10^12 cells.
 
@@ -192,18 +193,6 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 2. Systemic somatic identity verification: identity tag readable in ≥85% of sampled cells across ≥5 tissue types at 6-month timepoint
 3. Measurable multi-system functional rejuvenation — biological age reduction ≥20% by two independent epigenetic clocks in same organism
 4. Safety at 12-month follow-up: zero oncogenic events, ANA panel negative, karyotype stable by whole-genome sequencing
-
----
-
-#### G-5.2 · Somatic Identity Triage and External Intervention Loop
-
-**Theoretical Target:** Implement a 2-of-3 spatial quorum logic gate. If a permanent somatic cell experiences dual identity-string corruption and cryptographic checksum mismatch, the cell must: (i) cease functional operations and downregulate metabolic activity below 20% baseline; (ii) induce micro-scale Somatic Identity Triage and Localized Fibrotic Encapsulation to prevent lineage-infidelity propagation; and (iii) continuously secrete a bio-orthogonal tracking peptide into the vascular system at ≥10 fmol/mL, triggering targeted retrieval by Track 02 nanorobotic units or systemic clinical assays. Prevents Byzantine fault cascade propagation across the somatic network.
-
-**Milestones:**
-1. In vitro human 3D organoid validation: dual-corruption trigger activates metabolic shutdown (<20% baseline ATP by luminescence assay), fibrotic encapsulation (Sirius Red staining), and bio-orthogonal peptide secretion (≥10 fmol/mL by LC-MS/MS) in ≥90% of triggered cells with <2% false-positive rate in uncorrupted neighbours
-2. Murine in vivo model: engineered cells with dual-corruption trigger confirm triage activation within 24h, fibrotic capsule at ≥85% of sites, vascular peptide ≥10 fmol/mL by systemic assay; host biological age unchanged at 90-day follow-up (no SASP-mediated bystander aging)
-3. Large animal / NHP validation across ≥3 tissue compartments: independent triage activation in each, no cross-compartment corruption propagation, vascular peptide ≥10 fmol/mL by clinical-grade ELISA, host biological age within ±5% of baseline at 180-day follow-up
-4. Human Phase I safety and biomarker detection trial (n ≥ 12): vascular peptide ≥10 fmol/mL in serum by LC-MS/MS within 72h; no grade ≥2 adverse events (CTCAE v5.0); CRP ≤1.5× ULN at 30 days; no fibrotic lesion expansion beyond 5mm by MRI
 
 ---
 
@@ -307,13 +296,7 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 3. Code update reprograms nanounit operational parameters mid-deployment — updated function confirmed within 60s of instruction receipt
 4. In vivo murine: near-field code flash confirmed in implanted nanounits at 30-day post-implantation, updated function confirmed by reporter output
 
----
-
----
-
-*Track 02 ends here. N-4.1 appears in the SLIB section below.*
-
----
+### Phase 4 — System-Level Integration Bottleneck (SLIB)
 
 #### N-4.1 · ⚠️ SLIB: Mass Swarm Cohesion and Systemic Integration
 
