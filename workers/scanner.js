@@ -3,9 +3,10 @@
 // Cron: runs every 6 hours. HTTP: manual trigger from admin panel.
 
 const PROJECT_ID = 'immortality-index';
+const FIREBASE_API_KEY = 'AIzaSyBCyaJFe9jDuBHcf3fcKkgvfjPdi1pN0dM';
 const FS_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
 
-// ── Firebase JWT auth ──────────────────────────────────────────────────────
+// ── Firebase JWT auth (service account) ───────────────────────────────────
 async function getToken(env) {
   const sa = JSON.parse(env.FIREBASE_SERVICE_ACCOUNT);
   const now = Math.floor(Date.now() / 1000);
@@ -25,6 +26,18 @@ async function getToken(env) {
     body: `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${unsigned}.${sigB64}`
   });
   return (await r.json()).access_token;
+}
+
+// ── Verify Firebase ID token via REST ──────────────────────────────────────
+async function verifyFirebaseToken(idToken) {
+  try {
+    const r = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${FIREBASE_API_KEY}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken })
+    });
+    const d = await r.json();
+    return r.ok && d.users?.length > 0;
+  } catch { return false; }
 }
 
 // ── Firestore value codec ──────────────────────────────────────────────────
@@ -80,11 +93,16 @@ const CORS = {
 };
 
 // ── Auth check ─────────────────────────────────────────────────────────────
-function isAuthorized(request, env) {
+async function isAuthorized(request, env) {
   const secret = request.headers.get('x-admin-secret');
   const auth = request.headers.get('authorization');
-  return (env.ADMIN_SECRET && secret === env.ADMIN_SECRET) ||
-         (env.CRON_SECRET && auth === `Bearer ${env.CRON_SECRET}`);
+  if (env.ADMIN_SECRET && secret === env.ADMIN_SECRET) return true;
+  if (env.CRON_SECRET && auth === `Bearer ${env.CRON_SECRET}`) return true;
+  if (auth?.startsWith('Bearer ')) {
+    const idToken = auth.replace('Bearer ', '');
+    return await verifyFirebaseToken(idToken);
+  }
+  return false;
 }
 
 // ── Scan logic ─────────────────────────────────────────────────────────────
@@ -109,6 +127,7 @@ async function runScan(env) {
     obstacleIndex: 0, totalObstacles: obstacles.length,
     milestonesScanned: 0, totalMilestones, milestonesUpdated: 0, obstaclesUpdated: 0, log: [] });
 
+  const delay2 = ms => new Promise(r => setTimeout(r, ms));
   let milestonesScanned = 0, milestonesUpdated = 0, obstaclesUpdated = 0;
   const log = [];
 
@@ -204,20 +223,13 @@ Respond ONLY as a JSON array — one object per milestone, in order:
 
 // ── Worker export ──────────────────────────────────────────────────────────
 export default {
-  // Cron trigger — runs on schedule
   async scheduled(event, env, ctx) {
     ctx.waitUntil(runScan(env));
   },
-
-  // HTTP trigger — for manual scans from admin panel + status/cleanup
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
 
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: CORS });
-    }
-
-    // GET /status — public, no auth needed
     if (request.method === 'GET' && url.pathname === '/status') {
       try {
         const token = await getToken(env);
@@ -230,9 +242,8 @@ export default {
       }
     }
 
-    // POST /scan — requires auth
     if (request.method === 'POST' && url.pathname === '/scan') {
-      if (!isAuthorized(request, env)) {
+      if (!await isAuthorized(request, env)) {
         return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: CORS });
       }
       ctx.waitUntil(runScan(env));
