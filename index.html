@@ -499,45 +499,35 @@
   });
 </script>
 
-<!-- ═══════════════════════════════════════════════════════ FOR SCIENTISTS ══ -->
-<section id="for-scientists" style="
-  background: #0a0a0f;
-  border-top: 1px solid #1e293b;
-  padding: 64px 24px;
-  font-family: inherit;
-">
-  <div style="max-width:860px; margin:0 auto;">
 
-    <h2 style="
-      color:#e2e8f0; font-size:1.6rem; font-weight:700; margin:0 0 8px;
-      letter-spacing:-0.02em;
-    ">For Scientists</h2>
-    <p style="color:#64748b; font-size:0.95rem; margin:0 0 48px; line-height:1.6;">
-      Cite this framework in your research, access nightly-updated open data,
-      and contribute milestone evidence via peer review pull request.
+<!-- ═══════════════════════════════════════════════════════ FOR SCIENTISTS ══ -->
+<section id="for-scientists" style="background:#0a0a0f;border-top:1px solid #1e293b;padding:64px 24px;font-family:inherit;">
+  <div style="max-width:860px;margin:0 auto;">
+
+    <h2 style="color:#e2e8f0;font-size:1.6rem;font-weight:700;margin:0 0 8px;letter-spacing:-0.02em;">For Scientists</h2>
+    <p style="color:#64748b;font-size:0.95rem;margin:0 0 40px;line-height:1.6;">
+      Cite this framework in your research or read the open-access preprint.
     </p>
 
-    <!-- ── Citation Block ─────────────────────────────────────────────────── -->
-    <div style="
-      background:#111827; border:1px solid #1e293b; border-radius:12px;
-      padding:28px 28px 24px; margin-bottom:24px;
-    ">
-      <div style="display:flex; gap:8px; margin-bottom:16px;">
-        <button onclick="showCitation('bibtex')" id="tab-bibtex" style="
-          background:#1e40af; color:#e0e7ff; border:none; border-radius:6px;
-          padding:6px 16px; font-size:0.82rem; font-weight:600; cursor:pointer;
-        ">BibTeX</button>
-        <button onclick="showCitation('apa')" id="tab-apa" style="
-          background:#1e293b; color:#94a3b8; border:none; border-radius:6px;
-          padding:6px 16px; font-size:0.82rem; font-weight:600; cursor:pointer;
-        ">APA</button>
+    <!-- Citation block -->
+    <div style="background:#111827;border:1px solid #1e293b;border-radius:12px;padding:28px 28px 24px;margin-bottom:24px;">
+
+      <!-- Tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <button id="ii-tab-bibtex"
+          onclick="iiShowTab('bibtex')"
+          style="background:#1e40af;color:#e0e7ff;border:none;border-radius:6px;padding:6px 18px;font-size:0.82rem;font-weight:600;cursor:pointer;">
+          BibTeX
+        </button>
+        <button id="ii-tab-apa"
+          onclick="iiShowTab('apa')"
+          style="background:#1e293b;color:#94a3b8;border:none;border-radius:6px;padding:6px 18px;font-size:0.82rem;font-weight:600;cursor:pointer;">
+          APA
+        </button>
       </div>
 
-      <pre id="citation-bibtex" style="
-        background:#0f172a; color:#a5b4fc; border:1px solid #1e293b;
-        border-radius:8px; padding:16px; font-size:0.78rem; line-height:1.6;
-        overflow-x:auto; white-space:pre; margin:0 0 16px;
-      ">@misc{immortalityindex2026,
+      <!-- BibTeX text -->
+      <pre id="ii-text-bibtex" style="background:#0f172a;color:#a5b4fc;border:1px solid #1e293b;border-radius:8px;padding:16px;font-size:0.78rem;line-height:1.6;overflow-x:auto;white-space:pre;margin:0 0 16px;">@misc{immortalityindex2026,
   author       = {{Immortality Index}},
   title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},
   year         = {2026},
@@ -547,124 +537,81 @@
   note         = {Version 1.0.0. License: CC BY 4.0}
 }</pre>
 
-      <pre id="citation-apa" style="
-        background:#0f172a; color:#a5b4fc; border:1px solid #1e293b;
-        border-radius:8px; padding:16px; font-size:0.78rem; line-height:1.6;
-        overflow-x:auto; white-space:pre-wrap; margin:0 0 16px; display:none;
-      ">Immortality Index. (2026). Immortality Index: A Binary Milestone Registry for Longevity Research (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.PLACEHOLDER</pre>
+      <!-- APA text -->
+      <pre id="ii-text-apa" style="background:#0f172a;color:#a5b4fc;border:1px solid #1e293b;border-radius:8px;padding:16px;font-size:0.78rem;line-height:1.6;overflow-x:auto;white-space:pre-wrap;margin:0 0 16px;display:none;">Immortality Index. (2026). Immortality Index: A Binary Milestone Registry for Longevity Research (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.PLACEHOLDER</pre>
 
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-        <button onclick="copyCitation('bibtex')" style="
-          background:#1e40af; color:#e0e7ff; border:none; border-radius:6px;
-          padding:8px 20px; font-size:0.84rem; font-weight:600; cursor:pointer;
-          transition:background .15s;
-        ">Copy BibTeX</button>
-        <button onclick="copyCitation('apa')" style="
-          background:#1e293b; color:#94a3b8; border:none; border-radius:6px;
-          padding:8px 20px; font-size:0.84rem; font-weight:600; cursor:pointer;
-        ">Copy APA</button>
-        <span id="copy-success" style="
-          color:#4ade80; font-size:0.82rem; display:none; font-weight:600;
-        ">✓ Copied to clipboard</span>
+      <!-- Copy buttons -->
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button onclick="iiCopy('bibtex')"
+          style="background:#1e40af;color:#e0e7ff;border:none;border-radius:6px;padding:8px 20px;font-size:0.84rem;font-weight:600;cursor:pointer;">
+          Copy BibTeX
+        </button>
+        <button onclick="iiCopy('apa')"
+          style="background:#1e293b;color:#94a3b8;border:none;border-radius:6px;padding:8px 20px;font-size:0.84rem;font-weight:600;cursor:pointer;">
+          Copy APA
+        </button>
+        <span id="ii-copied" style="color:#4ade80;font-size:0.82rem;font-weight:600;display:none;">&#10003; Copied</span>
       </div>
     </div>
 
-    <!-- ── Whitepaper ─────────────────────────────────────────────────────── -->
-    <div style="
-      background:#111827; border:1px solid #1e293b; border-radius:12px;
-      padding:24px 28px; margin-bottom:24px;
-      display:flex; align-items:center; justify-content:space-between;
-      flex-wrap:wrap; gap:16px;
-    ">
+    <!-- Whitepaper -->
+    <div style="background:#111827;border:1px solid #1e293b;border-radius:12px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
       <div>
-        <div style="color:#e2e8f0; font-weight:600; font-size:0.95rem; margin-bottom:4px;">
-          Open-Access Preprint
-        </div>
-        <div style="color:#64748b; font-size:0.84rem;">
-          Immortality Index: A Binary Milestone Registry for Longevity Research
-        </div>
+        <div style="color:#e2e8f0;font-weight:600;font-size:0.95rem;margin-bottom:4px;">Open-Access Preprint</div>
+        <div style="color:#64748b;font-size:0.84rem;">Immortality Index: A Binary Milestone Registry for Longevity Research</div>
       </div>
-      <a href="https://github.com/immortalityindex/immortality-index/blob/main/docs/whitepaper.md" target="_blank" rel="noopener" style="
-        background:#0f4c75; color:#bae6fd; border:1px solid #0369a1;
-        border-radius:8px; padding:10px 22px; font-size:0.84rem; font-weight:600;
-        text-decoration:none; white-space:nowrap; display:inline-block;
-      ">Read Preprint →</a>
-    </div>
-
-    <!-- ── Open Data API ──────────────────────────────────────────────────── -->
-    <div style="
-      background:#111827; border:1px solid #1e293b; border-radius:12px;
-      padding:24px 28px;
-    ">
-      <div style="color:#e2e8f0; font-weight:600; font-size:0.95rem; margin-bottom:4px;">
-        Open Data API
-      </div>
-      <div style="color:#64748b; font-size:0.84rem; margin-bottom:14px;">
-        Nightly-updated milestone completion percentages — pull into your own pipeline.
-      </div>
-      <div style="
-        background:#0f172a; border:1px solid #1e293b; border-radius:8px;
-        padding:12px 16px; display:flex; align-items:center;
-        justify-content:space-between; flex-wrap:wrap; gap:12px;
-      ">
-        <code style="color:#34d399; font-size:0.82rem; font-family:monospace;">
-          curl https://immortalityindex.pages.dev/api/milestones
-        </code>
-        <button onclick="copyApiCmd()" style="
-          background:#1e293b; color:#94a3b8; border:none; border-radius:6px;
-          padding:6px 14px; font-size:0.8rem; cursor:pointer; font-weight:600;
-        ">Copy</button>
-      </div>
-      <div style="color:#475569; font-size:0.78rem; margin-top:10px;">
-        Returns JSON with obstacle metadata, milestone completion status, and nightly scan timestamp.
-        License: CC BY 4.0 · DOI: 10.5281/zenodo.PLACEHOLDER
-      </div>
+      <a href="https://github.com/immortalityindex/immortality-index/blob/main/docs/whitepaper.md" target="_blank" rel="noopener"
+        style="background:#0f4c75;color:#bae6fd;border:1px solid #0369a1;border-radius:8px;padding:10px 22px;font-size:0.84rem;font-weight:600;text-decoration:none;white-space:nowrap;">
+        Read Preprint &#8594;
+      </a>
     </div>
 
   </div>
 </section>
 
 <script>
-(function() {
-  var bibtexText = "@misc{immortalityindex2026,
-  author       = {{Immortality Index}},
-  title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},
-  year         = {2026},
-  publisher    = {GitHub},
-  doi          = {10.5281/zenodo.PLACEHOLDER},
-  url          = {https://github.com/immortalityindex/immortality-index},
-  note         = {Version 1.0.0. License: CC BY 4.0}
-}";
-  var apaText    = "Immortality Index. (2026). Immortality Index: A Binary Milestone Registry for Longevity Research (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.PLACEHOLDER";
-  var apiCmd     = "curl https://immortalityindex.pages.dev/api/milestones";
-  var copyTimer;
+var _iiBibtex = "@misc{immortalityindex2026,\n  author       = {{Immortality Index}},\n  title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},\n  year         = {2026},\n  publisher    = {GitHub},\n  doi          = {10.5281/zenodo.PLACEHOLDER},\n  url          = {https://github.com/immortalityindex/immortality-index},\n  note         = {Version 1.0.0. License: CC BY 4.0}\n}";
+var _iiApa    = "Immortality Index. (2026). Immortality Index: A Binary Milestone Registry for Longevity Research (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.PLACEHOLDER";
+var _iiTimer;
 
-  window.showCitation = function(type) {
-    document.getElementById('citation-bibtex').style.display = type === 'bibtex' ? 'block' : 'none';
-    document.getElementById('citation-apa').style.display    = type === 'apa'    ? 'block' : 'none';
-    document.getElementById('tab-bibtex').style.background   = type === 'bibtex' ? '#1e40af' : '#1e293b';
-    document.getElementById('tab-bibtex').style.color        = type === 'bibtex' ? '#e0e7ff' : '#94a3b8';
-    document.getElementById('tab-apa').style.background      = type === 'apa'    ? '#1e40af' : '#1e293b';
-    document.getElementById('tab-apa').style.color           = type === 'apa'    ? '#e0e7ff' : '#94a3b8';
-  };
+function iiShowTab(type) {
+  document.getElementById('ii-text-bibtex').style.display = (type === 'bibtex') ? 'block' : 'none';
+  document.getElementById('ii-text-apa').style.display    = (type === 'apa')    ? 'block' : 'none';
+  var btnB = document.getElementById('ii-tab-bibtex');
+  var btnA = document.getElementById('ii-tab-apa');
+  btnB.style.background = (type === 'bibtex') ? '#1e40af' : '#1e293b';
+  btnB.style.color      = (type === 'bibtex') ? '#e0e7ff' : '#94a3b8';
+  btnA.style.background = (type === 'apa')    ? '#1e40af' : '#1e293b';
+  btnA.style.color      = (type === 'apa')    ? '#e0e7ff' : '#94a3b8';
+}
 
-  window.copyCitation = function(type) {
-    var text = type === 'bibtex' ? bibtexText : apaText;
-    navigator.clipboard.writeText(text).then(function() { flashSuccess(); });
-    showCitation(type);
-  };
-
-  window.copyApiCmd = function() {
-    navigator.clipboard.writeText(apiCmd).then(function() { flashSuccess(); });
-  };
-
-  function flashSuccess() {
-    var el = document.getElementById('copy-success');
-    el.style.display = 'inline';
-    clearTimeout(copyTimer);
-    copyTimer = setTimeout(function() { el.style.display = 'none'; }, 2000);
+function iiCopy(type) {
+  iiShowTab(type);
+  var text = (type === 'bibtex') ? _iiBibtex : _iiApa;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(iiFlash, iiCopyFallback.bind(null, text));
+  } else {
+    iiCopyFallback(text);
   }
-})();
+}
+
+function iiCopyFallback(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity  = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); iiFlash(); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+function iiFlash() {
+  var el = document.getElementById('ii-copied');
+  el.style.display = 'inline';
+  clearTimeout(_iiTimer);
+  _iiTimer = setTimeout(function() { el.style.display = 'none'; }, 2000);
+}
 </script>
 <!-- ════════════════════════════════════════════════════ /FOR SCIENTISTS ══ -->
 
