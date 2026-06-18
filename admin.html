@@ -298,7 +298,7 @@
         progBar.style.width = pct + '%';
         progStat.textContent = pct + '%';
 
-        if (i > 0) await new Promise(r => setTimeout(r, 7000));
+        if (i > 0) await new Promise(r => setTimeout(r, 10000));
 
         // Refresh token for long-running scans
         token = await user.getIdToken();
