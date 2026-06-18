@@ -75,11 +75,11 @@ Obstacles G-3.1 through G-3.3 address the active maintenance infrastructure: eng
 **Phase 4 — Intercellular Communication Layer**
 Obstacles G-4.1 through G-4.4 address the network layer: tunneling nanotube synthesis for directed molecular cargo transfer, the Decentralized Intercellular Transcriptomic Error-Correction Network (paracrine-mediated correction signalling between cells), homing matrix stem cell routing, and G-4.4 — Somatic Identity Triage and External Intervention Loop — the cell-autonomous fault-containment circuit that converts irreparably corrupted cells into inert, self-labelled units and emits a vascular peptide beacon for Track 02 nanorobotic retrieval.
 
-Track 01 converges into a Phase 5 System-Level Integration Bottleneck (SLIB) containing a single obstacle: G-5.1 (Full Chromosomal Integration and Identity Verification).
+Track 01 converges into a Phase 5 System-Level Integration Bottleneck (SLIB) containing a single obstacle: G-5.2 (Perpetual Human Somatic Rejuvenation). G-5.1 (Full Chromosomal Integration and Identity Verification) is now a Phase 4 prerequisite.
 
 ### 2.2 Track 02 · Nanoscale Biomedical Systems
 
-Track 02 addresses the downstream retrieval and physical intervention layer: the nanorobotic systems required to receive the G-5.2 vascular peptide signal, navigate to triage sites, and execute targeted physical interventions that the molecular biology layer cannot achieve autonomously.
+Track 02 addresses the downstream retrieval and physical intervention layer: the nanorobotic systems required to receive the Track 01 somatic identity vascular peptide signal, navigate to triage sites, and execute targeted physical interventions that the molecular biology layer cannot achieve autonomously.
 
 **Phase 1 — Propulsion & Processing Layer**
 Obstacles N-1.1 through N-1.3 address mobility and onboard computation: sub-10-attojoule reversible neuromorphic processing elements, remote mechanical micro-propulsion in physiological media, and low-frequency acoustic mesh networks for swarm coordination.
@@ -96,7 +96,7 @@ Track 02 converges into a Phase 4 System-Level Integration Bottleneck (SLIB) con
 
 Each track terminates in its own System-Level Integration Bottleneck (SLIB) — a final integration phase that can only be satisfied once all upstream obstacles in that track are simultaneously validated in a single organism.
 
-**Track 01 SLIB (Phase 5)** contains a single obstacle: G-5.1 (Full Chromosomal Integration and Identity Verification) — the culminating validation that all fourteen Track 01 obstacles operate simultaneously in a single aged organism, with confirmed systemic somatic identity integrity, ≥20% biological age reduction by two independent epigenetic clocks, and 12-month safety with zero oncogenic events.
+**Track 01 SLIB (Phase 5)** contains a single obstacle: G-5.2 (Perpetual Human Somatic Rejuvenation) — the culminating validation that all fourteen Track 01 obstacles operate simultaneously in a single aged organism, with confirmed systemic somatic identity integrity, ≥20% biological age reduction by two independent epigenetic clocks, and 12-month safety with zero oncogenic events.
 
 **Track 02 SLIB (Phase 4)** contains a single obstacle: N-4.1 (Mass Swarm Cohesion and Systemic Integration) — full nanorobotic swarm deployment with confirmed task completion and bio-clearance.
 
