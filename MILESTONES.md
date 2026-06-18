@@ -12,7 +12,7 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 - **Track 01 · Somatic Genetic Fidelity** — 14 obstacles, 56 milestones (Phases 1–4 + SLIB)
 - **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones (Phases 1–3 + SLIB)
 
-**System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track — one obstacle each. Track 01's SLIB is G-5.2 (Perpetual Human Somatic Rejuvenation): indefinite biological age homeostasis in a living human subject with all 13 Track 01 subsystems active. G-5.1 (Full Chromosomal Integration) is a Phase 4 prerequisite. Track 02's SLIB is N-4.1 (Mass Swarm Cohesion and Systemic Integration). The cross-track dependency runs through G-4.4: the Somatic Identity Triage circuit (Phase 4, Track 01) generates the vascular peptide beacon that Track 02 nanorobots are built to receive.
+**System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track — one obstacle each. Track 01's SLIB is G-5.1 (Perpetual Human Somatic Rejuvenation): indefinite biological age homeostasis in a living human subject with all 13 Track 01 subsystems active. G-4.5 (Full Chromosomal Integration) is a Phase 4 prerequisite. Track 02's SLIB is N-4.1 (Mass Swarm Cohesion and Systemic Integration). The cross-track dependency runs through G-4.4: the Somatic Identity Triage circuit (Phase 4, Track 01) generates the vascular peptide beacon that Track 02 nanorobots are built to receive.
 
 ---
 
@@ -182,7 +182,7 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 
 ### Phase 5 — System-Level Integration Bottleneck (SLIB)
 
-#### G-5.1 · Full Chromosomal Integration and Identity Verification
+#### G-4.5 · Full Chromosomal Integration and Identity Verification
 
 **Theoretical Target:** Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-4.4) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.
 
@@ -193,14 +193,14 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 4. Safety at 12-month follow-up: zero oncogenic events, ANA panel negative, karyotype stable by whole-genome sequencing
 
 
-#### G-5.2 · Perpetual Human Somatic Rejuvenation (⚠️ SLIB)
+#### G-5.1 · Perpetual Human Somatic Rejuvenation (⚠️ SLIB)
 
 **Theoretical Target:** Demonstrate indefinite maintenance of biological age homeostasis (Horvath clock equivalent ≤30 years) in a living human subject running the full integrated Track 01 protocol — all 13 genetic subsystems active simultaneously — over a minimum 5-year observation period. Annual safety panels (oncology screen, karyotype by WGS, ANA panel) must remain clear throughout. Peer-reviewed publication confirms sustained multi-organ biological age maintenance with zero cumulative oncogenic events and no immune dysregulation.
 
-- [ ] **G-5.2.1** Phase I/II human trial IND accepted for integrated Track 01 multi-subsystem protocol — all 13 genetic subsystems included in a single patient protocol
-- [ ] **G-5.2.2** 12-month human data: biological age reduction ≥15% confirmed by two independent epigenetic clocks (Horvath + GrimAge/DunedinPACE) — no oncogenic events, ANA negative
-- [ ] **G-5.2.3** 3-year follow-up: sustained biological age maintenance confirmed — identity tag readable in ≥85% sampled cells across ≥5 tissue types, karyotype stable by WGS, no oncogenic events
-- [ ] **G-5.2.4** 5-year peer-reviewed publication confirms indefinite biological age maintenance in human subject — Horvath clock ≤30-year equivalent sustained throughout
+- [ ] **G-5.1.1** Phase I/II human trial IND accepted for integrated Track 01 multi-subsystem protocol — all 13 genetic subsystems included in a single patient protocol
+- [ ] **G-5.1.2** 12-month human data: biological age reduction ≥15% confirmed by two independent epigenetic clocks (Horvath + GrimAge/DunedinPACE) — no oncogenic events, ANA negative
+- [ ] **G-5.1.3** 3-year follow-up: sustained biological age maintenance confirmed — identity tag readable in ≥85% sampled cells across ≥5 tissue types, karyotype stable by WGS, no oncogenic events
+- [ ] **G-5.1.4** 5-year peer-reviewed publication confirms indefinite biological age maintenance in human subject — Horvath clock ≤30-year equivalent sustained throughout
 
 **Anchors:** Altos Labs, Calico Life Sciences, GrimAge/DunedinPACE clocks, Juvenescence / Human Longevity Inc., FDA IND framework for combination biologics, David Sinclair Lab
 

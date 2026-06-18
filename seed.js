@@ -672,7 +672,7 @@ exports.handler = async (event, context) => {
 
       // PHASE 5 — SYSTEM-LEVEL INTEGRATION BOTTLENECK (SLIB)
       {
-        id: 'g-5.1',
+        id: 'g-4.5',
         track: 'genetics',
         phase: 4,
         phaseLabel: 'Phase 4 — Intercellular Communication Layer',
@@ -684,25 +684,25 @@ exports.handler = async (event, context) => {
           'Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-4.4) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.',
         milestones: [
           {
-            id: 'g-5.1.1',
+            id: 'g-4.5.1',
             name: 'All Track 01 subsystems co-delivered and co-expressed in a single aged murine model without mutual interference confirmed by multi-omics profiling',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.1.2',
+            id: 'g-4.5.2',
             name: 'Systemic somatic identity verification: identity tag readable in ≥85% of sampled cells across ≥5 tissue types at 6-month timepoint',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.1.3',
+            id: 'g-4.5.3',
             name: 'Measurable multi-system functional rejuvenation — biological age reduction ≥20% by two independent epigenetic clocks in same organism',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.1.4',
+            id: 'g-4.5.4',
             name: 'Safety at 12-month follow-up: zero oncogenic events, ANA panel negative, karyotype stable by whole-genome sequencing',
             completed: false,
             evidence: ''
@@ -723,7 +723,7 @@ exports.handler = async (event, context) => {
 
       // ────────────────────────────────────────────────────────────────────────
       {
-        id: 'g-5.2',
+        id: 'g-5.1',
         track: 'genetics',
         phase: 5,
         phaseLabel: 'Phase 5 — System-Level Integration Bottleneck (SLIB)',
@@ -735,25 +735,25 @@ exports.handler = async (event, context) => {
           'Demonstrate indefinite maintenance of biological age homeostasis (Horvath clock equivalent ≤30 years) in a living human subject running the full integrated Track 01 protocol — all 13 genetic subsystems active simultaneously — over a minimum 5-year observation period. Annual safety panels (full oncology screen, karyotype by whole-genome sequencing, ANA panel) must remain clear throughout. Peer-reviewed publication confirms sustained multi-organ biological age maintenance with zero cumulative oncogenic events and no immune dysregulation.',
         milestones: [
           {
-            id: 'g-5.2.1',
+            id: 'g-5.1.1',
             name: 'Phase I/II human trial IND accepted for integrated Track 01 multi-subsystem protocol — all 13 genetic subsystems included in a single patient protocol',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.2.2',
+            id: 'g-5.1.2',
             name: '12-month human data: biological age reduction ≥15% confirmed by two independent epigenetic clocks (Horvath + GrimAge/DunedinPACE) in subject receiving integrated protocol — no oncogenic events, ANA negative',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.2.3',
+            id: 'g-5.1.3',
             name: '3-year follow-up: sustained biological age maintenance confirmed — identity tag readable in ≥85% sampled cells across ≥5 tissue types, karyotype stable by WGS, no oncogenic events across all annual safety panels',
             completed: false,
             evidence: ''
           },
           {
-            id: 'g-5.2.4',
+            id: 'g-5.1.4',
             name: '5-year peer-reviewed publication confirms indefinite biological age maintenance in human subject — Horvath clock ≤30-year equivalent sustained throughout full observation period',
             completed: false,
             evidence: ''
