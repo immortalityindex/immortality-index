@@ -1,6 +1,7 @@
 ---
-title: "A Decentralized Peer-to-Peer Error-Correction Architecture for the Mitigation of Somatic Identity Loss and Epigenetic Drift"
-authors: "The Immortality Index Consortium"
+title: "Immortality Index: A Binary Milestone Registry for Longevity Research"
+subtitle: "A Decentralized Peer-to-Peer Error-Correction Architecture for the Mitigation of Somatic Identity Loss and Epigenetic Drift"
+authors: "Immortality Index"
 affiliation: "Independent Distributed Research Infrastructure"
 date: "2026"
 doi: "10.5281/zenodo.PLACEHOLDER"
@@ -12,9 +13,10 @@ keywords:
   - Bio-orthogonal Surveillance
 ---
 
-# A Decentralized Peer-to-Peer Error-Correction Architecture for the Mitigation of Somatic Identity Loss and Epigenetic Drift
+# Immortality Index: A Binary Milestone Registry for Longevity Research
 
-**Authors:** The Immortality Index Consortium
+**Subtitle:** A Decentralized Peer-to-Peer Error-Correction Architecture for the Mitigation of Somatic Identity Loss and Epigenetic Drift
+**Authors:** Immortality Index
 **Institutional Affiliation:** Independent Distributed Research Infrastructure
 **Publication Type:** Open-Access Preprint
 **Preprint DOI:** 10.5281/zenodo.PLACEHOLDER
@@ -212,15 +214,14 @@ Current limitations include the theoretical nature of several Track 01 Phase 3â€
 
 ### APA Citation
 
-The Immortality Index Consortium. (2026). *A decentralized peer-to-peer error-correction architecture for the mitigation of somatic identity loss and epigenetic drift.* Independent Distributed Research Infrastructure. https://doi.org/10.5281/zenodo.PLACEHOLDER
+Immortality Index. (2026). *Immortality Index: A binary milestone registry for longevity research.* Independent Distributed Research Infrastructure. https://doi.org/10.5281/zenodo.PLACEHOLDER
 
 ### BibTeX Entry
 
 ```bibtex
 @techreport{immortalityindex2026,
-  author      = {{The Immortality Index Consortium}},
-  title       = {A Decentralized Peer-to-Peer Error-Correction Architecture for
-                 the Mitigation of Somatic Identity Loss and Epigenetic Drift},
+  author      = {{Immortality Index}},
+  title       = {Immortality Index: A Binary Milestone Registry for Longevity Research},
   institution = {Independent Distributed Research Infrastructure},
   year        = {2026},
   doi         = {10.5281/zenodo.PLACEHOLDER},
@@ -236,4 +237,4 @@ The Immortality Index Consortium. (2026). *A decentralized peer-to-peer error-co
 
 ---
 
-*This paper is published under collective open-source pseudonymity. The Immortality Index Consortium is an independent, distributed research collective operating without institutional affiliation. Correspondence, data access requests, and milestone challenge submissions should be directed to the public repository at github.com/immortalityindex/immortality-index. All milestone audit logs are publicly accessible via the repository.*
+*This paper is published under collective open-source pseudonymity. Immortality Index is an independent, distributed research collective operating without institutional affiliation. Correspondence, data access requests, and milestone challenge submissions should be directed to the public repository at github.com/immortalityindex/immortality-index. All milestone audit logs are publicly accessible via the repository.*
