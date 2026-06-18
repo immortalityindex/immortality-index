@@ -1366,30 +1366,52 @@ function doSignOut() {
   auth.signOut();
 }
 
-function seedFirestore() {
-  var btn = document.getElementById('seed-btn');
-  var statusEl = document.getElementById('seed-status');
-  var bar  = document.getElementById('prog-bar');
-  var fill = document.getElementById('prog-fill');
+async function seedFirestore() {
+  const btn      = document.getElementById('seed-btn');
+  const statusEl = document.getElementById('seed-status');
+  const progBar  = document.getElementById('prog-bar');
+  const progFill = document.getElementById('prog-fill');
   btn.disabled = true;
-  bar.style.display = 'block';
-  statusEl.innerHTML = '<span class="info">Writing ' + OBSTACLES.length + ' obstacles…</span>';
+  progBar.style.display = 'block';
+  statusEl.innerHTML = '<span class=\'info\'>Reading existing data…</span>';
 
-  var batch = db.batch();
-  OBSTACLES.forEach(function(obs) {
-    batch.set(db.collection('obstacles').doc(obs.id), obs);
-  });
+  try {
+    // Read all existing docs first so we can preserve progress
+    const snaps = await Promise.all(
+      OBSTACLES.map(o => db.collection('obstacles').doc(o.id).get())
+    );
 
-  batch.commit()
-    .then(function() {
-      fill.style.width = '100%';
-      statusEl.innerHTML = '<span class="ok">✓ ' + OBSTACLES.length + ' obstacles written! '
-        + '<a href="https://immortality-index.pages.dev" target="_blank">Reload the live site</a> to verify.</span>';
-    })
-    .catch(function(e) {
-      statusEl.innerHTML = '<span class="err">Error: ' + e.message + '</span>';
-      btn.disabled = false;
+    const batch = db.batch();
+    OBSTACLES.forEach((obs, i) => {
+      const ref    = db.collection('obstacles').doc(obs.id);
+      const prev   = snaps[i].exists ? snaps[i].data() : null;
+      const merged = { ...obs };
+
+      if (prev) {
+        // Preserve milestone completion state
+        merged.milestones = obs.milestones.map(m => {
+          const old = (prev.milestones || []).find(pm => pm.id === m.id);
+          return old ? { ...m, completed: old.completed, evidence: old.evidence } : m;
+        });
+        // Preserve papers
+        merged.papers = prev.papers || [];
+      }
+
+      batch.set(ref, merged);
+      progFill.style.width = Math.round((i + 1) / OBSTACLES.length * 100) + '%';
     });
+
+    statusEl.innerHTML = '<span class=\'info\'>Writing…</span>';
+    await batch.commit();
+    progFill.style.width = '100%';
+    statusEl.innerHTML =
+      '<span class=\'ok\'>&#10003; ' + OBSTACLES.length +
+      ' obstacles written — progress preserved!</span>';
+  } catch (e) {
+    statusEl.innerHTML = '<span class=\'err\'>&#10007; ' + e.message + '</span>';
+  } finally {
+    btn.disabled = false;
+  }
 }
 </script>
 </body>
