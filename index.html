@@ -210,7 +210,9 @@
       background: rgba(255,255,255,0.03); border: 1px solid var(--border);
       border-radius: 5px; padding: 3px 8px;
     }
-
+    .papers-list { display: flex; flex-direction: column; gap: 4px; }
+    .paper-link { font-size: 12px; color: var(--accent); text-decoration: none; }
+    .paper-link:hover { text-decoration: underline; }
     .no-data { font-size: 12px; color: var(--text3); font-style: italic; }
 
     .modal-overlay {
@@ -258,35 +260,32 @@
 
 <div class="modal-overlay" id="disclaimerModal">
   <div class="modal-box">
-    <h2>Immortality Index</h2>
-    <p class="modal-subtitle">Research Framework Disclaimer</p>
+    <h2>The Radical Longevity Index</h2>
+    <p class="modal-subtitle">System Architecture, Methodology, and Academic Accountability Statement</p>
     <div class="modal-section">
       <h3>What This Is</h3>
-      <p>The Immortality Index is a proprietary, speculative theoretical roadmap — not a scientific consensus document. It maps a <em>possible</em> pathway toward indefinite human lifespan by decomposing the challenge into 23 verifiable research milestones across two engineering tracks: Genetics and Nanotech. Progress on each milestone is determined by evidence from peer-reviewed literature, not prediction or personal estimate.</p>
+      <p>The Radical Longevity Index (RLI) is an open-source, version-controlled binary milestone registry that decomposes the biological aging problem into 24 falsifiable research obstacles across two primary engineering tracks. Progress on each obstacle is determined solely by evidence from peer-reviewed literature — not prediction, personal estimate, or institutional position. The framework is designed for formal academic citation.</p>
     </div>
     <div class="modal-section">
-      <h3>Speculative Framework Elements</h3>
-      <p>Several concepts in this index — including <strong>Boss Hurdles</strong>, <strong>P2P Re-Flashing</strong>, <strong>Cryptographic Logic Gate Wiring</strong>, and the <strong>12-hour operational window</strong> — are original theoretical constructs developed for this roadmap. They are not established scientific terminology and do not represent universal scientific consensus. They represent engineering targets derived from extrapolating current biological and nanotechnology research trajectories.</p>
+      <h3>Theoretical Constructs</h3>
+      <p>Several concepts in this framework — including <strong>System-Level Integration Bottlenecks (SLIB)</strong>, <strong>Decentralized Intercellular Transcriptomic Error-Correction Networks</strong>, <strong>Somatic Identity Triage and Localized Fibrotic Encapsulation</strong>, and the <strong>G-5.2 2-of-3 spatial quorum logic gate</strong> — are original engineering constructs developed for this roadmap. They are not established clinical terminology. They represent formal engineering targets derived from extrapolating current biological and nanotechnology research trajectories and are intended as falsifiable specifications, not claims about currently operational systems.</p>
     </div>
     <div class="modal-section">
-      <h3>AI-Assisted Literature Monitoring</h3>
-      <p>Daily automated scans use large language model (LLM) analysis of scientific literature to assess whether individual milestones have been met by peer-reviewed evidence. These assessments are probabilistic and may contain errors. Milestone completion reflects the AI's interpretation of available published research — not a formal peer review or expert panel evaluation. Manual overrides are available through the admin panel.</p>
+      <h3>AI Literature Scanning Methodology</h3>
+      <p>Every six hours, an automated edge-worker pipeline uses large-language-model (LLM) analysis of peer-reviewed scientific literature to assess whether each milestone has been achieved. A milestone is confirmed only when: (1) the LLM returns high confidence with a specific journal citation; (2) all quantitative thresholds stated in the milestone are explicitly addressed; (3) sample size and experimental conditions match milestone requirements; and (4) evidence is from peer-reviewed primary literature, not conference abstracts or preprints without peer review. The double-confirmation requirement — threshold matching plus citation validation — is the primary false-positive elimination mechanism.</p>
     </div>
     <div class="modal-section">
-      <h3>Optimistic Stance</h3>
-      <p>This index operates from a transhumanist perspective — treating biological aging as an engineering problem, not an inevitability. We believe the evidence supports long-term feasibility of the roadmap, while acknowledging that timelines are deeply uncertain, many milestones are decades away, and the path will require breakthroughs that have not yet occurred. Scientific surprise — in both directions — is guaranteed.</p>
+      <h3>Benchmark Integrity</h3>
+      <p>All milestone thresholds are pre-registered and immutable except via publicly visible pull requests with documented peer-reviewed justification. No threshold may be adjusted retroactively to accommodate an experimental result. The full change history of every threshold and milestone is permanently auditable in the public GitHub repository. This framework is maintained under the collective pseudonym The Immortality Index Consortium to ensure assessments remain free from institutional affiliation, funding relationships, and individual reputational incentive.</p>
+    </div>
+    <div class="modal-section">
+      <h3>Cite This Work</h3>
+      <p style="font-size:0.78rem;font-family:monospace;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:6px;line-height:1.6;margin-bottom:8px">@misc{rli2026,<br>&nbsp;&nbsp;author = {{The Immortality Index Consortium}},<br>&nbsp;&nbsp;title = {The Radical Longevity Index},<br>&nbsp;&nbsp;year = {2026},<br>&nbsp;&nbsp;doi = {10.5281/zenodo.PLACEHOLDER},<br>&nbsp;&nbsp;url = {https://github.com/immortalityindex/immortality-index}<br>}</p>
+      <p style="font-size:0.82rem;color:#94a3b8">APA: The Immortality Index Consortium. (2026). <em>The Radical Longevity Index</em> (v1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER</p>
     </div>
     <div class="modal-section">
       <h3>Not Medical Advice</h3>
       <p>Nothing on this site constitutes medical advice, investment advice, or a recommendation to pursue any specific intervention. All described technologies are research-stage unless otherwise noted.</p>
-    </div>
-    <div class="modal-section">
-      <h3>Corrections & Contributions</h3>
-      <p>If you spot an incorrect milestone assessment, a missing paper, or evidence that a milestone should be ticked off, we want to know. Open an issue on <a href="https://github.com/immortalityindex/immortality-index/issues" target="_blank" rel="noopener" style="color:var(--accent)">GitHub Issues</a> — corrections are tracked publicly so others can see what's been fixed.</p>
-    </div>
-    <div class="modal-section">
-      <h3>License</h3>
-      <p>The obstacle framework, milestone definitions, and methodology are licensed under <a href="https://github.com/immortalityindex/immortality-index/blob/main/LICENSE" target="_blank" rel="noopener" style="color:var(--accent)">CC BY 4.0</a>. You may use, share, or build on this work — including linking to or citing it in papers — as long as you credit "Immortality Index" and link back to <a href="https://immortality-index.pages.dev" target="_blank" rel="noopener" style="color:var(--accent)">immortality-index.pages.dev</a>.</p>
     </div>
     <button class="modal-close" onclick="document.getElementById('disclaimerModal').classList.remove('open')">Close</button>
   </div>
@@ -295,11 +294,11 @@
 <header>
   <div class="header-inner">
     <div class="logo-area">
-      <h1>⚡ Immortality Index</h1>
-      <p>23 Research Obstacles · Live Literature Tracking</p>
+      <h1>⚡ Radical Longevity Index</h1>
+      <p>24 Research Obstacles · Live Literature Tracking</p>
     </div>
     <div class="header-actions">
-      <button class="disclaimer-btn" onclick="document.getElementById('disclaimerModal').classList.add('open')">ℹ Disclaimer</button>
+      <button class="disclaimer-btn" onclick="document.getElementById('disclaimerModal').classList.add('open')">ℹ Methodology &amp; Citation</button>
       <div class="last-scan">
         <div id="lastScanLabel" class="pulse">Loading...</div>
         <div style="margin-top:2px">Last Scan</div>
@@ -342,8 +341,8 @@
 
 <footer>
   <div class="footer-inner">
-    <span>Immortality Index · Speculative Research Roadmap</span>
-    <a onclick="document.getElementById('disclaimerModal').classList.add('open')">Disclaimer &amp; Methodology</a>
+    <span>Radical Longevity Index · The Immortality Index Consortium · CC BY 4.0</span>
+    <a onclick="document.getElementById('disclaimerModal').classList.add('open')">Methodology &amp; Citation</a>
     <span id="footer-update">Updated: —</span>
   </div>
 </footer>
@@ -399,6 +398,10 @@
     const anchorsHtml = obs.anchors?.length
       ? obs.anchors.map(a => `<span class="anchor-chip">${escHtml(a)}</span>`).join('')
       : '<span class="no-data">No anchors listed.</span>';
+    const papersHtml = obs.papers?.length
+      ? obs.papers.map(p => `<a class="paper-link" href="${p.url}" target="_blank" rel="noopener">${escHtml(p.title||p.url)}</a>`).join('')
+      : '<div class="no-data">No papers linked yet — AI scan populates this.</div>';
+
     return `
       <div class="${cls}" id="${cardId}">
         <div class="card-header" onclick="toggleCard('${cardId}')">
@@ -422,7 +425,8 @@
           <div class="milestones-list">${renderMilestones(obs.milestones)}</div>
           <div class="section-label" style="margin-top:14px">🔬 Real-World Scientific Anchors</div>
           <div class="anchors-list">${anchorsHtml}</div>
-
+          <div class="section-label" style="margin-top:14px">📄 Research Papers</div>
+          <div class="papers-list">${papersHtml}</div>
         </div>
       </div>`;
   }
@@ -458,49 +462,4 @@
 
     document.getElementById('nanotech-pct').textContent = ns.pct + '%';
     document.getElementById('nanotech-bar').style.width = ns.pct + '%';
-    document.getElementById('nanotech-count').textContent = `${ns.done} / ${ns.total} milestones complete`;
-
-    // Last scan date from scan-status endpoint
-    fetch('https://immortality-index-scanner.immortalityindex.workers.dev/status').then(r => r.json()).then(d => {
-      const ts = d.completedAt || d.startedAt;
-      if (ts) {
-        const dt = new Date(ts);
-        const label = dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
-          + ' ' + dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-        document.getElementById('lastScanLabel').textContent = 'Last scan: ' + label;
-        document.getElementById('lastScanLabel').classList.remove('pulse');
-        document.getElementById('footer-update').textContent = 'Last scan: ' + label;
-      } else {
-        document.getElementById('lastScanLabel').textContent = 'No scan yet';
-        document.getElementById('lastScanLabel').classList.remove('pulse');
-      }
-    }).catch(() => {
-      document.getElementById('lastScanLabel').textContent = 'Last scan: unknown';
-      document.getElementById('lastScanLabel').classList.remove('pulse');
-    });
-
-    function renderCol(obs, colId, colClass) {
-      const phases = groupByPhase(obs);
-      let html = `<h3>${colId==='genetics-col'?'Track 01 · Genetics':'Track 02 · Nanotech'}</h3>`;
-      let first = true;
-      phases.forEach((phaseObs, label) => {
-        html += `<div class="phase-header" style="${first?'border-top:none;margin-top:0;padding-top:0':''}">
-          ${escHtml(label)}
-        </div>`;
-        first = false;
-        phaseObs.forEach(o => { html += renderCard(o, colClass); });
-      });
-      document.getElementById(colId).innerHTML = html;
-    }
-
-    renderCol(genetics, 'genetics-col', 'genetics-col');
-    renderCol(nanotech, 'nanotech-col', 'nanotech-col');
-  }, err => {
-    console.error(err);
-    ['genetics-col','nanotech-col'].forEach(id => {
-      document.getElementById(id).innerHTML = `<div class="loading-state" style="color:var(--red)">Failed to load: ${err.message}</div>`;
-    });
-  });
-</script>
-</body>
-</html>
+    document.getElementById('nanotech-count').textContent = `${ns.done} / ${ns.total} milestones 

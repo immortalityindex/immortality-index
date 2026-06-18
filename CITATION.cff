@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use, build upon, or reference this engineering framework in academic literature, please cite it as follows."
+authors:
+  - name: "The Immortality Index Consortium"
+    website: "https://immortality-index.pages.dev"
+title: "The Radical Longevity Index: A Quantitative Dependency Graph and Milestone Framework for Somatic Identity Verification and Radical Longevity Engineering"
+version: "1.0.0"
+doi: "10.5281/zenodo.PLACEHOLDER"
+date-released: 2026-06-18
+url: "https://github.com/immortalityindex/immortality-index"
+license: CC-BY-4.0
+abstract: >
+  The Radical Longevity Index (RLI) is an open, version-controlled, binary milestone
+  registry that operationalises the engineering prerequisites for negligible somatic senescence.
+  It decomposes the biological aging problem into 23 falsifiable research obstacles across two
+  primary engineering tracks — somatic genetic fidelity (Track 01) and nanoscale biomedical
+  systems (Track 02) — each governed by four binary milestone gates. Milestone status is
+  updated autonomously via large-language-model literature scanning against peer-reviewed
+  sources. The framework is designed for formal citation, collaborative extension, and
+  integration into academic longevity research programmes.
+keywords:
+  - longevity
+  - biogerontology
+  - negligible senescence
+  - epigenetic reprogramming
+  - somatic identity
+  - nanotechnology
+  - systems biology
+  - falsifiable benchmarking
+  - open science
+repository-code: "https://github.com/immortalityindex/immortality-index"
