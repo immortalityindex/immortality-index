@@ -2,7 +2,7 @@
 
 A structured framework tracking humanity's progress toward defeating aging and death.
 
-**Live site:** [immortality-index.netlify.app](https://immortality-index.netlify.app)
+**Live site:** [immortality-index.pages.dev](https://immortality-index.pages.dev)
 **Project info & docs:** [immortalityindex.github.io/immortality-index](https://immortalityindex.github.io/immortality-index)
 
 ## About
