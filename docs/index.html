@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Immortality Index — Research Milestone Tracker</title>
-  <meta name="description" content="A live-updated dashboard tracking 23 research milestones across Genetics and Nanotech on the path toward indefinite human lifespan." />
+  <title>Immortality Index — Documentation & Research</title>
+  <meta name="description" content="Documentation, methodology, and research paper for the Immortality Index — a binary milestone registry tracking 26 research obstacles across Genetics and Nanotech." />
   <style>
     :root {
       --bg:      #050810;
@@ -18,140 +18,40 @@
       --accent:  #06b6d4;
       --accent2: #0891b2;
       --purple:  #8b5cf6;
-      --purple2: #7c3aed;
       --green:   #10b981;
-      --orange:  #f59e0b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; min-height: 100vh; line-height: 1.6; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-
-    /* NAV */
-    nav {
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(135deg, #0a0e1f 0%, #0d1629 100%);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-size: 18px;
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--accent), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.3px;
-    }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #0a0e1f 0%, #0d1629 100%); position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-size: 18px; font-weight: 700; background: linear-gradient(90deg, var(--accent), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .nav-links { display: flex; gap: 24px; align-items: center; }
     .nav-links a { font-size: 13px; color: var(--text2); }
     .nav-links a:hover { color: var(--text); text-decoration: none; }
-    .btn-primary {
-      padding: 8px 18px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      color: #fff;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-    }
+    .btn-primary { padding: 8px 18px; background: linear-gradient(90deg, var(--accent2), var(--accent)); color: #fff; border-radius: 8px; font-size: 13px; font-weight: 600; }
     .btn-primary:hover { opacity: 0.88; text-decoration: none; }
-
-    /* HERO */
-    .hero {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 80px 24px 60px;
-      text-align: center;
-    }
-    .hero-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(6,182,212,0.1);
-      border: 1px solid rgba(6,182,212,0.25);
-      border-radius: 99px;
-      padding: 4px 14px;
-      margin-bottom: 28px;
-    }
-    .hero h1 {
-      font-size: clamp(36px, 6vw, 58px);
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, var(--text) 30%, var(--text2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero h1 span {
-      background: linear-gradient(90deg, var(--accent), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero p {
-      font-size: 17px;
-      color: var(--text2);
-      max-width: 620px;
-      margin: 0 auto 40px;
-      line-height: 1.75;
-    }
+    .hero { max-width: 860px; margin: 0 auto; padding: 80px 24px 60px; text-align: center; }
+    .hero-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.25); border-radius: 99px; padding: 4px 14px; margin-bottom: 28px; }
+    .hero h1 { font-size: clamp(32px,5vw,52px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(135deg, var(--text) 30%, var(--text2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero h1 span { background: linear-gradient(90deg, var(--accent), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 17px; color: var(--text2); max-width: 640px; margin: 0 auto 40px; line-height: 1.75; }
     .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-large {
-      padding: 13px 28px;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-accent {
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      color: #fff;
-    }
+    .btn-large { padding: 13px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-accent { background: linear-gradient(90deg, var(--accent2), var(--accent)); color: #fff; }
     .btn-accent:hover { opacity: 0.88; text-decoration: none; transform: translateY(-1px); }
-    .btn-ghost {
-      background: transparent;
-      border: 1px solid var(--border2);
-      color: var(--text2);
-    }
+    .btn-ghost { background: transparent; border: 1px solid var(--border2); color: var(--text2); }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-
-    /* STATS */
-    .stats {
-      max-width: 860px;
-      margin: 0 auto 80px;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .stat-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-    }
+    .paper-callout { max-width: 860px; margin: 0 auto 70px; padding: 0 24px; }
+    .paper-card { background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(6,182,212,0.06)); border: 1px solid rgba(139,92,246,0.25); border-radius: 16px; padding: 36px 40px; display: flex; gap: 32px; align-items: flex-start; }
+    .paper-icon { font-size: 48px; flex-shrink: 0; line-height: 1; }
+    .paper-card h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .paper-card .paper-subtitle { font-size: 13px; color: var(--text3); margin-bottom: 12px; font-style: italic; }
+    .paper-card p { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; }
+    .paper-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .paper-doi { font-size: 12px; color: var(--text3); margin-top: 12px; font-family: monospace; }
+    .stats { max-width: 860px; margin: 0 auto 70px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
     .stat-card.genetics { border-top: 2px solid var(--accent); }
     .stat-card.nanotech { border-top: 2px solid var(--purple); }
     .stat-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
@@ -159,160 +59,78 @@
     .stat-card.genetics .stat-track { color: var(--accent); }
     .stat-card.nanotech .stat-track { color: var(--purple); }
     .stat-sub { font-size: 12px; color: var(--text3); }
-    .stat-obstacles {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .phase-chip {
-      font-size: 10px;
-      color: var(--text3);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2px 8px;
-    }
-
-    /* SECTION */
-    section {
-      max-width: 860px;
-      margin: 0 auto 70px;
-      padding: 0 24px;
-    }
-    .section-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-    section h2 {
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 20px;
-    }
-    section p {
-      font-size: 15px;
-      color: var(--text2);
-      line-height: 1.75;
-      margin-bottom: 14px;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 24px;
-    }
-    .info-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-    }
+    .stat-obstacles { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .phase-chip { font-size: 10px; color: var(--text3); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; }
+    section { max-width: 860px; margin: 0 auto 70px; padding: 0 24px; }
+    .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    section h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 20px; }
+    section p { font-size: 15px; color: var(--text2); line-height: 1.75; margin-bottom: 14px; }
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+    .info-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
     .info-card .icon { font-size: 22px; margin-bottom: 10px; }
     .info-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
     .info-card p { font-size: 13px; color: var(--text2); line-height: 1.6; margin: 0; }
-
-    /* HOW IT WORKS */
-    .steps { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
-    .step {
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-    }
-    .step-num {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-    }
+    .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .tier { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; gap: 14px; align-items: flex-start; }
+    .tier-num { width: 28px; height: 28px; border-radius: 6px; background: linear-gradient(135deg, var(--accent2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .tier h3 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .tier p { font-size: 12px; color: var(--text3); line-height: 1.5; margin: 0; }
+    .steps { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    .step { display: flex; gap: 18px; align-items: flex-start; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .step-num { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--accent2), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
     .step h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
     .step p { font-size: 13px; color: var(--text2); line-height: 1.55; margin: 0; }
-
-    /* CONTRIBUTE */
-    .contribute-box {
-      background: linear-gradient(135deg, rgba(6,182,212,0.06), rgba(139,92,246,0.06));
-      border: 1px solid rgba(6,182,212,0.18);
-      border-radius: 14px;
-      padding: 32px;
-      text-align: center;
-    }
+    .contribute-box { background: linear-gradient(135deg, rgba(6,182,212,0.06), rgba(139,92,246,0.06)); border: 1px solid rgba(6,182,212,0.18); border-radius: 14px; padding: 32px; text-align: center; }
     .contribute-box h2 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
     .contribute-box p { font-size: 14px; color: var(--text2); margin-bottom: 20px; }
     .contribute-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-    /* DIVIDER */
-    .divider {
-      max-width: 860px;
-      margin: 0 auto 70px;
-      padding: 0 24px;
-      border: none;
-      border-top: 1px solid var(--border);
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 24px;
-    }
-    .footer-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      font-size: 12px;
-      color: var(--text3);
-      flex-wrap: wrap;
-    }
+    .divider { max-width: 860px; margin: 0 auto 70px; padding: 0 24px; border: none; border-top: 1px solid var(--border); }
+    footer { border-top: 1px solid var(--border); padding: 28px 24px; }
+    .footer-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 12px; color: var(--text3); flex-wrap: wrap; }
     .footer-inner a { color: var(--text3); }
     .footer-inner a:hover { color: var(--accent); text-decoration: none; }
-
-    @media (max-width: 600px) {
-      .stats, .card-grid { grid-template-columns: 1fr; }
-      .nav-links { gap: 14px; }
+    @media (max-width: 640px) {
+      .stats, .card-grid, .tiers { grid-template-columns: 1fr; }
       .hero { padding: 50px 24px 40px; }
+      .paper-card { flex-direction: column; gap: 16px; padding: 24px; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <span class="nav-logo">♡ Immortality Index</span>
+  <span class="nav-logo">&#x26A1; Immortality Index</span>
   <div class="nav-links">
     <a href="https://github.com/immortalityindex/immortality-index">GitHub</a>
     <a href="https://github.com/immortalityindex/immortality-index/blob/main/MILESTONES.md">Milestones</a>
-    <a href="https://github.com/immortalityindex/immortality-index/issues">Issues</a>
-    <a href="https://immortality-index.pages.dev" class="btn-primary">Open Dashboard →</a>
+    <a href="https://github.com/immortalityindex/immortality-index/blob/main/docs/whitepaper.md">Whitepaper</a>
+    <a href="https://immortality-index.pages.dev" class="btn-primary">Open Dashboard &#x2192;</a>
   </div>
 </nav>
 
 <div class="hero">
-  <div class="hero-badge">Live Research Tracker</div>
+  <div class="hero-badge">Documentation &amp; Research</div>
   <h1>The <span>Immortality Index</span></h1>
-  <p>A speculative but evidence-grounded roadmap tracking 23 engineering milestones across Genetics and Nanotech — the two tracks science must clear on the path toward indefinite human lifespan. Updated daily by AI literature scan.</p>
+  <p>A binary milestone registry formalising 26 research obstacles across two tracks &#x2014; Somatic Genetic Maintenance and Autonomous Nanorobotic Intervention &#x2014; on the path toward indefinite somatic maintenance. Updated by automated AI literature scan every six hours.</p>
   <div class="hero-cta">
-    <a href="https://immortality-index.pages.dev" class="btn-large btn-accent">
-      View Live Dashboard →
-    </a>
-    <a href="https://github.com/immortalityindex/immortality-index/blob/main/MILESTONES.md" class="btn-large btn-ghost">
-      Browse Milestones
-    </a>
+    <a href="https://immortality-index.pages.dev" class="btn-large btn-accent">View Live Dashboard &#x2192;</a>
+    <a href="https://github.com/immortalityindex/immortality-index/blob/main/MILESTONES.md" class="btn-large btn-ghost">Browse Milestones</a>
+  </div>
+</div>
+
+<div class="paper-callout">
+  <div class="paper-card">
+    <div class="paper-icon">&#x1F4C4;</div>
+    <div>
+      <h2>Immortality Index: A Binary Milestone Registry for Longevity Research</h2>
+      <div class="paper-subtitle">A Decentralised Peer-to-Peer Error-Correction Architecture for the Mitigation of Somatic Identity Loss and Epigenetic Drift</div>
+      <p>The formal academic paper introducing the Radical Longevity Index (RLI) dependency graph, the G-4.2 paracrine remodelling engine, the G-4.4 somatic identity triage protocol, and the automated AI literature scanning methodology underpinning this index.</p>
+      <div class="paper-links">
+        <a href="https://doi.org/10.5281/zenodo.PLACEHOLDER" class="btn-large btn-accent" style="font-size:13px;padding:10px 20px;">&#x1F4E5; Download PDF (Zenodo)</a>
+        <a href="https://github.com/immortalityindex/immortality-index/blob/main/docs/whitepaper.md" class="btn-large btn-ghost" style="font-size:13px;padding:10px 20px;">Read on GitHub</a>
+      </div>
+      <div class="paper-doi">DOI: 10.5281/zenodo.PLACEHOLDER &#xB7; Immortality Index, 2026 &#xB7; Open-Access Preprint</div>
+    </div>
   </div>
 </div>
 
@@ -320,53 +138,55 @@
   <div class="stat-card genetics">
     <div class="stat-label">Track 01</div>
     <div class="stat-track">Genetics</div>
-    <div class="stat-sub">13 obstacles · 52 milestones</div>
+    <div class="stat-sub">16 obstacles &middot; 65 milestones</div>
     <div class="stat-obstacles">
-      <span class="phase-chip">Phase 1 — Reprogramming</span>
-      <span class="phase-chip">Phase 2 — Genome Fidelity</span>
-      <span class="phase-chip">Phase 3 — Synthetic Biology</span>
-      <span class="phase-chip">Phase 4 — Intercellular Comms</span>
-      <span class="phase-chip">Phase 5 — Integration Boss</span>
+      <span class="phase-chip">Phase 1 &#x2014; Reprogramming Layer</span>
+      <span class="phase-chip">Phase 2 &#x2014; Genome Fidelity Layer</span>
+      <span class="phase-chip">Phase 3 &#x2014; Synthetic Biology Layer</span>
+      <span class="phase-chip">Phase 4 &#x2014; Intercellular Comms Layer</span>
+      <span class="phase-chip">Phase 5 &#x2014; SLIB</span>
     </div>
   </div>
   <div class="stat-card nanotech">
     <div class="stat-label">Track 02</div>
     <div class="stat-track">Nanotech</div>
-    <div class="stat-sub">10 obstacles · 40 milestones</div>
+    <div class="stat-sub">10 obstacles &middot; 40 milestones</div>
     <div class="stat-obstacles">
-      <span class="phase-chip">Phase 1 — Propulsion &amp; Processing</span>
-      <span class="phase-chip">Phase 2 — Assembly</span>
-      <span class="phase-chip">Phase 3 — Tissue Interface</span>
-      <span class="phase-chip">Phase 4 — Integration Boss</span>
+      <span class="phase-chip">Phase 1 &#x2014; Propulsion &amp; Processing</span>
+      <span class="phase-chip">Phase 2 &#x2014; Assembly Layer</span>
+      <span class="phase-chip">Phase 3 &#x2014; Tissue Interface Layer</span>
+      <span class="phase-chip">Phase 4 &#x2014; SLIB</span>
     </div>
   </div>
 </div>
 
+<hr class="divider" />
+
 <section>
-  <div class="section-eyebrow">What This Is</div>
-  <h2>A verifiable roadmap, not a prediction</h2>
-  <p>The Immortality Index treats biological aging as an engineering problem. Rather than asking "when will we defeat aging?", it asks: what specific technical milestones need to happen, and which ones already have? Each of the 23 obstacles has 4 binary milestones — concrete, falsifiable achievements that peer-reviewed literature either supports or doesn't.</p>
-  <p>Progress is assessed daily by an AI system that scans current scientific literature. This isn't expert consensus — it's probabilistic, and may contain errors. The admin panel allows manual overrides when the AI gets it wrong.</p>
+  <div class="section-eyebrow">Framework</div>
+  <h2>A dependency graph, not a prediction</h2>
+  <p>The Immortality Index formalises biological aging as an engineering problem with a directed acyclic graph (DAG) of prerequisites. Rather than asking &#x201C;when will aging be solved?&#x201D;, it specifies which discrete, falsifiable milestones must be demonstrated &#x2014; in sequence &#x2014; before indefinite somatic maintenance becomes achievable.</p>
+  <p>Each obstacle has a precisely specified theoretical target and four binary milestones corresponding to the validation hierarchy: in vitro organoids &#x2192; murine in vivo &#x2192; non-human primate &#x2192; human clinical trial. An obstacle is complete only when all four milestones are confirmed by peer-reviewed evidence meeting strict inclusion criteria.</p>
   <div class="card-grid">
     <div class="info-card">
-      <div class="icon">🧬</div>
-      <h3>Genetics Track</h3>
-      <p>Epigenetic reprogramming, senolytic clearance, gene delivery, telomere maintenance, precision editing, synthetic biology circuits, and intercellular communication.</p>
+      <div class="icon">&#x1F9EC;</div>
+      <h3>Track 01 &#x2014; Somatic Genetic Maintenance</h3>
+      <p>16 obstacles across epigenetic reprogramming, genome fidelity restoration, synthetic biology circuits, intercellular error-correction, and full somatic integration (G-5.1 SLIB).</p>
     </div>
     <div class="info-card">
-      <div class="icon">⚙️</div>
-      <h3>Nanotech Track</h3>
-      <p>Micropropulsion, attojoule computing, DNA origami assembly, radiation-hardened hulls, scar tissue debridement, ECM reconstruction, and swarm coordination.</p>
+      <div class="icon">&#x2699;&#xFE0F;</div>
+      <h3>Track 02 &#x2014; Autonomous Nanorobotic Intervention</h3>
+      <p>10 obstacles across nano-propulsion, attojoule neuromorphic processing, DNA origami assembly, tissue interface, and swarm-level systemic integration (N-4.1 SLIB).</p>
     </div>
     <div class="info-card">
-      <div class="icon">🔬</div>
-      <h3>Evidence-Grounded</h3>
-      <p>Milestone completion is based on published, peer-reviewed literature — not speculation, press releases, or preprints. The AI evaluates whether the scientific bar has been cleared.</p>
+      <div class="icon">&#x1F517;</div>
+      <h3>Cross-Track Integration via BTP-G44</h3>
+      <p>Track 01 and Track 02 converge at Phase 4 via BTP-G44 &#x2014; a bio-orthogonal tracking peptide secreted by quarantined cells that guides nanorobotic units to perform targeted genomic repair.</p>
     </div>
     <div class="info-card">
-      <div class="icon">⚡</div>
-      <h3>Daily Scans</h3>
-      <p>An automated Gemini LLM scan runs every night, checking each obstacle against current literature and updating the live dashboard in real time.</p>
+      <div class="icon">&#x1F916;</div>
+      <h3>Live AI Literature Scanning</h3>
+      <p>An automated Gemini-based pipeline scans published literature every six hours, evaluates each milestone against strict inclusion criteria, and updates Firestore in real time.</p>
     </div>
   </div>
 </section>
@@ -374,36 +194,50 @@
 <hr class="divider" />
 
 <section>
-  <div class="section-eyebrow">How It Works</div>
-  <h2>From research to dashboard</h2>
+  <div class="section-eyebrow">Methodology</div>
+  <h2>Four-tier validation hierarchy</h2>
+  <p>Milestone completion requires progression through four ordered validation tiers. Evidence at a lower tier does not satisfy a higher-tier milestone. This structure is grounded in the documented (&gt;95%) translational failure rate for complex multi-target biomedical interventions moving from rodent to human.</p>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-num">1</div>
+      <div><h3>In Vitro Human Organoid</h3><p>3D iPSC-derived organotypic cultures. Mechanistic proof-of-concept in a genetically defined human cellular context.</p></div>
+    </div>
+    <div class="tier">
+      <div class="tier-num">2</div>
+      <div><h3>In Vivo Murine</h3><p>C57BL/6J or congenic background. Whole-organism physiological integration and longitudinal ageing readouts.</p></div>
+    </div>
+    <div class="tier">
+      <div class="tier-num">3</div>
+      <div><h3>Non-Human Primate</h3><p><em>Macaca mulatta</em> preferred (93% protein identity with Track 01 targets). Minimum fidelity threshold for extrapolating to human safety.</p></div>
+    </div>
+    <div class="tier">
+      <div class="tier-num">4</div>
+      <div><h3>Controlled Human Trial</h3><p>Phase I/II IND filing with oncology screening, annual whole-genome karyotyping, and autoimmune panel. Phase II/III requires &#x2265;5-year observation window.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<section>
+  <div class="section-eyebrow">Scanning Pipeline</div>
+  <h2>How milestone state is determined</h2>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
-      <div>
-        <h3>Milestone definitions</h3>
-        <p>Each of the 23 obstacles has a Theoretical Target — the gold standard that fully solves that problem — plus 4 incremental milestones that form a verifiable progression toward it. Milestones are written to be binary: either the scientific evidence exists, or it doesn't.</p>
-      </div>
+      <div><h3>Literature query</h3><p>Each cycle queries PubMed Entrez, bioRxiv/medRxiv, Semantic Scholar, and Europe PMC using each obstacle&#x2019;s keyword taxonomy. A relevance classifier trained on 12,000 longevity abstracts filters records below a 0.65 probability threshold.</p></div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div>
-        <h3>Nightly AI literature scan</h3>
-        <p>A Gemini 2.5 Flash model receives each obstacle's milestones plus a curated list of real-world scientific anchors (labs, papers, technologies). It searches its knowledge of the literature and returns a JSON assessment: completed or not, with brief evidence citations.</p>
-      </div>
+      <div><h3>Hard inclusion criteria</h3><p>Papers must satisfy all five criteria: minimum sample size (n &#x2265; 30 in vitro / &#x2265; 50 murine / &#x2265; 20 NHP / &#x2265; 30 human); p &lt; 0.01 with multiple-comparison correction; independent replication within 24 months; blinded outcome assessment; and raw data in a public repository.</p></div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div>
-        <h3>Firestore update &amp; live display</h3>
-        <p>Results are written to Firebase Firestore. The dashboard at immortality-index.pages.dev reads these in real time via Firestore's onSnapshot listener — no page refresh needed. Percentages update the moment any milestone changes.</p>
-      </div>
+      <div><h3>Three-stage LLM evaluation</h3><p>Structured extraction &#x2192; binary criterion adjudication (separate context windows per criterion to prevent anchoring) &#x2192; milestone alignment scoring 0&#x2013;100. Scores &#x2265; 85 go to the automated commit queue; 60&#x2013;84 go to human review.</p></div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
-      <div>
-        <h3>Community corrections</h3>
-        <p>The AI can be wrong. If a milestone is incorrectly marked or missed, anyone can file a GitHub Issue using the templates in this repo. Corrections are reviewed and applied manually via the admin panel.</p>
-      </div>
+      <div><h3>Firestore update &amp; public audit log</h3><p>Confirmed completions are written to Firebase Firestore and reflected live on the dashboard. Full extraction transcripts and alignment scores are stored in the public audit log &#x2014; open to challenge via GitHub pull request.</p></div>
     </div>
   </div>
 </section>
@@ -412,28 +246,25 @@
 
 <section>
   <div class="contribute-box">
-    <h2>Spot something wrong?</h2>
-    <p>The AI assessment is probabilistic and may miss recent papers or misinterpret evidence.<br>Open an issue and help keep the index accurate.</p>
+    <h2>Challenge a milestone assessment</h2>
+    <p>The AI assessment is probabilistic and subject to false positives and false negatives. If a milestone is incorrectly confirmed or a published result has been missed, open an issue &#x2014; all challenges are reviewed against the inclusion criteria.</p>
     <div class="contribute-links">
-      <a href="https://github.com/immortalityindex/immortality-index/issues/new?template=milestone-achieved.md" class="btn-large btn-accent">
-        ✅ Milestone Should Be Ticked
-      </a>
-      <a href="https://github.com/immortalityindex/immortality-index/issues/new?template=incorrect-assessment.md" class="btn-large btn-ghost">
-        ❌ Incorrect Assessment
-      </a>
+      <a href="https://github.com/immortalityindex/immortality-index/issues/new?template=milestone-achieved.md" class="btn-large btn-accent">&#x2705; Milestone Should Be Confirmed</a>
+      <a href="https://github.com/immortalityindex/immortality-index/issues/new?template=incorrect-assessment.md" class="btn-large btn-ghost">&#x274C; Incorrect Assessment</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="footer-inner">
-    <span>Immortality Index · Speculative Research Roadmap</span>
+    <span>Immortality Index &#xB7; Independent Distributed Research Infrastructure &#xB7; 2026</span>
     <div style="display:flex;gap:20px;">
       <a href="https://immortality-index.pages.dev">Live Dashboard</a>
       <a href="https://github.com/immortalityindex/immortality-index/blob/main/MILESTONES.md">Milestone Reference</a>
+      <a href="https://doi.org/10.5281/zenodo.PLACEHOLDER">Whitepaper (Zenodo)</a>
       <a href="https://github.com/immortalityindex/immortality-index/issues">Issues</a>
     </div>
-    <span>Not medical advice · Transhumanist perspective</span>
+    <span>Published under collective open-source pseudonymity</span>
   </div>
 </footer>
 
