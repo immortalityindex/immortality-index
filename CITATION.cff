@@ -23,7 +23,7 @@ abstract: >
   The Immortality Index is an open-science binary milestone registry that tracks
   progress toward engineered negligible senescence across two parallel research tracks:
   Track 01 (Somatic Genetic Maintenance) and Track 02 (Autonomous Nanorobotic Intervention).
-  Each of the 25 research obstacles is defined by a precise theoretical target and four
-  validation-tier milestones. Milestone state is updated nightly by an automated AI
+  Each of the 26 research obstacles is defined by a precise theoretical target and
+  binary validation-tier milestones. Milestone state is updated nightly by an automated AI
   literature scanner enforcing strict inclusion criteria. The framework provides a
   falsifiable, publicly auditable dependency graph for the global longevity research community.
