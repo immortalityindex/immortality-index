@@ -42,14 +42,14 @@ This framework is designed for formal academic citation. If you reference, build
   title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},
   year         = {2026},
   publisher    = {GitHub},
-  doi          = {10.5281/zenodo.PLACEHOLDER},
+  doi          = {10.5281/zenodo.20756206},
   url          = {https://github.com/immortalityindex/immortality-index},
   note         = {Version 1.0.0. License: CC BY 4.0}
 }
 ```
 
 **APA:**
-> Immortality Index. (2026). *Immortality Index: A Binary Milestone Registry for Longevity Research* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.PLACEHOLDER
+> Immortality Index. (2026). *Immortality Index: A Binary Milestone Registry for Longevity Research* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.20756206
 
 ---
 
