@@ -214,28 +214,52 @@
 
   // ── SCAN ─────────────────────────────────────────────────
   window.triggerScan = async () => {
-    const btn = document.getElementById('scan-btn');
-    const status = document.getElementById('scan-status');
-    btn.disabled = true;
-    btn.textContent = 'Triggering...';
-    status.textContent = '';
-    try {
-      const user = auth.currentUser;
-      const token = await user.getIdToken();
-      const r = await fetch('/api/scan', {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      status.textContent = r.ok ? '✓ Scan triggered (background — runs ~2 min)' : '✗ Scan failed: ' + r.status;
-      status.style.color = r.ok ? 'var(--green)' : 'var(--red)';
-    } catch(e) {
-      status.textContent = '✗ ' + e.message;
-      status.style.color = 'var(--red)';
-    } finally {
-      btn.disabled = false;
-      btn.textContent = '▶ Trigger AI Scan';
-    }
-  };
+const btn = document.getElementById('scan-btn');
+const status = document.getElementById('scan-status');
+btn.disabled = true;
+status.style.color = 'var(--accent)';
+status.textContent = '';
+
+try {
+const user = auth.currentUser;
+const obstacles = Object.values(allDocs).sort((a,b) => {
+if (a.track !== b.track) return a.track < b.track ? -1 : 1;
+return (a.order||0) - (b.order||0);
+});
+
+let totalConfirmed = 0;
+for (let i = 0; i < obstacles.length; i++) {
+const obs = obstacles[i];
+const label = obs.shortName || obs.name || obs.id;
+btn.textContent = `Scanning ${i+1}/${obstacles.length}`;
+status.textContent = `⟳ ${label}`;
+
+try {
+const token = await user.getIdToken();
+const r = await fetch('/api/scan', {
+method: 'POST',
+headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+body: JSON.stringify({ obstacleId: obs.id })
+});
+if (r.ok) {
+const result = await r.json();
+totalConfirmed += result.confirmed || 0;
+}
+} catch(e) { /* continue */ }
+
+if (i < obstacles.length - 1) await new Promise(r => setTimeout(r, 1500));
+}
+
+status.textContent = `✓ Scan complete — ${totalConfirmed} milestone${totalConfirmed !== 1 ? 's' : ''} confirmed`;
+status.style.color = 'var(--green)';
+} catch(e) {
+status.textContent = '✗ ' + e.message;
+status.style.color = 'var(--red)';
+} finally {
+btn.disabled = false;
+btn.textContent = '▶ Trigger AI Scan';
+}
+};;
 
   // ── OBSTACLES ────────────────────────────────────────────
   let allDocs = {};
