@@ -7,12 +7,12 @@
 
 ## Overview
 
-The Immortality Index tracks **24 research obstacles** across two engineering tracks. Each obstacle has **4 binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
+The Immortality Index tracks **26 research obstacles** across two engineering tracks. Each obstacle has **binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
 
-- **Track 01 · Somatic Genetic Fidelity** — 14 obstacles, 56 milestones (Phases 1–4 + SLIB)
+- **Track 01 · Somatic Genetic Fidelity** — 16 obstacles, 65 milestones (Phases 1–4 + SLIB)
 - **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones (Phases 1–3 + SLIB)
 
-**System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track — one obstacle each. Track 01's SLIB is G-5.1 (Perpetual Human Somatic Rejuvenation): indefinite biological age homeostasis in a living human subject with all 13 Track 01 subsystems active. G-4.5 (Full Chromosomal Integration) is a Phase 4 prerequisite. Track 02's SLIB is N-4.1 (Mass Swarm Cohesion and Systemic Integration). The cross-track dependency runs through G-4.4: the Somatic Identity Triage circuit (Phase 4, Track 01) generates the vascular peptide beacon that Track 02 nanorobots are built to receive.
+**System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track — one obstacle each. Track 01's SLIB is G-5.1 (Perpetual Human Somatic Rejuvenation): indefinite biological age homeostasis in a living human subject with all 14 Track 01 subsystems active. G-4.6 (Full Chromosomal Integration) is a Phase 4 prerequisite. Track 02's SLIB is N-4.1 (Mass Swarm Cohesion and Systemic Integration). The cross-track dependency runs through G-4.5: the Somatic Identity Triage circuit (Phase 4, Track 01) generates the vascular peptide beacon that Track 02 nanorobots are built to receive.
 
 ---
 
@@ -170,7 +170,20 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 3. Fibrosis markers (collagen-I, α-SMA, TGF-β) remain ≤1.5× baseline at recruitment sites at 14-day post-homing timepoint
 4. In vivo murine tissue damage model demonstrates ≥4× functional stem cell enrichment with improved healing metrics vs. controls (p < 0.05)
 
-#### G-4.4 · Somatic Identity Triage and External Intervention Loop
+#### G-4.4 · Programmable Detection of Somatic Identity Failure
+
+**Theoretical Target:** Deploy a synthetic AND-gate circuit in permanent somatic cells that activates apoptosis only upon sustained co-loss of two lineage master regulators (LMRs) specific to that cell type — discriminating pathological identity drift from physiological expression variation. The circuit must function in primary human somatic cells without false-positive activation during normal LMR oscillation, and must include a validated safety switch capable of eliminating all circuit-bearing cells on demand.
+
+**Milestones:**
+1. AND-gate logic confirmed in an established hepatoma cell model: apoptotic output ≥10-fold above background in the dual-LMR-knockdown condition only; no significant signal in single-knockdown or intact-control conditions; safety override eliminates signal completely
+2. Temporal discrimination confirmed in primary hepatocytes from ≥3 independent donors: no apoptosis during physiological LMR oscillation; ≥10-fold apoptotic signal under sustained dual-knockdown (≥48h); replicated across all donors
+3. Immunological compatibility of the sensing engine: de-immunized intein variant retains assembly rate within 2-fold of wild-type with ≥80% reduction in predicted HLA-binding epitopes; or a humanised alternative achieves equivalent AND-gate performance
+4. Escape resistance under 30-day selective pressure: zero circuit-inactivating mutations or promoter methylation at circuit loci in surviving colonies across ≥3 independent biological replicates; circuit activity in survivors indistinguishable from starting culture
+5. In vivo co-delivery and circuit function in humanised mouse hepatocyte model: ≥15% dual-vector co-transduction confirmed by dual reporter; specific apoptosis in LMR-co-loss-targeted vs non-targeted hepatocytes; AP20187 eliminates ≥99% of circuit-bearing cells within 4h
+
+---
+
+#### G-4.5 · Somatic Identity Triage and External Intervention Loop
 
 **Theoretical Target:** Engineer a cell-autonomous fault-containment circuit in permanent somatic cells that activates upon simultaneous detection of: (1) corruption in ≥2 of 3 independently checksummed domains of the synthetic identity tag (G-3.3), and (2) transcriptomic state divergence exceeding the pre-specified correction threshold. Upon activation, the circuit executes three coordinated outputs in parallel: metabolic shutdown to <20% of baseline ATP production, localised fibrotic self-encapsulation to prevent molecular exchange with neighbouring cells, and continuous secretion of a bio-orthogonal vascular tracking peptide at ≥10 fmol/mL. This converts irreparably corrupted cells into inert, self-labelled units that halt somatic identity contamination and emit a persistent retrieval beacon for Track 02 nanorobotic systems — closing the Byzantine fault isolation loop before cascade propagation can occur.
 
@@ -182,9 +195,9 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 
 ### Phase 5 — System-Level Integration Bottleneck (SLIB)
 
-#### G-4.5 · Full Chromosomal Integration and Identity Verification
+#### G-4.6 · Full Chromosomal Integration and Identity Verification
 
-**Theoretical Target:** Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), and somatic identity triage (G-4.4) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.
+**Theoretical Target:** Demonstrate simultaneous, non-interfering co-expression of all Track 01 subsystems — epigenetic reprogramming (G-1.1), senolytic clearance (G-1.2), vascular gene delivery (G-1.3), telomere maintenance (G-1.4), heterochromatin decoupling (G-2.1), precision editing (G-2.2), nuclear enclaves (G-3.1), cryptographic logic gates (G-3.2), identity tag binding (G-3.3), tunneling nanotube synthesis (G-4.1), P2P re-flashing (G-4.2), stem cell routing (G-4.3), programmable somatic identity detection (G-4.4), and somatic identity triage (G-4.5) — within a single aged mammalian organism. Confirm systemic somatic identity integrity (synthetic identity tag readable in ≥85% of sampled cells across ≥5 tissue types), measurable biological age reduction of ≥20% by two independent epigenetic clocks, and 12-month safety with zero oncogenic events, stable karyotype by whole-genome sequencing, and ANA panel negative throughout.
 
 **Milestones:**
 1. All Track 01 subsystems co-delivered and co-expressed in a single aged murine model without mutual interference confirmed by multi-omics profiling
@@ -195,9 +208,9 @@ The Immortality Index tracks **24 research obstacles** across two engineering tr
 
 #### G-5.1 · Perpetual Human Somatic Rejuvenation (⚠️ SLIB)
 
-**Theoretical Target:** Demonstrate indefinite maintenance of biological age homeostasis (Horvath clock equivalent ≤30 years) in a living human subject running the full integrated Track 01 protocol — all 13 genetic subsystems active simultaneously — over a minimum 5-year observation period. Annual safety panels (oncology screen, karyotype by WGS, ANA panel) must remain clear throughout. Peer-reviewed publication confirms sustained multi-organ biological age maintenance with zero cumulative oncogenic events and no immune dysregulation.
+**Theoretical Target:** Demonstrate indefinite maintenance of biological age homeostasis (Horvath clock equivalent ≤30 years) in a living human subject running the full integrated Track 01 protocol — all 14 genetic subsystems active simultaneously — over a minimum 5-year observation period. Annual safety panels (oncology screen, karyotype by WGS, ANA panel) must remain clear throughout. Peer-reviewed publication confirms sustained multi-organ biological age maintenance with zero cumulative oncogenic events and no immune dysregulation.
 
-- [ ] **G-5.1.1** Phase I/II human trial IND accepted for integrated Track 01 multi-subsystem protocol — all 13 genetic subsystems included in a single patient protocol
+- [ ] **G-5.1.1** Phase I/II human trial IND accepted for integrated Track 01 multi-subsystem protocol — all 14 genetic subsystems included in a single patient protocol
 - [ ] **G-5.1.2** 12-month human data: biological age reduction ≥15% confirmed by two independent epigenetic clocks (Horvath + GrimAge/DunedinPACE) — no oncogenic events, ANA negative
 - [ ] **G-5.1.3** 3-year follow-up: sustained biological age maintenance confirmed — identity tag readable in ≥85% sampled cells across ≥5 tissue types, karyotype stable by WGS, no oncogenic events
 - [ ] **G-5.1.4** 5-year peer-reviewed publication confirms indefinite biological age maintenance in human subject — Horvath clock ≤30-year equivalent sustained throughout
