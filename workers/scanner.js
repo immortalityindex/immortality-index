@@ -1,27 +1,8 @@
-// Immortality Index — Cloudflare Worker (scanner + Twitter auto-poster)
-import { Resvg, initWasm } from '@resvg/resvg-wasm';
+// Immortality Index — Cloudflare Worker (scanner + email notifier)
 
 const PROJECT_ID = 'immortality-index';
 const FS_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
 const SITE_URL = 'immortalityindex.github.io/immortality-index';
-
-// ── resvg WASM ──────────────────────────────────────────────────────────────
-let resvgReady = false;
-async function ensureResvg() {
-  if (resvgReady) return;
-  await initWasm(fetch('https://cdn.jsdelivr.net/npm/@resvg/resvg-wasm@2.6.3/index_bg.wasm'));
-  resvgReady = true;
-}
-async function svgToPng(svg) {
-  try {
-    await ensureResvg();
-    const resvg = new Resvg(svg, { font: { loadSystemFonts: false } });
-    return resvg.render().asPng();
-  } catch (e) {
-    console.error('svgToPng failed:', e.message);
-    return null;
-  }
-}
 
 // ── SVG helpers ─────────────────────────────────────────────────────────────
 function esc(s) {
@@ -169,58 +150,53 @@ function isAuthorized(request, env) {
   return false;
 }
 
-// ── Twitter OAuth 1.0a ──────────────────────────────────────────────────────
-function pe(s) {
-  return encodeURIComponent(String(s)).replace(/!/g,'%21').replace(/'/g,'%27').replace(/\(/g,'%28').replace(/\)/g,'%29').replace(/\*/g,'%2A');
+// ── Email via Resend ─────────────────────────────────────────────────────────
+function buildTweetUrl(text) {
+  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
 }
-async function hmacSha1(key, data) {
-  const k = await crypto.subtle.importKey('raw',new TextEncoder().encode(key),{name:'HMAC',hash:'SHA-1'},false,['sign']);
-  const sig = await crypto.subtle.sign('HMAC',k,new TextEncoder().encode(data));
-  return btoa(String.fromCharCode(...new Uint8Array(sig)));
+
+function emailHtml(subject, tweetText) {
+  const tweetUrl = buildTweetUrl(tweetText);
+  const escaped = tweetText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#070d1a;font-family:system-ui,-apple-system,sans-serif;color:#ffffff;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#070d1a;">
+<tr><td align="center" style="padding:40px 20px;">
+<table width="600" cellpadding="0" cellspacing="0" style="background:#0f1829;border:1px solid #1e3a5f;border-radius:8px;overflow:hidden;max-width:600px;">
+  <tr><td style="padding:28px 36px;border-bottom:1px solid #1e3a5f;">
+    <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:3px;color:#7cc8f8;text-transform:uppercase;">Immortality Index</p>
+    <h1 style="margin:0;font-size:22px;font-weight:700;color:#ffffff;line-height:1.3;">${subject}</h1>
+  </td></tr>
+  <tr><td style="padding:28px 36px;">
+    <p style="margin:0 0 12px;font-size:13px;color:#7cc8f8;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Suggested tweet</p>
+    <div style="background:#070d1a;border:1px solid #1e3a5f;border-radius:6px;padding:20px;font-size:15px;line-height:1.7;color:#e0f0ff;">${escaped}</div>
+    <div style="margin:24px 0;text-align:center;">
+      <a href="${tweetUrl}" style="display:inline-block;padding:14px 36px;background:#1d9bf0;color:#ffffff;text-decoration:none;border-radius:9999px;font-size:15px;font-weight:700;letter-spacing:0.3px;">Post on X / Twitter</a>
+    </div>
+    <p style="margin:0;font-size:12px;color:#4db8ff;opacity:0.5;text-align:center;">${SITE_URL}</p>
+  </td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
 }
-async function oauthHeader(method, url, bodyParams, env) {
-  const nonce = crypto.randomUUID().replace(/-/g,'');
-  const ts = String(Math.floor(Date.now()/1000));
-  const op = {
-    oauth_consumer_key: env.TWITTER_API_KEY,
-    oauth_nonce: nonce,
-    oauth_signature_method: 'HMAC-SHA1',
-    oauth_timestamp: ts,
-    oauth_token: env.TWITTER_ACCESS_TOKEN,
-    oauth_version: '1.0'
-  };
-  const all = {...bodyParams,...op};
-  const paramStr = Object.keys(all).sort().map(k=>`${pe(k)}=${pe(all[k])}`).join('&');
-  const baseStr = `${method}&${pe(url)}&${pe(paramStr)}`;
-  const sigKey = `${pe(env.TWITTER_API_SECRET)}&${pe(env.TWITTER_ACCESS_TOKEN_SECRET)}`;
-  op.oauth_signature = await hmacSha1(sigKey, baseStr);
-  return 'OAuth '+Object.keys(op).sort().map(k=>`${pe(k)}="${pe(op[k])}"`).join(', ');
-}
-async function twitterUploadMedia(pngBytes, env) {
-  const url = 'https://upload.twitter.com/1.1/media/upload.json';
-  const auth = await oauthHeader('POST', url, {}, env);
-  const form = new FormData();
-  form.append('media', new Blob([pngBytes],{type:'image/png'}), 'card.png');
-  const r = await fetch(url,{method:'POST',headers:{Authorization:auth},body:form});
-  if (!r.ok) throw new Error(`Media upload ${r.status}: ${(await r.text()).slice(0,200)}`);
-  return (await r.json()).media_id_string;
-}
-async function twitterPost(text, mediaId, env) {
-  const url = 'https://api.twitter.com/2/tweets';
-  const auth = await oauthHeader('POST', url, {}, env);
-  const body = {text,...(mediaId?{media:{media_ids:[mediaId]}}:{})};
-  const r = await fetch(url,{method:'POST',headers:{Authorization:auth,'Content-Type':'application/json'},body:JSON.stringify(body)});
-  if (!r.ok) throw new Error(`Tweet ${r.status}: ${(await r.text()).slice(0,200)}`);
-  return (await r.json()).data?.id;
-}
-async function tweetWithImage(text, svg, env) {
-  const png = await svgToPng(svg);
-  let mediaId = null;
-  if (png) {
-    try { mediaId = await twitterUploadMedia(png, env); }
-    catch(e) { console.error('Media upload failed, tweeting without image:', e.message); }
-  }
-  return twitterPost(text, mediaId, env);
+
+async function sendEmail(subject, tweetText, env) {
+  if (!env.RESEND_API_KEY || !env.NOTIFY_EMAIL) return;
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: env.EMAIL_FROM || 'Immortality Index <scanner@immortalityindex.dev>',
+      to: [env.NOTIFY_EMAIL],
+      subject,
+      html: emailHtml(subject, tweetText)
+    })
+  });
+  if (!r.ok) console.error(`Resend ${r.status}:`, await r.text());
 }
 
 // ── Tweet text builders ─────────────────────────────────────────────────────
@@ -255,9 +231,9 @@ function buildDigestText(trackName, confirmed, total, newMs) {
   return text;
 }
 
-// ── Tweet orchestration ─────────────────────────────────────────────────────
-async function tweetAfterScan(obstacles, newlyConfirmed, token, env) {
-  if (!env.TWITTER_API_KEY || !env.TWITTER_ACCESS_TOKEN) return;
+// ── Email orchestration ──────────────────────────────────────────────────────
+async function emailAfterScan(obstacles, newlyConfirmed, token, env) {
+  if (!env.RESEND_API_KEY || !env.NOTIFY_EMAIL) return;
 
   function trackStats(obs) {
     return {
@@ -274,33 +250,32 @@ async function tweetAfterScan(obstacles, newlyConfirmed, token, env) {
 
   try {
     if (!prev) {
-      // First run — post state of play for both tracks
+      // First run — send state of play email
       const text = buildStateOfPlayText(gStats, nStats);
-      const svg = stateOfPlaySVG(gStats, nStats);
-      await tweetWithImage(text, svg, env);
+      await sendEmail('Immortality Index — initial state of play', text, env);
     } else {
-      // Only tweet tracks with new confirmed milestones
+      // Only email for tracks with newly confirmed milestones
       const gNew = newlyConfirmed.filter(m=>m.id.startsWith('G'));
       const nNew = newlyConfirmed.filter(m=>m.id.startsWith('N'));
       if (gNew.length>0) {
         const text = buildDigestText('Genetics', gStats.confirmed, gStats.total, gNew);
-        const svg = digestSVG('Genetics', gStats.confirmed, gStats.total, gNew);
-        await tweetWithImage(text, svg, env);
+        const n = gNew.length;
+        await sendEmail(`Immortality Index — ${n} Genetics milestone${n!==1?'s':''} confirmed`, text, env);
       }
       if (nNew.length>0) {
         const text = buildDigestText('Nanotech', nStats.confirmed, nStats.total, nNew);
-        const svg = digestSVG('Nanotech', nStats.confirmed, nStats.total, nNew);
-        await tweetWithImage(text, svg, env);
+        const n = nNew.length;
+        await sendEmail(`Immortality Index — ${n} Nanotech milestone${n!==1?'s':''} confirmed`, text, env);
       }
     }
   } catch(e) {
-    console.error('Tweet failed:', e.message);
+    console.error('Email failed:', e.message);
   }
 
   await fsSet('_meta/twitterState',{
     geneticsConfirmed: gStats.confirmed,
     nanotechConfirmed: nStats.confirmed,
-    lastTweetedAt: new Date().toISOString()
+    lastEmailedAt: new Date().toISOString()
   }, token);
 }
 
@@ -405,7 +380,7 @@ async function runFullScan(env) {
       milestonesUpdated += result.confirmed;
       obstaclesUpdated++;
       allNewlyConfirmed.push(...(result.newMilestones||[]));
-      // Update in-memory obstacle so tweetAfterScan sees fresh counts
+      // Update in-memory obstacle so emailAfterScan sees fresh counts
       if (result.updatedMilestones) obstacles[i] = {...obs, milestones:result.updatedMilestones};
     }
     log.push({t:new Date().toISOString().slice(11,19),obs:obs.shortName||obs.id,
@@ -416,8 +391,8 @@ async function runFullScan(env) {
     milestonesScanned,milestonesUpdated,obstaclesUpdated,log:log.slice(-50),
     updatedAt:new Date().toISOString()},token);
 
-  // Tweet after scan completes — only if something changed (or first run)
-  await tweetAfterScan(obstacles, allNewlyConfirmed, token, env);
+  // Email after scan completes — first run sends state of play, subsequent runs only email on new milestones
+  await emailAfterScan(obstacles, allNewlyConfirmed, token, env);
 }
 
 // ── HTTP handler ────────────────────────────────────────────────────────────
