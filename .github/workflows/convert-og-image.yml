@@ -13,23 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install cairosvg
-        run: pip install cairosvg
+      - name: Install rsvg-convert
+        run: sudo apt-get install -y librsvg2-bin
 
       - name: Convert any new SVGs to PNG
         run: |
-          python3 << 'EOF'
-          import cairosvg, os, glob
-          converted = []
-          for svg_path in sorted(glob.glob('docs/images/*.svg')):
-              png_path = svg_path.replace('.svg', '.png')
-              if not os.path.exists(png_path):
-                  cairosvg.svg2png(url=svg_path, write_to=png_path, output_width=1200, output_height=628)
-                  converted.append(png_path)
-                  print(f'Converted: {svg_path} → {png_path}')
-          if not converted:
-              print('No new SVGs to convert.')
-          EOF
+          converted=0
+          for svg in docs/images/*.svg; do
+            png="${svg%.svg}.png"
+            if [ ! -f "$png" ]; then
+              rsvg-convert -w 1200 -h 628 "$svg" -o "$png"
+              echo "Converted: $svg → $png"
+              converted=$((converted+1))
+            fi
+          done
+          echo "Total converted: $converted"
 
       - name: Commit new PNGs
         uses: stefanzweifel/git-auto-commit-action@v5
