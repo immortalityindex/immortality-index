@@ -18,19 +18,19 @@ jobs:
 
       - name: Convert any new SVGs to PNG
         run: |
-          converted=0
           for svg in docs/images/*.svg; do
             png="${svg%.svg}.png"
             if [ ! -f "$png" ]; then
               rsvg-convert -w 1200 -h 628 "$svg" -o "$png"
               echo "Converted: $svg → $png"
-              converted=$((converted+1))
             fi
           done
-          echo "Total converted: $converted"
 
-      - name: Commit new PNGs
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Auto-convert new OG image SVGs to PNG"
-          file_pattern: docs/images/*.png
+      - name: Commit and push PNGs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/images/*.png
+          git diff --staged --quiet && echo "Nothing to commit" || git commit -m "Auto-convert SVG to PNG"
+          git pull --rebase origin main
+          git push origin main
