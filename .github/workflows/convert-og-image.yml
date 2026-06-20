@@ -1,0 +1,38 @@
+name: Convert OG images SVG to PNG
+
+on:
+  push:
+    paths:
+      - 'docs/images/*.svg'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cairosvg
+        run: pip install cairosvg
+
+      - name: Convert any new SVGs to PNG
+        run: |
+          python3 << 'EOF'
+          import cairosvg, os, glob
+          converted = []
+          for svg_path in sorted(glob.glob('docs/images/*.svg')):
+              png_path = svg_path.replace('.svg', '.png')
+              if not os.path.exists(png_path):
+                  cairosvg.svg2png(url=svg_path, write_to=png_path, output_width=1200, output_height=628)
+                  converted.append(png_path)
+                  print(f'Converted: {svg_path} → {png_path}')
+          if not converted:
+              print('No new SVGs to convert.')
+          EOF
+
+      - name: Commit new PNGs
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-convert new OG image SVGs to PNG"
+          file_pattern: docs/images/*.png
