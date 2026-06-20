@@ -5,6 +5,7 @@ A structured, open-source, binary milestone registry tracking humanity's quantit
 
 **Live platform:** [immortality-index.pages.dev](https://immortality-index.pages.dev)  
 **Documentation & whitepaper:** [immortalityindex.github.io/immortality-index](https://immortalityindex.github.io/immortality-index)  
+**Follow on X:** [@ImmortalityIdx](https://twitter.com/ImmortalityIdx)  
 **Academic citation:** See [`CITATION.cff`](./CITATION.cff) and [`docs/whitepaper.md`](./docs/whitepaper.md)
 
 ---
