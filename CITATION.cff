@@ -1,14 +1,14 @@
 cff-version: 1.2.0
 message: "If you use the Immortality Index in your research, please cite it using this metadata."
 type: software
-title: "Immortality Index: A Binary Milestone Registry for Longevity Research"
+title: "Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis"
 authors:
   - name: "Immortality Index"
 version: 1.0.0
 date-released: "2026-06-18"
 license: CC-BY-4.0
 repository-code: "https://github.com/immortalityindex/immortality-index"
-doi: "10.5281/zenodo.20756206"
+doi: "10.5281/zenodo.20793473"
 keywords:
   - longevity
   - biogerontology
