@@ -9,7 +9,7 @@
 
 The Immortality Index tracks **27 research obstacles** across two engineering tracks. Each obstacle has **binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
 
-- **Track 01 · Somatic Genetic Fidelity** — 16 obstacles, 65 milestones (Phases 1–4 + SLIB)
+- **Track 01 · Somatic Genetic Fidelity** — 17 obstacles, 69 milestones (Phases 1–4 + SLIB)
 - **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones (Phases 1–3 + SLIB)
 
 **System-Level Integration Bottleneck (SLIB):** Denoted with ⚠️. The final phase of each track — one obstacle each. Track 01's SLIB is G-5.1 (Perpetual Human Somatic Rejuvenation): indefinite biological age homeostasis in a living human subject with all 14 Track 01 subsystems active. G-4.6 (Full Chromosomal Integration) is a Phase 4 prerequisite. Track 02's SLIB is N-4.1 (Mass Swarm Cohesion and Systemic Integration). The cross-track dependency runs through G-4.5: the Somatic Identity Triage circuit (Phase 4, Track 01) generates the vascular peptide beacon that Track 02 nanorobots are built to receive.
