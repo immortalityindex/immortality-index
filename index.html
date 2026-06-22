@@ -253,11 +253,11 @@
     @media (max-width: 900px) { .summary,.tracks { grid-template-columns: 1fr; } }
   </style>
   <!-- Google Scholar / citation meta tags -->
-  <meta name="citation_title"                content="Immortality Index: A Binary Milestone Registry for Longevity Research">
+  <meta name="citation_title"                content="Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis">
   <meta name="citation_author"               content="Immortality Index">
   <meta name="citation_publication_date"     content="2026/06/18">
   <meta name="citation_technical_report_number" content="RLI-2026-V1">
-  <meta name="citation_doi"                  content="10.5281/zenodo.20756206">
+  <meta name="citation_doi"                  content="10.5281/zenodo.20793473">
   <meta name="citation_abstract_html_url"    content="https://github.com/immortalityindex/immortality-index/blob/main/docs/whitepaper.md">
   <meta name="citation_pdf_url"              content="https://github.com/immortalityindex/immortality-index/blob/main/docs/whitepaper.md">
 </head>
@@ -281,7 +281,7 @@
     </div>
     <div class="modal-section">
       <h3>AI Literature Scanning Methodology</h3>
-      <p>Every six hours, an automated edge-worker pipeline uses large-language-model (LLM) analysis of peer-reviewed scientific literature to assess whether each milestone has been achieved. A milestone is confirmed only when: (1) the LLM returns high confidence with a specific journal citation; (2) all quantitative thresholds stated in the milestone are explicitly addressed; (3) sample size and experimental conditions match milestone requirements; and (4) evidence is from peer-reviewed primary literature, not conference abstracts or preprints without peer review. The double-confirmation requirement — threshold matching plus citation validation — is the primary false-positive elimination mechanism.</p>
+      <p>Every six hours, an automated pipeline running on Cloudflare Workers submits each unconfirmed milestone to Google Gemini 2.5 Flash for evaluation. The model assesses whether peer-reviewed evidence meeting the milestone’s stated quantitative threshold exists as of its training knowledge cutoff, and returns a verdict (achieved / not achieved), a confidence level (high / medium / low), and a one-sentence evidence citation. A milestone is committed only when the model returns achieved with high or medium confidence. Low-confidence results are not committed regardless of the achieved verdict. Evidence citations are model-generated and should be independently verified against the primary literature.</p>
     </div>
     <div class="modal-section">
       <h3>Benchmark Integrity</h3>
@@ -289,8 +289,8 @@
     </div>
     <div class="modal-section">
       <h3>Cite This Work</h3>
-      <p style="font-size:0.78rem;font-family:monospace;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:6px;line-height:1.6;margin-bottom:8px">@misc{immortalityindex2026,<br>&nbsp;&nbsp;author = {{Immortality Index}},<br>&nbsp;&nbsp;title = {Immortality Index: A Binary Milestone Registry for Longevity Research},<br>&nbsp;&nbsp;year = {2026},<br>&nbsp;&nbsp;doi = {10.5281/zenodo.20756206},<br>&nbsp;&nbsp;url = {https://github.com/immortalityindex/immortality-index}<br>}</p>
-      <p style="font-size:0.82rem;color:#94a3b8">APA: Immortality Index. (2026). <em>Immortality Index: A Binary Milestone Registry for Longevity Research</em> (v1.0.0). GitHub. https://doi.org/10.5281/zenodo.20756206</p>
+      <p style="font-size:0.78rem;font-family:monospace;background:rgba(0,0,0,0.3);padding:10px 12px;border-radius:6px;line-height:1.6;margin-bottom:8px">@misc{immortalityindex2026,<br>&nbsp;&nbsp;author = {{Immortality Index}},<br>&nbsp;&nbsp;title = {Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis},<br>&nbsp;&nbsp;year = {2026},<br>&nbsp;&nbsp;doi = {10.5281/zenodo.20793473},<br>&nbsp;&nbsp;url = {https://github.com/immortalityindex/immortality-index}<br>}</p>
+      <p style="font-size:0.82rem;color:#94a3b8">APA: Immortality Index. (2026). <em>Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis</em> (v1.0.0). GitHub. https://doi.org/10.5281/zenodo.20793473</p>
     </div>
     <div class="modal-section">
       <h3>Not Medical Advice</h3>
@@ -530,16 +530,16 @@
       <!-- BibTeX text -->
       <pre id="ii-text-bibtex" style="background:#0f172a;color:#a5b4fc;border:1px solid #1e293b;border-radius:8px;padding:16px;font-size:0.78rem;line-height:1.6;overflow-x:auto;white-space:pre;margin:0 0 16px;">@misc{immortalityindex2026,
   author       = {{Immortality Index}},
-  title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},
+  title        = {Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis},
   year         = {2026},
   publisher    = {GitHub},
-  doi          = {10.5281/zenodo.20756206},
+  doi          = {10.5281/zenodo.20793473},
   url          = {https://github.com/immortalityindex/immortality-index},
   note         = {Version 1.0.0. License: CC BY 4.0}
 }</pre>
 
       <!-- APA text -->
-      <pre id="ii-text-apa" style="background:#0f172a;color:#a5b4fc;border:1px solid #1e293b;border-radius:8px;padding:16px;font-size:0.78rem;line-height:1.6;overflow-x:auto;white-space:pre-wrap;margin:0 0 16px;display:none;">Immortality Index. (2026). Immortality Index: A Binary Milestone Registry for Longevity Research (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.20756206</pre>
+      <pre id="ii-text-apa" style="background:#0f172a;color:#a5b4fc;border:1px solid #1e293b;border-radius:8px;padding:16px;font-size:0.78rem;line-height:1.6;overflow-x:auto;white-space:pre-wrap;margin:0 0 16px;display:none;">Immortality Index. (2026). Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.20793473</pre>
 
       <!-- Copy buttons -->
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
@@ -571,8 +571,8 @@
 </section>
 
 <script>
-var _iiBibtex = "@misc{immortalityindex2026,\n  author       = {{Immortality Index}},\n  title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},\n  year         = {2026},\n  publisher    = {GitHub},\n  doi          = {10.5281/zenodo.20756206},\n  url          = {https://github.com/immortalityindex/immortality-index},\n  note         = {Version 1.0.0. License: CC BY 4.0}\n}";
-var _iiApa    = "Immortality Index. (2026). Immortality Index: A Binary Milestone Registry for Longevity Research (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.20756206";
+var _iiBibtex = "@misc{immortalityindex2026,\n  author       = {{Immortality Index}},\n  title        = {Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis},\n  year         = {2026},\n  publisher    = {GitHub},\n  doi          = {10.5281/zenodo.20793473},\n  url          = {https://github.com/immortalityindex/immortality-index},\n  note         = {Version 1.0.0. License: CC BY 4.0}\n}";
+var _iiApa    = "Immortality Index. (2026). Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis (Version 1.0.0). GitHub. DOI: 10.5281/zenodo.20793473";
 var _iiTimer;
 
 function iiShowTab(type) {
