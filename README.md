@@ -24,7 +24,7 @@ Milestone status is updated autonomously every six hours via large-language-mode
 
 ### Engineering Tracks
 
-- **Track 01 · Somatic Genetic Fidelity** — 16 obstacles, 65 milestones  
+- **Track 01 · Somatic Genetic Fidelity** — 17 obstacles, 69 milestones  
   Covers epigenetic reprogramming, genomic error-correction, senescent cell clearance, vascular gene delivery, telomere maintenance, transcriptional fidelity, and somatic identity verification.
 
 - **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones  
