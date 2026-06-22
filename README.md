@@ -18,7 +18,7 @@ This project was conceived by a human and developed through AI-assisted collabor
 
 ## About
 
-The Immortality Index operationalises the engineering prerequisites for negligible somatic senescence. Rather than tracking qualitative "progress," it uses a formal dependency graph of **26 research obstacles** across two primary engineering tracks, each governed by **binary milestone gates** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not.
+The Immortality Index operationalises the engineering prerequisites for negligible somatic senescence. Rather than tracking qualitative "progress," it uses a formal dependency graph of **27 research obstacles** across two primary engineering tracks, each governed by **binary milestone gates** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not.
 
 Milestone status is updated autonomously every six hours via large-language-model (LLM) edge-worker literature scanning against peer-reviewed sources. No human curator adjusts thresholds after the fact. This design ensures the framework functions as a **neutral, falsifiable benchmarking mechanism** rather than an advocacy tool.
 
