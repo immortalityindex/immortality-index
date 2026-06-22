@@ -1,5 +1,5 @@
 # Immortality Index
-### A Binary Milestone Registry for Longevity Research
+### Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis
 
 A structured, open-source, binary milestone registry tracking humanity's quantitative progress toward defeating biological aging. Designed for formal academic citation and collaborative scientific contribution.
 
@@ -40,17 +40,17 @@ This framework is designed for formal academic citation. If you reference, build
 ```bibtex
 @misc{immortalityindex2026,
   author       = {{Immortality Index}},
-  title        = {Immortality Index: A Binary Milestone Registry for Longevity Research},
+  title        = {Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis},
   year         = {2026},
   publisher    = {GitHub},
-  doi          = {10.5281/zenodo.20756206},
+  doi          = {10.5281/zenodo.20793473},
   url          = {https://github.com/immortalityindex/immortality-index},
   note         = {Version 1.0.0. License: CC BY 4.0}
 }
 ```
 
 **APA:**
-> Immortality Index. (2026). *Immortality Index: A Binary Milestone Registry for Longevity Research* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.20756206
+> Immortality Index. (2026). *Programmable Detection of Somatic Identity Failure in Living Cells: Milestone Definition and Gap Analysis* (Version 1.0.0). GitHub. https://doi.org/10.5281/zenodo.20793473
 
 ---
 
