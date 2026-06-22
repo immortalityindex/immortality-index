@@ -7,7 +7,7 @@
 
 ## Overview
 
-The Immortality Index tracks **26 research obstacles** across two engineering tracks. Each obstacle has **binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
+The Immortality Index tracks **27 research obstacles** across two engineering tracks. Each obstacle has **binary milestones** — concrete, falsifiable achievements that peer-reviewed literature either confirms or does not. The live platform's AI scanning updates milestone completion every six hours.
 
 - **Track 01 · Somatic Genetic Fidelity** — 16 obstacles, 65 milestones (Phases 1–4 + SLIB)
 - **Track 02 · Nanoscale Biomedical Systems** — 10 obstacles, 40 milestones (Phases 1–3 + SLIB)
